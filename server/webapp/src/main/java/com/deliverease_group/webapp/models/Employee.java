@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "employee")
+@Table(name = "employees")
 @Inheritance(strategy = InheritanceType.JOINED)
 public class Employee {
 
@@ -20,7 +20,7 @@ public class Employee {
 
     @ManyToOne
     @JoinColumn(name = "distribution_centre_id")
-    @JsonIgnoreProperties({"employee"})
+    @JsonIgnoreProperties({"employee", "driver", "manager"})
     private DistributionCentre distributionCentre;
 
 
