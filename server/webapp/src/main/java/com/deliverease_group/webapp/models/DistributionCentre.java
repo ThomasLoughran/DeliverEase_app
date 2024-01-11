@@ -16,12 +16,13 @@ public class DistributionCentre {
 
     private DistributionCentreLocation location;
 
-//    private ArrayList<Order> orders;
-
-//    private ArrayList<Route> routes;
-//    @JsonIgnoreProperties({"distribution_centre"})
     @OneToMany(mappedBy = "distributionCentre")
+    private ArrayList<Order> orders;
 
+    @OneToMany(mappedBy = "distributionCentre")
+    private ArrayList<Route> routes;
+    @JsonIgnoreProperties({"distribution_centre"})
+    @OneToMany(mappedBy = "distributionCentre")
     private ArrayList<Employee> employees;
 
     public DistributionCentre() {
@@ -29,8 +30,8 @@ public class DistributionCentre {
 
     public DistributionCentre(DistributionCentreLocation location) {
         this.location = location;
-//        this.orders = new ArrayList<>();
-//        this.routes = new ArrayList<>();
+        this.orders = new ArrayList<>();
+        this.routes = new ArrayList<>();
         this.employees = new ArrayList<>();
     }
 
@@ -50,21 +51,21 @@ public class DistributionCentre {
         this.location = location;
     }
 
-//    public ArrayList<Order> getOrders() {
-//        return orders;
-//    }
-//
-//    public void setOrders(ArrayList<Order> orders) {
-//        this.orders = orders;
-//    }
+    public ArrayList<Order> getOrders() {
+        return orders;
+    }
 
-//    public ArrayList<Route> getRoutes() {
-//        return routes;
-//    }
-//
-//    public void setRoutes(ArrayList<Route> routes) {
-//        this.routes = routes;
-//    }
+    public void setOrders(ArrayList<Order> orders) {
+        this.orders = orders;
+    }
+
+    public ArrayList<Route> getRoutes() {
+        return routes;
+    }
+
+    public void setRoutes(ArrayList<Route> routes) {
+        this.routes = routes;
+    }
 
     public ArrayList<Employee> getEmployees() {
         return employees;

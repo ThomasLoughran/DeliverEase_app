@@ -12,6 +12,10 @@ public class Order {
 
     private String name;
 
+    @ManyToOne
+    @JoinColumn(name = "distribution_centre_id")
+    private DistributionCentre distributionCentre;
+
     public Order() {
 
     }
@@ -34,5 +38,13 @@ public class Order {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public DistributionCentre getDistributionCentre() {
+        return distributionCentre;
+    }
+
+    public void setDistributionCentre(DistributionCentre distributionCentre) {
+        this.distributionCentre = distributionCentre;
     }
 }
