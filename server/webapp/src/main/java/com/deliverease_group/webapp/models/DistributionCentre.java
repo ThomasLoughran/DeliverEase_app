@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "distribution_centre")
@@ -11,19 +12,24 @@ public class DistributionCentre {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column
     private long id;
 
 
+    @Column
     private DistributionCentreLocation location;
 
     @OneToMany(mappedBy = "distributionCentre")
-    private ArrayList<Order> orders;
+    @Column
+    private List<Order> orders;
 
     @OneToMany(mappedBy = "distributionCentre")
-    private ArrayList<Route> routes;
+    @Column
+    private List<Route> routes;
     @JsonIgnoreProperties({"distribution_centre"})
     @OneToMany(mappedBy = "distributionCentre")
-    private ArrayList<Employee> employees;
+    @Column
+    private List<Employee> employees;
 
     public DistributionCentre() {
     }
@@ -51,27 +57,33 @@ public class DistributionCentre {
         this.location = location;
     }
 
-    public ArrayList<Order> getOrders() {
+    public List<Order> getOrders() {
         return orders;
     }
 
-    public void setOrders(ArrayList<Order> orders) {
+    public void setOrders(List<Order> orders) {
         this.orders = orders;
     }
 
-    public ArrayList<Route> getRoutes() {
+    public List<Route> getRoutes() {
         return routes;
     }
 
-    public void setRoutes(ArrayList<Route> routes) {
+    public void setRoutes(List<Route> routes) {
         this.routes = routes;
     }
 
-    public ArrayList<Employee> getEmployees() {
+    public List<Employee> getEmployees() {
         return employees;
+    }
+
+    public void setEmployees(List<Employee> employees) {
+        this.employees = employees;
     }
 
     public void setEmployees(ArrayList<Employee> employees) {
         this.employees = employees;
     }
+
+
 }

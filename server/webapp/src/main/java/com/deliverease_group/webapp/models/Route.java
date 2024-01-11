@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Route {
@@ -18,7 +19,7 @@ public class Route {
 
     @ElementCollection
     @CollectionTable
-    private ArrayList<Long> orderId; // not intended to be directly connected to the order ids in db.
+    private List<Long> orderId; // not intended to be directly connected to the order ids in db.
 
     private Long driverId;
 
@@ -58,8 +59,13 @@ public class Route {
         this.distributionCentre = distributionCentre;
     }
 
-    public ArrayList<Long> getOrderId() {
+
+    public List<Long> getOrderId() {
         return orderId;
+    }
+
+    public void setOrderId(List<Long> orderId) {
+        this.orderId = orderId;
     }
 
     public void setOrderId(ArrayList<Long> orderId) {

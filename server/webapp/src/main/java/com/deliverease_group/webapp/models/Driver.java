@@ -22,7 +22,7 @@ public class Driver extends Employee{
 
     private Boolean capacityFull;
 
-    private ArrayList<ZonedDateTime> unavailableDates;
+    private List<ZonedDateTime> unavailableDates;
 
 
     public Driver(String name,
@@ -77,8 +77,12 @@ public class Driver extends Employee{
         this.capacityFull = capacityFull;
     }
 
-    public ArrayList<ZonedDateTime> getUnavailableDates() {
+    public List<ZonedDateTime> getUnavailableDates() {
         return unavailableDates;
+    }
+
+    public void setUnavailableDates(List<ZonedDateTime> unavailableDates) {
+        this.unavailableDates = unavailableDates;
     }
 
     public void setUnavailableDates(ArrayList<ZonedDateTime> unavailableDates) {
