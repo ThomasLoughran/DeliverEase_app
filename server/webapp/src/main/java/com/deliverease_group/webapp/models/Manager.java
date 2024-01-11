@@ -1,4 +1,4 @@
 package com.deliverease_group.webapp.models;
 
-public class Manager {
+public class Manager extends Employee{
 }

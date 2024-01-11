@@ -1,4 +1,4 @@
 package com.deliverease_group.webapp.models;
 
-public class Driver {
+public class Driver extends Employee{
 }
