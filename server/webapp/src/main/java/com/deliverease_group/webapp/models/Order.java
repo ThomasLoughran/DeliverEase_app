@@ -2,6 +2,8 @@ package com.deliverease_group.webapp.models;
 
 import jakarta.persistence.*;
 
+import java.time.ZonedDateTime;
+
 @Entity
 @Table(name = "orders")
 public class Order {
@@ -15,6 +17,20 @@ public class Order {
     @ManyToOne
     @JoinColumn(name = "distribution_centre_id")
     private DistributionCentre distributionCentre;
+
+
+    private int size;
+    private int weight;
+    private String postcode;
+    private String address;
+    private double latitude;
+    private double longitude;
+    private ZonedDateTime dateOrdered;
+    private boolean isCompleted;
+    private boolean isManagerReviewed;
+    private boolean isFragile;
+    private Issue issue;
+    private ZonedDateTime timeIssuePosted;
 
     public Order() {
 
