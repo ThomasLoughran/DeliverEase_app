@@ -1,9 +1,6 @@
 package com.deliverease_group.webapp.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Inheritance;
-import jakarta.persistence.InheritanceType;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
@@ -22,6 +19,8 @@ public class Driver extends Employee{
 
     private Boolean capacityFull;
 
+    @ElementCollection
+    @CollectionTable
     private List<ZonedDateTime> unavailableDates;
 
 
