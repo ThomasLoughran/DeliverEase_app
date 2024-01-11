@@ -1,4 +1,4 @@
 package com.deliverease_group.webapp.controllers;
 
-public class DistributionController {
+public class DistributionCentreController {
 }
