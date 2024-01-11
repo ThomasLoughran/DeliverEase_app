@@ -1,4 +1,87 @@
 package com.deliverease_group.webapp.models;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Inheritance;
+import jakarta.persistence.InheritanceType;
+import jakarta.persistence.Table;
+
+import java.time.ZonedDateTime;
+import java.util.ArrayList;
+import java.util.List;
+
+@Entity
+@Table(name = "drivers")
+@Inheritance(strategy = InheritanceType.JOINED)
 public class Driver extends Employee{
+
+
+    private int vanCapacity; // volume m3
+    private int vanMaxWeight; // kg
+
+    private String vanName;
+
+    private Boolean capacityFull;
+
+    private ArrayList<ZonedDateTime> unavailableDates;
+
+
+    public Driver(String name,
+                  String password,
+                  Role role,
+                  DistributionCentre distributionCentre,
+                  int vanCapacity,
+                  int vanMaxWeight,
+                  String vanName,
+                  Boolean capacityFull,
+                  ArrayList<ZonedDateTime> unavailableDates) {
+        super(name, password, role, distributionCentre);
+        this.vanCapacity = vanCapacity;
+        this.vanMaxWeight = vanMaxWeight;
+        this.vanName = vanName;
+        this.capacityFull = capacityFull;
+        this.unavailableDates = unavailableDates;
+    }
+
+    public Driver() {
+    }
+
+    public int getVanCapacity() {
+        return vanCapacity;
+    }
+
+    public void setVanCapacity(int vanCapacity) {
+        this.vanCapacity = vanCapacity;
+    }
+
+    public int getVanMaxWeight() {
+        return vanMaxWeight;
+    }
+
+    public void setVanMaxWeight(int vanMaxWeight) {
+        this.vanMaxWeight = vanMaxWeight;
+    }
+
+    public String getVanName() {
+        return vanName;
+    }
+
+    public void setVanName(String vanName) {
+        this.vanName = vanName;
+    }
+
+    public Boolean getCapacityFull() {
+        return capacityFull;
+    }
+
+    public void setCapacityFull(Boolean capacityFull) {
+        this.capacityFull = capacityFull;
+    }
+
+    public ArrayList<ZonedDateTime> getUnavailableDates() {
+        return unavailableDates;
+    }
+
+    public void setUnavailableDates(ArrayList<ZonedDateTime> unavailableDates) {
+        this.unavailableDates = unavailableDates;
+    }
 }
