@@ -25,5 +25,6 @@ public class ManagerController {
 
     }
 
+    // TODO - PATCH assign driver to route, GET all active messages by centre id, GET all routes by date
 
 }
