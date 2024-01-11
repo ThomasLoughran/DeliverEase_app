@@ -21,10 +21,12 @@ public class DistributionCentre {
 
     @OneToMany(mappedBy = "distributionCentre")
     @Column
+    @JsonIgnoreProperties({ "distributionCentre" })
     private List<Order> orders;
 
     @OneToMany(mappedBy = "distributionCentre")
     @Column
+    @JsonIgnoreProperties({ "distributionCentre" })
     private List<Route> routes;
     @JsonIgnoreProperties({"distribution_centre"})
     @OneToMany(mappedBy = "distributionCentre")
