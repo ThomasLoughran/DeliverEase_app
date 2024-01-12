@@ -1,5 +1,6 @@
 package com.deliverease_group.webapp.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
@@ -14,6 +15,7 @@ public class Employee {
 
     private String name;
 
+    @JsonIgnore
     private String password;
 
     private Role role;
@@ -21,6 +23,7 @@ public class Employee {
     @ManyToOne
     @JoinColumn(name = "distribution_centre_id")
     @JsonIgnoreProperties({ "employees" })
+    @JsonIgnore
     private DistributionCentre distributionCentre;
 
 
