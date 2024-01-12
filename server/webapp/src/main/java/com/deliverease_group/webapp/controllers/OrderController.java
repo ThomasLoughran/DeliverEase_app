@@ -1,5 +1,6 @@
 package com.deliverease_group.webapp.controllers;
 
+import com.deliverease_group.webapp.dtos.OrderDTO;
 import com.deliverease_group.webapp.models.DistributionCentre;
 import com.deliverease_group.webapp.models.Order;
 import com.deliverease_group.webapp.services.OrderService;
@@ -45,6 +46,11 @@ public class OrderController {
         }else{
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
+    }
+
+    @PatchMapping(value = "/{id}")
+    public ResponseEntity<Order> patchOrderById(@RequestBody OrderDTO orderDTO){
+        return new ResponseEntity<>(orderService.updateOrder(orderDTO),HttpStatus.OK);
     }
     // TODO - GET all orders by distribution centre and date, GET all orders by driver ID and date, GET all incomplete orders,
     //          PATCH order message, PATCH update isComplete, Patch update is ManagerReviewed
