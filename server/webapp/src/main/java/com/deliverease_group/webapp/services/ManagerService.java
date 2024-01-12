@@ -34,4 +34,10 @@ public class ManagerService {
         return null;
     }
 
+    public List<Manager> getAllManagers(){
+        return managerRepository.findAll();
+    }
+
+
+
 }
