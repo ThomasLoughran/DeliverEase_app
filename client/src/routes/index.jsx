@@ -2,6 +2,7 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import Dashboard from "../pages/Dashboard";
 import LoginPage from "../pages/LoginPage";
 import { ProtectedRoute } from "./ProtectedRoute";
+import LogoutPage from "../pages/LogoutPage";
 
 const Routes = () => {
 
@@ -12,7 +13,7 @@ const Routes = () => {
             element: <LoginPage/>
         },
         {
-            path: "/",
+            path: "/home",
             element: <p>Not logged in user home page</p>
         }
 
@@ -30,6 +31,10 @@ const Routes = () => {
                 {
                     path: "/test",
                     element: <p>test</p>
+                },
+                {
+                    path: "/logout",
+                    element: <LogoutPage/>
                 }
             ]
         }
