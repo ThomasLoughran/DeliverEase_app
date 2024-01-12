@@ -34,6 +34,13 @@ public class ManagerController {
         }
     }
 
+    @GetMapping("/all")
+    public ResponseEntity<List<Manager>> getAllManagers(){
+        return new ResponseEntity<>(managerService.getAllManagers(), HttpStatus.OK);
+    }
+
+
+
     // TODO - PATCH assign driver to route, GET all active messages by centre id, GET all routes by date
 
 }

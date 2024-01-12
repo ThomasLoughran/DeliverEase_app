@@ -17,4 +17,7 @@ public class OrderService {
         return orderRepository.findAllByDistributionCentreId(distCentreId);
     }
 
+    public List<Order> getDistributionCentreOrdersByCompletionStatus(Long distCentreId, boolean isOrderComplete) {
+        return orderRepository.findAllByDistributionCentreIdAndIsCompleted(distCentreId,isOrderComplete);
+    }
 }
