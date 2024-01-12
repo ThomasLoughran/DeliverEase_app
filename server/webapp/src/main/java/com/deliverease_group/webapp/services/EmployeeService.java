@@ -1,5 +1,6 @@
 package com.deliverease_group.webapp.services;
 
+import com.deliverease_group.webapp.dtos.LoginDTO;
 import com.deliverease_group.webapp.models.Employee;
 import com.deliverease_group.webapp.repositories.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,11 +15,11 @@ public class EmployeeService {
     EmployeeRepository employeeRepository;
 
 
-    public Employee checkLoginDetails(Long employeeId, String password){
-        Optional<Employee> optionalEmployee = employeeRepository.findById(employeeId);
+    public Employee checkLoginDetails(LoginDTO loginDTO){
+        Optional<Employee> optionalEmployee = employeeRepository.findById(loginDTO.getId());
         if (optionalEmployee.isPresent()){
             Employee employee = optionalEmployee.get();
-            if (employee.getPassword().equals(password)){
+            if (employee.getPassword().equals(loginDTO.getPassword())){
                 return employee;
             }
         }
