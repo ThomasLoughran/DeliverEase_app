@@ -25,6 +25,11 @@ public class OrderController {
         return new ResponseEntity<>(orderService.getAllOrdersByDistributionCentre(distCentreId), HttpStatus.OK );
     }
 
+    @GetMapping("/completion")
+    public ResponseEntity<List<Order>> getDistributionCentreOrdersByCompletionStatus(@RequestParam Long distCentreId,@RequestParam boolean isOrderComplete){
+        return new ResponseEntity<>(orderService.getDistributionCentreOrdersByCompletionStatus(distCentreId, isOrderComplete), HttpStatus.OK );
+    }
+
     // TODO - GET all orders by distribution centre and date, GET all orders by driver ID and date, GET all incomplete orders,
     //          PATCH order message, PATCH update isComplete, Patch update is ManagerReviewed
 }
