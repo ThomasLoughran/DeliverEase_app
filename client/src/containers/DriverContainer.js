@@ -1,4 +1,5 @@
 
+import NavBar from "../components/NavBar";
 import { useUser } from "../contexts/UserContext";
 
 const DriverContainer = () => {
@@ -7,12 +8,13 @@ const DriverContainer = () => {
 
 
 
-    return ( 
+    return (
         <>
-        <p>Hello from Driver Container</p>
-        {user ? <p>name: {user.name}</p> : <p>Loading</p>}
+            <NavBar />
+            <p>Hello from Driver Container</p>
+            {user ? <p>name: {user.name}</p> : <p>Loading</p>}
         </>
-     );
+    );
 }
- 
+
 export default DriverContainer;

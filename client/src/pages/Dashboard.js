@@ -12,27 +12,27 @@ const Dashboard = () => {
 
     if (user.role === "MANAGER") {
         return (
-        <>
-            <ManagerContainer/>
-        </>
+            <>
+                <ManagerContainer />
+            </>
         )
     }
 
 
     if (user.role === "DRIVER") {
         return (
-        <>
-            <DriverContainer/>
-        </>
+            <>
+                <DriverContainer />
+            </>
         )
     }
 
 
-    return ( 
+    return (
         <>
-        <p>Hello from dashboard</p>
+            <p>Hello from dashboard</p>
         </>
-     );
+    );
 }
- 
+
 export default Dashboard;
