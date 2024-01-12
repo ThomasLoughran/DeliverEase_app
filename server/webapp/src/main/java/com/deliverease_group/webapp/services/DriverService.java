@@ -8,6 +8,7 @@ import com.deliverease_group.webapp.repositories.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 @Service
 public class DriverService {
@@ -23,7 +24,7 @@ public class DriverService {
         return employeeRepository.findAllByDistributionCentreIdAndRole(distCentId, role);
     }
 
-    public List<Driver> findAllAvailableDrivers(Long distCentId, String date) {
+    public List<Driver> findAllAvailableDrivers(Long distCentId, LocalDate date) {
         return driverRepository.availableDrivers(distCentId, date);
     }
 
