@@ -21,7 +21,7 @@ public class Driver extends Employee{
 
     @ElementCollection
     @CollectionTable
-    private List<ZonedDateTime> unavailableDates;
+    private List<ZonedDateTime> availableDates;
 
 
     public Driver(String name,
@@ -32,13 +32,13 @@ public class Driver extends Employee{
                   int vanMaxWeight,
                   String vanName,
                   Boolean capacityFull,
-                  ArrayList<ZonedDateTime> unavailableDates) {
+                  ArrayList<ZonedDateTime> availableDates) {
         super(name, password, role, distributionCentre);
         this.vanCapacity = vanCapacity;
         this.vanMaxWeight = vanMaxWeight;
         this.vanName = vanName;
         this.capacityFull = capacityFull;
-        this.unavailableDates = unavailableDates;
+        this.availableDates = availableDates;
     }
 
     public Driver() {
@@ -76,15 +76,11 @@ public class Driver extends Employee{
         this.capacityFull = capacityFull;
     }
 
-    public List<ZonedDateTime> getUnavailableDates() {
-        return unavailableDates;
+    public List<ZonedDateTime> getAvailableDates() {
+        return availableDates;
     }
 
-    public void setUnavailableDates(List<ZonedDateTime> unavailableDates) {
-        this.unavailableDates = unavailableDates;
-    }
-
-    public void setUnavailableDates(ArrayList<ZonedDateTime> unavailableDates) {
-        this.unavailableDates = unavailableDates;
+    public void setAvailableDates(List<ZonedDateTime> availableDates) {
+        this.availableDates = availableDates;
     }
 }
