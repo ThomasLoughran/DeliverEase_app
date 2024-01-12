@@ -1,5 +1,9 @@
+import { useUser } from "../contexts/UserContext";
+
+
 const ManagerContainer = () => {
 
+    const { user } = useUser();
 
     return ( 
         <>

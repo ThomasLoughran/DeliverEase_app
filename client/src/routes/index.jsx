@@ -3,19 +3,25 @@ import Dashboard from "../pages/Dashboard";
 import LoginPage from "../pages/LoginPage";
 import { ProtectedRoute } from "./ProtectedRoute";
 import LogoutPage from "../pages/LogoutPage";
+import { useUser }  from "../contexts/UserContext"
+
 
 const Routes = () => {
+
+
+    const { user } = useUser();
 
     const routesForPublic = [
 
         {
-            path: "/login",
-            element: <LoginPage/>
+            path: "/about-us",
+            element: <p>About-us</p>
         },
         {
             path: "/home",
             element: <p>Not logged in user home page</p>
-        }
+        },
+       
 
     ];
 
@@ -40,11 +46,23 @@ const Routes = () => {
         }
     ]
 
+    const routesForNotLoggedInOnly = [
+        {
+            path: "/",
+            element: <div>Home Page</div>,
+        },
+        {
+            path: "/login",
+            element: <LoginPage/>
+        }
+    ]
+
 
 
 
     const router = createBrowserRouter([
         ...routesForPublic,
+        ...(!user ? routesForNotLoggedInOnly : []),
         ...routesForLoggedInOnly,
     ])
 
