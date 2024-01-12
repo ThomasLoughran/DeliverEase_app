@@ -1,5 +1,6 @@
 package com.deliverease_group.webapp.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.time.ZonedDateTime;
@@ -14,6 +15,7 @@ public class Order {
 
     @ManyToOne
     @JoinColumn(name = "distribution_centre_id")
+    @JsonIgnore
     private DistributionCentre distributionCentre;
 
 
