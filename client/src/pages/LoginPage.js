@@ -1,5 +1,5 @@
 import LoginForm from "../components/LoginForm";
-
+import '../css/LoginPage.css';
 
 
 const LoginPage = () => {
@@ -7,11 +7,11 @@ const LoginPage = () => {
 
 
 
-    return ( 
+    return (
         <>
-        <LoginForm/>
+            <LoginForm />
         </>
-     );
+    );
 }
- 
+
 export default LoginPage;

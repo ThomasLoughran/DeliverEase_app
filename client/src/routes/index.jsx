@@ -3,7 +3,7 @@ import Dashboard from "../pages/Dashboard";
 import LoginPage from "../pages/LoginPage";
 import { ProtectedRoute } from "./ProtectedRoute";
 import LogoutPage from "../pages/LogoutPage";
-import { useUser }  from "../contexts/UserContext"
+import { useUser } from "../contexts/UserContext"
 
 
 const Routes = () => {
@@ -21,18 +21,18 @@ const Routes = () => {
             path: "/home",
             element: <p>Not logged in user home page</p>
         },
-       
+
 
     ];
 
     const routesForLoggedInOnly = [
         {
             path: "/",
-            element: <ProtectedRoute/>,
+            element: <ProtectedRoute />,
             children: [
                 {
                     path: "/",
-                    element: <Dashboard/>
+                    element: <Dashboard />
                 },
                 {
                     path: "/test",
@@ -40,7 +40,7 @@ const Routes = () => {
                 },
                 {
                     path: "/logout",
-                    element: <LogoutPage/>
+                    element: <LogoutPage />
                 }
             ]
         }
@@ -53,7 +53,7 @@ const Routes = () => {
         },
         {
             path: "/login",
-            element: <LoginPage/>
+            element: <LoginPage />
         }
     ]
 
@@ -68,7 +68,7 @@ const Routes = () => {
 
 
 
-    return ( 
+    return (
         <RouterProvider router={router} />
     );
 }
