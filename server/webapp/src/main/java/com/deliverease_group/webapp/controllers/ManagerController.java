@@ -21,7 +21,7 @@ public class ManagerController {
 
     @GetMapping
     public ResponseEntity<List<Driver>> getAllDrivers(){
-            return new ResponseEntity<>(managerService.findAllDrivers(), HttpStatus.OK);
+        return new ResponseEntity<>(managerService.findAllDrivers(), HttpStatus.OK);
 
     }
 

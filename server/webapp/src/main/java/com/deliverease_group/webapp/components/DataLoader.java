@@ -16,6 +16,9 @@ import java.util.List;
 public class DataLoader implements ApplicationRunner {
 
     @Autowired
+    EmployeeRepository employeeRepository;
+
+    @Autowired
     DistributionCentreRepository distributionCentreRepository;
 
     @Autowired
@@ -27,9 +30,6 @@ public class DataLoader implements ApplicationRunner {
     @Autowired
     DriverRepository driverRepository;
 
-    @Autowired
-    ManagerRepository managerRepository;
-
     public DataLoader() {
     }
 
@@ -38,33 +38,33 @@ public class DataLoader implements ApplicationRunner {
         DistributionCentre birminghamCentre = new DistributionCentre(DistributionCentreLocation.BIRMINGHAM);
         distributionCentreRepository.save(birminghamCentre);
 
-       Manager manager1 = new Manager("Manager 1", "password", Role.MANAGER, birminghamCentre);
-       managerRepository.save(manager1);
+        Manager manager1 = new Manager("Manager 1", "password", Role.MANAGER, birminghamCentre);
+        employeeRepository.save(manager1);
 
-       Driver driver1 = new Driver("Driver 1", "password", Role.DRIVER, 500000, 1000, "A caravan", false, birminghamCentre, new ArrayList<>());
-       driverRepository.save(driver1);
-//
-//       Order order1 = new Order(
-//               birminghamCentre,
-//               12,
-//               15,
-//               "W3 6JJ",
-//               "33 Yoke Road",
-//               10.21,
-//               80.25,
-//               ZonedDateTime.now(),
-//               false,
-//               false,
-//               false,
-//               ZonedDateTime.now()
-//               );
-//       orderRepository.save(order1);
-//
-//        ArrayList<Long> orderList = new ArrayList<>();
-//        orderList.add(order1.getId());
-//        Route route1 = new Route(birminghamCentre, orderList, driver1.getId(), ZonedDateTime.now(), false
-//        );
-//        routeRepository.save(route1);
+        Driver driver1 = new Driver("Driver 1", "password", Role.DRIVER, birminghamCentre, 500000, 1000, "A caravan", false, new ArrayList<>());
+        employeeRepository.save(driver1);
+
+        Order order1 = new Order(
+                birminghamCentre,
+                12,
+                15,
+                "W3 6JJ",
+                "33 Yoke Road",
+                10.21,
+                80.25,
+                ZonedDateTime.now(),
+                false,
+                false,
+                false,
+                ZonedDateTime.now()
+        );
+        orderRepository.save(order1);
+
+        ArrayList<Long> orderList = new ArrayList<>();
+        orderList.add(order1.getId());
+        Route route1 = new Route(birminghamCentre, orderList, driver1.getId(), ZonedDateTime.now(), false
+        );
+        routeRepository.save(route1);
 
     }
 }

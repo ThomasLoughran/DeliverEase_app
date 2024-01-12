@@ -15,20 +15,23 @@ public class DistributionCentre {
     @Column
     private long id;
 
+
     @Column
     private DistributionCentreLocation location;
 
     @OneToMany(mappedBy = "distributionCentre")
     @Column
+    @JsonIgnoreProperties({ "distributionCentre" })
     private List<Order> orders;
 
     @OneToMany(mappedBy = "distributionCentre")
     @Column
+    @JsonIgnoreProperties({ "distributionCentre" })
     private List<Route> routes;
     @JsonIgnoreProperties({"distribution_centre"})
     @OneToMany(mappedBy = "distributionCentre")
     @Column
-    private List<Manager> managers;
+    private List<Employee> employees;
 
     public DistributionCentre() {
     }
@@ -37,7 +40,7 @@ public class DistributionCentre {
         this.location = location;
         this.orders = new ArrayList<>();
         this.routes = new ArrayList<>();
-        this.managers = new ArrayList<>();
+        this.employees = new ArrayList<>();
     }
 
     public long getId() {
@@ -72,11 +75,17 @@ public class DistributionCentre {
         this.routes = routes;
     }
 
-    public List<Manager> getManagers() {
-        return managers;
+    public List<Employee> getEmployees() {
+        return employees;
     }
 
-    public void setManagers(List<Manager> managers) {
-        this.managers = managers;
+    public void setEmployees(List<Employee> employees) {
+        this.employees = employees;
     }
+
+    public void setEmployees(ArrayList<Employee> employees) {
+        this.employees = employees;
+    }
+
+
 }
