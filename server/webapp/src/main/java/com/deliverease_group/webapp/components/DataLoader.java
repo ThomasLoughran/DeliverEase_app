@@ -47,6 +47,12 @@ public class DataLoader implements ApplicationRunner {
         Driver driver2 = new Driver("Driver 2", "password", Role.DRIVER, birminghamCentre, 100, 1000, "A bus", false, new ArrayList<>());
         employeeRepository.save(driver2);
 
+        ArrayList<ZonedDateTime> availableDates =  new ArrayList<>();
+        availableDates.add(ZonedDateTime.now());
+
+        Driver driver3 = new Driver("Driver 3", "password", Role.DRIVER, birminghamCentre, 100, 1000, "A bus", false, availableDates);
+        employeeRepository.save(driver3);
+
         //3 orders:
         Order order1 = new Order(
                 birminghamCentre,

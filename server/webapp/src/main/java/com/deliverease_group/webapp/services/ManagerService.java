@@ -16,8 +16,6 @@ public class ManagerService {
     DriverRepository driverRepository;
 
     public List<Driver> findAllDrivers() {
-        System.out.println("xzz");
-        System.out.println(driverRepository.findAll());
         return driverRepository.findAll();
     }
 
