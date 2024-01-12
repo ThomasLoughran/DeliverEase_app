@@ -6,6 +6,7 @@ import com.deliverease_group.webapp.models.Role;
 import com.deliverease_group.webapp.services.DriverService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,15 +23,18 @@ public class DriverController {
     DriverService driverService;
 
     @GetMapping
-    public ResponseEntity<List<Employee>> getAllDriversByDistCentId(@RequestParam Long distCentId){
+    public ResponseEntity<List<Employee>> getAllDriversByDistCentId(@RequestParam Long distCentId) {
         try {
             return new ResponseEntity<>(driverService.findAllDriverIdsByDistCentId(distCentId, Role.DRIVER), HttpStatus.OK);
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
 
+    @GetMapping("/available")
+    public ResponseEntity<List<Driver>> getAvailableDriversByDistCentId(@RequestParam Long distCentId, @RequestParam String date) {
 
+        return new ResponseEntity<>(driverService.findAllAvailableDrivers(distCentId, date), HttpStatus.OK);
 
+    }
 }
