@@ -8,6 +8,7 @@ const ManagerContainer = () => {
     return ( 
         <>
         <p>Hello from manager container</p>
+        {user ? <p>name: {user.name}</p> : <p>Loading</p>}
         </>
 
     );
