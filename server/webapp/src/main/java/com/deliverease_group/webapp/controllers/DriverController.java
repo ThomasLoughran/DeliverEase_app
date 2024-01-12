@@ -24,6 +24,7 @@ public class DriverController {
     @Autowired
     DriverService driverService;
 
+
     @GetMapping
     public ResponseEntity<List<Employee>> getAllDriversByDistCentId(@RequestParam Long distCentId) {
         try {
@@ -41,4 +42,6 @@ public class DriverController {
         return new ResponseEntity<>(driverService.findAllAvailableDrivers(distCentId, date), HttpStatus.OK);
 
     }
+
+
 }
