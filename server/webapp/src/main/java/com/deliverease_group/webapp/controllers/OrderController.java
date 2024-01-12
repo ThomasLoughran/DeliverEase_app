@@ -48,7 +48,7 @@ public class OrderController {
         }
     }
 
-    @PatchMapping(value = "/{id}")
+    @PatchMapping()
     public ResponseEntity<Order> patchOrderById(@RequestBody OrderDTO orderDTO){
         return new ResponseEntity<>(orderService.updateOrder(orderDTO),HttpStatus.OK);
     }

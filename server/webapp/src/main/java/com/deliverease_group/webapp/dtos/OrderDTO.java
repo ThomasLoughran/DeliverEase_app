@@ -11,10 +11,10 @@ public class OrderDTO {
     private Long id;
     private boolean isCompleted;
     private boolean isManagerReviewed;
-    private Issue issue;
+    private int issue;
     private ZonedDateTime timeIssuePosted;
 
-    public OrderDTO(Long id, boolean isCompleted, boolean isManagerReviewed, Issue issue, ZonedDateTime timeIssuePosted) {
+    public OrderDTO(Long id, boolean isCompleted, boolean isManagerReviewed, int issue, ZonedDateTime timeIssuePosted) {
         this.id = id;
         this.isCompleted = isCompleted;
         this.isManagerReviewed = isManagerReviewed;
@@ -49,11 +49,11 @@ public class OrderDTO {
         isManagerReviewed = managerReviewed;
     }
 
-    public Issue getIssue() {
+    public int getIssue() {
         return issue;
     }
 
-    public void setIssue(Issue issue) {
+    public void setIssue(int issue) {
         this.issue = issue;
     }
 
