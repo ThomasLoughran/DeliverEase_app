@@ -10,7 +10,12 @@ const Routes = () => {
         {
             path: "/login",
             element: <LoginPage/>
+        },
+        {
+            path: "/",
+            element: <p>Not logged in user home page</p>
         }
+
     ];
 
     const routesForLoggedInOnly = [
@@ -21,6 +26,10 @@ const Routes = () => {
                 {
                     path: "/",
                     element: <Dashboard/>
+                },
+                {
+                    path: "/test",
+                    element: <p>test</p>
                 }
             ]
         }
