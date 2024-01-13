@@ -19,7 +19,7 @@ const handleLogout = () => {
 
     return (
         <div className={user?.role === 'MANAGER' ? 'manager-navigation' : 'driver-navigation'}>
-            <Link id="home" to="/home">
+            <Link id="home" to="/">
                 Home
             </Link>
             {user?.role === 'MANAGER' && (
@@ -27,13 +27,13 @@ const handleLogout = () => {
                     <Link id="drivers" to="manager/drivers">
                         Drivers
                     </Link>
-                    <Link id="dist-cent" to="manager/distribution-centre">
+                    <Link id="dist-cent" to="manager/distribution-centres">
                         Distribution Centres
                     </Link>
                 </>
             )}
             {user?.role === 'DRIVER' && (
-                <Link id="routes" to="/routes">
+                <Link id="routes" to="driver/routes">
                     Routes
                 </Link>
             )}

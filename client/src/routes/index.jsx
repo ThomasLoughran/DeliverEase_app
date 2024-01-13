@@ -48,6 +48,10 @@ const Routes = () => {
             path: "/test",
             element: <p>Not logged in user home page</p>
         },
+        {
+            path: "/home",
+            element: <p>Home</p>
+        }
 
 
     ];
@@ -62,7 +66,7 @@ const Routes = () => {
                     element: <LoggedInLayout/>,
                     children: [
                         {
-                            path: "/home",
+                            path: "/dashboard",
                             element: <p>Hello from home</p>
                         },
                         {
