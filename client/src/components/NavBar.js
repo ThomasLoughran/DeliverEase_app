@@ -12,13 +12,13 @@ const handleLogout = () => {
     logoutUser();
 }
 
-    const logoStyle =
-        user?.role === 'MANAGER'
-            ? { width: '200px', height: 'auto', marginTop: '200px' }
-            : { width: '200px', height: 'auto', marginTop: '300px' };
+    // const logoStyle =
+    //     user?.role === 'MANAGER'
+    //         ? { width: '200px', height: 'auto', marginTop: '200px' }
+    //         : { width: '200px', height: 'auto', marginTop: '300px' };
 
     return (
-        <div className={user?.role === 'MANAGER' ? 'manager-navigation' : 'driver-navigation'}>
+        <div className= "NavBar">
             <Link id="home" to="/">
                 Home
             </Link>
@@ -40,7 +40,7 @@ const handleLogout = () => {
             <Link id="logout" to="/" onClick={handleLogout}>
                 Logout
             </Link>
-            <img src={darkLogo} alt="Logo" className="logo" style={logoStyle} />
+            <img src={darkLogo} alt="Logo" className="logo"/>
         </div>
     );
 };
