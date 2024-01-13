@@ -102,6 +102,7 @@ const LoginForm = () => {
                 src={darkMode ? lightLogo : darkLogo}
                 alt="Logo"
                 className="logo"
+                style={{ width: '400px', height: 'auto' }}
             />
 
 

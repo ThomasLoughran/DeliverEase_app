@@ -1,10 +1,17 @@
 import { Link } from 'react-router-dom';
 import { useUser } from '../contexts/UserContext';
 import '../styles/NavBar.css';
+import darkLogo from '../assets/dark-mode-logo.png';
+
 
 
 const NavBar = () => {
     const { user } = useUser();
+
+    const logoStyle =
+        user?.role === 'MANAGER'
+            ? { width: '200px', height: 'auto', marginTop: '200px' }
+            : { width: '200px', height: 'auto', marginTop: '300px' };
 
     return (
         <div className={user?.role === 'MANAGER' ? 'manager-navigation' : 'driver-navigation'}>
@@ -29,6 +36,8 @@ const NavBar = () => {
             <Link id="logout" to="/logout">
                 Logout
             </Link>
+            <img src={darkLogo} alt="Logo" className="logo" style={logoStyle} />
+
         </div>
     );
 };
