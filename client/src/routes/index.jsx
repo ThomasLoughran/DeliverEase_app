@@ -4,6 +4,7 @@ import LoginPage from "../pages/LoginPage";
 import { ProtectedRoute } from "./ProtectedRoute";
 import LogoutPage from "../pages/LogoutPage";
 import { useUser } from "../contexts/UserContext"
+import HomePage from "../pages/HomePage";
 
 
 const Routes = () => {
@@ -49,7 +50,7 @@ const Routes = () => {
     const routesForNotLoggedInOnly = [
         {
             path: "/",
-            element: <div>Home Page</div>,
+            element: <HomePage/>,
         },
         {
             path: "/login",
