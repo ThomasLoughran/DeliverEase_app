@@ -1,0 +1,34 @@
+
+
+
+.homepage-container {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+
+}
+
+.homepage-login-button {
+    margin-top: 5rem;
+}
+
+.homepage-slogan {
+    margin-bottom: 5vh;
+}
+.homepage-title {
+    margin-top: 10vh;
+    font-size: 4rem;
+}
+
+.homepage-login-button {
+    background-color: #f8b400;
+    color: #004445;
+    padding: 10px 50px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 2rem;
+}

@@ -9,7 +9,9 @@ const LoginPage = () => {
 
     return (
         <>
+            <div className="Login-form-container">
             <LoginForm />
+            </div>
         </>
     );
 }
