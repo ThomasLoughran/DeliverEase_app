@@ -10,8 +10,7 @@ const DriverContainer = () => {
 
     return (
         <>
-            <NavBar />
-            <Profile />
+            <p>Hello from driver container</p>
         </>
     );
 }

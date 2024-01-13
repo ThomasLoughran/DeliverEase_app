@@ -3,7 +3,7 @@ import { useUser }  from "../contexts/UserContext"
 import { useEffect } from "react";
 
 
-export const ProtectedRoute = () => {
+export const ManagerProtectedRoute = () => {
 
     const { user } = useUser();
 
@@ -13,9 +13,9 @@ export const ProtectedRoute = () => {
     }, [user])
 
 
-if (!user) {
-    {console.log("User not logged in", user)}
-    return  <Navigate to="/login" />;
+if (user.role !== 'MANAGER') {
+    {console.log("Cannot access page due to invalid user type", user.role)}
+    return  <Navigate to="/" />;
 }
 
 return <Outlet/>

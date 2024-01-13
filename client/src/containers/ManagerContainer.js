@@ -9,9 +9,7 @@ const ManagerContainer = () => {
 
     return (
         <>
-            <NavBar />
-            <Profile />
-
+            <p>Hello from manager container</p>
         </>
 
     );

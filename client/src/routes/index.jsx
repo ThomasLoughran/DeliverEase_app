@@ -2,6 +2,10 @@ import { Outlet, RouterProvider, createBrowserRouter } from "react-router-dom";
 import Dashboard from "../pages/Dashboard";
 import LoginPage from "../pages/LoginPage";
 import { ProtectedRoute } from "./ProtectedRoute";
+import { DriverProtectedRoute } from "./DriverProtectedRoute";
+import { ManagerProtectedRoute } from "./ManagerProtectedRoute";
+
+
 import LogoutPage from "../pages/LogoutPage";
 import { useUser } from "../contexts/UserContext"
 import HomePage from "../pages/HomePage";
@@ -41,7 +45,7 @@ const Routes = () => {
             element: <p>About-us</p>
         },
         {
-            path: "/home",
+            path: "/test",
             element: <p>Not logged in user home page</p>
         },
 
@@ -55,7 +59,37 @@ const Routes = () => {
             children: [
                 {
                     path: "/",
-                    element: <Dashboard />
+                    element: <LoggedInLayout/>,
+                    children: [
+                        {
+                            path: "/home",
+                            element: <p>Hello from home</p>
+                        },
+                        {
+                            path: "/manager",
+                            element: <ManagerProtectedRoute/>,
+                            children: [
+                                {
+                                    path:"/manager/drivers",
+                                    element: <p>Hello there will be a list of drivers here</p>
+                                },
+                                {
+                                    path:"/manager/distribution-centres",
+                                    element: <p>Hello there will be a list of distribution centres here</p>
+                                }
+                            ]
+                        },
+                        {
+                            path: "/driver",
+                            element: <DriverProtectedRoute/>,
+                            children: [
+                                {
+                                    path:"/driver/routes",
+                                    element: <p>Hello there will be a list of routes here</p>
+                                }
+                            ]
+                        }
+                    ]
                 },
                 {
                     path: "/test",

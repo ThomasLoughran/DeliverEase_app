@@ -24,10 +24,10 @@ const handleLogout = () => {
             </Link>
             {user?.role === 'MANAGER' && (
                 <>
-                    <Link id="drivers" to="/drivers/all">
+                    <Link id="drivers" to="manager/drivers">
                         Drivers
                     </Link>
-                    <Link id="dist-cent" to="/distribution-centre">
+                    <Link id="dist-cent" to="manager/distribution-centre">
                         Distribution Centres
                     </Link>
                 </>
