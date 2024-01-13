@@ -41,7 +41,6 @@ const handleLogout = () => {
                 Logout
             </Link>
             <img src={darkLogo} alt="Logo" className="logo" style={logoStyle} />
-
         </div>
     );
 };
