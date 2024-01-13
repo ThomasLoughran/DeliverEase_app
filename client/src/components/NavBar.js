@@ -6,7 +6,11 @@ import darkLogo from '../assets/dark-mode-logo.png';
 
 
 const NavBar = () => {
-    const { user } = useUser();
+    const { user, logoutUser } = useUser();
+
+const handleLogout = () => {
+    logoutUser();
+}
 
     const logoStyle =
         user?.role === 'MANAGER'
@@ -33,7 +37,7 @@ const NavBar = () => {
                     Routes
                 </Link>
             )}
-            <Link id="logout" to="/logout">
+            <Link id="logout" to="/" onClick={handleLogout}>
                 Logout
             </Link>
             <img src={darkLogo} alt="Logo" className="logo" style={logoStyle} />
