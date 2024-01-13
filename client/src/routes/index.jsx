@@ -1,13 +1,35 @@
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import { Outlet, RouterProvider, createBrowserRouter } from "react-router-dom";
 import Dashboard from "../pages/Dashboard";
 import LoginPage from "../pages/LoginPage";
 import { ProtectedRoute } from "./ProtectedRoute";
 import LogoutPage from "../pages/LogoutPage";
 import { useUser } from "../contexts/UserContext"
 import HomePage from "../pages/HomePage";
+import NavBar from "../components/NavBar";
+import Profile from "../components/Profile";
 
 
 const Routes = () => {
+
+
+    const LoggedInLayout = () => {
+        return (
+            <div className="main">
+                <NavBar/>
+                <div className="container">
+                    <div className="profileContainer">
+                        <Profile/>
+                    </div>
+                    <div className="contentContainer">
+                        <Outlet/>
+                    </div>
+                </div>
+            </div>
+        )
+    }
+
+
+
 
 
     const { user } = useUser();
