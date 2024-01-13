@@ -25,6 +25,11 @@ const LoginForm = () => {
     };
 
     const handleLogin = async (event) => {
+        if (!userLoginInformation.id || !userLoginInformation.password) {
+            alert('Please enter both ID and Password.');
+            return;
+        }
+    
         event.preventDefault()
         await fetchUser(userLoginInformation);
         console.log(userLoginInformation)
