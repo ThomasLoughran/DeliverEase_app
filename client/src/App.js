@@ -1,6 +1,4 @@
-
 import './App.css';
-import LoginPage from './pages/LoginPage';
 import UserProvider from './contexts/UserContext';
 import Routes from './routes';
 

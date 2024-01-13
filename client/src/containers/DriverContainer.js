@@ -1,5 +1,5 @@
-
 import NavBar from "../components/NavBar";
+import Profile from "../components/Profile";
 import { useUser } from "../contexts/UserContext";
 
 const DriverContainer = () => {
@@ -11,7 +11,7 @@ const DriverContainer = () => {
     return (
         <>
             <NavBar />
-            <p>Hello from Driver Container</p>
+            <Profile />
             {user ? <p>name: {user.name}</p> : <p>Loading</p>}
         </>
     );
