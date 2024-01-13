@@ -2,6 +2,9 @@ import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useUser } from "../contexts/UserContext";
 import '../styles/LoginPage.css';
+import darkLogo from '../assets/dark-mode-logo.png';
+import lightLogo from '../assets/light-mode-logo.png';
+
 
 const LoginForm = () => {
 
@@ -95,6 +98,11 @@ const LoginForm = () => {
                 <button type="submit">Login</button>
 
             </form>
+            <img
+                src={darkMode ? lightLogo : darkLogo}
+                alt="Logo"
+                className="logo"
+            />
 
 
         </>
