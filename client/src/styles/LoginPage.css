@@ -1,8 +1,13 @@
 body {
     margin: 0;
     font-family: 'Arial', sans-serif;
-    background-color: #004445;
-    color: #faf5e4;
+    background-color: #faf5e4;
+    color: #004445;
+}
+
+body.dark-mode {
+    background: #004445; 
+    color: #faf5e4; 
 }
 
 #login-form {

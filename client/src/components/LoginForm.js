@@ -1,6 +1,7 @@
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useUser } from "../contexts/UserContext";
+import '../styles/LoginPage.css';
 
 const LoginForm = () => {
 
@@ -14,6 +15,7 @@ const LoginForm = () => {
 
 
     const { loginUser } = useUser();
+    const [darkMode, setDarkMode] = useState(false);
 
     const handleUserLoginInformationChange = (event) => {
         const propertyName = event.target.name;
@@ -24,75 +26,72 @@ const LoginForm = () => {
 
     const handleLogin = async (event) => {
         event.preventDefault()
-
         await fetchUser(userLoginInformation);
-
-
         console.log(userLoginInformation)
     }
 
     const fetchUser = async (userDetails) => {
         try {
-        const response = await fetch('http://localhost:8080/employees/login', {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(userDetails)
-        });
-        
-        if (!response.ok) {
-            throw new Error(`Failed to log in: ${response.status} ${response.statusText}`);
-        }
-        
+            const response = await fetch('http://localhost:8080/employees/login', {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(userDetails)
+            });
+
+            if (!response.ok) {
+                throw new Error(`Failed to log in: ${response.status} ${response.statusText}`);
+            }
+
             const data = await response.json();
-        
-        if (!data) {
-            throw new Error("Empty response received");
-        }
-        
+
+            if (!data) {
+                throw new Error("Empty response received");
+            }
+
             loginUser(data);
             console.log("This is data", data);
             navigate("/", { replace: true });
         } catch (error) {
             console.error('Error during login:', error);
-            
+
+        }
     }
-}
 
+    const handleToggleDarkMode = () => {
+        setDarkMode(!darkMode);
+        document.body.classList.toggle('dark-mode', darkMode);
+    };
 
-
-
-
-    return ( 
+    return (
 
         <>
-        <form id="login-form" onSubmit={handleLogin}>
-            <p>Login page</p>
-            <label htmlFor="login-form">Please enter your details</label>
-            <input
-                id="userId"
-                name="id"
-                type="id"
-                placeholder="Please enter your id"
-                value={userLoginInformation.id}
-                onChange={handleUserLoginInformationChange}
-            />
+            <button onClick={handleToggleDarkMode} className="dark-mode-toggle">
+                Toggle Dark Mode
+            </button>
+            <form id="login-form" onSubmit={handleLogin} className={darkMode ? 'dark-mode' : ''}>
+                <label htmlFor="login-form">Please enter your details:</label>
+                <input
+                    id="userId"
+                    name="id"
+                    type="id"
+                    placeholder="Please enter your id"
+                    value={userLoginInformation.id}
+                    onChange={handleUserLoginInformationChange}
+                />
 
-            <input
-                id="useePassword"
-                name="password"
-                type="password"
-                placeholder="Please enter your Password"
-                value={userLoginInformation.password}
-                onChange={handleUserLoginInformationChange}
-            />
+                <input
+                    id="useePassword"
+                    name="password"
+                    type="password"
+                    placeholder="Please enter your Password"
+                    value={userLoginInformation.password}
+                    onChange={handleUserLoginInformationChange}
+                />
+                <button type="submit">Login</button>
+
+            </form>
 
 
-            <button type="submit">Login</button>
-
-        </form>
-        
-        
-        
         </>
 
 
