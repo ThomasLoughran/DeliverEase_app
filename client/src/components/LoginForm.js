@@ -18,7 +18,7 @@ const LoginForm = () => {
 
 
     const { loginUser } = useUser();
-    const [darkMode, setDarkMode] = useState(false);
+    const [darkMode, setDarkMode] = useState(true);
 
     const handleUserLoginInformationChange = (event) => {
         const propertyName = event.target.name;
