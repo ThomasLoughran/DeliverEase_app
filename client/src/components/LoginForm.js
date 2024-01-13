@@ -2,8 +2,10 @@ import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useUser } from "../contexts/UserContext";
 import '../styles/LoginPage.css';
-import darkLogo from '../assets/dark-mode-logo.png';
-import lightLogo from '../assets/light-mode-logo.png';
+
+
+import darkLogo from '../assets/adjusted-size-logos/dark-mode-logo.png';
+import lightLogo from '../assets/adjusted-size-logos/light-mode-logo.png';
 
 
 const LoginForm = () => {
