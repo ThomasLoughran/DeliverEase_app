@@ -12,7 +12,6 @@ const DriverContainer = () => {
         <>
             <NavBar />
             <Profile />
-            {user ? <p>name: {user.name}</p> : <p>Loading</p>}
         </>
     );
 }
