@@ -7,6 +7,8 @@ const ManagerContainer = () => {
 
     const { user } = useUser();
 
+
+    
     return (
         <>
             <p>Hello from manager container</p>

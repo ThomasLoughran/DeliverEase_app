@@ -1,3 +1,6 @@
+import '../../styles/DriversList.css'
+
+
 const DriversList = ({ drivers }) => {
 
     console.log(drivers);
@@ -20,14 +23,9 @@ const DriversList = ({ drivers }) => {
 
 
     return ( 
-        <>
-            <p>Hello from DriversList</p>
-            <ul>
+            <ul className='drivers-list'>
             {drivers ? driversListComponents : <p>Loading</p>}
             </ul>
-        </>
-        
-
     );
 }
  

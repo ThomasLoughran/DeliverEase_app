@@ -46,7 +46,7 @@ const DriversListContainer = () => {
 
     return ( 
         <div className="drivers-list-container">
-            <p>Hello from driversListContainer</p>
+            {/* <p>Hello from driversListContainer</p> */}
             <DriversList drivers={drivers}/>
         </div>
 

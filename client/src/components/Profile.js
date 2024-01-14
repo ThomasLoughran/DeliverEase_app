@@ -6,7 +6,7 @@ const Profile = () => {
     const { user } = useUser();
 
     return (
-        <div className="profile-container">
+        <div className="profile">
             <h2>Your Profile:</h2>
             {user.role === 'MANAGER' && (
                 <>
