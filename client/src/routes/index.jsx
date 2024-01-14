@@ -11,6 +11,7 @@ import { useUser } from "../contexts/UserContext"
 import HomePage from "../pages/HomePage";
 import NavBar from "../components/NavBar";
 import Profile from "../components/Profile";
+import DriversListContainer from "../containers/DriversListContainer";
 
 
 const Routes = () => {
@@ -75,7 +76,7 @@ const Routes = () => {
                             children: [
                                 {
                                     path:"/manager/drivers",
-                                    element: <p>Hello there will be a list of drivers here</p>
+                                    element: <DriversListContainer/>
                                 },
                                 {
                                     path:"/manager/distribution-centres",

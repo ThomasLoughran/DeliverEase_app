@@ -59,11 +59,10 @@ const LoginForm = () => {
             }
 
             loginUser(data);
-            console.log("This is data", data);
+            // console.log("This is data", data);
             navigate("/", { replace: true });
         } catch (error) {
             console.error('Error during login:', error);
-
         }
     }
 
