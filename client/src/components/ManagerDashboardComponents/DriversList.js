@@ -3,10 +3,10 @@ import '../../styles/DriversList.css'
 
 const DriversList = ({ drivers }) => {
 
-    console.log(drivers);
+    // console.log(drivers);
 
     const driversListComponents = drivers.map((driver) => {
-        console.log(driver);
+        // console.log(driver);
         return (
 
             <li className="driver-card">

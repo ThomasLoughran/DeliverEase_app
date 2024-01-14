@@ -12,6 +12,7 @@ import HomePage from "../pages/HomePage";
 import NavBar from "../components/NavBar";
 import Profile from "../components/Profile";
 import DriversListContainer from "../containers/DriversListContainer";
+import DistributionCentreListContainer from "../containers/DistributionCentreListContainer";
 
 
 const Routes = () => {
@@ -80,7 +81,7 @@ const Routes = () => {
                                 },
                                 {
                                     path:"/manager/distribution-centres",
-                                    element: <p>Hello there will be a list of distribution centres here</p>
+                                    element: <DistributionCentreListContainer/>
                                 }
                             ]
                         },
