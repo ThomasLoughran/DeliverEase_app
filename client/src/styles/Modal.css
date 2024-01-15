@@ -18,7 +18,7 @@
 
 .driver-form {
     animation-name: zoom;
-    animation-duration: 0.3s;
+    animation-duration: 0.6s;
 }
 
 @keyframes zoom {
