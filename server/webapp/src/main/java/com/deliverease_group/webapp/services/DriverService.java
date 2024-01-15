@@ -43,4 +43,10 @@ public class DriverService {
         return driverRepository.findAll();
     }
 
+    public Driver updateDriverAvailability(Long driverId, LocalDate date) {
+        Driver driver = driverRepository.findById(driverId).get();
+        driver.updateAvailableDates(date);
+        driverRepository.save(driver);
+        return driver;
+    }
 }

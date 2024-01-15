@@ -82,7 +82,18 @@ public class Driver extends Employee{
         return availableDates;
     }
 
+    public Map<LocalDate, Boolean> updateAvailableDates(LocalDate date) {
+        if (this.availableDates.containsKey(date)){
+            this.availableDates.remove(date);
+        } else {
+            this.availableDates.put(date, true);
+        }
+        return availableDates;
+    }
+
     public void setAvailableDates(Map<LocalDate, Boolean> availableDates) {
         this.availableDates = availableDates;
     }
+
+
 }
