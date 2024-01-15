@@ -1,7 +1,7 @@
 import '../../styles/DriversList.css'
 
 
-const DriversList = ({ drivers, distributionCentres }) => {
+const DriversList = ({ drivers, distributionCentres, selectedCentreId, setSelectedCentreId }) => {
 
     // console.log(drivers);
 
@@ -20,6 +20,10 @@ const DriversList = ({ drivers, distributionCentres }) => {
         )
     })
 
+    const handleDropDownChange = (e) => {
+        setSelectedCentreId(e.target.value);
+    }
+
     const dropDownComponents = distributionCentres.map((distributionCentre) => {
         return (
             <>
@@ -36,7 +40,7 @@ const DriversList = ({ drivers, distributionCentres }) => {
 
         <>
 
-            <select> 
+            <select id="distribution-centre-drop-down" onChange={handleDropDownChange} value={selectedCentreId} > 
                 {dropDownComponents}
             </select>
 

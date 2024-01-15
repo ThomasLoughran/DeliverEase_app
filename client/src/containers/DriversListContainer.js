@@ -4,20 +4,22 @@ import DriversList from "../components/ManagerDashboardComponents/DriversList";
 const DriversListContainer = () => {
 
 
-    const [drivers, setDrivers] = useState([])
+    const [drivers, setDrivers] = useState([]);
     const distributionCentreId = 1; // hardcoded for test purposes. 
     //Should be coded so that there is a context that tracks the current distcent selected.
-
+    const [selectedCentreId, setSelectedCentreId] = useState(null);
 
     const [distributionCentres, setDistributionCentres] = useState([]);
 
     useEffect(() => {
 
         fetchDistributionCentres();
-        fetchDrivers(distributionCentreId);
+        if (distributionCentreId !== null) {    
+            fetchDrivers(selectedCentreId);
+        }
         
 
-    }, [])
+    }, [selectedCentreId])
 
     const fetchDistributionCentres = async () => {
 
@@ -78,7 +80,7 @@ const DriversListContainer = () => {
         <>
         <div className="drivers-list-container">
             {/* <p>Hello from driversListContainer</p> */}
-            <DriversList drivers={drivers} distributionCentres={distributionCentres}/>
+            <DriversList drivers={drivers} distributionCentres={distributionCentres} selectedCentreId={selectedCentreId} setSelectedCentreId={setSelectedCentreId}/>
         </div>
         </>
 
