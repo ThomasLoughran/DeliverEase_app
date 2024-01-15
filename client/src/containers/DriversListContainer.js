@@ -5,8 +5,6 @@ const DriversListContainer = () => {
 
 
     const [drivers, setDrivers] = useState([]);
-    const distributionCentreId = 1; // hardcoded for test purposes. 
-    //Should be coded so that there is a context that tracks the current distcent selected.
     const [selectedCentreId, setSelectedCentreId] = useState(null);
 
     const [distributionCentres, setDistributionCentres] = useState([]);
@@ -14,7 +12,7 @@ const DriversListContainer = () => {
     useEffect(() => {
 
         fetchDistributionCentres();
-        if (distributionCentreId !== null) {    
+        if (selectedCentreId !== null) {    
             fetchDrivers(selectedCentreId);
         }
         
