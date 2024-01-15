@@ -11,6 +11,6 @@ public interface OrderRepository extends JpaRepository<Order,Long> {
 
     List<Order> findAllByDistributionCentreId(Long distCentreId);
 
-    List<Order> findAllByDistributionCentreIdAndIsCompleted(Long distCentreId, boolean b);
+    List<Order> findAllByDistributionCentreIdAndIsCompletedOrderByDateOrdered(Long distCentreId, boolean b);
     //List<Employee> findAllByDistributionCentreIdAndRole(Long distCentId, Role role);
 }

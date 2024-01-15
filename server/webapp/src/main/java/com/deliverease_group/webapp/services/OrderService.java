@@ -6,6 +6,10 @@ import com.deliverease_group.webapp.models.Order;
 import com.deliverease_group.webapp.repositories.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,7 +25,7 @@ public class OrderService {
     }
 
     public List<Order> getDistributionCentreOrdersByCompletionStatus(Long distCentreId, boolean isOrderComplete) {
-        return orderRepository.findAllByDistributionCentreIdAndIsCompleted(distCentreId,isOrderComplete);
+        return orderRepository.findAllByDistributionCentreIdAndIsCompletedOrderByDateOrdered(distCentreId,isOrderComplete);
     }
 
     public Order getOrderById(Long id) {
@@ -55,5 +59,12 @@ public class OrderService {
         order.setManagerReviewed(isManagerReviewed);
         orderRepository.save(order);
         return order;
+    }
+
+    public List<Order> generateRoutes(Long distCentreId, LocalDate localDate) {
+        List<Order> incompleteOrders = getDistributionCentreOrdersByCompletionStatus(distCentreId, false);
+
+        return incompleteOrders;
+
     }
 }

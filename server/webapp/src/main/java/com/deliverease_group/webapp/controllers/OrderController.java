@@ -4,11 +4,14 @@ import com.deliverease_group.webapp.dtos.OrderDTO;
 import com.deliverease_group.webapp.models.DistributionCentre;
 import com.deliverease_group.webapp.models.Order;
 import com.deliverease_group.webapp.services.OrderService;
+import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -61,6 +64,11 @@ public class OrderController {
     @PatchMapping(value = "/manager-review/{id}")
     public ResponseEntity<Order> patchOrderManagerReviewById(@PathVariable Long id, @RequestParam boolean isManagerReviewed){
         return new ResponseEntity<>(orderService.updateOrderManagerReviewed(id, isManagerReviewed),HttpStatus.OK);
+    }
+
+    @PostMapping(value = "/new-routes/{id}")
+    public ResponseEntity<List<Order>> generateRoutes (@PathVariable Long distCentreId, @RequestParam LocalDate localDate){
+        return new ResponseEntity<>(orderService.generateRoutes(distCentreId,localDate),HttpStatus.CREATED);
     }
 
     // TODO - GET all orders by distribution centre and date, GET all orders by driver ID and date, GET all incomplete orders,
