@@ -21,9 +21,9 @@ const Routes = () => {
     // probably should be in a separate file and imported.
     const LoggedInLayout = () => {
         return (
-            <div className="main">
+            <div className="wrapper">
                 <NavBar/>
-                <div className="container">
+                <div className="main">
                     <div className="profileContainer">
                         <Profile/>
                     </div>

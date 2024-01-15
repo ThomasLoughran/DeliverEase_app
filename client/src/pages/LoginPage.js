@@ -9,7 +9,7 @@ const LoginPage = () => {
 
     return (
         <>
-            <div className="Login-form-container">
+            <div className="login-form-container">
             <LoginForm />
             </div>
         </>

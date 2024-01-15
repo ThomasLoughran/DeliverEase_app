@@ -1,17 +1,18 @@
-body {
+.login-form-container {
     margin: 0;
     font-family: 'Arial', sans-serif;
     display: flex;
     align-items: center;
+    flex-direction: column;
     justify-content: center;
-    background: #faf5e4; 
+    /* background: #faf5e4;  */
     color: #004445; 
 }
 
-body.dark-mode {
+/* .login-form-container.dark-mode {
     background: #004445; 
     color: #faf5e4; 
-}
+}  */
 
 #login-form {
     width: 300px;

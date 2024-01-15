@@ -18,7 +18,7 @@ const handleLogout = () => {
     //         : { width: '200px', height: 'auto', marginTop: '300px' };
 
     return (
-        <div className= "NavBar">
+        <div className= "navBar">
             <Link id="home" to="/">
                 Home
             </Link>
