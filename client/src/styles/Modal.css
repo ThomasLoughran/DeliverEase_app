@@ -12,7 +12,19 @@
     background-color: rgb(0,0,0); /* Fallback color */
     background-color: rgba(0,0,0,0.5); /* Black w/ opacity */
     /* display: flex; */
+
+    
 }
+
+.driver-form {
+    animation-name: zoom;
+    animation-duration: 0.3s;
+}
+
+@keyframes zoom {
+    from {transform: scale(0.1)} 
+    to {transform: scale(1)}
+  }
 
 .modal-container {
     display: flex;
@@ -23,6 +35,7 @@
     width: 50px;
     height: 40px;
 }
+
 
 
 
