@@ -6,12 +6,9 @@ import com.deliverease_group.webapp.models.Order;
 import com.deliverease_group.webapp.repositories.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
-import static com.deliverease_group.webapp.models.Issue.LOST_IN_TRANSIT;
 
 @Service
 public class OrderService {
@@ -35,11 +32,8 @@ public class OrderService {
         return null;
     }
 
-    public Order updateOrder(OrderDTO orderDTO) {
+    public Order updateOrderIssue(OrderDTO orderDTO) {
         Order order = orderRepository.findById(orderDTO.getId()).get();
-
-        order.setCompleted(orderDTO.isCompleted());
-        order.setManagerReviewed(orderDTO.isManagerReviewed());
         order.setIssue(Issue.fromInteger(orderDTO.getIssue()));
         order.setTimeIssuePosted(orderDTO.getTimeIssuePosted());
 
@@ -48,4 +42,17 @@ public class OrderService {
     }
 
 
+    public Order updateOrderCompletion(Long id, boolean isComplete) {
+        Order order = orderRepository.findById(id).get();
+        order.setCompleted(isComplete);
+        orderRepository.save(order);
+        return order;
+    }
+
+    public Order updateOrderManagerReviewed(Long id, boolean isManagerReviewed) {
+        Order order = orderRepository.findById(id).get();
+        order.setManagerReviewed(isManagerReviewed);
+        orderRepository.save(order);
+        return order;
+    }
 }

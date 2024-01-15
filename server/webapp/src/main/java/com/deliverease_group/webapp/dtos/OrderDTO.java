@@ -9,15 +9,13 @@ import java.time.ZonedDateTime;
 
 public class OrderDTO {
     private Long id;
-    private boolean isCompleted;
-    private boolean isManagerReviewed;
+
     private int issue;
+
     private ZonedDateTime timeIssuePosted;
 
-    public OrderDTO(Long id, boolean isCompleted, boolean isManagerReviewed, int issue, ZonedDateTime timeIssuePosted) {
+    public OrderDTO(Long id, int issue, ZonedDateTime timeIssuePosted) {
         this.id = id;
-        this.isCompleted = isCompleted;
-        this.isManagerReviewed = isManagerReviewed;
         this.issue = issue;
         this.timeIssuePosted = timeIssuePosted;
     }
@@ -31,22 +29,6 @@ public class OrderDTO {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public boolean isCompleted() {
-        return isCompleted;
-    }
-
-    public void setCompleted(boolean completed) {
-        isCompleted = completed;
-    }
-
-    public boolean isManagerReviewed() {
-        return isManagerReviewed;
-    }
-
-    public void setManagerReviewed(boolean managerReviewed) {
-        isManagerReviewed = managerReviewed;
     }
 
     public int getIssue() {

@@ -19,6 +19,6 @@ public interface DriverRepository extends JpaRepository<Driver,Long> {
             "INNER JOIN employees\n" +
             "ON driver_available_dates.driver_id = employees.id\n" +
             "WHERE employees.distribution_centre_id = ?1\n" +
-            "AND DATE(driver_available_dates.available_dates) = ?2", nativeQuery = true)
+            "AND available_dates_key = ?2", nativeQuery = true)
     List<Driver> availableDrivers(Long distCentId, LocalDate selectedDate);
 }
