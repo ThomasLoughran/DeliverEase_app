@@ -78,7 +78,7 @@ public class OrderService {
 
         int totalCapacity = 0;
         int totalWeight = 0;
-        int maxParcelsPerVan = 3;
+        int maxParcelsPerVan = 10;
         int totalOrders = maxParcelsPerVan * availableDrivers.size();
 
         //gets the totals of each across all drivers

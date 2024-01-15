@@ -140,6 +140,38 @@ public class DataLoader implements ApplicationRunner {
         );
         orderRepository.save(order3);
 
+        Order order4 = new Order(
+                birminghamCentre,
+                25,
+                30,
+                "B14 7TG",
+                "59 Avenue Road",
+                52.433252,
+                -1.900467,
+                ZonedDateTime.now(),
+                false,
+                false,
+                false,
+                ZonedDateTime.now()
+        );
+        orderRepository.save(order4);
+
+        Order order5 = new Order(
+                birminghamCentre,
+                0,
+                0,
+                "B66 3TF",
+                "5 Woodland Street",
+                52.491102,
+                -1.951745,
+                ZonedDateTime.now(),
+                false,
+                false,
+                false,
+                ZonedDateTime.now()
+        );
+        orderRepository.save(order5);
+
 
 
 //       to generate data loader route:
