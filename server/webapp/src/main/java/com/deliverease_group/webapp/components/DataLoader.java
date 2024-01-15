@@ -75,6 +75,7 @@ public class DataLoader implements ApplicationRunner {
         Manager manager6 = new Manager("Manager 6", "password", Role.MANAGER, cardiffCentre);
         employeeRepository.save(manager6);
 
+
         Driver driver1 = new Driver("Driver 1", "password", Role.DRIVER, birminghamCentre, 50, 1000, "A caravan", false, new HashMap<>());
         employeeRepository.save(driver1);
 

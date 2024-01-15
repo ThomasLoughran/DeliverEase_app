@@ -1,5 +1,6 @@
 package com.deliverease_group.webapp.controllers;
 
+import com.deliverease_group.webapp.dtos.DriverDTO;
 import com.deliverease_group.webapp.models.Driver;
 import com.deliverease_group.webapp.models.Employee;
 import com.deliverease_group.webapp.models.Manager;
@@ -60,5 +61,9 @@ public class DriverController {
         return new ResponseEntity<>(driverService.updateDriverAvailability(id, date), HttpStatus.OK);
     }
 
+    @PostMapping("/new-driver")
+    public ResponseEntity<Driver> createNewDriver(@RequestBody DriverDTO driverDTO){
+        return new ResponseEntity<>(driverService.addNewDriver(driverDTO), HttpStatus.CREATED);
+    }
 
 }
