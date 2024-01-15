@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import DriversList from "../components/ManagerDashboardComponents/DriversList";
+import AddDriverForm from "../components/ManagerDashboardComponents/AddDriverForm";
 
 const DriversListContainer = () => {
 
@@ -79,6 +80,7 @@ const DriversListContainer = () => {
         <div className="drivers-list-container">
             {/* <p>Hello from driversListContainer</p> */}
             <DriversList drivers={drivers} distributionCentres={distributionCentres} selectedCentreId={selectedCentreId} setSelectedCentreId={setSelectedCentreId}/>
+            <AddDriverForm />
         </div>
         </>
 
