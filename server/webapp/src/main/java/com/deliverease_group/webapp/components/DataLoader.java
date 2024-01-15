@@ -7,9 +7,12 @@ import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDate;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 @Component
@@ -41,14 +44,14 @@ public class DataLoader implements ApplicationRunner {
         Manager manager1 = new Manager("Manager 1", "password", Role.MANAGER, birminghamCentre);
         employeeRepository.save(manager1);
 
-        Driver driver1 = new Driver("Driver 1", "password", Role.DRIVER, birminghamCentre, 50, 1000, "A caravan", false, new ArrayList<>());
+        Driver driver1 = new Driver("Driver 1", "password", Role.DRIVER, birminghamCentre, 50, 1000, "A caravan", false, new HashMap<>());
         employeeRepository.save(driver1);
 
-        Driver driver2 = new Driver("Driver 2", "password", Role.DRIVER, birminghamCentre, 100, 1000, "A bus", false, new ArrayList<>());
+        Driver driver2 = new Driver("Driver 2", "password", Role.DRIVER, birminghamCentre, 100, 1000, "A bus", false, new HashMap<>());
         employeeRepository.save(driver2);
 
-        ArrayList<ZonedDateTime> availableDates =  new ArrayList<>();
-        availableDates.add(ZonedDateTime.now());
+        Map<LocalDate, Boolean> availableDates =  new HashMap<>();
+        availableDates.put(LocalDate.now(), true);
 
         Driver driver3 = new Driver("Driver 3", "password", Role.DRIVER, birminghamCentre, 100, 1000, "A bus", false, availableDates);
         employeeRepository.save(driver3);
