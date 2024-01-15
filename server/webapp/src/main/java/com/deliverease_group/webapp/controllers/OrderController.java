@@ -66,7 +66,7 @@ public class OrderController {
         return new ResponseEntity<>(orderService.updateOrderManagerReviewed(id, isManagerReviewed),HttpStatus.OK);
     }
 
-    @PostMapping(value = "/new-routes/{id}")
+    @PostMapping(value = "/new-routes/{distCentreId}")
     public ResponseEntity<List<Order>> generateRoutes (@PathVariable Long distCentreId, @RequestParam LocalDate localDate){
         return new ResponseEntity<>(orderService.generateRoutes(distCentreId,localDate),HttpStatus.CREATED);
     }

@@ -5,11 +5,15 @@ import com.deliverease_group.webapp.models.*;
 import com.deliverease_group.webapp.repositories.DistributionCentreRepository;
 import com.deliverease_group.webapp.repositories.DriverRepository;
 import com.deliverease_group.webapp.repositories.OrderRepository;
+import com.deliverease_group.webapp.repositories.RouteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.time.ZonedDateTime;
 import java.util.*;
+
+import static java.time.ZoneOffset.UTC;
 
 
 @Service
@@ -22,6 +26,9 @@ public class OrderService {
 
     @Autowired
     DistributionCentreRepository distributionCentreRepository;
+
+    @Autowired
+    RouteRepository routeRepository;
 
     public List<Order> getAllOrdersByDistributionCentre(Long distCentreId){
         return orderRepository.findAllByDistributionCentreId(distCentreId);
@@ -71,7 +78,8 @@ public class OrderService {
 
         int totalCapacity = 0;
         int totalWeight = 0;
-        int totalOrders = 50 * availableDrivers.size();
+        int maxParcelsPerVan = 3;
+        int totalOrders = maxParcelsPerVan * availableDrivers.size();
 
         //gets the totals of each across all drivers
         for (Driver driver : availableDrivers){
@@ -82,17 +90,17 @@ public class OrderService {
         //Gets total list of orders up-to any of the above limits
         ArrayList<Order> ordersToBeDelivered = new ArrayList<>();
         int runningTotalCapacity = 0;
-        int runningotalWeight = 0;
-        int runningotalOrders = 0;
+        int runningTotalWeight = 0;
+        int runningTotalOrders = 0;
 
         for (Order order : incompleteOrders){
-            runningotalOrders+=1;
-            runningotalWeight+=order.getWeight();
+            runningTotalOrders+=1;
+            runningTotalWeight+=order.getWeight();
             runningTotalCapacity+=order.getSize();
 
-            if ((runningotalOrders < totalOrders)
-                    ||(runningotalWeight < totalWeight)
-                    ||(runningTotalCapacity < totalCapacity)){
+            if ((runningTotalOrders <= totalOrders)
+                    &&(runningTotalWeight < totalWeight)
+                    &&(runningTotalCapacity < totalCapacity)){
 
                 ordersToBeDelivered.add(order);
 
@@ -129,52 +137,136 @@ public class OrderService {
         //get and shuffle drivers
         Collections.shuffle(availableDrivers);
 
-        Map<Long,ArrayList<Long>> ordersInRoutes = new HashMap<>();
+        Map<Long,ArrayList<Node>> ordersInRoutes = new HashMap<>();
 
-        //sets the vans as empty;
+        //sets the all drivers to have an empty list of routes associated with them;
         for (Driver driver : availableDrivers){
-            driver.setCapacityFull(false);
+            ordersInRoutes.put(driver.getId(), new ArrayList<>());
         }
 
+
+
+        // Assign orders to Drivers
+
+        int driverCount = 0;
+        Driver currentDriver = availableDrivers.get(driverCount);
+
         runningTotalCapacity = 0;
-        runningotalWeight = 0;
-        Order order;
+        runningTotalWeight = 0;
+        runningTotalOrders = 0;
+        for (Node node : orderLocations){
+            Order order = orderRepository.findById(node.getOrderId()).get();
+            runningTotalWeight += order.getWeight();
+            runningTotalCapacity += order.getSize();
+            runningTotalOrders ++;
 
-        //Assign orders to Drivers
-        Iterator<Driver> iterator = availableDrivers.iterator();
-
-        for (Node node : orderLocations) {
-            order = orderRepository.findById(node.getOrderId()).orElse(null);
-
-            
-            iterator = availableDrivers.iterator(); // Reset the iterator for each order
-
-            while (iterator.hasNext()) {
-                Driver driver = iterator.next();
-                runningotalWeight += order.getWeight();
-                runningTotalCapacity += order.getSize();
-
-                if (
-                        (driver.getVanCapacity() < runningTotalCapacity) ||
-                                (driver.getVanMaxWeight() < runningotalWeight) ||
-                                (ordersInRoutes.get(driver.getId()).size() < 50)
-                ) {
-                    // Handle the case where the driver is not valid for the order
+            if(runningTotalCapacity < currentDriver.getVanCapacity() &&
+            runningTotalWeight < currentDriver.getVanMaxWeight() &&
+            runningTotalOrders < maxParcelsPerVan){
+                ordersInRoutes.get(currentDriver.getId()).add(node);
+            } else {
+                driverCount ++;
+                if (driverCount < availableDrivers.size()) {
+                    currentDriver = availableDrivers.get(driverCount);
+                    ordersInRoutes.get(currentDriver.getId()).add(node);
+                    runningTotalCapacity = order.getSize();
+                    runningTotalWeight = order.getWeight();
+                    runningTotalOrders = 1;
                 } else {
-                    iterator.remove();
-                    runningTotalCapacity = 0;
-                    runningotalWeight = 0;
+                    break;
                 }
             }
         }
 
+//        id is -1 to avoid overlap with any order id
+        Node distributionCentreNode = new Node(distCentreX, distCentreY, -1);
 
-
-
-
-
+        List<Node> orderedNodeList = new ArrayList<>();
+        for (Long driverId : ordersInRoutes.keySet()){
+            orderedNodeList = routeFind(ordersInRoutes.get(driverId), distributionCentreNode);
+            ArrayList<Long> orderedIds = new ArrayList<>();
+            for (Node node : orderedNodeList){
+//                dist centre has id -1 and must not be included in final list
+                if (node.getOrderId() > 0){
+                    orderedIds.add(node.getOrderId());
+                }
+            }
+            Route route = new Route(distributionCentre, orderedIds, driverId, ZonedDateTime.of(localDate, localDate.atStartOfDay().toLocalTime(), UTC), false);
+            routeRepository.save(route);
+        }
 
         return ordersToBeDelivered;
 
+    }
+
+    public List<Node> routeFind(ArrayList<Node> nodes, Node distCentre){
+        nodes.add(0, distCentre);
+        int numberOfNodes = nodes.size();
+
+//        create a matrix of the distances between two nodes
+        double[][] distanceMatrix = new double[numberOfNodes][numberOfNodes];
+        for (int i = 0; i < numberOfNodes; i++){
+            for (int j = 0; j < numberOfNodes; j++){
+                double distance = Math.sqrt(Math.pow(nodes.get(i).getX() - nodes.get(j).getX(), 2) + Math.pow(nodes.get(i).getY() - nodes.get(j).getY(), 2));
+                distanceMatrix[i][j] = distance;
+                distanceMatrix[j][i] = distance;
+            }
+        }
+
+//        make a copy of the arraylist
+        ArrayList<Node> nodesInRoute = new ArrayList<>();
+        ArrayList<Node> nodesNotInRoute = new ArrayList<>();
+        for (Node node : nodes){
+            nodesNotInRoute.add(node);
+        }
+
+        nodesInRoute.add(nodes.get(0));
+        nodesNotInRoute.remove(0);
+
+//        iterate through n times until every node is a part of the node tree (1st time is before loop)
+        for (int i = 0; i < numberOfNodes - 1; i++){
+            Node routeNode = nodesInRoute.get(i);
+            Node minRouteNode = nodesInRoute.get(i);
+            Node nonRouteNode = nodesNotInRoute.get(0);
+            Node minNonRouteNode = nodesNotInRoute.get(0);
+            double minDistance = distanceMatrix[nodesInRoute.indexOf(routeNode)][nodesNotInRoute.indexOf(nonRouteNode)];
+//            iterate through the nodes in the node tree
+            for (int j = 1; j < nodesNotInRoute.size(); j++){
+                nonRouteNode = nodesNotInRoute.get(j);
+                double distance = distanceMatrix[nodesInRoute.indexOf(routeNode)][nodesNotInRoute.indexOf(nonRouteNode)];
+                if (distance < minDistance){
+                    minDistance = distance;
+                    minRouteNode = nodesInRoute.get(i);
+                    minNonRouteNode = nodesNotInRoute.get(j);
+                }
+            }
+
+
+            nodesInRoute.add(minNonRouteNode);
+            nodesNotInRoute.remove(minNonRouteNode);
+
+        }
+
+
+
+//        return nodeList back to original form
+        double[][] driverRoute = new double[numberOfNodes + 1][2];
+        for (int i = 0; i < numberOfNodes; i++){
+            driverRoute[i][0] = nodesInRoute.get(i).getX();
+            driverRoute[i][1] = nodesInRoute.get(i).getY();
+        }
+
+//        loop back to start
+        driverRoute[driverRoute.length - 1][0] = nodesInRoute.get(0).getX();
+        driverRoute[driverRoute.length - 1][1] = nodesInRoute.get(0).getY();
+
+//        for (int i = 0; i < driverRoute.length; i++){
+//            System.out.println("(" + driverRoute[i][0] + ", " + driverRoute[i][1] + ")");
+//
+//        }
+
+//        adding distribution centre as the last element in the route
+        nodesInRoute.add(distCentre);
+        return nodesInRoute;
     }
 }

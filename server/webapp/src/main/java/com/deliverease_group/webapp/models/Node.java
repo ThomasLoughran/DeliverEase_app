@@ -16,7 +16,6 @@ public class Node {
         this.x = x;
         this.y = y;
         this.orderId = id;
-
     }
 
     public double getX() {

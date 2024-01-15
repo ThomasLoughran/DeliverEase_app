@@ -88,6 +88,9 @@ public class DataLoader implements ApplicationRunner {
         Driver driver3 = new Driver("Driver 3", "password", Role.DRIVER, birminghamCentre, 100, 1000, "A bus", false, availableDates);
         employeeRepository.save(driver3);
 
+        Driver driver4 = new Driver("Driver 4", "password", Role.DRIVER, birminghamCentre, 100, 1000, "A bus", false, availableDates);
+        employeeRepository.save(driver4);
+
         //3 orders:
         Order order1 = new Order(
                 birminghamCentre,
@@ -140,12 +143,12 @@ public class DataLoader implements ApplicationRunner {
 
 
 //       to generate data loader route:
-        ArrayList<Long> orderList = new ArrayList<>();
-        orderList.add(order1.getId());
-        orderList.add(order2.getId());
-        orderList.add(order3.getId());
-        Route route1 = new Route(birminghamCentre, orderList, driver1.getId(), ZonedDateTime.now(), false);
-        routeRepository.save(route1);
+//        ArrayList<Long> orderList = new ArrayList<>();
+//        orderList.add(order1.getId());
+//        orderList.add(order2.getId());
+//        orderList.add(order3.getId());
+//        Route route1 = new Route(birminghamCentre, orderList, driver1.getId(), ZonedDateTime.now(), false);
+//        routeRepository.save(route1);
 
     }
 }
