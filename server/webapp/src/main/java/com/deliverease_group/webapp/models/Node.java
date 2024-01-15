@@ -10,12 +10,12 @@ public class Node {
 
     private double theta;
 
-    private int id;
+    private long orderId;
 
-    public Node(double x, double y, int id) {
+    public Node(double x, double y, long id) {
         this.x = x;
         this.y = y;
-        this.id = id;
+        this.orderId = id;
 
     }
 
@@ -51,11 +51,11 @@ public class Node {
         this.theta = theta;
     }
 
-    public int getId() {
-        return id;
+    public long getOrderId() {
+        return orderId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setOrderId(int orderId) {
+        this.orderId = orderId;
     }
 }

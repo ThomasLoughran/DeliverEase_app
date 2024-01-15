@@ -1,10 +1,7 @@
 package com.deliverease_group.webapp.services;
 
 import com.deliverease_group.webapp.dtos.OrderDTO;
-import com.deliverease_group.webapp.models.DistributionCentre;
-import com.deliverease_group.webapp.models.Driver;
-import com.deliverease_group.webapp.models.Issue;
-import com.deliverease_group.webapp.models.Order;
+import com.deliverease_group.webapp.models.*;
 import com.deliverease_group.webapp.repositories.DistributionCentreRepository;
 import com.deliverease_group.webapp.repositories.DriverRepository;
 import com.deliverease_group.webapp.repositories.OrderRepository;
@@ -12,10 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 
 @Service
@@ -108,6 +102,77 @@ public class OrderService {
         }
 
         DistributionCentre distributionCentre = distributionCentreRepository.findById(distCentreId).get();
+
+        double distCentreX = distributionCentre.getLocation().getX();
+        double distCentreY = distributionCentre.getLocation().getY();
+
+        ArrayList<Node> orderLocations = new ArrayList<>();
+
+        // Gets the order's angle from North of distribution centre and it's radial distance from the distribution centre
+        for (Order order : ordersToBeDelivered){
+            Node node = new Node(order.getLongitude(),order.getLatitude(),order.getId());
+
+            node.setRadius( Math.sqrt( Math.pow(node.getX() - distCentreX,2) ) +  Math.sqrt( Math.pow(node.getY() - distCentreY,2) ) );
+            node.setTheta(Math.atan(node.getY())/ node.getX());
+
+            orderLocations.add(node);
+        }
+
+        //sort order Locations By Angle Theta
+        Collections.sort(orderLocations, new Comparator<Node>() {
+            @Override
+            public int compare(Node o1, Node o2) {
+                return (int) (o1.getTheta() - o2.getTheta());
+            }
+        });
+
+        //get and shuffle drivers
+        Collections.shuffle(availableDrivers);
+
+        Map<Long,ArrayList<Long>> ordersInRoutes = new HashMap<>();
+
+        //sets the vans as empty;
+        for (Driver driver : availableDrivers){
+            driver.setCapacityFull(false);
+        }
+
+        runningTotalCapacity = 0;
+        runningotalWeight = 0;
+        Order order;
+
+        //Assign orders to Drivers
+        Iterator<Driver> iterator = availableDrivers.iterator();
+
+        for (Node node : orderLocations) {
+            order = orderRepository.findById(node.getOrderId()).orElse(null);
+
+            
+            iterator = availableDrivers.iterator(); // Reset the iterator for each order
+
+            while (iterator.hasNext()) {
+                Driver driver = iterator.next();
+                runningotalWeight += order.getWeight();
+                runningTotalCapacity += order.getSize();
+
+                if (
+                        (driver.getVanCapacity() < runningTotalCapacity) ||
+                                (driver.getVanMaxWeight() < runningotalWeight) ||
+                                (ordersInRoutes.get(driver.getId()).size() < 50)
+                ) {
+                    // Handle the case where the driver is not valid for the order
+                } else {
+                    iterator.remove();
+                    runningTotalCapacity = 0;
+                    runningotalWeight = 0;
+                }
+            }
+        }
+
+
+
+
+
+
 
         return ordersToBeDelivered;
 
