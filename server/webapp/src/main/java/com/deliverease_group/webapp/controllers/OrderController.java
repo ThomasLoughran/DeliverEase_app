@@ -48,10 +48,21 @@ public class OrderController {
         }
     }
 
-    @PatchMapping()
-    public ResponseEntity<Order> patchOrderById(@RequestBody OrderDTO orderDTO){
-        return new ResponseEntity<>(orderService.updateOrder(orderDTO),HttpStatus.OK);
+    @PatchMapping(value = "/issue")
+    public ResponseEntity<Order> patchOrderIssueById(@RequestBody OrderDTO orderDTO){
+        return new ResponseEntity<>(orderService.updateOrderIssue(orderDTO),HttpStatus.OK);
     }
+
+    @PatchMapping(value = "/complete/{id}")
+    public ResponseEntity<Order> patchOrderCompletionById(@PathVariable Long id, @RequestParam boolean isComplete){
+        return new ResponseEntity<>(orderService.updateOrderCompletion(id, isComplete),HttpStatus.OK);
+    }
+
+    @PatchMapping(value = "/manager-review/{id}")
+    public ResponseEntity<Order> patchOrderManagerReviewById(@PathVariable Long id, @RequestParam boolean isManagerReviewed){
+        return new ResponseEntity<>(orderService.updateOrderManagerReviewed(id, isManagerReviewed),HttpStatus.OK);
+    }
+
     // TODO - GET all orders by distribution centre and date, GET all orders by driver ID and date, GET all incomplete orders,
     //          PATCH order message, PATCH update isComplete, Patch update is ManagerReviewed
 }
