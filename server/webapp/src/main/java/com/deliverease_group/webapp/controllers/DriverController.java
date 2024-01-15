@@ -55,7 +55,7 @@ public class DriverController {
         return new ResponseEntity<>(driverService.getAllDrivers(), HttpStatus.OK);
     }
 
-    @PatchMapping("/change-availablec/{id}")
+    @PatchMapping("/change-available/{id}")
     public ResponseEntity<Driver> updateDriverAvailability(@PathVariable Long id, @RequestParam LocalDate date){
         return new ResponseEntity<>(driverService.updateDriverAvailability(id, date), HttpStatus.OK);
     }
