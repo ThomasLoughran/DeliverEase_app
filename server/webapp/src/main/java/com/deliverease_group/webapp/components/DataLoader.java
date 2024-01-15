@@ -41,8 +41,39 @@ public class DataLoader implements ApplicationRunner {
         DistributionCentre birminghamCentre = new DistributionCentre(DistributionCentreLocation.BIRMINGHAM);
         distributionCentreRepository.save(birminghamCentre);
 
+        DistributionCentre bristolCentre = new DistributionCentre(DistributionCentreLocation.BRISTOL);
+        distributionCentreRepository.save(bristolCentre);
+
+        DistributionCentre londonCentre = new DistributionCentre(DistributionCentreLocation.LONDON);
+        distributionCentreRepository.save(londonCentre);
+
+        DistributionCentre manchesterCentre = new DistributionCentre(DistributionCentreLocation.MANCHESTER);
+        distributionCentreRepository.save(manchesterCentre);
+
+        DistributionCentre oxfordCentre = new DistributionCentre(DistributionCentreLocation.OXFORD);
+        distributionCentreRepository.save(oxfordCentre);
+
+        DistributionCentre cardiffCentre = new DistributionCentre(DistributionCentreLocation.CARDIFF);
+        distributionCentreRepository.save(cardiffCentre);
+
+
         Manager manager1 = new Manager("Manager 1", "password", Role.MANAGER, birminghamCentre);
         employeeRepository.save(manager1);
+
+        Manager manager2 = new Manager("Manager 2", "password", Role.MANAGER, londonCentre);
+        employeeRepository.save(manager2);
+
+        Manager manager3 = new Manager("Manager 3", "password", Role.MANAGER, bristolCentre);
+        employeeRepository.save(manager3);
+
+        Manager manager4 = new Manager("Manager 4", "password", Role.MANAGER, manchesterCentre);
+        employeeRepository.save(manager4);
+
+        Manager manager5 = new Manager("Manager 5", "password", Role.MANAGER, oxfordCentre);
+        employeeRepository.save(manager5);
+
+        Manager manager6 = new Manager("Manager 6", "password", Role.MANAGER, cardiffCentre);
+        employeeRepository.save(manager6);
 
         Driver driver1 = new Driver("Driver 1", "password", Role.DRIVER, birminghamCentre, 50, 1000, "A caravan", false, new HashMap<>());
         employeeRepository.save(driver1);
@@ -104,6 +135,8 @@ public class DataLoader implements ApplicationRunner {
                 ZonedDateTime.now()
         );
         orderRepository.save(order3);
+
+
 
 //       to generate data loader route:
 //        ArrayList<Long> orderList = new ArrayList<>();

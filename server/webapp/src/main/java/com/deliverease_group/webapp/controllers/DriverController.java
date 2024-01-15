@@ -26,7 +26,7 @@ public class DriverController {
     DriverService driverService;
 
 
-    @GetMapping
+    @GetMapping()
     public ResponseEntity<List<Employee>> getAllDriversByDistCentId(@RequestParam Long distCentId) {
         try {
             return new ResponseEntity<>(driverService.findAllDriverIdsByDistCentId(distCentId, Role.DRIVER), HttpStatus.OK);
@@ -37,11 +37,7 @@ public class DriverController {
 
     @GetMapping("/available")
     public ResponseEntity<List<Driver>> getAvailableDriversByDistCentId(@RequestParam Long distCentId, @RequestParam LocalDate date) {
-
-        System.out.println("test");
-        System.out.println(date);
         return new ResponseEntity<>(driverService.findAllAvailableDrivers(distCentId, date), HttpStatus.OK);
-
     }
 
     @GetMapping(value = "/{id}")
