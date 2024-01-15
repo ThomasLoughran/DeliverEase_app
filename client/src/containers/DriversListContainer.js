@@ -1,14 +1,22 @@
 import { useEffect, useState } from "react";
 import DriversList from "../components/ManagerDashboardComponents/DriversList";
-import AddDriverForm from "../components/ManagerDashboardComponents/AddDriverForm";
+import Modal from "../components/Modal";
 
 const DriversListContainer = () => {
 
 
     const [drivers, setDrivers] = useState([]);
     const [selectedCentreId, setSelectedCentreId] = useState(null);
-
+    const [openModal, setOpenModal] = useState(false);
     const [distributionCentres, setDistributionCentres] = useState([]);
+
+    // const handleOpenModal = () => {
+    //     setOpenModal(true);
+    // }
+
+    // const handleCloseModal = () => {
+    //     setOpenModal(false);
+    // }    
 
     useEffect(() => {
 
@@ -80,7 +88,9 @@ const DriversListContainer = () => {
         <div className="drivers-list-container">
             {/* <p>Hello from driversListContainer</p> */}
             <DriversList drivers={drivers} distributionCentres={distributionCentres} selectedCentreId={selectedCentreId} setSelectedCentreId={setSelectedCentreId}/>
-            <AddDriverForm />
+            {openModal && <Modal closeModal={setOpenModal}/>}
+
+            {!openModal && <button onClick={() => setOpenModal(true)} className="open-modal-button">Add Driver</button>}
         </div>
         </>
 

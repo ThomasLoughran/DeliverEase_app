@@ -1,0 +1,45 @@
+.route-calendar {
+    margin: 20px;
+}
+
+.calendar {
+    margin-bottom: 20px;
+}
+
+.routes {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.routes h3 {
+    color: #004445;
+}
+
+.routes ul {
+    list-style: none;
+    padding: 0;
+}
+
+.routes li {
+    margin-bottom: 10px;
+    color: #2c786c;
+}
+
+.calendar label {
+    font-size: 16px;
+    margin-right: 10px;
+    color: #2c786c;
+}
+
+.calendar input {
+    padding: 8px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    outline: none;
+}
+
+.route-calendar h2 {
+    color: #004445;
+    margin-bottom: 10px;
+}
