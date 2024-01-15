@@ -30,6 +30,9 @@ const handleLogout = () => {
                     <Link id="dist-cent" to="manager/distribution-centres">
                         Distribution Centres
                     </Link>
+                    <Link id="routes-calendar" to='manager/routes'>
+                        Routes Calendar
+                    </Link>
                 </>
             )}
             {user?.role === 'DRIVER' && (
