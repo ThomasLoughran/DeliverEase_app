@@ -20,6 +20,7 @@
 5. App Functionality
    - 5.1. MVPs
    - 5.2. Extensions
+   - 5.3. Routes
 
 ## Introduction
 Welcome to our full stack application allowing delivery drivers and managers to better communicate.
@@ -40,6 +41,14 @@ Our app solves these challenges currently faced by RainForestRetail:
 **Risk Register**
 
 **Business Case**
+
+The application provides a user-friendly solution that assists managers with distribution centre optimisation, fleet utilisation and workforce management through its real-time  communications functionality with drivers and automated workload allocation & tracking features for drivers. 
+
+The following Business Plan details the advantages of DeliverEase for RainForest Retail:
+
+```
+*insert doc here*
+```
 
 ## 2. Technologies & Libraries
 - Java
@@ -108,7 +117,7 @@ npm start
 - Undelivered items given priority for tomorrow delivery
 - Drivers can see their route of orders to deliver by date
 
-## 5.3. Routes
+## 5.3. Routes 🗺
 
 1. **Display all drivers**
 * Method: GET
@@ -155,7 +164,7 @@ npm start
 7. **Display all completed orders**
 * Method: GET
 * URL: localhost:8080/orders/completion
-* This will get the full list of completed orders (i.e. they have been delivered to the customer).
+* This will get the full list of completed orders (i.e. they have been delivered to the customer). 
 
 <br>
 
@@ -166,17 +175,24 @@ npm start
 
 <br>
 
-9. **Update orders’ status**
+9. **Display all distribution centres**
+* Method: GET
+* URL: localhost:8080/distribution-centres
+* This will get the full list of distribution centres.
+
+<br>
+
+10. **Update orders’ status**
 * Method: PATCH
 * URL: localhost:8080/orders/id
 * This will update an order’s delivered, manager-reviewed and/or issue and issue timing status by order ID.
 
-<br>
+<br> 
 
-10. **Create new driver**
+11. **Create new driver**
 * Method: POST
-* URL: localhost:8080/orders/id
-* This will update an order’s delivered, manager-reviewed and/or issue and issue timing status by order ID. 
+* URL: localhost:8080/drivers/new-driver
+* This will create a new driver record and add it to the list of drivers. 
 
 
 
