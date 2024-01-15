@@ -1,7 +1,7 @@
 import '../../styles/DriversList.css'
 
 
-const DriversList = ({ drivers, distributionCentres, selectedCentreId, setSelectedCentreId }) => {
+const DriversList = ({ drivers, distributionCentres, selectedCentreId, setSelectedCentreId, setOpenModal, openModal }) => {
 
     // console.log(drivers);
 
@@ -45,6 +45,9 @@ const DriversList = ({ drivers, distributionCentres, selectedCentreId, setSelect
                 {dropDownComponents}
 
             </select>
+
+            {!openModal && <button onClick={() => setOpenModal(true)} className="open-modal-button">Add Driver</button>}
+
 
 
             <ul className='drivers-list'>

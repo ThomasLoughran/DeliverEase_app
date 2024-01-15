@@ -87,10 +87,11 @@ const DriversListContainer = () => {
         <>
         <div className="drivers-list-container">
             {/* <p>Hello from driversListContainer</p> */}
-            <DriversList drivers={drivers} distributionCentres={distributionCentres} selectedCentreId={selectedCentreId} setSelectedCentreId={setSelectedCentreId}/>
+            <DriversList drivers={drivers} distributionCentres={distributionCentres} selectedCentreId={selectedCentreId} setSelectedCentreId={setSelectedCentreId} setOpenModal={setOpenModal} openModal={openModal}/>
+            {/* {!openModal && <button onClick={() => setOpenModal(true)} className="open-modal-button">Add Driver</button>} moved to driversList */}
             {openModal && <Modal closeModal={setOpenModal}/>}
 
-            {!openModal && <button onClick={() => setOpenModal(true)} className="open-modal-button">Add Driver</button>}
+            
         </div>
         </>
 
