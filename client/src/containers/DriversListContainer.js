@@ -9,11 +9,40 @@ const DriversListContainer = () => {
     //Should be coded so that there is a context that tracks the current distcent selected.
 
 
+    const [distributionCentres, setDistributionCentres] = useState([]);
+
     useEffect(() => {
 
+        fetchDistributionCentres();
         fetchDrivers(distributionCentreId);
+        
 
     }, [])
+
+    const fetchDistributionCentres = async () => {
+
+        try {
+            const response = await fetch(`http://localhost:8080/distribution-centres`, {
+                method: "GET"
+            });
+
+            if (!response.ok) {
+                throw new Error(`Failed to get distribution centres: ${response.status} ${response.statusText} `);
+            }
+
+            const data = await response.json();
+
+            if (!data) {
+                throw new Error("Empty response received"); // 
+            }
+
+            setDistributionCentres(data);
+            console.log(data);
+
+        } catch (error) {
+            console.error('Error getting distribution centres:', error);
+        }
+    }
 
     const fetchDrivers = async (distributionCentreId) => {
 
@@ -45,11 +74,13 @@ const DriversListContainer = () => {
 
 
     return ( 
+
+        <>
         <div className="drivers-list-container">
             {/* <p>Hello from driversListContainer</p> */}
-            <DriversList drivers={drivers}/>
+            <DriversList drivers={drivers} distributionCentres={distributionCentres}/>
         </div>
-
+        </>
 
 
     );

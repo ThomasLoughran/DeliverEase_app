@@ -7,7 +7,6 @@ const ManagerRoutesContainer = () => {
     
     
     useEffect(() => {
-        // console.log(date);
     }, [date])
 
     const moveForwardOneDay = () => {
