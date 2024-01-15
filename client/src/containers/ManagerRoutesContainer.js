@@ -10,9 +10,15 @@ const ManagerRoutesContainer = () => {
         // console.log(date);
     }, [date])
 
+    const moveForwardOneDay = () => {
+        date.setDate(date.getDate()+1);
+    }
+
+
+
     return ( 
 
-            <RouteCalendar date={date} />
+            <RouteCalendar date={date} moveForwardOneDay={moveForwardOneDay} />
 
      );
 }
