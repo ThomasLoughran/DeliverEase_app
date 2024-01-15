@@ -40,8 +40,10 @@ const DriversList = ({ drivers, distributionCentres, selectedCentreId, setSelect
 
         <>
 
-            <select id="distribution-centre-drop-down" onChange={handleDropDownChange} value={selectedCentreId} > 
+            <select id="distribution-centre-drop-down" onChange={handleDropDownChange} value={selectedCentreId || ''} > 
+            <option value="" disabled> Please select centre</option>
                 {dropDownComponents}
+
             </select>
 
 
