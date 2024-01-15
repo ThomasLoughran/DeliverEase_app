@@ -17,7 +17,7 @@ public class EmployeeController {
     @Autowired
     EmployeeService employeeService;
 
-    @GetMapping("/login")
+    @PostMapping("/login")
     public ResponseEntity<Employee> getEmployeeByLoginDetail(@RequestBody LoginDTO loginDTO){
         Employee employee = employeeService.checkLoginDetails(loginDTO);
         if (employee != null){
