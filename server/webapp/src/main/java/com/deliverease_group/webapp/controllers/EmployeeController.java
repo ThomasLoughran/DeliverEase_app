@@ -1,6 +1,7 @@
 package com.deliverease_group.webapp.controllers;
 
 import com.deliverease_group.webapp.dtos.LoginDTO;
+import com.deliverease_group.webapp.dtos.PasswordDTO;
 import com.deliverease_group.webapp.models.Driver;
 import com.deliverease_group.webapp.models.Employee;
 import com.deliverease_group.webapp.services.EmployeeService;
@@ -25,6 +26,11 @@ public class EmployeeController {
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
+    }
+
+    @PatchMapping("/update-password")
+    public ResponseEntity<String> updatePassword(@RequestBody PasswordDTO passwordDTO){
+        return new ResponseEntity<>(employeeService.updatePassword(passwordDTO), HttpStatus.OK);
     }
 
 }

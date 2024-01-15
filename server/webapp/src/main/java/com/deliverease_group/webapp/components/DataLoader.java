@@ -75,6 +75,7 @@ public class DataLoader implements ApplicationRunner {
         Manager manager6 = new Manager("Manager 6", "password", Role.MANAGER, cardiffCentre);
         employeeRepository.save(manager6);
 
+
         Driver driver1 = new Driver("Driver 1", "password", Role.DRIVER, birminghamCentre, 50, 1000, "A caravan", false, new HashMap<>());
         employeeRepository.save(driver1);
 
@@ -139,11 +140,12 @@ public class DataLoader implements ApplicationRunner {
 
 
 //       to generate data loader route:
-//        ArrayList<Long> orderList = new ArrayList<>();
-//        orderList.add(order1.getId());
-//        Route route1 = new Route(birminghamCentre, orderList, driver1.getId(), ZonedDateTime.now(), false
-//        );
-//        routeRepository.save(route1);
+        ArrayList<Long> orderList = new ArrayList<>();
+        orderList.add(order1.getId());
+        orderList.add(order2.getId());
+        orderList.add(order3.getId());
+        Route route1 = new Route(birminghamCentre, orderList, driver1.getId(), ZonedDateTime.now(), false);
+        routeRepository.save(route1);
 
     }
 }

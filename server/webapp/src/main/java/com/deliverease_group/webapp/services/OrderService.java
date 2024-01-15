@@ -36,6 +36,7 @@ public class OrderService {
         Order order = orderRepository.findById(orderDTO.getId()).get();
         order.setIssue(Issue.fromInteger(orderDTO.getIssue()));
         order.setTimeIssuePosted(orderDTO.getTimeIssuePosted());
+        order.setManagerReviewed(false);
 
         orderRepository.save(order);
         return order;
