@@ -4,11 +4,14 @@ import com.deliverease_group.webapp.dtos.OrderDTO;
 import com.deliverease_group.webapp.models.DistributionCentre;
 import com.deliverease_group.webapp.models.Order;
 import com.deliverease_group.webapp.services.OrderService;
+import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -61,6 +64,22 @@ public class OrderController {
     @PatchMapping(value = "/manager-review/{id}")
     public ResponseEntity<Order> patchOrderManagerReviewById(@PathVariable Long id, @RequestParam boolean isManagerReviewed){
         return new ResponseEntity<>(orderService.updateOrderManagerReviewed(id, isManagerReviewed),HttpStatus.OK);
+    }
+
+    @PostMapping(value = "/new-routes/{distCentreId}")
+    public ResponseEntity<List<Order>> generateRoutes (@PathVariable Long distCentreId, @RequestParam LocalDate localDate){
+        List<Order> orderList = orderService.generateRoutes(distCentreId,localDate);
+        if (orderList!=null) {
+            return new ResponseEntity<>(orderList,HttpStatus.CREATED);
+        }else{
+            return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+        }
+
+    }
+
+    @GetMapping(value = "/issue/all")
+    public ResponseEntity<List<Order>> getAllIssuesByManagerReviewed (@RequestParam Long distCentreId, @RequestParam boolean isManagerReviewed){
+        return new ResponseEntity<>(orderService.getAllByDistributionAndIsManagerReviewed(distCentreId,isManagerReviewed),HttpStatus.OK);
     }
 
     // TODO - GET all orders by distribution centre and date, GET all orders by driver ID and date, GET all incomplete orders,
