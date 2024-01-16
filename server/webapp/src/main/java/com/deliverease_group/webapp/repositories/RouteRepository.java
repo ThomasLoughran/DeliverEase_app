@@ -12,4 +12,6 @@ public interface RouteRepository extends JpaRepository<Route,Long> {
     List<Route> findAllByDistributionCentreIdAndDate(Long distributionCentreId, ZonedDateTime date);
 
     List<Route> findAllRoutesByDistributionCentreIdAndIsComplete(Long distCentreId, boolean isComplete);
+
+    Route findRouteByDriverIdAndDate(Long driverId, ZonedDateTime localDate);
 }

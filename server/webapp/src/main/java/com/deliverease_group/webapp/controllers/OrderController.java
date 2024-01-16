@@ -66,17 +66,6 @@ public class OrderController {
         return new ResponseEntity<>(orderService.updateOrderManagerReviewed(id, isManagerReviewed),HttpStatus.OK);
     }
 
-    @PostMapping(value = "/new-routes/{distCentreId}")
-    public ResponseEntity<List<Order>> generateRoutes (@PathVariable Long distCentreId, @RequestParam LocalDate localDate){
-        List<Order> orderList = orderService.generateRoutes(distCentreId,localDate);
-        if (orderList!=null) {
-            return new ResponseEntity<>(orderList,HttpStatus.CREATED);
-        }else{
-            return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-        }
-
-    }
-
     @GetMapping(value = "/issue/all")
     public ResponseEntity<List<Order>> getAllIssuesByManagerReviewed (@RequestParam Long distCentreId, @RequestParam boolean isManagerReviewed){
         return new ResponseEntity<>(orderService.getAllByDistributionAndIsManagerReviewed(distCentreId,isManagerReviewed),HttpStatus.OK);
