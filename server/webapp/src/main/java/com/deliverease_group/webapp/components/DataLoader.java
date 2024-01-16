@@ -88,6 +88,9 @@ public class DataLoader implements ApplicationRunner {
         Driver driver3 = new Driver("Driver 3", "password", Role.DRIVER, birminghamCentre, 100, 1000, "A bus", false, availableDates);
         employeeRepository.save(driver3);
 
+        Driver driver4 = new Driver("Driver 4", "password", Role.DRIVER, birminghamCentre, 100, 1000, "A bus", false, availableDates);
+        employeeRepository.save(driver4);
+
         //3 orders:
         Order order1 = new Order(
                 birminghamCentre,
@@ -137,15 +140,47 @@ public class DataLoader implements ApplicationRunner {
         );
         orderRepository.save(order3);
 
+        Order order4 = new Order(
+                birminghamCentre,
+                25,
+                30,
+                "B14 7TG",
+                "59 Avenue Road",
+                52.433252,
+                -1.900467,
+                ZonedDateTime.now(),
+                false,
+                false,
+                false,
+                ZonedDateTime.now()
+        );
+        orderRepository.save(order4);
+
+        Order order5 = new Order(
+                birminghamCentre,
+                0,
+                0,
+                "B66 3TF",
+                "5 Woodland Street",
+                52.491102,
+                -1.951745,
+                ZonedDateTime.now(),
+                false,
+                false,
+                false,
+                ZonedDateTime.now()
+        );
+        orderRepository.save(order5);
+
 
 
 //       to generate data loader route:
-        ArrayList<Long> orderList = new ArrayList<>();
-        orderList.add(order1.getId());
-        orderList.add(order2.getId());
-        orderList.add(order3.getId());
-        Route route1 = new Route(birminghamCentre, orderList, driver1.getId(), ZonedDateTime.now(), false);
-        routeRepository.save(route1);
+//        ArrayList<Long> orderList = new ArrayList<>();
+//        orderList.add(order1.getId());
+//        orderList.add(order2.getId());
+//        orderList.add(order3.getId());
+//        Route route1 = new Route(birminghamCentre, orderList, driver1.getId(), ZonedDateTime.now(), false);
+//        routeRepository.save(route1);
 
     }
 }
