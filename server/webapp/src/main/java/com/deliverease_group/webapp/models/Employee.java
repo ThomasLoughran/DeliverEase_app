@@ -23,7 +23,7 @@ public class Employee {
     @ManyToOne
     @JoinColumn(name = "distribution_centre_id")
     @JsonIgnoreProperties({ "employees" })
-    @JsonIgnore
+//    @JsonIgnore
     private DistributionCentre distributionCentre;
 
 
