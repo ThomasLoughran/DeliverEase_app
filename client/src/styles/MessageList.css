@@ -69,6 +69,8 @@ animation-name: zoom;
     color: #faf5e4; 
     border-radius: 8px;
 
+    margin-bottom: 10px;
+
 
 }
 
@@ -81,4 +83,12 @@ animation-name: zoom;
 .message-list-title {
     padding-bottom: 2%;
     padding-top: 2%;
+}
+
+.confirm-manager-review-button {
+    margin-bottom: 5%;
+}
+
+.message-order-id {
+    margin-top: 5%;
 }
