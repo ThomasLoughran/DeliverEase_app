@@ -1,6 +1,6 @@
 import { useUser } from '../contexts/UserContext';
 import '../styles/Profile.css'; 
-
+import { Link } from 'react-router-dom';
 
 const Profile = () => {
     const { user } = useUser();
@@ -21,7 +21,11 @@ const Profile = () => {
                     <p>Van name: {user.vanName}</p>
                 </>
             )}
+
+        <Link to="" ><button id="update-details-button"> <b>Update details</b> </button></Link>     
         </div>
+        
+
     );
 }
 

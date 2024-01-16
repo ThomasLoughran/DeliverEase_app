@@ -30,10 +30,61 @@ body {
     transition: 0.3s;
 }
 
-
-
 .navBar a:hover {
     background-color: #2c786c;
 }
 
+
+.profile-message-container{
+    flex-direction: row;
+    background-color: #004445;
+    margin-top: 0;
+    padding: 15px;
+    justify-content: left;
+    display: flex;
+}
+
+#profile-button {
+     width: auto;
+     height: 40px;
+     margin: 10px;
+     background-color: #004445;
+     display: flex;
+     align-items: center;
+     padding: 0 10px;
+     text-decoration: none;
+     border: none;
+     cursor: pointer;
+}
+
+    .profile-button:hover {
+        background-color: #004445;
+        transform: scale(1.07);
+    }
+
+#message-button {
+     width: auto; 
+     height: 40px;
+     margin: 10px;
+     background-color: #004445;
+     display: flex;
+     align-items: center;
+     padding: 0 10px;
+     text-decoration: none;
+     border: none;
+     cursor: pointer;
+}
+
+    .message-button:hover {
+        background-color: #004445;
+        transform: scale(1.07);
+    }
+
+#profile-img {
+    /* height: 40px; */
+}
+
+#message-img {
+    /* height: 40px; */
+}
 
