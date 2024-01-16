@@ -19,6 +19,8 @@ public class ManagerController {
     @Autowired
     ManagerService managerService;
 
+//    probably want to get rid. Have identical route in driverController
+//    If front end isn't using, delete
     @GetMapping
     public ResponseEntity<List<Driver>> getAllDrivers(){
         return new ResponseEntity<>(managerService.findAllDrivers(), HttpStatus.OK);

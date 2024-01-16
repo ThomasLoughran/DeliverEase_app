@@ -43,6 +43,7 @@ public class RouteService {
         return orderRepository.findAllByDistributionCentreIdAndIsCompletedOrderByDateOrdered(distCentreId,isOrderComplete);
     }
 
+
     public List<Order> generateRoutes(Long distCentreId, LocalDate localDate) {
         List<Order> incompleteOrders = getDistributionCentreOrdersByCompletionStatus(distCentreId, false);
 
@@ -105,42 +106,15 @@ public class RouteService {
             }
         }
 
+//        cannot create routes if no drivers available
         if (availableDrivers.isEmpty() || incompleteOrders.isEmpty()){
             return null;
         }
 
-        int totalCapacity = 0;
-        int totalWeight = 0;
         int maxParcelsPerVan = 10;
-        int totalOrders = maxParcelsPerVan * availableDrivers.size();
+//        logic here ________________________________________________________________________
+        List<Order> ordersToBeDelivered = setTotalOrders(availableDrivers, incompleteOrders, maxParcelsPerVan);
 
-        //gets the totals of each across all drivers
-        for (Driver driver : availableDrivers){
-            totalCapacity += driver.getVanCapacity();
-            totalWeight += driver.getVanMaxWeight();
-        }
-
-        //Gets total list of orders up-to any of the above limits
-        ArrayList<Order> ordersToBeDelivered = new ArrayList<>();
-        int runningTotalCapacity = 0;
-        int runningTotalWeight = 0;
-        int runningTotalOrders = 0;
-
-        for (Order order : incompleteOrders){
-            runningTotalOrders+=1;
-            runningTotalWeight+=order.getWeight();
-            runningTotalCapacity+=order.getSize();
-
-            if ((runningTotalOrders <= totalOrders)
-                    &&(runningTotalWeight < totalWeight)
-                    &&(runningTotalCapacity < totalCapacity)){
-
-                ordersToBeDelivered.add(order);
-
-            }else{
-                break;
-            }
-        }
 
         DistributionCentre distributionCentre = distributionCentreRepository.findById(distCentreId).get();
 
@@ -184,9 +158,9 @@ public class RouteService {
         int driverCount = 0;
         Driver currentDriver = availableDrivers.get(driverCount);
 
-        runningTotalCapacity = 0;
-        runningTotalWeight = 0;
-        runningTotalOrders = 0;
+        int runningTotalCapacity = 0;
+        int runningTotalWeight = 0;
+        int runningTotalOrders = 0;
         for (Node node : orderLocations){
             Order order = orderRepository.findById(node.getOrderId()).get();
             runningTotalWeight += order.getWeight();
@@ -280,6 +254,42 @@ public class RouteService {
         nodesInRoute.add(distCentre);
         return nodesInRoute;
     }
+
+    public List<Order> setTotalOrders(List<Driver> availableDrivers, List<Order> incompleteOrders, int maxParcelsPerVan){
+        int totalCapacity = 0;
+        int totalWeight = 0;
+        int totalOrders = maxParcelsPerVan * availableDrivers.size();
+
+        //gets the totals of each across all drivers
+        for (Driver driver : availableDrivers){
+            totalCapacity += driver.getVanCapacity();
+            totalWeight += driver.getVanMaxWeight();
+        }
+
+        //Gets total list of orders up-to any of the above limits
+        ArrayList<Order> ordersToBeDelivered = new ArrayList<>();
+        int runningTotalCapacity = 0;
+        int runningTotalWeight = 0;
+        int runningTotalOrders = 0;
+
+        for (Order order : incompleteOrders){
+            runningTotalOrders+=1;
+            runningTotalWeight+=order.getWeight();
+            runningTotalCapacity+=order.getSize();
+
+            if ((runningTotalOrders <= totalOrders)
+                    &&(runningTotalWeight < totalWeight)
+                    &&(runningTotalCapacity < totalCapacity)){
+
+                ordersToBeDelivered.add(order);
+
+            }else{
+                break;
+            }
+        }
+        return ordersToBeDelivered;
+    }
+
 
     public Route findRouteById(Long routeId) {
         Optional<Route> optionalRoute = routeRepository.findById(routeId);
