@@ -213,9 +213,8 @@ public class OrderService {
             }
         }
 
-//        make a copy of the arraylist
         ArrayList<Node> nodesInRoute = new ArrayList<>();
-        ArrayList<Node> nodesNotInRoute = new ArrayList<>();
+        ArrayList<Node> nodesNotInRoute = new ArrayList();
         for (Node node : nodes){
             nodesNotInRoute.add(node);
         }
@@ -226,46 +225,23 @@ public class OrderService {
 //        iterate through n times until every node is a part of the node tree (1st time is before loop)
         for (int i = 0; i < numberOfNodes - 1; i++){
             Node routeNode = nodesInRoute.get(i);
-            Node minRouteNode = nodesInRoute.get(i);
             Node nonRouteNode = nodesNotInRoute.get(0);
             Node minNonRouteNode = nodesNotInRoute.get(0);
-            double minDistance = distanceMatrix[nodesInRoute.indexOf(routeNode)][nodesNotInRoute.indexOf(nonRouteNode)];
+            double minDistance = distanceMatrix[nodes.indexOf(routeNode)][nodes.indexOf(nonRouteNode)];
 //            iterate through the nodes in the node tree
             for (int j = 1; j < nodesNotInRoute.size(); j++){
                 nonRouteNode = nodesNotInRoute.get(j);
-                double distance = distanceMatrix[nodesInRoute.indexOf(routeNode)][nodesNotInRoute.indexOf(nonRouteNode)];
+                double distance = distanceMatrix[nodes.indexOf(routeNode)][nodes.indexOf(nonRouteNode)];
                 if (distance < minDistance){
                     minDistance = distance;
-                    minRouteNode = nodesInRoute.get(i);
                     minNonRouteNode = nodesNotInRoute.get(j);
                 }
             }
 
-
-            nodesInRoute.add(minNonRouteNode);
-            nodesNotInRoute.remove(minNonRouteNode);
+            nodesInRoute.add(nodes.get(nodes.indexOf(minNonRouteNode)));
+            nodesNotInRoute.remove(nodes.get(nodes.indexOf(minNonRouteNode)));
 
         }
-
-
-
-//        return nodeList back to original form
-        double[][] driverRoute = new double[numberOfNodes + 1][2];
-        for (int i = 0; i < numberOfNodes; i++){
-            driverRoute[i][0] = nodesInRoute.get(i).getX();
-            driverRoute[i][1] = nodesInRoute.get(i).getY();
-        }
-
-//        loop back to start
-        driverRoute[driverRoute.length - 1][0] = nodesInRoute.get(0).getX();
-        driverRoute[driverRoute.length - 1][1] = nodesInRoute.get(0).getY();
-
-//        for (int i = 0; i < driverRoute.length; i++){
-//            System.out.println("(" + driverRoute[i][0] + ", " + driverRoute[i][1] + ")");
-//
-//        }
-
-//        adding distribution centre as the last element in the route
         nodesInRoute.add(distCentre);
         return nodesInRoute;
     }
