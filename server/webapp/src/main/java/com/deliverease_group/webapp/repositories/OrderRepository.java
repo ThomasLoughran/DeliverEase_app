@@ -12,5 +12,6 @@ public interface OrderRepository extends JpaRepository<Order,Long> {
     List<Order> findAllByDistributionCentreId(Long distCentreId);
 
     List<Order> findAllByDistributionCentreIdAndIsCompletedOrderByDateOrdered(Long distCentreId, boolean b);
-    //List<Employee> findAllByDistributionCentreIdAndRole(Long distCentId, Role role);
+
+    List<Order> findByDistributionCentreIdAndIsManagerReviewedAndIssueIsNotNull(Long distCentreId, boolean isManagerReviewed);
 }

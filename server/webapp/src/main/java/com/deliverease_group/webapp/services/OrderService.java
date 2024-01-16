@@ -316,4 +316,9 @@ public class OrderService {
         nodesInRoute.add(distCentre);
         return nodesInRoute;
     }
+
+    public List<Order> getAllByDistributionAndIsManagerReviewed(Long distCentreId, boolean isManagerReviewed) {
+        return orderRepository.findByDistributionCentreIdAndIsManagerReviewedAndIssueIsNotNull(distCentreId, isManagerReviewed);
+
+    }
 }

@@ -77,6 +77,11 @@ public class OrderController {
 
     }
 
+    @GetMapping(value = "/issue/all")
+    public ResponseEntity<List<Order>> getAllIssuesByManagerReviewed (@RequestParam Long distCentreId, @RequestParam boolean isManagerReviewed){
+        return new ResponseEntity<>(orderService.getAllByDistributionAndIsManagerReviewed(distCentreId,isManagerReviewed),HttpStatus.OK);
+    }
+
     // TODO - GET all orders by distribution centre and date, GET all orders by driver ID and date, GET all incomplete orders,
     //          PATCH order message, PATCH update isComplete, Patch update is ManagerReviewed
 }
