@@ -13,8 +13,6 @@ const DriverAvailabilityCalendar = () => {
     };
 
     const handleDateChange = (date) => {
-        console.log(date);
-
         setSelectedDate(date);
     };
 
@@ -44,6 +42,11 @@ const DriverAvailabilityCalendar = () => {
         }
     };
 
+    const filteredDates = Object.fromEntries(
+        Object.entries(availability)
+            .filter(([date, isAvailable]) => isAvailable)
+    );
+
     return (
         <>
             <h2>Driver Availability Calendar</h2>
@@ -58,9 +61,9 @@ const DriverAvailabilityCalendar = () => {
             </button>
 
             <ul>
-                {Object.keys(availability).map((date) => (
+                {Object.keys(filteredDates).map((date) => (
                     <li key={date}>
-                        {date}: {availability[date] ? 'Available' : 'Unavailable'}
+                        {date}: {filteredDates[date] ? 'Available' : 'Unavailable'}
                     </li>
                 ))}
             </ul>
