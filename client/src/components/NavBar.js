@@ -6,12 +6,14 @@ import { useState } from 'react';
 import ProfileModal from './ProfileModal';
 import profileIcon from '../assets/icon-location.png';
 import messageIcon from '../assets/icons8-message.png';
+import MessageModal from './MessageModal';
 
 
 const NavBar = () => {
     const { user, logoutUser } = useUser();
 
-    const [openModal, setOpenModal] = useState(false);
+    const [openProfileModal, setOpenProfileModal] = useState(false);
+    const [openMessageListModal, setOpenMessageListModal] = useState(false);
 
 const handleLogout = () => {
     logoutUser();
@@ -25,18 +27,25 @@ const handleLogout = () => {
     return (
         <div className= "navBar">
             
-            {!openModal && 
-                <button onClick={() => setOpenModal(true)} 
-                className="open-modal-button"> 
+            {!openProfileModal && 
+                <button onClick={() => setOpenProfileModal(true)} 
+                className="open-profile-modal-button"> 
                     <img id="profile-icon" src={profileIcon} />
                 </button>
             }
 
-            {openModal && <ProfileModal closeModal={setOpenModal}/>}
+            {openProfileModal && <ProfileModal closeModal={setOpenProfileModal}/>}
 
-            <button>
+            {user?.role === 'MANAGER' && (
+            <button onClick={() => setOpenMessageListModal(true)} >
                 <img id="message-icon" src={messageIcon} />
             </button>
+
+            )}
+
+            {openMessageListModal && <MessageModal closeModal={setOpenMessageListModal}/>}
+
+
 
             <Link id="home" to="/">
                 Home

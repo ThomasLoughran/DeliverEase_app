@@ -1,0 +1,151 @@
+import { useEffect, useState } from "react";
+import { useUser } from "../../contexts/UserContext";
+import '../../styles/MessageList.css'
+
+const MessageList = () => {
+
+    const { user } = useUser();
+    const [orders, setOrders] = useState([]);
+    const [distCentreId, setDistCentreId] = useState(user.distributionCentre.id);
+    const [orderId, setOrderId] = useState(null); // set to null by default? then switches based on the button clicked.
+
+
+// In this file a "message" is an order. 
+// fetch all orders that have an issue.
+
+useEffect(() => {
+
+    // console.log(user);
+    // console.log(distCentreId);
+
+    fetchIssues();
+
+
+
+
+}, [orderId])
+
+
+// const handlePatchManagerReviewed = (orderId) => {
+//     console.log(orderId, "this is the order id")
+//     patchManagerReviewed(orderId);
+//     setOrderId(orderId);
+// }
+
+
+const handlePatchManagerReviewed = async (orderId) => {
+    console.log(orderId, "this is the order id");
+    try {
+        await patchManagerReviewed(orderId);
+        setOrderId(orderId);
+    } catch (error) {
+        console.error('Error handling manager review:', error);
+    }
+};
+
+
+const fetchIssues = async () => {
+    try {
+        const response = await fetch(`http://localhost:8080/orders/issue/all?distCentreId=${distCentreId}&isManagerReviewed=${false}`, {
+            method: "GET",
+        
+        });
+
+        if (!response.ok) {
+            throw new Error(`Failed to receive messages: ${response.status} ${response.statusText}`);
+        }
+
+        const data = await response.json();
+
+        if (!data) {
+            throw new Error("Empty response received");
+        }
+
+        setOrders(data);
+        console.log("This is data", data);
+
+    } catch (error) {
+        console.error('Error during receiving messages:', error);
+    }
+}
+
+const patchManagerReviewed = async (orderId) => {
+    try {
+        const response = await fetch(`http://localhost:8080/orders/manager-review/${orderId}?isManagerReviewed=true`, {
+            method: "PATCH",
+           
+    
+        });
+
+        if (!response.ok) {
+            throw new Error(`Failed to send patched message: ${response.status} ${response.statusText}`);
+        }
+
+        const data = await response.json();
+
+        if (!data) {
+            throw new Error("Empty response received");
+        }
+
+        setOrders(data);
+        console.log("This is data", data);
+
+    } catch (error) {
+        console.error('Error sending patched message:', error);
+    }
+}
+
+
+
+
+
+ 
+
+const messageListComponents = orders.length > 0 ? (
+    orders.map((order) => (
+        <li key={order.id} className="order-message">
+            <p className="message-order-id">Order Id: {order.id}</p>
+            <p>Issue: {order.issue}</p>
+            <p>Time Posted: {order.timeIssuePosted}</p>
+            <button
+                className="confirm-manager-review-button"
+                onClick={() => handlePatchManagerReviewed(order.id)}
+                value={order.id}
+            >
+                Confirm Manager Review
+            </button>
+        </li>
+    ))
+) : (
+    <p>No orders have issues.</p>
+);
+
+
+
+    // const dropDownComponents = distributionCentres.map((distributionCentre) => {
+    //     return (
+    //         <>
+    //             <option value={distributionCentre.id}>
+    //                 {distributionCentre.location}
+    //             </option>
+    //         </>
+    //     )
+
+    // })
+
+
+
+
+
+
+    return (
+        <>
+            <h2 className="message-list-title">Message List</h2>
+            <ul className="order-message-list">
+                {messageListComponents}
+            </ul>
+        </>
+    );
+}
+
+export default MessageList;

@@ -16,14 +16,20 @@ import DistributionCentreListContainer from "../containers/DistributionCentreLis
 import ManagerRoutesContainer from "../containers/ManagerRoutesContainer";
 import DriverAvailabilityCalendar from "../components/DriverDashboard/DriverAvailabilityCalendar";
 
+import MessageListContainer from "../containers/MessageListContainer";
+
+import '../styles/Layout.css'
+
 
 const Routes = () => {
+
+    
 
     // probably should be in a separate file and imported.
     const LoggedInLayout = () => {
         return (
             <div className="wrapper">
-                <NavBar/>
+                  <NavBar/>
                 <div className="main">
                     <div className="contentContainer">
                         <Outlet/>
