@@ -15,8 +15,14 @@ import DriversListContainer from "../containers/DriversListContainer";
 import DistributionCentreListContainer from "../containers/DistributionCentreListContainer";
 import ManagerRoutesContainer from "../containers/ManagerRoutesContainer";
 
+import MessageListContainer from "../containers/MessageListContainer";
+
+import '../styles/Layout.css'
+
 
 const Routes = () => {
+
+    
 
     // probably should be in a separate file and imported.
     const LoggedInLayout = () => {
@@ -24,8 +30,14 @@ const Routes = () => {
             <div className="wrapper">
                 <NavBar/>
                 <div className="main">
-                    <div className="profileContainer">
-                        <Profile/>
+                    <div className="profile-message-container">
+                        <div className="profileContainer">
+                            <Profile/>
+                        </div>
+                        {/* May need to rename the className below */}
+                        <div className="MessageListContainer">
+                            <MessageListContainer/>
+                        </div>
                     </div>
                     <div className="contentContainer">
                         <Outlet/>
