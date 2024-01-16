@@ -68,7 +68,13 @@ public class OrderController {
 
     @PostMapping(value = "/new-routes/{distCentreId}")
     public ResponseEntity<List<Order>> generateRoutes (@PathVariable Long distCentreId, @RequestParam LocalDate localDate){
-        return new ResponseEntity<>(orderService.generateRoutes(distCentreId,localDate),HttpStatus.CREATED);
+        List<Order> orderList = orderService.generateRoutes(distCentreId,localDate);
+        if (orderList!=null) {
+            return new ResponseEntity<>(orderList,HttpStatus.CREATED);
+        }else{
+            return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+        }
+
     }
 
     // TODO - GET all orders by distribution centre and date, GET all orders by driver ID and date, GET all incomplete orders,

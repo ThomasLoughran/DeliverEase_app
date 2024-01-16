@@ -71,10 +71,17 @@ public class OrderService {
         return order;
     }
 
+    public List<Route> findAllRoutesByDistCentreIdAndDate(Long distCentreId, LocalDate date){
+        return routeRepository.findAllByDistributionCentreIdAndDate(distCentreId, date);
+    }
+
     public List<Order> generateRoutes(Long distCentreId, LocalDate localDate) {
         List<Order> incompleteOrders = getDistributionCentreOrdersByCompletionStatus(distCentreId, false);
 
         List<Driver> availableDrivers =  driverRepository.availableDrivers(distCentreId, localDate);
+        if (availableDrivers.isEmpty()){
+            return null;
+        }
 
         int totalCapacity = 0;
         int totalWeight = 0;
