@@ -45,17 +45,14 @@ public class RouteService {
 
 
     public List<Order> generateRoutes(Long distCentreId, LocalDate localDate) {
+
         List<Order> incompleteOrders = getDistributionCentreOrdersByCompletionStatus(distCentreId, false);
-
         List<Driver> availableDrivers =  driverRepository.availableDrivers(distCentreId, localDate);
-
         List<Route> alreadyAssignedRoutes = findAllRoutesByDistCentreIdAndDate(distCentreId, localDate);
-
 
         if (!alreadyAssignedRoutes.isEmpty()){
             for (Route route : alreadyAssignedRoutes){
                 Optional<Driver> optionalDriver = driverRepository.findById(route.getDriverId());
-
                 //remove drivers already on route that date
                 if (optionalDriver.isPresent()){
                     Driver driver = optionalDriver.get();
@@ -66,7 +63,7 @@ public class RouteService {
                 }
 
                 //remove orders already on route that date
-                for ( Long orderId: route.getOrderId()){
+                for (Long orderId: route.getOrderId()){
                     Optional<Order> optionalOrder = orderRepository.findById(orderId);
                     //remove orders already on route that date
                     if (optionalOrder.isPresent()){
@@ -115,55 +112,10 @@ public class RouteService {
         List<Node> orderLocations = createNodes( distributionCentre, ordersToBeDelivered);
 
         //sort order Locations By Angle Theta
-        Collections.sort(orderLocations, new Comparator<Node>() {
-            @Override
-            public int compare(Node o1, Node o2) {
-                return (int) (o1.getTheta() - o2.getTheta());
-            }
-        });
+        orderLocations = sortNodesByTheta(orderLocations);
 
+//        Assign drivers a list of their orders
         Map<Long,ArrayList<Node>> ordersInRoutes =  assignDriversOrders(availableDrivers, orderLocations, maxParcelsPerVan);
-
-//        //get and shuffle drivers
-//        Collections.shuffle(availableDrivers);
-//
-//        Map<Long,ArrayList<Node>> ordersInRoutes = new HashMap<>();
-//
-//        //sets the all drivers to have an empty list of routes associated with them;
-//        for (Driver driver : availableDrivers){
-//            ordersInRoutes.put(driver.getId(), new ArrayList<>());
-//        }
-//
-//        // Assign orders to Drivers
-//        int driverCount = 0;
-//        Driver currentDriver = availableDrivers.get(driverCount);
-//
-//        int runningTotalCapacity = 0;
-//        int runningTotalWeight = 0;
-//        int runningTotalOrders = 0;
-//        for (Node node : orderLocations){
-//            Order order = orderRepository.findById(node.getOrderId()).get();
-//            runningTotalWeight += order.getWeight();
-//            runningTotalCapacity += order.getSize();
-//            runningTotalOrders ++;
-//
-//            if(runningTotalCapacity < currentDriver.getVanCapacity() &&
-//                    runningTotalWeight < currentDriver.getVanMaxWeight() &&
-//                    runningTotalOrders < maxParcelsPerVan){
-//                ordersInRoutes.get(currentDriver.getId()).add(node);
-//            } else {
-//                driverCount ++;
-//                if (driverCount < availableDrivers.size()) {
-//                    currentDriver = availableDrivers.get(driverCount);
-//                    ordersInRoutes.get(currentDriver.getId()).add(node);
-//                    runningTotalCapacity = order.getSize();
-//                    runningTotalWeight = order.getWeight();
-//                    runningTotalOrders = 1;
-//                } else {
-//                    break;
-//                }
-//            }
-//        }
 
 //        id is -1 to avoid overlap with any order id
         Node distributionCentreNode = new Node(distributionCentre.getLocation().getX(), distributionCentre.getLocation().getY(), -1);
@@ -287,6 +239,16 @@ public class RouteService {
         }
 
         return orderLocations;
+    }
+
+    public List<Node> sortNodesByTheta(List<Node> nodeList){
+        Collections.sort(nodeList, new Comparator<Node>() {
+            @Override
+            public int compare(Node o1, Node o2) {
+                return (int) (o1.getTheta() - o2.getTheta());
+            }
+        });
+        return nodeList;
     }
 
     public Map<Long,ArrayList<Node>> assignDriversOrders(List<Driver> availableDrivers, List<Node> orderLocations, int maxParcelsPerVan){
