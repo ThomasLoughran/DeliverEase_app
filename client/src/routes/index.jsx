@@ -14,6 +14,7 @@ import Profile from "../components/Profile";
 import DriversListContainer from "../containers/DriversListContainer";
 import DistributionCentreListContainer from "../containers/DistributionCentreListContainer";
 import ManagerRoutesContainer from "../containers/ManagerRoutesContainer";
+import DriverAvailabilityCalendar from "../components/DriverDashboard/DriverAvailabilityCalendar";
 
 
 const Routes = () => {
@@ -96,7 +97,7 @@ const Routes = () => {
                             children: [
                                 {
                                     path:"/driver/routes",
-                                    element: <p>Hello there will be a list of routes here</p>
+                                    element: <DriverAvailabilityCalendar/>
                                 }
                             ]
                         }
