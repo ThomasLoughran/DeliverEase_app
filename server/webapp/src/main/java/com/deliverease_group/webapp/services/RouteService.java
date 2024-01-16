@@ -111,27 +111,29 @@ public class RouteService {
             return null;
         }
 
+//        assign a list of the most urgent parcels to be delivered that the drivers collectively have capacity for
         int maxParcelsPerVan = 10;
-//        logic here ________________________________________________________________________
         List<Order> ordersToBeDelivered = setTotalOrders(availableDrivers, incompleteOrders, maxParcelsPerVan);
 
-
+//        create nodes of all the locations with radial coordinates centred on distCentre
         DistributionCentre distributionCentre = distributionCentreRepository.findById(distCentreId).get();
+        List<Node> orderLocations = createNodes( distributionCentre, ordersToBeDelivered);
 
-        double distCentreX = distributionCentre.getLocation().getX();
-        double distCentreY = distributionCentre.getLocation().getY();
-
-        ArrayList<Node> orderLocations = new ArrayList<>();
-
-        // Gets the order's angle from North of distribution centre and it's radial distance from the distribution centre
-        for (Order order : ordersToBeDelivered){
-            Node node = new Node(order.getLongitude(),order.getLatitude(),order.getId());
-
-            node.setRadius( Math.sqrt( Math.pow(node.getX() - distCentreX,2) ) +  Math.sqrt( Math.pow(node.getY() - distCentreY,2) ) );
-            node.setTheta(Math.atan(node.getY())/ node.getX());
-
-            orderLocations.add(node);
-        }
+//        DistributionCentre distributionCentre = distributionCentreRepository.findById(distCentreId).get();
+//        double distCentreX = distributionCentre.getLocation().getX();
+//        double distCentreY = distributionCentre.getLocation().getY();
+//
+//        ArrayList<Node> orderLocations = new ArrayList<>();
+//
+//        // Gets the order's angle from North of distribution centre and it's radial distance from the distribution centre
+//        for (Order order : ordersToBeDelivered){
+//            Node node = new Node(order.getLongitude(),order.getLatitude(),order.getId());
+//
+//            node.setRadius( Math.sqrt( Math.pow(node.getX() - distCentreX,2) ) +  Math.sqrt( Math.pow(node.getY() - distCentreY,2) ) );
+//            node.setTheta(Math.atan(node.getY())/ node.getX());
+//
+//            orderLocations.add(node);
+//        }
 
         //sort order Locations By Angle Theta
         Collections.sort(orderLocations, new Comparator<Node>() {
@@ -288,6 +290,24 @@ public class RouteService {
             }
         }
         return ordersToBeDelivered;
+    }
+
+    public List<Node> createNodes(DistributionCentre distributionCentre, List<Order> ordersToBeDelivered){
+
+        double distCentreX = distributionCentre.getLocation().getX();
+        double distCentreY = distributionCentre.getLocation().getY();
+
+        ArrayList<Node> orderLocations = new ArrayList<>();
+
+        // Gets the order's angle from North of distribution centre and it's radial distance from the distribution centre
+        for (Order order : ordersToBeDelivered){
+            Node node = new Node(order.getLongitude(),order.getLatitude(),order.getId());
+
+            node.setRadius( Math.sqrt( Math.pow(node.getX() - distCentreX,2) ) +  Math.sqrt( Math.pow(node.getY() - distCentreY,2) ) );
+            node.setTheta(Math.atan(node.getY())/ node.getX());
+
+            orderLocations.add(node);
+        }
     }
 
 
