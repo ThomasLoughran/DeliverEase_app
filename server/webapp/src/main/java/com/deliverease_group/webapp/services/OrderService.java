@@ -72,14 +72,32 @@ public class OrderService {
     }
 
     public List<Route> findAllRoutesByDistCentreIdAndDate(Long distCentreId, LocalDate date){
-        return routeRepository.findAllByDistributionCentreIdAndDate(distCentreId, date);
+        return routeRepository.findAllByDistributionCentreIdAndDate(distCentreId, ZonedDateTime.of(date, date.atStartOfDay().toLocalTime(), UTC));
     }
 
     public List<Order> generateRoutes(Long distCentreId, LocalDate localDate) {
         List<Order> incompleteOrders = getDistributionCentreOrdersByCompletionStatus(distCentreId, false);
 
         List<Driver> availableDrivers =  driverRepository.availableDrivers(distCentreId, localDate);
-        if (availableDrivers.isEmpty()){
+
+        List<Route> alreadyAssignedRoutes = findAllRoutesByDistCentreIdAndDate(distCentreId, localDate);
+
+        if (!alreadyAssignedRoutes.isEmpty()){
+            for (Route route : alreadyAssignedRoutes){
+                Optional<Driver> optionalDriver = driverRepository.findById(route.getDriverId());
+
+                //remove drivers already on route that date
+                if (optionalDriver.isPresent()){
+                    availableDrivers.remove(optionalDriver.get());
+                }
+
+                //remove orders already on route that date
+                for ( Long orderId: route.getOrderId()){
+                    incompleteOrders.remove(orderRepository.findById(orderId).get());
+                }
+            }
+        }
+        if (availableDrivers.isEmpty() || incompleteOrders.isEmpty()){
             return null;
         }
 
