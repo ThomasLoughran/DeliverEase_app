@@ -75,6 +75,10 @@ public class OrderService {
         return routeRepository.findAllByDistributionCentreIdAndDate(distCentreId, ZonedDateTime.of(date, date.atStartOfDay().toLocalTime(), UTC));
     }
 
+    public List<Route> findAllRoutesByDistCentreIdAndIsComplete(Long distCentreId, boolean isComplete){
+        return routeRepository.findAllRoutesByDistributionCentreIdAndIsComplete(distCentreId, isComplete);
+    }
+
     public List<Order> generateRoutes(Long distCentreId, LocalDate localDate) {
         List<Order> incompleteOrders = getDistributionCentreOrdersByCompletionStatus(distCentreId, false);
 
@@ -82,21 +86,61 @@ public class OrderService {
 
         List<Route> alreadyAssignedRoutes = findAllRoutesByDistCentreIdAndDate(distCentreId, localDate);
 
+
         if (!alreadyAssignedRoutes.isEmpty()){
             for (Route route : alreadyAssignedRoutes){
                 Optional<Driver> optionalDriver = driverRepository.findById(route.getDriverId());
 
                 //remove drivers already on route that date
                 if (optionalDriver.isPresent()){
-                    availableDrivers.remove(optionalDriver.get());
+                    Driver driver = optionalDriver.get();
+                    // Check if the driver is present in availableDrivers before removing
+                    if (availableDrivers.contains(driver)) {
+                        availableDrivers.remove(driver);
+                    }
                 }
+
 
                 //remove orders already on route that date
                 for ( Long orderId: route.getOrderId()){
-                    incompleteOrders.remove(orderRepository.findById(orderId).get());
+                    Optional<Order> optionalOrder = orderRepository.findById(orderId);
+                    //remove orders already on route that date
+                    if (optionalOrder.isPresent()){
+                        Order order = optionalOrder.get();
+                        // Check if the order is present in incompleteOrders before removing
+                        if (incompleteOrders.contains(order)) {
+                            incompleteOrders.remove(order);
+                        }
+                    }
+
                 }
             }
         }
+
+        //drivers removed if already on route that day
+        //orders removed if already on route that day OR in an incomplete route
+
+        alreadyAssignedRoutes = findAllRoutesByDistCentreIdAndIsComplete(distCentreId,false);
+        if (!alreadyAssignedRoutes.isEmpty()){
+            for (Route route : alreadyAssignedRoutes){
+
+                //remove orders already on incomplete routes
+                for ( Long orderId: route.getOrderId()){
+                    Optional<Order> optionalOrder = orderRepository.findById(orderId);
+                    //remove orders already on route that date
+                    if (optionalOrder.isPresent()){
+                        Order order = optionalOrder.get();
+                        // Check if the order is present in incompleteOrders before removing
+                        if (incompleteOrders.contains(order)) {
+                            incompleteOrders.remove(order);
+                        }
+                    }
+
+                }
+
+            }
+        }
+
         if (availableDrivers.isEmpty() || incompleteOrders.isEmpty()){
             return null;
         }
@@ -216,8 +260,10 @@ public class OrderService {
                     orderedIds.add(node.getOrderId());
                 }
             }
-            Route route = new Route(distributionCentre, orderedIds, driverId, ZonedDateTime.of(localDate, localDate.atStartOfDay().toLocalTime(), UTC), false);
-            routeRepository.save(route);
+            if (!orderedIds.isEmpty()) {
+                Route route = new Route(distributionCentre, orderedIds, driverId, ZonedDateTime.of(localDate, localDate.atStartOfDay().toLocalTime(), UTC), false);
+                routeRepository.save(route);
+            }
         }
 
         return ordersToBeDelivered;
