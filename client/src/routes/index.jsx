@@ -14,23 +14,19 @@ import Profile from "../components/Profile";
 import DriversListContainer from "../containers/DriversListContainer";
 import DistributionCentreListContainer from "../containers/DistributionCentreListContainer";
 import ManagerRoutesContainer from "../containers/ManagerRoutesContainer";
-import DriverAvailabilityCalendar from "../components/DriverDashboard/DriverAvailabilityCalendar";
-
-import MessageListContainer from "../containers/MessageListContainer";
-
-import '../styles/Layout.css'
 
 
 const Routes = () => {
-
-    
 
     // probably should be in a separate file and imported.
     const LoggedInLayout = () => {
         return (
             <div className="wrapper">
-                  <NavBar/>
+                    <NavBar/>
                 <div className="main">
+                    <div className="profileContainer">
+                        <Profile/>
+                    </div>
                     <div className="contentContainer">
                         <Outlet/>
                     </div>
@@ -100,7 +96,7 @@ const Routes = () => {
                             children: [
                                 {
                                     path:"/driver/routes",
-                                    element: <DriverAvailabilityCalendar/>
+                                    element: <p>Hello there will be a list of routes here</p>
                                 }
                             ]
                         }
