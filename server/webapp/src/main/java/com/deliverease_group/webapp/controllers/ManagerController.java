@@ -19,11 +19,6 @@ public class ManagerController {
     @Autowired
     ManagerService managerService;
 
-    @GetMapping
-    public ResponseEntity<List<Driver>> getAllDrivers(){
-        return new ResponseEntity<>(managerService.findAllDrivers(), HttpStatus.OK);
-    }
-
     @GetMapping(value = "/{id}")
     public ResponseEntity<Manager> getManagerById(@PathVariable Long id){
         Manager manager = managerService.getManagerById(id);

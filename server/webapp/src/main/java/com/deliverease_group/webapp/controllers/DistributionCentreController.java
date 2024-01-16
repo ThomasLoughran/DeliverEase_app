@@ -20,7 +20,7 @@ public class DistributionCentreController {
     @Autowired
     DistributionService distributionService;
 
-    @GetMapping
+    @GetMapping(value = "/all")
     public ResponseEntity<List<DistributionCentre>> getAllDistributionCentres() {
         return distributionService.findAllDistributionCentres();
     }
