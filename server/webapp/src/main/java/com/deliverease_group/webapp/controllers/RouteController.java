@@ -58,4 +58,11 @@ public class RouteController {
         }
     }
 
+    @DeleteMapping(value = "/{routeId}")
+    public ResponseEntity<Route> deleteRouteById(@PathVariable Long routeId){
+        routeService.deleteRouteById(routeId);
+        return new ResponseEntity<>(null, HttpStatus.OK);
+
+    }
+
 }

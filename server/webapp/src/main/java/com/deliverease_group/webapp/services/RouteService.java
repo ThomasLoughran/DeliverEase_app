@@ -301,4 +301,12 @@ public class RouteService {
             return null;
         }
     }
+
+    public void deleteRouteById(Long routeId) {
+        Optional<Route> optionalRoute = routeRepository.findById(routeId);
+        if (optionalRoute.isPresent()){
+            Route route = optionalRoute.get();
+            routeRepository.delete(route);
+        }
+    }
 }
