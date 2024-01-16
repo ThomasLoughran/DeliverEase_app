@@ -172,6 +172,102 @@ public class DataLoader implements ApplicationRunner {
         );
         orderRepository.save(order5);
 
+        Order order6 = new Order(
+                birminghamCentre,
+                0,
+                0,
+                "B3 1PU",
+                "27 James Brindley Walk, Birmingham",
+                52.482526,
+                -1.909309,
+                ZonedDateTime.now(),
+                false,
+                false,
+                false,
+                ZonedDateTime.now()
+        );
+        orderRepository.save(order6);
+
+        Order order7 = new Order(
+                birminghamCentre,
+                0,
+                0,
+                "B79 7BU",
+                "34 Buckingham Road, Tamworth",
+                52.644873,
+                -1.727462,
+                ZonedDateTime.now(),
+                false,
+                false,
+                false,
+                ZonedDateTime.now()
+        );
+        orderRepository.save(order7);
+
+        Order order8 = new Order(
+                birminghamCentre,
+                0,
+                0,
+                "B38 9FF",
+                "17 Primrose Park Road, Birmingham",
+                52.40083,
+                -1.936396,
+                ZonedDateTime.now(),
+                false,
+                false,
+                false,
+                ZonedDateTime.now()
+        );
+        orderRepository.save(order8);
+
+        Order order9 = new Order(
+                birminghamCentre,
+                0,
+                0,
+                "B90 4EZ",
+                "17 Cheswick Way, Shirley",
+                52.379199,
+                -1.813562,
+                ZonedDateTime.now(),
+                false,
+                false,
+                false,
+                ZonedDateTime.now()
+        );
+        orderRepository.save(order9);
+
+        Order order10 = new Order(
+                birminghamCentre,
+                0,
+                0,
+                "B34 7LD",
+                "40 Berrowside Road, Birmingham",
+                52.497569,
+                -1.762391,
+                ZonedDateTime.now(),
+                false,
+                false,
+                false,
+                ZonedDateTime.now()
+        );
+        orderRepository.save(order10);
+
+        Order order11 = new Order(
+                birminghamCentre,
+                0,
+                0,
+                "B61 9HS",
+                "5 Dale Close, Bournheath",
+                52.357733,
+                -2.065488,
+                ZonedDateTime.now(),
+                false,
+                false,
+                false,
+                ZonedDateTime.now()
+        );
+        orderRepository.save(order11);
+
 
 
 //       to generate data loader route:
