@@ -18,7 +18,7 @@ const handleLogout = () => {
     //         : { width: '200px', height: 'auto', marginTop: '300px' };
 
     return (
-        <div className= "NavBar">
+        <div className= "navBar">
             <Link id="home" to="/">
                 Home
             </Link>
@@ -29,6 +29,9 @@ const handleLogout = () => {
                     </Link>
                     <Link id="dist-cent" to="manager/distribution-centres">
                         Distribution Centres
+                    </Link>
+                    <Link id="routes-calendar" to='manager/routes'>
+                        Routes Calendar
                     </Link>
                 </>
             )}

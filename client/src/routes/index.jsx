@@ -13,6 +13,7 @@ import NavBar from "../components/NavBar";
 import Profile from "../components/Profile";
 import DriversListContainer from "../containers/DriversListContainer";
 import DistributionCentreListContainer from "../containers/DistributionCentreListContainer";
+import ManagerRoutesContainer from "../containers/ManagerRoutesContainer";
 
 
 const Routes = () => {
@@ -20,9 +21,9 @@ const Routes = () => {
     // probably should be in a separate file and imported.
     const LoggedInLayout = () => {
         return (
-            <div className="main">
+            <div className="wrapper">
                 <NavBar/>
-                <div className="container">
+                <div className="main">
                     <div className="profileContainer">
                         <Profile/>
                     </div>
@@ -82,6 +83,10 @@ const Routes = () => {
                                 {
                                     path:"/manager/distribution-centres",
                                     element: <DistributionCentreListContainer/>
+                                },
+                                {
+                                    path:"/manager/routes",
+                                    element: <ManagerRoutesContainer/>
                                 }
                             ]
                         },

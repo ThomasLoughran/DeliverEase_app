@@ -1,19 +1,57 @@
 import { useEffect, useState } from "react";
 import DriversList from "../components/ManagerDashboardComponents/DriversList";
+import Modal from "../components/Modal";
 
 const DriversListContainer = () => {
 
 
-    const [drivers, setDrivers] = useState([])
-    const distributionCentreId = 1; // hardcoded for test purposes. 
-    //Should be coded so that there is a context that tracks the current distcent selected.
+    const [drivers, setDrivers] = useState([]);
+    const [selectedCentreId, setSelectedCentreId] = useState(null);
+    const [openModal, setOpenModal] = useState(false);
+    const [distributionCentres, setDistributionCentres] = useState([]);
 
+    // const handleOpenModal = () => {
+    //     setOpenModal(true);
+    // }
+
+    // const handleCloseModal = () => {
+    //     setOpenModal(false);
+    // }    
 
     useEffect(() => {
 
-        fetchDrivers(distributionCentreId);
+        fetchDistributionCentres();
+        if (selectedCentreId !== null) {    
+            fetchDrivers(selectedCentreId);
+        }
+        
 
-    }, [])
+    }, [selectedCentreId])
+
+    const fetchDistributionCentres = async () => {
+
+        try {
+            const response = await fetch(`http://localhost:8080/distribution-centres`, {
+                method: "GET"
+            });
+
+            if (!response.ok) {
+                throw new Error(`Failed to get distribution centres: ${response.status} ${response.statusText} `);
+            }
+
+            const data = await response.json();
+
+            if (!data) {
+                throw new Error("Empty response received"); // 
+            }
+
+            setDistributionCentres(data);
+            console.log(data);
+
+        } catch (error) {
+            console.error('Error getting distribution centres:', error);
+        }
+    }
 
     const fetchDrivers = async (distributionCentreId) => {
 
@@ -45,11 +83,17 @@ const DriversListContainer = () => {
 
 
     return ( 
+
+        <>
         <div className="drivers-list-container">
             {/* <p>Hello from driversListContainer</p> */}
-            <DriversList drivers={drivers}/>
-        </div>
+            <DriversList drivers={drivers} distributionCentres={distributionCentres} selectedCentreId={selectedCentreId} setSelectedCentreId={setSelectedCentreId} setOpenModal={setOpenModal} openModal={openModal}/>
+            {/* {!openModal && <button onClick={() => setOpenModal(true)} className="open-modal-button">Add Driver</button>} moved to driversList */}
+            {openModal && <Modal closeModal={setOpenModal}/>}
 
+            
+        </div>
+        </>
 
 
     );

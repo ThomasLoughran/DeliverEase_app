@@ -2,10 +2,12 @@ body {
     font-family: 'Arial', sans-serif;
 }
 
-.NavBar {
-    height: 100%;
+.navBar {
+    height: 100vh;
     width: 200px;
-    position: fixed;
+    position: sticky;
+    position: -webkit-sticky;
+    top: 0;
     background-color: #004445;
     padding-top: 20px;
     display: flex;
@@ -19,7 +21,7 @@ body {
     margin-bottom: 5vh;
 }
 
-.NavBar a {
+.navBar a {
     padding: 15px;
     text-decoration: none;
     font-size: 26px;
@@ -30,6 +32,6 @@ body {
 
 
 
-.NavBar a:hover {
+.navBar a:hover {
     background-color: #2c786c;
 }
