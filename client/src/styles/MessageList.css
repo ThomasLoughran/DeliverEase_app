@@ -33,31 +33,42 @@
 }
 
 .MessageList-container {
-width: 80%;
+width: 40%;
 height: 100%;
 background: #faf5e4; 
 text-align: center;
 border-radius: 8px;
 
 animation-name: zoom;
-    animation-duration: 0.6s;
+animation-duration: 0.6s;
+margin-right: 26%;
+
+
+
+}
+
+
+.close-message-modal-button {
+    width: 50px;
+    height: 40px;
+    margin-left: 20% ;
 
 }
 
 
 
 .order-message-list {
-    
-    
-
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: space-between;
+    max-height: 80%;
+    overflow-y: scroll
 
 }
 
 .order-message {
-    width: 30%;
+    width: 70%;
     height: 30%;
     margin: 0;
     font-family: 'Arial', sans-serif;
@@ -68,10 +79,7 @@ animation-name: zoom;
     background: #004445; 
     color: #faf5e4; 
     border-radius: 8px;
-
-    margin-bottom: 10px;
-
-
+    margin-bottom: 5%;
 }
 
 
@@ -92,3 +100,4 @@ animation-name: zoom;
 .message-order-id {
     margin-top: 5%;
 }
+
