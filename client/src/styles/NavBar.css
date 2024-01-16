@@ -36,12 +36,12 @@ body {
 
 
 .profile-message-container{
-    flex-direction: row;
+    flex-direction: column;
     background-color: #004445;
     margin-top: 0;
     padding: 15px;
     justify-content: left;
-    display: flex;
+    display: flexbox;
 }
 
 #profile-button {

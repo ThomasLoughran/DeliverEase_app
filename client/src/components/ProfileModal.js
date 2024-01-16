@@ -1,4 +1,4 @@
-import '../styles/Modal.css'
+import '../styles/ProfileModal.css';
 import Profile from "./Profile";
 
 const ProfileModal = ({closeModal}) => {

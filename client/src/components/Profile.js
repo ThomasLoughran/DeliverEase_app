@@ -1,13 +1,68 @@
+import { useState } from 'react';
 import { useUser } from '../contexts/UserContext';
 import '../styles/Profile.css'; 
 import { Link } from 'react-router-dom';
 
+// TO-DO:
+//save button to update user password
+//password fields to clear on save/submit/update
+//css: bring modal to center of screen 
+//css: position profile and message icon in column
+//css: resolve impact on messageIcon on profile-expand
+
+
 const Profile = () => {
+
     const { user } = useUser();
+    const [showMore, setShowMore] = useState(false);
+    const [employeeForm, setEmployeeForm] = useState({
+        changePassword: "",
+        confirmNewPassword: "",
+    });
+
+    //handle form change
+    const handleEmployeeFormChange = (e) => {
+        const {name, value} = e.target;
+        setEmployeeForm((previousData) => ({
+            ...previousData, [name]: value, 
+        }))
+    }
+    
+    //handle form submit
+    const handleUpdateEmployeeForm = async (e) => {
+        e.preventDefault();
+    
+    
+            if (employeeForm.confirmNewPassword !== employeeForm.changePassword ) {
+                alert('Passwords do not match.');
+                return;
+            }        
+    
+            
+            try {
+                const response = await fetch('localhost:8080/employees/update-password', {
+                    method: "PATCH",
+                    headers: {"Content-Type": "application/json"}, 
+                    body: JSON.stringify(employeeForm)
+                })
+
+                if (!response.ok) {
+                    throw new Error(`Failed to save new password: ${response.status}. Please try again.`)
+                } else {
+                    setEmployeeForm({
+                        changePassword: "",
+                        confirmNewPassword: "",
+                    })
+                }
+
+            } catch (error){
+                console.error(error);
+            }
+    }
 
     return (
         <div className="profile">
-            <h2>Your Profile:</h2>
+            <h2>My Profile:</h2>
             {user.role === 'MANAGER' && (
                 <>
                     <p>Name: {user.name}</p>
@@ -22,7 +77,47 @@ const Profile = () => {
                 </>
             )}
 
-        <Link to="" ><button id="update-details-button"> <b>Update details</b> </button></Link>     
+        {/* <Link to="" ><button id="update-details-button"> <b>Update details</b> </button></Link>     
+         */}
+            {showMore &&  (
+            <form id="update-employee-form" onSubmit={handleUpdateEmployeeForm}>
+                <label htmlFor="change-password">
+                    Change password: 
+                </label>
+                    <input 
+                    placeholder="Please enter a new password"
+                    id="change-password"
+                    type="password"
+                    name="changePassword"
+                    value={employeeForm.changePassword}
+                    onChange={handleEmployeeFormChange}
+                    required >
+                    </input> 
+
+                <label htmlFor="confirm-change-password">
+                    Confirm new password: 
+                </label>
+                    <input 
+                    placeholder="Please confirm new password"
+                    id="confirm-new-password"
+                    type="password"
+                    name="confirmNewPassword"
+                    value={employeeForm.confirmNewPassword}
+                    onChange={handleEmployeeFormChange}
+                    required >
+                    </input> 
+
+                <button type="submit" id="save-button" >
+                    Save
+                </button>
+            </form>
+            )}
+
+            <button className="update-details-button" 
+                onClick={() => setShowMore(!showMore)}>
+                {showMore ? 'Cancel' : 'Update details'}
+            </button>
+
         </div>
         
 
