@@ -245,7 +245,7 @@ public class RouteService {
         Collections.sort(nodeList, new Comparator<Node>() {
             @Override
             public int compare(Node o1, Node o2) {
-                return (int) (o1.getTheta() - o2.getTheta());
+                return (int) (Math.pow(10, 6) * (o1.getTheta() - o2.getTheta()));
             }
         });
         return nodeList;
@@ -277,7 +277,7 @@ public class RouteService {
 
             if(runningTotalCapacity < currentDriver.getVanCapacity() &&
                     runningTotalWeight < currentDriver.getVanMaxWeight() &&
-                    runningTotalOrders < maxParcelsPerVan){
+                    runningTotalOrders <= maxParcelsPerVan){
                 ordersInRoutes.get(currentDriver.getId()).add(node);
             } else {
                 driverCount ++;
