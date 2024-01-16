@@ -309,4 +309,8 @@ public class RouteService {
             routeRepository.delete(route);
         }
     }
+
+    public Route findRouteByDriverIdAndDate(Long driverId, LocalDate localDate) {
+        return routeRepository.findRouteByDriverIdAndDate(driverId, ZonedDateTime.of(localDate, localDate.atStartOfDay().toLocalTime(), UTC));
+    }
 }

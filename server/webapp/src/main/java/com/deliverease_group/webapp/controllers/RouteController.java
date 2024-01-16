@@ -48,6 +48,16 @@ public class RouteController {
         }
     }
 
+    @GetMapping(value = "/driver/{driverId}")
+    public ResponseEntity<Route> getRouteByDriverIdAndDate(@PathVariable Long driverId, @RequestParam LocalDate localDate){
+        Route route = routeService.findRouteByDriverIdAndDate(driverId, localDate);
+        if (route != null){
+            return new ResponseEntity<>(route, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(route, HttpStatus.NOT_FOUND);
+        }
+    }
+
     @PatchMapping(value = "/{routeId}")
     public ResponseEntity<Route> updateRouteCompletion(@PathVariable Long routeId, @RequestParam boolean isComplete){
         Route route = routeService.updateRouteCompletion(routeId, isComplete);
@@ -62,7 +72,6 @@ public class RouteController {
     public ResponseEntity<Route> deleteRouteById(@PathVariable Long routeId){
         routeService.deleteRouteById(routeId);
         return new ResponseEntity<>(null, HttpStatus.OK);
-
     }
 
 }
