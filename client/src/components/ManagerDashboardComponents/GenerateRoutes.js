@@ -19,7 +19,7 @@ const GenerateRoutes = () => {
         try {
             const formattedDate = formatDate(localDate);
 
-            const response = await fetch(`http://localhost:8080/orders/new-routes/${user.distributionCentre.id}?localDate=${formattedDate}`, {
+            const response = await fetch(`http://localhost:8080/routes/new-routes/${user.distributionCentre.id}?localDate=${formattedDate}`, {
                 method: 'POST',
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({}),
