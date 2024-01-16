@@ -7,6 +7,7 @@ import com.deliverease_group.webapp.repositories.OrderRepository;
 import com.deliverease_group.webapp.repositories.RouteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfigureOrder;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -280,4 +281,24 @@ public class RouteService {
         return nodesInRoute;
     }
 
+    public Route findRouteById(Long routeId) {
+        Optional<Route> optionalRoute = routeRepository.findById(routeId);
+        if (optionalRoute.isPresent()){
+            return optionalRoute.get();
+        } else {
+            return null;
+        }
+    }
+
+    public Route updateRouteCompletion(Long routeId, boolean isComplete) {
+        Optional<Route> optionalRoute = routeRepository.findById(routeId);
+        if (optionalRoute.isPresent()){
+            Route route = optionalRoute.get();
+            route.setComplete(isComplete);
+            routeRepository.save(route);
+            return route;
+        } else {
+            return null;
+        }
+    }
 }
