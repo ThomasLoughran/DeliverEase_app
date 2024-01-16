@@ -33,6 +33,8 @@ public class DistributionCentre {
     @Column
     private List<Employee> employees;
 
+    private String phoneNumber;
+
     public DistributionCentre() {
     }
 
@@ -41,6 +43,7 @@ public class DistributionCentre {
         this.orders = new ArrayList<>();
         this.routes = new ArrayList<>();
         this.employees = new ArrayList<>();
+        this.phoneNumber = location.getPhoneNumber();
     }
 
     public long getId() {
@@ -87,5 +90,11 @@ public class DistributionCentre {
         this.employees = employees;
     }
 
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
 
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
 }

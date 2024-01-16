@@ -29,17 +29,8 @@ const Routes = () => {
     const LoggedInLayout = () => {
         return (
             <div className="wrapper">
-                <NavBar/>
+                  <NavBar/>
                 <div className="main">
-                    <div className="profile-message-container">
-                        <div className="profileContainer">
-                            <Profile/>
-                        </div>
-                        {/* May need to rename the className below */}
-                        <div className="MessageListContainer">
-                            <MessageListContainer/>
-                        </div>
-                    </div>
                     <div className="contentContainer">
                         <Outlet/>
                     </div>
