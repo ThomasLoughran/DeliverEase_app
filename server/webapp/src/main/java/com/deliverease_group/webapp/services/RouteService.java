@@ -65,7 +65,6 @@ public class RouteService {
                     }
                 }
 
-
                 //remove orders already on route that date
                 for ( Long orderId: route.getOrderId()){
                     Optional<Order> optionalOrder = orderRepository.findById(orderId);
@@ -77,7 +76,6 @@ public class RouteService {
                             incompleteOrders.remove(order);
                         }
                     }
-
                 }
             }
         }
@@ -88,7 +86,6 @@ public class RouteService {
         alreadyAssignedRoutes = findAllRoutesByDistCentreIdAndIsComplete(distCentreId,false);
         if (!alreadyAssignedRoutes.isEmpty()){
             for (Route route : alreadyAssignedRoutes){
-
                 //remove orders already on incomplete routes
                 for ( Long orderId: route.getOrderId()){
                     Optional<Order> optionalOrder = orderRepository.findById(orderId);
@@ -100,9 +97,7 @@ public class RouteService {
                             incompleteOrders.remove(order);
                         }
                     }
-
                 }
-
             }
         }
 
@@ -119,22 +114,6 @@ public class RouteService {
         DistributionCentre distributionCentre = distributionCentreRepository.findById(distCentreId).get();
         List<Node> orderLocations = createNodes( distributionCentre, ordersToBeDelivered);
 
-//        DistributionCentre distributionCentre = distributionCentreRepository.findById(distCentreId).get();
-//        double distCentreX = distributionCentre.getLocation().getX();
-//        double distCentreY = distributionCentre.getLocation().getY();
-//
-//        ArrayList<Node> orderLocations = new ArrayList<>();
-//
-//        // Gets the order's angle from North of distribution centre and it's radial distance from the distribution centre
-//        for (Order order : ordersToBeDelivered){
-//            Node node = new Node(order.getLongitude(),order.getLatitude(),order.getId());
-//
-//            node.setRadius( Math.sqrt( Math.pow(node.getX() - distCentreX,2) ) +  Math.sqrt( Math.pow(node.getY() - distCentreY,2) ) );
-//            node.setTheta(Math.atan(node.getY())/ node.getX());
-//
-//            orderLocations.add(node);
-//        }
-
         //sort order Locations By Angle Theta
         Collections.sort(orderLocations, new Comparator<Node>() {
             @Override
@@ -143,52 +122,51 @@ public class RouteService {
             }
         });
 
-        //get and shuffle drivers
-        Collections.shuffle(availableDrivers);
+        Map<Long,ArrayList<Node>> ordersInRoutes =  assignDriversOrders(availableDrivers, orderLocations, maxParcelsPerVan);
 
-        Map<Long,ArrayList<Node>> ordersInRoutes = new HashMap<>();
-
-        //sets the all drivers to have an empty list of routes associated with them;
-        for (Driver driver : availableDrivers){
-            ordersInRoutes.put(driver.getId(), new ArrayList<>());
-        }
-
-
-
-        // Assign orders to Drivers
-
-        int driverCount = 0;
-        Driver currentDriver = availableDrivers.get(driverCount);
-
-        int runningTotalCapacity = 0;
-        int runningTotalWeight = 0;
-        int runningTotalOrders = 0;
-        for (Node node : orderLocations){
-            Order order = orderRepository.findById(node.getOrderId()).get();
-            runningTotalWeight += order.getWeight();
-            runningTotalCapacity += order.getSize();
-            runningTotalOrders ++;
-
-            if(runningTotalCapacity < currentDriver.getVanCapacity() &&
-                    runningTotalWeight < currentDriver.getVanMaxWeight() &&
-                    runningTotalOrders < maxParcelsPerVan){
-                ordersInRoutes.get(currentDriver.getId()).add(node);
-            } else {
-                driverCount ++;
-                if (driverCount < availableDrivers.size()) {
-                    currentDriver = availableDrivers.get(driverCount);
-                    ordersInRoutes.get(currentDriver.getId()).add(node);
-                    runningTotalCapacity = order.getSize();
-                    runningTotalWeight = order.getWeight();
-                    runningTotalOrders = 1;
-                } else {
-                    break;
-                }
-            }
-        }
+//        //get and shuffle drivers
+//        Collections.shuffle(availableDrivers);
+//
+//        Map<Long,ArrayList<Node>> ordersInRoutes = new HashMap<>();
+//
+//        //sets the all drivers to have an empty list of routes associated with them;
+//        for (Driver driver : availableDrivers){
+//            ordersInRoutes.put(driver.getId(), new ArrayList<>());
+//        }
+//
+//        // Assign orders to Drivers
+//        int driverCount = 0;
+//        Driver currentDriver = availableDrivers.get(driverCount);
+//
+//        int runningTotalCapacity = 0;
+//        int runningTotalWeight = 0;
+//        int runningTotalOrders = 0;
+//        for (Node node : orderLocations){
+//            Order order = orderRepository.findById(node.getOrderId()).get();
+//            runningTotalWeight += order.getWeight();
+//            runningTotalCapacity += order.getSize();
+//            runningTotalOrders ++;
+//
+//            if(runningTotalCapacity < currentDriver.getVanCapacity() &&
+//                    runningTotalWeight < currentDriver.getVanMaxWeight() &&
+//                    runningTotalOrders < maxParcelsPerVan){
+//                ordersInRoutes.get(currentDriver.getId()).add(node);
+//            } else {
+//                driverCount ++;
+//                if (driverCount < availableDrivers.size()) {
+//                    currentDriver = availableDrivers.get(driverCount);
+//                    ordersInRoutes.get(currentDriver.getId()).add(node);
+//                    runningTotalCapacity = order.getSize();
+//                    runningTotalWeight = order.getWeight();
+//                    runningTotalOrders = 1;
+//                } else {
+//                    break;
+//                }
+//            }
+//        }
 
 //        id is -1 to avoid overlap with any order id
-        Node distributionCentreNode = new Node(distCentreX, distCentreY, -1);
+        Node distributionCentreNode = new Node(distributionCentre.getLocation().getX(), distributionCentre.getLocation().getY(), -1);
 
         List<Node> orderedNodeList = new ArrayList<>();
         for (Long driverId : ordersInRoutes.keySet()){
@@ -207,7 +185,6 @@ public class RouteService {
         }
 
         return ordersToBeDelivered;
-
     }
 
     public List<Node> routeFind(ArrayList<Node> nodes, Node distCentre) {
@@ -308,6 +285,52 @@ public class RouteService {
 
             orderLocations.add(node);
         }
+
+        return orderLocations;
+    }
+
+    public Map<Long,ArrayList<Node>> assignDriversOrders(List<Driver> availableDrivers, List<Node> orderLocations, int maxParcelsPerVan){
+        //get and shuffle drivers
+        Collections.shuffle(availableDrivers);
+
+        Map<Long,ArrayList<Node>> ordersInRoutes = new HashMap<>();
+
+        //sets the all drivers to have an empty list of routes associated with them;
+        for (Driver driver : availableDrivers){
+            ordersInRoutes.put(driver.getId(), new ArrayList<>());
+        }
+
+        // Assign orders to Drivers
+        int driverCount = 0;
+        Driver currentDriver = availableDrivers.get(driverCount);
+
+        int runningTotalCapacity = 0;
+        int runningTotalWeight = 0;
+        int runningTotalOrders = 0;
+        for (Node node : orderLocations){
+            Order order = orderRepository.findById(node.getOrderId()).get();
+            runningTotalWeight += order.getWeight();
+            runningTotalCapacity += order.getSize();
+            runningTotalOrders ++;
+
+            if(runningTotalCapacity < currentDriver.getVanCapacity() &&
+                    runningTotalWeight < currentDriver.getVanMaxWeight() &&
+                    runningTotalOrders < maxParcelsPerVan){
+                ordersInRoutes.get(currentDriver.getId()).add(node);
+            } else {
+                driverCount ++;
+                if (driverCount < availableDrivers.size()) {
+                    currentDriver = availableDrivers.get(driverCount);
+                    ordersInRoutes.get(currentDriver.getId()).add(node);
+                    runningTotalCapacity = order.getSize();
+                    runningTotalWeight = order.getWeight();
+                    runningTotalOrders = 1;
+                } else {
+                    break;
+                }
+            }
+        }
+        return ordersInRoutes;
     }
 
 
