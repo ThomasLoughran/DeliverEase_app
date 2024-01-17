@@ -2,11 +2,12 @@ import { Link } from 'react-router-dom';
 import { useUser } from '../contexts/UserContext';
 import '../styles/NavBar.css';
 import darkLogo from '../assets/adjusted-size-logos/dark-mode-logo.png'; //altered the dark-logo and light logo sizes.
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import ProfileModal from './ProfileModal';
 
 import profileIcon from '../assets/profile-icon-white.png';
 import messageIcon from '../assets/message-icon-white.png';
+import activeMessageIcon  from '../assets/message-icon-white-active.png'
 import MessageModal from './MessageModal';
 
 
@@ -16,10 +17,63 @@ const NavBar = () => {
 
     const [openProfileModal, setOpenProfileModal] = useState(false);
     const [openMessageListModal, setOpenMessageListModal] = useState(false);
+    const [orders , setOrders] = useState([])
+    const [notificationRefresh, setNotificationRefresh] = useState(true);
+    // const [ordersLoaded, setOrdersLoaded] = useState(false)
 
     const handleLogout = () => {
         logoutUser();
     }
+
+
+
+    useEffect(() => {
+
+        console.log(notificationRefresh)
+
+
+
+        if (user.role == 'MANAGER') {
+            fetchIssues()
+        }
+
+
+
+    }, [user.role, openMessageListModal, notificationRefresh])
+
+
+    const fetchIssues = async () => {
+        try {
+            const response = await fetch(`http://localhost:8080/orders/issue/all?distCentreId=${1}&isManagerReviewed=${false}`, {
+                method: "GET",
+            
+            });
+    
+            if (!response.ok) {
+                throw new Error(`Failed to receive messages: ${response.status} ${response.statusText}`);
+            }
+    
+            const data = await response.json();
+    
+            if (!data) {
+                throw new Error("Empty response received");
+            }
+    
+            setOrders(data);
+            console.log("This is data", data);
+    
+        } catch (error) {
+            console.error('Error during receiving messages:', error);
+        }
+
+        // setOrdersLoaded(true);
+    }
+
+
+
+
+
+
 
     return (
 
@@ -30,8 +84,19 @@ const NavBar = () => {
             {openProfileModal && <ProfileModal closeModal={setOpenProfileModal}/>}
 
             {user?.role === 'MANAGER' && (
-                <img id="message-icon" src={messageIcon} onClick={() => setOpenMessageListModal(true)} className='message-button'/>
-        
+            <img
+                id="message-icon"
+                src={orders.length > 0 && notificationRefresh ? activeMessageIcon : messageIcon} 
+                alt={orders.length > 0 && notificationRefresh ? "New messages icon" : "message Icon"}
+                onClick={() => {
+                    setOpenMessageListModal(true)
+                    console.log("triggered")
+                    setNotificationRefresh(false)
+                    setOrders([])
+                    }
+                }
+                className='message-button'
+            />
             )}
             {openMessageListModal && <MessageModal closeModal={setOpenMessageListModal}/>}
             </div>
