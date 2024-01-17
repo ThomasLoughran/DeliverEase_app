@@ -13,26 +13,21 @@ const NavBar = () => {
 
     const [openModal, setOpenModal] = useState(false);
 
-const handleLogout = () => {
-    logoutUser();
-}
-
-    // const logoStyle =
-    //     user?.role === 'MANAGER'
-    //         ? { width: '200px', height: 'auto', marginTop: '200px' }
-    //         : { width: '200px', height: 'auto', marginTop: '300px' };
+    const handleLogout = () => {
+        logoutUser();
+    }
 
     return (
-        <div className= "navBar">
-            
-            {!openModal && 
-                <button onClick={() => setOpenModal(true)} 
-                className="open-modal-button"> 
+        <div className="navBar">
+
+            {!openModal &&
+                <button onClick={() => setOpenModal(true)}
+                    className="open-modal-button">
                     <img id="profile-icon" src={profileIcon} />
                 </button>
             }
 
-            {openModal && <ProfileModal closeModal={setOpenModal}/>}
+            {openModal && <ProfileModal closeModal={setOpenModal} />}
 
             <button>
                 <img id="message-icon" src={messageIcon} />
@@ -55,14 +50,19 @@ const handleLogout = () => {
                 </>
             )}
             {user?.role === 'DRIVER' && (
-                <Link id="routes" to="driver/routes">
-                    Routes
-                </Link>
+                <>
+                    <Link id="routes" to="driver/routes">
+                        Routes
+                    </Link>
+                    <Link id="driver-availability" to="driver/driver-availability">
+                        Driver Availability
+                    </Link>
+                </>
             )}
             <Link id="logout" to="/" onClick={handleLogout}>
                 Logout
             </Link>
-            <img src={darkLogo} alt="Logo" className="logo"/>
+            <img src={darkLogo} alt="Logo" className="logo" />
         </div>
     );
 };

@@ -15,6 +15,7 @@ import DriversListContainer from "../containers/DriversListContainer";
 import DistributionCentreListContainer from "../containers/DistributionCentreListContainer";
 import ManagerRoutesContainer from "../containers/ManagerRoutesContainer";
 import DriverAvailabilityCalendar from "../components/DriverDashboard/DriverAvailabilityCalendar";
+import CurrentRouteOrder from "../components/DriverDashboard/CurrentRouteOrder";
 
 
 const Routes = () => {
@@ -93,8 +94,12 @@ const Routes = () => {
                             element: <DriverProtectedRoute/>,
                             children: [
                                 {
-                                    path:"/driver/routes",
+                                    path:"/driver/driver-availability",
                                     element: <DriverAvailabilityCalendar/>
+                                },
+                                {
+                                    path:"/driver/routes",
+                                    element: <CurrentRouteOrder/>
                                 }
                             ]
                         }
