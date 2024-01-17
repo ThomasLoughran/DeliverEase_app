@@ -1,4 +1,5 @@
 import React from "react";
+import Map from "../map/Map";
 
 const OrderDetails = ({
     currentOrder,
@@ -35,6 +36,7 @@ const OrderDetails = ({
                     <button onClick={handleIssueSubmit}>Submit Issue</button>
                 </div>
             )}
+            <Map/>
         </div>
     );
 }
