@@ -43,6 +43,7 @@ public class OrderService {
         order.setIssue(Issue.fromInteger(orderDTO.getIssue()));
         order.setTimeIssuePosted(orderDTO.getTimeIssuePosted());
         order.setManagerReviewed(false);
+        order.setCompleted(false);
 
         orderRepository.save(order);
         return order;
