@@ -17,7 +17,8 @@ const Profile = () => {
     const { user } = useUser();
     const [showMore, setShowMore] = useState(false);
     const [employeeForm, setEmployeeForm] = useState({
-        changePassword: "",
+        id: `${user.id}`,
+        password: "",
         confirmNewPassword: "",
     });
 
@@ -34,7 +35,7 @@ const Profile = () => {
         e.preventDefault();
     
     
-            if (employeeForm.confirmNewPassword !== employeeForm.changePassword ) {
+            if (employeeForm.confirmNewPassword !== employeeForm.password ) {
                 alert('Passwords do not match.');
                 return;
             }        
@@ -51,7 +52,7 @@ const Profile = () => {
                     throw new Error(`Failed to save new password: ${response.status}. Please try again.`)
                 } else {
                     setEmployeeForm({
-                        changePassword: "",
+                        password: "",
                         confirmNewPassword: "",
                     })
                 }
@@ -59,10 +60,13 @@ const Profile = () => {
             } catch (error){
                 console.error(error);
             }
+
+            alert('Passwords successfully changed');
+
     }
 
     return (
-        <div className="profile">
+        <div className="profile-content">
             <h2>My Profile:</h2>
             {user.role === 'MANAGER' && (
                 <>
@@ -82,15 +86,15 @@ const Profile = () => {
          */}
             {showMore &&  (
             <form id="update-employee-form" onSubmit={handleUpdateEmployeeForm}>
-                <label htmlFor="change-password">
+                <label htmlFor="password">
                     Change password: 
                 </label>
                     <input 
                     placeholder="Please enter a new password"
-                    id="change-password"
+                    id="password"
                     type="password"
-                    name="changePassword"
-                    value={employeeForm.changePassword}
+                    name="password"
+                    value={employeeForm.password}
                     onChange={handleEmployeeFormChange}
                     required >
                     </input> 
