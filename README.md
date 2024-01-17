@@ -125,84 +125,84 @@ npm start
 ## 5.3. Routes used in the frontend:
 
 1. **Display all drivers**
-* Method: GET
-* URL: localhost:8080/drivers/all
+* Method: `GET`
+* URL: `http://localhost:8080/drivers/all`
 * This will get the full list of driver employees.
 
 <br>
 
 2. **Display driver by ID number**
-* Method: GET
-* URL: localhost:8080/drivers/id
+* Method: `GET`
+* URL: `http://localhost:8080/drivers/id`
 * This will get a driver by their employee ID number.
 
 <br>
 
 3. **Display all available drivers**
-* Method: GET
-* URL: localhost:8080/drivers/available
+* Method: `GET`
+* URL: `http://localhost:8080/drivers/available`
 * This will get the full list of driver employees that have a status of ‘available’.
 
 <br>
 
 4. **Display all managers**
-* Method: GET
-* URL: localhost:8080/managers/all
+* Method: `GET`
+* URL: `http://localhost:8080/managers/all`
 * This will get the full list of driver employees.
 
 <br>
 
 5. **Display manager by their ID number**
-* Method: GET
-* URL: localhost:8080/managers/id
+* Method: `GET`
+* URL: `http://localhost:8080/managers/id`
 * This will get the full list of driver employees.
 
 <br>
 
 6. **Display all orders**
-* Method: GET
-* URL: localhost:8080/orders/all
+* Method: `GET`
+* URL: `http://localhost:8080/orders/all`
 * This will display the current list of all orders.
 
 <br>
 
 7. **Display all completed orders**
-* Method: GET
-* URL: localhost:8080/orders/completion
+* Method: `GET`
+* URL: `http://localhost:8080/orders/completion`
 * This will get the full list of completed orders (i.e. they have been delivered to the customer). 
 
 <br>
 
 8. **Display order by ID**
-* Method: GET
-* URL: localhost:8080/orders/id
+* Method: `GET`
+* URL: `http://localhost:8080/orders/id`
 * This will get an order by its ID number.
 
 <br>
 
 9. **Display all distribution centres**
-* Method: GET
-* URL: localhost:8080/distribution-centres
+* Method: `GET`
+* URL: `http://localhost:8080/distribution-centres`
 * This will get the full list of distribution centres.
 
 <br>
 
 10. **Update orders’ status**
-* Method: PATCH
-* URL: localhost:8080/orders/id
+* Method: `PATCH`
+* URL: `http://localhost:8080/orders/{id}`
 * This will update an order’s delivered, manager-reviewed and/or issue and issue timing status by order ID.
 
 <br> 
 
 11. **Create new driver**
-* Method: POST
-* URL: localhost:8080/drivers/new-driver
+* Method: `POST`
+* URL: `http://localhost:8080/drivers/new-driver`
 * This will create a new driver record and add it to the list of drivers. 
 
 <br> 
 
 12. **Update driver's availability**
-* Method: PATCH
-* URL: localhost:8080/drivers/change-available/{id}
+* Method: `PATCH`
+* URL: `http://localhost:8080/drivers/change-available/{id}`
 * This will update an driver's availability.
 
