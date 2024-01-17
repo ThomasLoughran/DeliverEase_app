@@ -1,5 +1,6 @@
-# DeliverEase 🚛📦
-### Capstone Project
+# Capstone Project
+
+![DeliverEase logo](https://github.com/ThomasLoughran/DeliverEase_app/blob/main/client/src/assets/dark-mode-logo.png)
 
 ## 🎸 Developer Team 🎸 
 - [Albert](https://github.com/Al-B-code) 
