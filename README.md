@@ -113,6 +113,7 @@ npm start
 - Drivers can update availability in a calendar
 - Drivers can see the address and postcode of the next order to deliver
 - Driver marks delivery as successful or unsuccessful with issue
+- All employees can change their password
 - Managers can create a new driver
 - Managers generate routes
 - Managers have a calendar log of all the create routes
