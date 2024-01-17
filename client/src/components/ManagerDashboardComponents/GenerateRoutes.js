@@ -4,7 +4,7 @@ import { useUser } from '../../contexts/UserContext';
 const GenerateRoutes = () => {
     const { user } = useUser();
     const [localDate, setLocalDate] = useState(new Date());
-    const [generatedRoutes, setGeneratedRoutes] = useState([]);
+    //const [generatedRoutes, setGeneratedRoutes] = useState([]);
 
 
     const formatDate = (date) => {
@@ -25,16 +25,19 @@ const GenerateRoutes = () => {
                 body: JSON.stringify({}),
             });
 
-            if (response.ok) {
-                const data = await response.json();
-                console.log('Generated routes:', data);
-                setGeneratedRoutes(data);
-                alert("Routes Generated");
-            } else {
-                console.error('Failed to generate routes:', response.status, response.statusText);
-                console.log(user)
-                alert("Routes already generated for today")
-            }
+            const data = await response.text();
+                alert(data);
+
+            // if (response.ok) {
+            //     const data = await response.text();
+            //     //console.log('Generated routes:', data);
+            //     //setGeneratedRoutes(data);
+            //     alert(data);
+            // } else {
+            //     console.error('Failed to generate routes:', response.status, response.statusText);
+            //     console.log(user)
+            //     alert("Routes already generated for today")
+            // }
         } catch (error) {
             console.error('Error generating routes:', error);
         }
@@ -53,7 +56,7 @@ const GenerateRoutes = () => {
 
             <button onClick={handleGenerateRoutes}>Generate Routes</button>
 
-            <ul>
+            {/* <ul>
                 {generatedRoutes.map((route, index) => (
                     <li key={index}>
                         <p>ID: {route.id}</p>
@@ -61,7 +64,7 @@ const GenerateRoutes = () => {
                         <p>Postcode: {route.postcode}</p>
                     </li>
                 ))}
-            </ul>
+            </ul> */}
         </>
     );
 }
