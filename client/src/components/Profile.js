@@ -4,12 +4,12 @@ import '../styles/Profile.css';
 import { Link } from 'react-router-dom';
 
 // TO-DO:
-//save button to update user password
+//save button to update user password 
 //add current password verification before user can update password
 //password fields to clear on save/submit/update
 //css: bring modal to center of screen 
 //css: position profile and message icon in column
-//css: resolve impact on messageIcon on profile-expand
+//css: resolve impact on messageIcon on profile-expand ✅
 
 
 const Profile = () => {
@@ -18,8 +18,8 @@ const Profile = () => {
     const [showMore, setShowMore] = useState(false);
     const [employeeForm, setEmployeeForm] = useState({
         id: `${user.id}`,
-        password: "",
-        confirmNewPassword: "",
+        oldPassword: "",
+        newPassword: "",
     });
 
     //handle form change
@@ -35,10 +35,10 @@ const Profile = () => {
         e.preventDefault();
     
     
-            if (employeeForm.confirmNewPassword !== employeeForm.password ) {
-                alert('Passwords do not match.');
-                return;
-            }        
+            // if (employeeForm.newPassword !== employeeForm.password ) {
+            //     alert('Passwords do not match.');
+            //     return;
+            // }        
     
             
             try {
@@ -52,8 +52,8 @@ const Profile = () => {
                     throw new Error(`Failed to save new password: ${response.status}. Please try again.`)
                 } else {
                     setEmployeeForm({
-                        password: "",
-                        confirmNewPassword: "",
+                        oldPassword: "",
+                        newPassword: "",
                     })
                 }
 
@@ -86,15 +86,15 @@ const Profile = () => {
          */}
             {showMore &&  (
             <form id="update-employee-form" onSubmit={handleUpdateEmployeeForm}>
-                <label htmlFor="password">
-                    Change password: 
+                <label htmlFor="old-password">
+                    Old password: 
                 </label>
                     <input 
-                    placeholder="Please enter a new password"
-                    id="password"
+                    placeholder="Please enter your current password"
+                    id="old-password"
                     type="password"
-                    name="password"
-                    value={employeeForm.password}
+                    name="oldPassword"
+                    value={employeeForm.oldPassword}
                     onChange={handleEmployeeFormChange}
                     required >
                     </input> 
@@ -103,11 +103,11 @@ const Profile = () => {
                     Confirm new password: 
                 </label>
                     <input 
-                    placeholder="Please confirm new password"
+                    placeholder="Please add a new password"
                     id="confirm-new-password"
                     type="password"
-                    name="confirmNewPassword"
-                    value={employeeForm.confirmNewPassword}
+                    name="newPassword"
+                    value={employeeForm.newPassword}
                     onChange={handleEmployeeFormChange}
                     required >
                     </input> 
