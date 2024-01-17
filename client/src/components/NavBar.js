@@ -25,16 +25,11 @@ const NavBar = () => {
 
         <div className= "navBar">
             <div className="profile-message-container" >
-            {!openProfileModal &&
-                
                     <img id="profile-icon" src={profileIcon} onClick={() => setOpenProfileModal(true)}
                     className="profile-button"/>
-        
-            }
             {openProfileModal && <ProfileModal closeModal={setOpenProfileModal}/>}
 
             {user?.role === 'MANAGER' && (
-           
                 <img id="message-icon" src={messageIcon} onClick={() => setOpenMessageListModal(true)} className='message-button'/>
         
             )}
