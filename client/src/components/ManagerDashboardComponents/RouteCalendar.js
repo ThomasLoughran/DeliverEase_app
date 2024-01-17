@@ -89,11 +89,11 @@ const RouteCalendar = ({loadRoute,showTodayRoutes}) => {
                 {routesData.length === 0 ? (
                     <p>No routes on this date.</p>
                 ) : (
-                    <ul style={{ listStyle: 'none' }}>
+                    <ul>
                         {routesData.map((route, index) => (
                             
                             <li key={index}>
-                                <div className="route-calendar">
+                                <div>
                                     Route: {route.id} |
                                     Driver Id Assigned : {route.driverId} |
                                     Number of Orders: {route.orderId.length} 

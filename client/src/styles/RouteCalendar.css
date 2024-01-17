@@ -20,9 +20,12 @@
     padding: 0;
 }
 
-.routes li {
+.routes div {
     margin-bottom: 10px;
     color: #2c786c;
+    border: 2px solid yellow;
+    padding: 10px; 
+    margin: 5px;
 }
 
 .calendar label {
