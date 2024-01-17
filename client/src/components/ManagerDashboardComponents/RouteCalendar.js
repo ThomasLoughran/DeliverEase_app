@@ -53,12 +53,12 @@ const RouteCalendar = ({loadRoute,showTodayRoutes}) => {
     };
 
     const handleCurrentDay = () => {
-        setTimeout(() => {
+        
           fetchRoutesData();
           console.log(routesData);
           showTodayRoutes(false);
           setLoadRoutes(false);
-        }, 1000);
+        
       };
 
     return (
@@ -91,9 +91,16 @@ const RouteCalendar = ({loadRoute,showTodayRoutes}) => {
                 ) : (
                     <ul>
                         {routesData.map((route, index) => (
+                            
                             <li key={index}>
-                                Route Id: {route.id}
+                                <div>
+                                    Route: {route.id} |
+                                    Driver Id Assigned : {route.driverId} |
+                                    Number of Orders: {route.orderId.length} 
+                                 </div>
+                                
                             </li>
+                            
                         ))}
                     </ul>
                 )}
