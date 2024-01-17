@@ -44,7 +44,7 @@ public class RouteService {
     }
 
 
-    public List<Order> generateRoutes(Long distCentreId, LocalDate localDate) {
+    public String generateRoutes(Long distCentreId, LocalDate localDate) {
 
         List<Order> incompleteOrders = getDistributionCentreOrdersByCompletionStatus(distCentreId, false);
         List<Driver> availableDrivers =  driverRepository.availableDrivers(distCentreId, localDate);
@@ -99,9 +99,12 @@ public class RouteService {
         }
 
 //        cannot create routes if no drivers available
-        if (availableDrivers.isEmpty() || incompleteOrders.isEmpty()){
-            return null;
+        if (availableDrivers.isEmpty()) {
+            return ("Routes not created - No available drivers");
+        }else if  (incompleteOrders.isEmpty()){
+            return ("Routes not created - No unassigned orders to be routed");
         }
+
 
 //        assign a list of the most urgent parcels to be delivered that the drivers collectively have capacity for
         int maxParcelsPerVan = 10;
@@ -136,7 +139,7 @@ public class RouteService {
             }
         }
 
-        return ordersToBeDelivered;
+        return ("Routes successfully created");
     }
 
     public List<Node> routeFind(ArrayList<Node> nodes, Node distCentre) {
