@@ -9,6 +9,8 @@ const CurrentRouteOrder = () => {
     const [selectedIssue, setSelectedIssue] = useState(null);
     const [data, setData] = useState(null);
     const [showNextOrder, setShowNextOrder] = useState(false);
+    const [showIndex, setShowIndex] = useState(0);
+
 
 
     const fetchCurrentOrder = async () => {
@@ -24,7 +26,7 @@ const CurrentRouteOrder = () => {
             const responseData = await response.json();
 
         if (responseData.orderId && responseData.orderId.length > 0) {
-            const orderId = responseData.orderId[0];
+                    const orderId = responseData.orderId[showIndex];
                     const orderResponse = await fetch(`http://localhost:8080/orders/${orderId}`);
 
                     if (orderResponse.ok) {
@@ -81,6 +83,7 @@ const CurrentRouteOrder = () => {
     const fetchNextOrder = async (currentOrderId) => {
         try {
             const nextOrderIndex = data.orderId.indexOf(currentOrderId) + 1;
+            setShowIndex(showIndex + 1);
             console.log(nextOrderIndex, "this is next order id");
     
             if (nextOrderIndex < data.orderId.length) {
@@ -130,7 +133,7 @@ const CurrentRouteOrder = () => {
                 console.log('Issue submitted!');
 
 
-                fetchCurrentOrder();
+                fetchNextOrder();
             } catch (error) {
                 console.error('Error submitting issue:', error);
             }
