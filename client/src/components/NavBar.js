@@ -4,9 +4,11 @@ import '../styles/NavBar.css';
 import darkLogo from '../assets/adjusted-size-logos/dark-mode-logo.png'; //altered the dark-logo and light logo sizes.
 import { useState } from 'react';
 import ProfileModal from './ProfileModal';
-import profileIcon from '../assets/icon-location.png';
-import messageIcon from '../assets/icons8-message.png';
+
+import profileIcon from '../assets/profile-icon-white.png';
+import messageIcon from '../assets/message-icon-white.png';
 import MessageModal from './MessageModal';
+
 
 
 const NavBar = () => {
@@ -26,20 +28,21 @@ const handleLogout = () => {
 
     return (
         <div className= "navBar">
-            
-            {!openProfileModal && 
-                <button onClick={() => setOpenProfileModal(true)} 
-                className="open-profile-modal-button"> 
-                    <img id="profile-icon" src={profileIcon} />
-                </button>
-            }
 
-            {openProfileModal && <ProfileModal closeModal={setOpenProfileModal}/>}
+            <div className="profile-message-container" >
+                {!openModal && 
+                    <img className="profile-button" 
+                    onClick={() => setOpenModal(true)} src={profileIcon} > 
+                    </img>
+                }
 
-            {user?.role === 'MANAGER' && (
-            <button onClick={() => setOpenMessageListModal(true)} >
-                <img id="message-icon" src={messageIcon} />
-            </button>
+                {openModal && <ProfileModal closeModal={setOpenModal}/>}
+
+                <img className="message-button"  src={messageIcon} >
+                </img>
+                
+            </div>
+
 
             )}
 
