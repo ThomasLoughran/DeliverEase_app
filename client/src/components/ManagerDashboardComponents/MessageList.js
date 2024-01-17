@@ -3,7 +3,7 @@ import { useUser } from "../../contexts/UserContext";
 import '../../styles/MessageList.css'
 import refreshButton from '../../assets/refresh-button.png';
 
-const MessageList = () => {
+const MessageList = ({setNotificationRefresh}) => {
 
     const { user } = useUser();
     const [orders, setOrders] = useState([]);
@@ -143,7 +143,8 @@ const messageListComponents = orders.length > 0 ? (
         <>
         <div className="title-and-refresh-button-container">
             <h2 className="message-list-title">Message List</h2>
-            <button  className="message-list-refresh-button" onClick={() => {fetchIssues()}}>
+            <button  className="message-list-refresh-button" onClick={() => {
+                fetchIssues()}}>
                 <img className="refresh-symbol" src={refreshButton} alt="Refresh"></img>
             
             </button>
