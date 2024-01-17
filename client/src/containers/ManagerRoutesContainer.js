@@ -5,6 +5,7 @@ import GenerateRoutes from "../components/ManagerDashboardComponents/GenerateRou
 const ManagerRoutesContainer = () => {
 
     const [date, setDate] = useState(new Date());
+    const [loadRoutes,setLoadRoutes] = useState(true);
 
 
     useEffect(() => {
@@ -14,14 +15,18 @@ const ManagerRoutesContainer = () => {
         date.setDate(date.getDate() + 1);
     }
 
-
+    const showTodayRoutes = (showtoggle) => {
+        setLoadRoutes(showtoggle);
+        console.log(loadRoutes);
+    }
 
     return (
         <>
-            <GenerateRoutes />
-            <RouteCalendar date={date} moveForwardOneDay={moveForwardOneDay} />
+            <GenerateRoutes showTodayRoutes={showTodayRoutes} />
+            <RouteCalendar date={date} loadRoute={loadRoutes} moveForwardOneDay={moveForwardOneDay} showTodayRoutes={showTodayRoutes}/>
         </>
     );
 }
+
 
 export default ManagerRoutesContainer;
