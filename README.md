@@ -118,88 +118,66 @@ npm start
 
 - Undelivered items given priority for tomorrow delivery
 - Drivers can see their route of orders to deliver on a map
+- Make app compatible with a mobile device
 
 ## 5.3. Routes used in the frontend:
 
-1. **Display all drivers**
-* Method: `GET`
-* URL: `http://localhost:8080/drivers/all`
-* This will get the full list of driver employees.
+1. **Display the route of a driver**
+- Method: `GET`
+- URL: `http://localhost:8080/routes/driver/{driverId}`
+- This will get the route for the current day by driver id and date.
 
-<br>
+2. **Update the order as complete**
+- Method: `PATCH`
+- URL: `http://localhost:8080/orders/complete/{id}/`
+- This will update the order by order id as the order being complete (true or false).
 
-2. **Display driver by ID number**
-* Method: `GET`
-* URL: `http://localhost:8080/drivers/id`
-* This will get a driver by their employee ID number.
+3. **Display order by id**
+- Method: `GET`
+- URL: `http://localhost:8080/orders/{id}`
+- This will get an order by its id number.
 
-<br>
+4. **Update the issue attached to a incomplete order**
+- Method: `PATCH`
+- URL: `http://localhost:8080/orders/issue`
+- This will update the order by adding the selected issue with the date the issue was submitted by the order id.
 
-3. **Display all available drivers**
-* Method: `GET`
-* URL: `http://localhost:8080/drivers/available`
-* This will get the full list of driver employees that have a status of ‘available’.
+5. **Update driver's availability**
+- Method: `PATCH`
+- URL: `http://localhost:8080/drivers/change-available/{id}`
+- This will update an driver's availability on a selected date.
 
-<br>
+6. **Create new driver**
+- Method: `POST`
+- URL: `http://localhost:8080/drivers/new-driver`
+- This will create a new driver record and add it to the list of drivers. 
 
-4. **Display all managers**
-* Method: `GET`
-* URL: `http://localhost:8080/managers/all`
-* This will get the full list of driver employees.
+7. **Create routes**
+- Method: `POST`
+- URL: `http://localhost:8080/routes/new-routes/{disCentreId}`
+- This will generate routes by distribution centre given a selected date.
 
-<br>
+8. **Display all issue**
+- Method: `GET`
+- URL: `http://localhost:8080/orders/issue/all`
+- This will get all the issues of a given distribution centre if the manager has not reviewed them.
 
-5. **Display manager by their ID number**
-* Method: `GET`
-* URL: `http://localhost:8080/managers/id`
-* This will get the full list of driver employees.
+9. **Update if the manager has reviewed an issue**
+- Method: `PATCH`
+- URL: `http://localhost:8080/orders/manager-review/{id}`
+- This will update the order issue by order id and change manager to reviewed true.
 
-<br>
+10. **Display all routes by date**
+- Method: `GET`
+- URL: `http://localhost:8080/routes/all/{distCentreId}`
+- This will get all the routes of a given distribution centre by date.
 
-6. **Display all orders**
-* Method: `GET`
-* URL: `http://localhost:8080/orders/all`
-* This will display the current list of all orders.
+11. **Login**
+- Method: `POST`
+- URL: `http://localhost:8080/employees/login`
+- This will log an employee into the app.
 
-<br>
-
-7. **Display all completed orders**
-* Method: `GET`
-* URL: `http://localhost:8080/orders/completion`
-* This will get the full list of completed orders (i.e. they have been delivered to the customer). 
-
-<br>
-
-8. **Display order by ID**
-* Method: `GET`
-* URL: `http://localhost:8080/orders/id`
-* This will get an order by its ID number.
-
-<br>
-
-9. **Display all distribution centres**
-* Method: `GET`
-* URL: `http://localhost:8080/distribution-centres`
-* This will get the full list of distribution centres.
-
-<br>
-
-10. **Update orders’ status**
-* Method: `PATCH`
-* URL: `http://localhost:8080/orders/{id}`
-* This will update an order’s delivered, manager-reviewed and/or issue and issue timing status by order ID.
-
-<br> 
-
-11. **Create new driver**
-* Method: `POST`
-* URL: `http://localhost:8080/drivers/new-driver`
-* This will create a new driver record and add it to the list of drivers. 
-
-<br> 
-
-12. **Update driver's availability**
-* Method: `PATCH`
-* URL: `http://localhost:8080/drivers/change-available/{id}`
-* This will update an driver's availability.
-
+12. **Update employee password**
+- Method: `PATCH`
+- URL: `http://localhost:8080/employees/update-password`
+- This will let the employee change their password if they can enter their current password and the new password matches the confirm new password.
