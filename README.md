@@ -24,9 +24,6 @@
 
 ## Introduction
 Welcome to our full stack application allowing delivery drivers and managers to better communicate.
-Our app solves these challenges currently faced by RainForestRetail:
-- A single warehouse creates a bottleneck in the delivery system
-
 
 ## 1.1 Scenario
 
@@ -111,17 +108,19 @@ npm start
 
 ## 5.1. MVP 
 
-- Drivers can update availability
-- Drivers can see their route of orders to deliver by date
+- Drivers can update availability in a calendar
+- Drivers can see the address and postcode of the next order to deliver
 - Driver marks delivery as successful or unsuccessful with issue
-- Manager allocates driver to route
-- Managers can find drivers by distribution centre
-- Manager receives message of issue with delivery
+- Managers can create a new driver
+- Managers generate routes
+- Managers have a calendar log of all the create routes
+- Managers can see all distribution centres with contact details
+- Managers receives message of issue with delivery
 
 ## 5.2. Extensions
 
 - Undelivered items given priority for tomorrow delivery
-- Drivers can see their route of orders to deliver by date
+- Drivers can see their route of orders to deliver on a map
 
 ## 5.3. Routes 
 
