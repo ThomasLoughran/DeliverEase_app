@@ -10,17 +10,17 @@
 
 ## Table of Contents 📜
 1. [Introduction](#introduction)
-   - 1.1 Scenario 
-   - 1.2 Business Case & Risk Register   
-2. Technologies & Libraries
-3. Setup Instructions
-   - 3.1. Server Side Setup
-   - 3.2. Client Side Setup
-4. Component & Wireframe Diagrams
-5. App Functionality
-   - 5.1. MVPs
-   - 5.2. Extensions
-   - 5.3. Routes
+   - 1.1 [Scenario](#11-scenario)
+   - 1.2 [Business Case & Risk Register](#12-business-case--risk-register)   
+2. [Technologies & Libraries](#2-technologies--libraries)
+3. [Setup Instructions](#3-setup-instructions)
+   - 3.1 [Server Side Setup](#31-server-side-setup)
+   - 3.2 [Client Side Setup](#32-client-side-setup)
+4. [Component & Wireframe Diagrams](#4-component-uml--wireframe-diagrams)
+5. [App Functionality](#5-app-functionality)
+   - 5.1 [MVP](#51-mvp)
+   - 5.2 [Extensions](#52-extensions)
+   - 5.3 [Routes](#53-routes)
 
 ## Introduction
 Welcome to our full stack application allowing delivery drivers and managers to better communicate.
@@ -70,7 +70,7 @@ The following Business Plan details the advantages of DeliverEase for RainForest
 - Visual Studio Code
 - GitHub
 
-## 3. Setup Instructions 🛠️
+## 3. Setup Instructions 
 
 ## 3.1 Server Side Setup
 1. Clone the project from the [DeliverEase GitHub Repository](https://github.com/ThomasLoughran/DeliverEase_app)
@@ -99,7 +99,7 @@ npm install react-router-dom
 npm start
 ```
 
-## 4. Component, UML & Wireframe Diagrams 🎨
+## 4. Component, UML & Wireframe Diagrams 
 
 **Component Diagram:**
 
@@ -123,7 +123,7 @@ npm start
 - Undelivered items given priority for tomorrow delivery
 - Drivers can see their route of orders to deliver by date
 
-## 5.3. Routes 🗺
+## 5.3. Routes 
 
 1. **Display all drivers**
 * Method: GET
