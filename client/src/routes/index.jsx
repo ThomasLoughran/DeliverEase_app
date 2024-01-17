@@ -24,9 +24,6 @@ const Routes = () => {
             <div className="wrapper">
                     <NavBar/>
                 <div className="main">
-                    <div className="profileContainer">
-                        <Profile/>
-                    </div>
                     <div className="contentContainer">
                         <Outlet/>
                     </div>
