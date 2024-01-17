@@ -20,7 +20,7 @@
 5. [App Functionality](#5-app-functionality)
    - 5.1 [MVP](#51-mvp)
    - 5.2 [Extensions](#52-extensions)
-   - 5.3 [Routes](#53-routes)
+   - 5.3 [Routes](#53-routes-used-in-the-frontend)
 
 ## Introduction
 Welcome to our full stack application allowing delivery drivers and managers to better communicate.
@@ -122,7 +122,7 @@ npm start
 - Undelivered items given priority for tomorrow delivery
 - Drivers can see their route of orders to deliver on a map
 
-## 5.3. Routes 
+## 5.3. Routes used in the frontend:
 
 1. **Display all drivers**
 * Method: GET
@@ -199,5 +199,10 @@ npm start
 * URL: localhost:8080/drivers/new-driver
 * This will create a new driver record and add it to the list of drivers. 
 
+<br> 
 
+12. **Update driver's availability**
+* Method: PATCH
+* URL: localhost:8080/drivers/change-available/{id}
+* This will update an driver's availability.
 
