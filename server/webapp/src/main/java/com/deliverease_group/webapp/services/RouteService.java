@@ -233,7 +233,7 @@ public class RouteService {
             Node node = new Node(order.getLongitude(),order.getLatitude(),order.getId());
 
             node.setRadius( Math.sqrt( Math.pow(node.getX() - distCentreX,2) ) +  Math.sqrt( Math.pow(node.getY() - distCentreY,2) ) );
-            node.setTheta(Math.atan(node.getY())/ node.getX());
+            node.setTheta(Math.atan2(node.getY() - distCentreY, node.getX() - distCentreX));
 
             orderLocations.add(node);
         }
