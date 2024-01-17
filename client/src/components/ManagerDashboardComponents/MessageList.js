@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useUser } from "../../contexts/UserContext";
 import '../../styles/MessageList.css'
+import refreshButton from '../../assets/refresh-button.png';
 
 const MessageList = () => {
 
@@ -140,7 +141,13 @@ const messageListComponents = orders.length > 0 ? (
 
     return (
         <>
+        <div className="title-and-refresh-button-container">
             <h2 className="message-list-title">Message List</h2>
+            <button  className="message-list-refresh-button" onClick={() => {fetchIssues()}}>
+                <img className="refresh-symbol" src={refreshButton} alt="Refresh"></img>
+            
+            </button>
+        </div>
             <ul className="order-message-list">
                 {messageListComponents}
             </ul>

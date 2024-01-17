@@ -52,7 +52,6 @@ margin-right: 26%;
     width: 50px;
     height: 40px;
     margin-left: 20% ;
-
 }
 
 
@@ -63,7 +62,9 @@ margin-right: 26%;
     align-items: center;
     justify-content: space-between;
     max-height: 80%;
-    overflow-y: scroll
+    overflow-y: scroll;
+    padding-left: 2%;
+
 
 }
 
@@ -91,6 +92,8 @@ margin-right: 26%;
 .message-list-title {
     padding-bottom: 2%;
     padding-top: 2%;
+
+
 }
 
 .confirm-manager-review-button {
@@ -99,5 +102,32 @@ margin-right: 26%;
 
 .message-order-id {
     margin-top: 5%;
+}
+
+.message-list-refresh-button {
+/* margin-bottom: 5%; */
+}
+
+.title-and-refresh-button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.message-list-title {
+
+}
+
+.refresh-symbol {
+    width: 20px;
+    height: 20px;
+}
+
+.message-list-refresh-button {
+    background-color: rgba(0,0,0,0);
+    width: 30px;
+    height: fit-content;
+    display: flex;
+    justify-content: space-around;
 }
 
