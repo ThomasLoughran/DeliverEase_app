@@ -9,7 +9,7 @@
 - [Suzi](https://github.com/sctowers) 
 - [Tom](https://github.com/ThomasLoughran) 
 
-## Table of Contents 📜
+## Table of Contents 
 1. [Introduction](#introduction)
    - 1.1 [Scenario](#11-scenario)
    - 1.2 [Business Case & Risk Register](#12-business-case--risk-register)   
@@ -111,7 +111,7 @@ npm start
 - All employees can change their password
 - Managers can create a new driver
 - Managers generate routes
-- Managers have a calendar log of all the create routes
+- Managers have a calendar log of all the created routes
 - Managers can see all distribution centres with contact details
 - Managers receives message of issue with delivery
 
