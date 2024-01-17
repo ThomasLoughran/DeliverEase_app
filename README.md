@@ -104,6 +104,8 @@ npm start
 
 **UML Diagram:**
 
+![uml diagram](https://github.com/ThomasLoughran/DeliverEase_app/blob/README/DeliverEaseUML.drawio.png)
+
 ## 5. App Functionality 
 
 ## 5.1. MVP 
