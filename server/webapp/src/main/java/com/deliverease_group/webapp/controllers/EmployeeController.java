@@ -30,7 +30,11 @@ public class EmployeeController {
 
     @PatchMapping("/update-password")
     public ResponseEntity<String> updatePassword(@RequestBody PasswordDTO passwordDTO){
-        return new ResponseEntity<>(employeeService.updatePassword(passwordDTO), HttpStatus.OK);
+        String passwordStatus = employeeService.updatePassword(passwordDTO);
+        if (passwordStatus.equals("Password updated successfully")) {
+            return new ResponseEntity<>(passwordStatus, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(passwordStatus,HttpStatus.BAD_REQUEST);
     }
 
 }
