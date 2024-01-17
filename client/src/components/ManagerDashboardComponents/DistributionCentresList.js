@@ -9,8 +9,8 @@ const DistributionCentresList = ({ distributionCentres }) => {
         return (
 
             <li className="distribution-centre-card">
-                <p>Id: {distributionCentre.id}</p>
                 <p>Name: {distributionCentre.location}</p>
+                <p>Phone number: {distributionCentre.phoneNumber}</p>
             </li>
         )
     })
