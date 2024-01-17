@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 
 // TO-DO:
 //save button to update user password
+//add current password verification before user can update password
 //password fields to clear on save/submit/update
 //css: bring modal to center of screen 
 //css: position profile and message icon in column
@@ -40,7 +41,7 @@ const Profile = () => {
     
             
             try {
-                const response = await fetch('localhost:8080/employees/update-password', {
+                const response = await fetch('http://localhost:8080/employees/update-password', {
                     method: "PATCH",
                     headers: {"Content-Type": "application/json"}, 
                     body: JSON.stringify(employeeForm)
