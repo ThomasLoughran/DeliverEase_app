@@ -15,14 +15,9 @@ const NavBar = () => {
     const [openProfileModal, setOpenProfileModal] = useState(false);
     const [openMessageListModal, setOpenMessageListModal] = useState(false);
 
-const handleLogout = () => {
-    logoutUser();
-}
-
-    // const logoStyle =
-    //     user?.role === 'MANAGER'
-    //         ? { width: '200px', height: 'auto', marginTop: '200px' }
-    //         : { width: '200px', height: 'auto', marginTop: '300px' };
+    const handleLogout = () => {
+        logoutUser();
+    }
 
     return (
         <div className= "navBar">
@@ -35,6 +30,7 @@ const handleLogout = () => {
             }
 
             {openProfileModal && <ProfileModal closeModal={setOpenProfileModal}/>}
+
 
             {user?.role === 'MANAGER' && (
             <button onClick={() => setOpenMessageListModal(true)} >
@@ -64,14 +60,19 @@ const handleLogout = () => {
                 </>
             )}
             {user?.role === 'DRIVER' && (
-                <Link id="routes" to="driver/routes">
-                    Routes
-                </Link>
+                <>
+                    <Link id="routes" to="driver/routes">
+                        Routes
+                    </Link>
+                    <Link id="driver-availability" to="driver/driver-availability">
+                        Driver Availability
+                    </Link>
+                </>
             )}
             <Link id="logout" to="/" onClick={handleLogout}>
                 Logout
             </Link>
-            <img src={darkLogo} alt="Logo" className="logo"/>
+            <img src={darkLogo} alt="Logo" className="logo" />
         </div>
     );
 };
