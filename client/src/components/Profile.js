@@ -20,6 +20,7 @@ const Profile = () => {
         id: `${user.id}`,
         oldPassword: "",
         newPassword: "",
+        confirmNewPassword: "",
     });
 
     //handle form change
@@ -35,34 +36,51 @@ const Profile = () => {
         e.preventDefault();
     
     
-            // if (employeeForm.newPassword !== employeeForm.password ) {
-            //     alert('Passwords do not match.');
-            //     return;
-            // }        
+            if (employeeForm.newPassword !== employeeForm.confirmNewPassword ) {
+                alert('Passwords do not match.');
+                return;
+            }  
+            
+            // if (employeeForm.oldPassword !==  )
     
             
             try {
+                console.log(employeeForm);
                 const response = await fetch('http://localhost:8080/employees/update-password', {
                     method: "PATCH",
                     headers: {"Content-Type": "application/json"}, 
                     body: JSON.stringify(employeeForm)
                 })
+                
+                //noted: data is a string (not JSON) so response must be .'text' - see below:
+                const data = await response.text(); 
+                
+                alert(data);
 
                 if (!response.ok) {
+
+                 
                     throw new Error(`Failed to save new password: ${response.status}. Please try again.`)
                 } else {
                     setEmployeeForm({
                         oldPassword: "",
                         newPassword: "",
+                        confirmNewPassword: "",
                     })
                 }
 
+                
+
             } catch (error){
                 console.error(error);
+
+                
+                // alert({data});
             }
 
-            alert('Passwords successfully changed');
+            // alert('Passwords successfully changed');
 
+            
     }
 
     return (
@@ -99,15 +117,28 @@ const Profile = () => {
                     required >
                     </input> 
 
+                <label htmlFor="new-password">
+                    New password: 
+                </label>
+                    <input 
+                    placeholder="Please add a new password"
+                    id="new-password"
+                    type="password"
+                    name="newPassword"
+                    value={employeeForm.newPassword}
+                    onChange={handleEmployeeFormChange}
+                    required >
+                    </input> 
+
                 <label htmlFor="confirm-change-password">
                     Confirm new password: 
                 </label>
                     <input 
-                    placeholder="Please add a new password"
+                    placeholder="Please confirm new password"
                     id="confirm-new-password"
                     type="password"
-                    name="newPassword"
-                    value={employeeForm.newPassword}
+                    name="confirmNewPassword"
+                    value={employeeForm.confirmNewPassword}
                     onChange={handleEmployeeFormChange}
                     required >
                     </input> 

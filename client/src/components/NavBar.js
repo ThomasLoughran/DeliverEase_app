@@ -27,28 +27,45 @@ const handleLogout = () => {
     //         : { width: '200px', height: 'auto', marginTop: '300px' };
 
     return (
-        <div className= "navBar">
+        // <div className= "navBar">
 
-            <div className="profile-message-container" >
-                {!openModal && 
-                    <img className="profile-button" 
-                    onClick={() => setOpenModal(true)} src={profileIcon} > 
-                    </img>
-                }
+        //     <div className="profile-message-container" >
+        //         {!openProfileModal && 
+        //             <img className="profile-button" 
+        //             onClick={() => setOpenProfileModal(true)} src={profileIcon} > 
+        //             </img>
+        //         }
 
-                {openModal && <ProfileModal closeModal={setOpenModal}/>}
+        //         {openProfileModal && <ProfileModal closeModal={setOpenProfileModal}/>}
 
-                <img className="message-button"  src={messageIcon} >
-                </img>
+        //         <img className="message-button"  src={messageIcon} >
+        //         </img>
                 
+        //     </div>
+
+
+            
+
+        //     {openMessageListModal && <MessageModal closeModal={setOpenMessageListModal}/>}
+
+        <div className= "navBar">
+            <div className="profile-message-container" >
+            {!openProfileModal &&
+                
+                    <img id="profile-icon" src={profileIcon} onClick={() => setOpenProfileModal(true)}
+                    className="profile-button"/>
+        
+            }
+            {openProfileModal && <ProfileModal closeModal={setOpenProfileModal}/>}
+            {user?.role === 'MANAGER' && (
+           
+                <img id="message-icon" src={messageIcon} onClick={() => setOpenMessageListModal(true)} className='message-button'/>
+        
+            )}
+            {openMessageListModal && <MessageModal closeModal={setOpenMessageListModal}/>}
             </div>
 
-
-            )}
-
-            {openMessageListModal && <MessageModal closeModal={setOpenMessageListModal}/>}
-
-
+            
 
             <Link id="home" to="/">
                 Home
