@@ -30,10 +30,13 @@ public class EmployeeService {
     public String updatePassword(PasswordDTO passwordDTO) {
 
         Employee employee = employeeRepository.findById(passwordDTO.getId()).get();
-        if (employee.getPassword().equals(passwordDTO.getPassword())){
+        if (!employee.getPassword().equals(passwordDTO.getOldPassword())){
+            return "Old password doesn't match";
+        }
+        if (employee.getPassword().equals(passwordDTO.getNewPassword())){
             return "Password already in use";
         } else {
-            employee.setPassword(passwordDTO.getPassword());
+            employee.setPassword(passwordDTO.getNewPassword());
             employeeRepository.save(employee);
             return "Password updated successfully";
         }
