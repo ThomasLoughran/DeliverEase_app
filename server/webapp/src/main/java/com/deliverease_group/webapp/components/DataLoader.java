@@ -28,8 +28,7 @@ public class DataLoader implements ApplicationRunner {
     OrderRepository orderRepository;
 
     @Autowired
-    RouteRepository routeRepository;
-
+    RouteRepository routeRepositor
     @Autowired
     DriverRepository driverRepository;
 

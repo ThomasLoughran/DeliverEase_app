@@ -2,10 +2,15 @@ import { useState, useEffect } from "react";
 import { useUser } from '../../contexts/UserContext';
 
 
-const RouteCalendar = () => {
+const RouteCalendar = ({loadRoute,showTodayRoutes}) => {
     const { user } = useUser();
     const [selectedDate, setSelectedDate] = useState(new Date());
     const [routesData, setRoutesData] = useState([]);
+    const [loadRoutes, setLoadRoutes] = useState(loadRoute)
+
+    useEffect(() => {
+        setLoadRoutes(loadRoute);
+      }, [loadRoute]);
 
     const formatDate = (date) => {
         return date.toISOString().split('T')[0];
@@ -47,6 +52,15 @@ const RouteCalendar = () => {
         setSelectedDate(nextDay);
     };
 
+    const handleCurrentDay = () => {
+        setTimeout(() => {
+          fetchRoutesData();
+          console.log(routesData);
+          showTodayRoutes(false);
+          setLoadRoutes(false);
+        }, 1000);
+      };
+
     return (
         <div className="route-calendar">
             <h2>Route Log</h2>
@@ -63,6 +77,12 @@ const RouteCalendar = () => {
 
             <button onClick={handlePreviousDay}>Previous day</button>
             <button onClick={handleNextDay}>Next day</button>
+
+            {loadRoutes && (
+                <div>
+                    {handleCurrentDay()}
+                </div>
+            )}
 
             <div className="routes">
                 <h3>Routes on {selectedDate.toDateString()}:</h3>
