@@ -37,7 +37,7 @@ Our app solves these challenges currently faced by RainForestRetail:
 
 **Risk Register**
 
-![risk register](https://github.com/ThomasLoughran/DeliverEase_app/blob/README/risk_register.pdf)
+- [Risk register](https://github.com/ThomasLoughran/DeliverEase_app/blob/README/risk_register.pdf)
 
 **Business Case**
 
@@ -45,7 +45,7 @@ The application provides a user-friendly solution that assists managers with dis
 
 The following Business Plan details the advantages of DeliverEase for RainForest Retail:
 
-![business case](https://github.com/ThomasLoughran/DeliverEase_app/blob/README/business_case.pdf)
+- [Business case](https://github.com/ThomasLoughran/DeliverEase_app/blob/README/business_case.pdf)
 
 ## 2. Technologies & Libraries
 - Java
