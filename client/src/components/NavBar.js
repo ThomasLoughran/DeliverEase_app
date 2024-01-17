@@ -17,36 +17,11 @@ const NavBar = () => {
     const [openProfileModal, setOpenProfileModal] = useState(false);
     const [openMessageListModal, setOpenMessageListModal] = useState(false);
 
-const handleLogout = () => {
-    logoutUser();
-}
-
-    // const logoStyle =
-    //     user?.role === 'MANAGER'
-    //         ? { width: '200px', height: 'auto', marginTop: '200px' }
-    //         : { width: '200px', height: 'auto', marginTop: '300px' };
+    const handleLogout = () => {
+        logoutUser();
+    }
 
     return (
-        // <div className= "navBar">
-
-        //     <div className="profile-message-container" >
-        //         {!openProfileModal && 
-        //             <img className="profile-button" 
-        //             onClick={() => setOpenProfileModal(true)} src={profileIcon} > 
-        //             </img>
-        //         }
-
-        //         {openProfileModal && <ProfileModal closeModal={setOpenProfileModal}/>}
-
-        //         <img className="message-button"  src={messageIcon} >
-        //         </img>
-                
-        //     </div>
-
-
-            
-
-        //     {openMessageListModal && <MessageModal closeModal={setOpenMessageListModal}/>}
 
         <div className= "navBar">
             <div className="profile-message-container" >
@@ -57,6 +32,7 @@ const handleLogout = () => {
         
             }
             {openProfileModal && <ProfileModal closeModal={setOpenProfileModal}/>}
+
             {user?.role === 'MANAGER' && (
            
                 <img id="message-icon" src={messageIcon} onClick={() => setOpenMessageListModal(true)} className='message-button'/>
@@ -84,14 +60,19 @@ const handleLogout = () => {
                 </>
             )}
             {user?.role === 'DRIVER' && (
-                <Link id="routes" to="driver/routes">
-                    Routes
-                </Link>
+                <>
+                    <Link id="routes" to="driver/routes">
+                        Routes
+                    </Link>
+                    <Link id="driver-availability" to="driver/driver-availability">
+                        Driver Availability
+                    </Link>
+                </>
             )}
             <Link id="logout" to="/" onClick={handleLogout}>
                 Logout
             </Link>
-            <img src={darkLogo} alt="Logo" className="logo"/>
+            <img src={darkLogo} alt="Logo" className="logo" />
         </div>
     );
 };
