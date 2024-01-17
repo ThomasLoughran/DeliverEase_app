@@ -19,12 +19,12 @@ public class RouteController {
     RouteService routeService;
 
     @PostMapping(value = "/new-routes/{distCentreId}")
-    public ResponseEntity<List<Order>> generateRoutes (@PathVariable Long distCentreId, @RequestParam LocalDate localDate){
-        List<Order> orderList = routeService.generateRoutes(distCentreId,localDate);
-        if (orderList!=null) {
-            return new ResponseEntity<>(orderList, HttpStatus.CREATED);
+    public ResponseEntity<String> generateRoutes (@PathVariable Long distCentreId, @RequestParam LocalDate localDate){
+        String routeStatus = routeService.generateRoutes(distCentreId,localDate);
+        if (routeStatus.equals("Routes successfully created")) {
+            return new ResponseEntity<>(routeStatus, HttpStatus.CREATED);
         }else{
-            return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+            return new ResponseEntity<>(routeStatus,HttpStatus.NOT_IMPLEMENTED);
         }
     }
 
