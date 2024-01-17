@@ -53,12 +53,12 @@ const RouteCalendar = ({loadRoute,showTodayRoutes}) => {
     };
 
     const handleCurrentDay = () => {
-        setTimeout(() => {
+        
           fetchRoutesData();
           console.log(routesData);
           showTodayRoutes(false);
           setLoadRoutes(false);
-        }, 1000);
+        
       };
 
     return (

@@ -16,7 +16,7 @@ const GenerateRoutes = ({showTodayRoutes}) => {
     };
 
     const handleGenerateRoutes = async () => {
-        showTodayRoutes(true);
+        
         try {
             const formattedDate = formatDate(localDate);
 
@@ -28,6 +28,9 @@ const GenerateRoutes = ({showTodayRoutes}) => {
 
             const data = await response.text();
                 alert(data);
+                if (data === "Routes successfully created"){
+                    showTodayRoutes(true);
+                }
 
 
         } catch (error) {
