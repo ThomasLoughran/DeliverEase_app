@@ -17,9 +17,11 @@ import { useUser } from "../../contexts/UserContext";
 import RoutingControl from './RoutingControl'
 
 const Map = ({currentOrder}) => {
+  const { user } = useUser();
   const [map, setMap] = useState(null);
-  const [start, setStart] = useState([51.2, -1.8])
+  const [start, setStart] = useState([user.distributionCentre.latitude, user.distributionCentre.longitude])
   const [end, setEnd] = useState([currentOrder.latitude, currentOrder.longitude])
+  
 
   const maps = {
     base: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
