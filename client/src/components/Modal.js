@@ -7,8 +7,8 @@ const Modal = ({closeModal}) => {
         <div className="modal">
             <div className="modal-background">
                 <div className="modal-container">
-                    <button onClick={() => closeModal(false)} className="close-modal-button">X</button>
                     <div className="driver-form">
+                    <button onClick={() => closeModal(false)} className="close-modal-button">X</button>
                         <AddDriverForm/>
                     </div>
                 </div>

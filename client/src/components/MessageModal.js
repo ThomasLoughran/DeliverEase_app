@@ -8,8 +8,8 @@ const MessageModal = ({closeModal}) => {
         <div className="message-modal">
             <div className="message-modal-background">
                 <div className="message-modal-container">
-                    <button onClick={() => closeModal(false)} className="close-message-modal-button">X</button>
                     <div className="MessageList-container">
+                    <button onClick={() => closeModal(false)} className="close-message-modal-button">X</button>
                         <MessageList/>
                     </div>
                 </div>
