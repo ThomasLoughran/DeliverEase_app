@@ -26,7 +26,7 @@ const Map = ({currentOrder, previousOrder,data,distCentre}) => {
   const [allOrders,setAllOrders] = useState([]);
   const [orderWayPoints,setOrderWayPoints] = useState([])
 
-  const orderPoints = [];
+  //const orderPoints = [];
 
   // orderPoints.push([[distCentre.latitude,distCentre.longitude]])
 
@@ -36,22 +36,26 @@ const Map = ({currentOrder, previousOrder,data,distCentre}) => {
 
   // orderPoints.push([[distCentre.latitude,distCentre.longitude]])
 
-  console.log(orderPoints);
+
 
   const fetchAllOrders = async () => {
+    
     try {
+      const orderPoints = [];
       const response = await fetch(`http://localhost:8080/routes/${data.id}/all-orders`);
       const orderData = await response.json();
       
       orderPoints.push([distCentre.latitude,distCentre.longitude])
   
       for(let i=0;i<orderData.length;i++){
-        orderPoints.push([orderData[i].longitude,orderData[i].longitude])
+        orderPoints.push([orderData[i].latitude,orderData[i].longitude])
       }
 
       orderPoints.push([distCentre.latitude,distCentre.longitude])
-
-      console.log(orderPoints);
+      
+      setOrderWayPoints(orderPoints)
+       
+      //console.log(orderPoints);
 
 
 
@@ -83,7 +87,7 @@ const Map = ({currentOrder, previousOrder,data,distCentre}) => {
       attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
       url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
     />
-    <Routing key={key} currentOrder={currentOrder} previousOrder={previousOrder}/>
+    <Routing currentOrder={currentOrder} previousOrder={previousOrder} orderWayPoints={orderWayPoints}/>
   </MapContainer>)
   
 };
