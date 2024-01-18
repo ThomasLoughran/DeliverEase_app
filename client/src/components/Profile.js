@@ -83,7 +83,7 @@ const Profile = ({closeModal}) => {
 
             {showMore && (
                 <form id="update-employee-form" onSubmit={handleUpdateEmployeeForm}>
-                    <label htmlFor="old-password">
+                    <label htmlFor="old-password" id='old-password'>
                         Old password:
                     </label>
                     <input
@@ -96,7 +96,7 @@ const Profile = ({closeModal}) => {
                         required >
                     </input>
 
-                    <label htmlFor="new-password">
+                    <label htmlFor="new-password" id='new-password'>
                         New password:
                     </label>
                     <input
@@ -109,7 +109,7 @@ const Profile = ({closeModal}) => {
                         required >
                     </input>
 
-                    <label htmlFor="confirm-change-password">
+                    <label htmlFor="confirm-change-password" id='confirm-change-password'>
                         Confirm new password:
                     </label>
                     <input
