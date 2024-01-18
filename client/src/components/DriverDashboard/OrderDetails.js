@@ -12,6 +12,8 @@ const OrderDetails = ({
     selectedIssue,
     setSelectedIssue,
     handleIssueSubmit,
+    issueSubmitted,
+    setIssueSubmitted,
 }) => {
 
 
@@ -21,6 +23,7 @@ const OrderDetails = ({
 
     const incrementPreviousOrder = () => {
         setPreviousOrder(currentOrder);
+        setIssueSubmitted(false);
     }
 
     return (
@@ -38,7 +41,7 @@ const OrderDetails = ({
                 handleUnsuccessfulDelivery(); 
                 }}>Problem...</button>
 
-            {unsuccessfulClicked && (
+            {unsuccessfulClicked && !issueSubmitted && (
                 <div>
                     <label>Select Issue:</label>
                     <select onChange={(e) => setSelectedIssue(parseInt(e.target.value))} value={selectedIssue || ''}>
