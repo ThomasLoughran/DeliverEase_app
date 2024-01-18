@@ -23,6 +23,7 @@ const OrderDetails = ({
 
     const incrementPreviousOrder = () => {
         setPreviousOrder(currentOrder);
+        handleIssueSubmit(false);
         setIssueSubmitted(false);
     }
 
@@ -44,8 +45,9 @@ const OrderDetails = ({
             {unsuccessfulClicked && !issueSubmitted && (
                 <div>
                     <label>Select Issue:</label>
-                    <select onChange={(e) => setSelectedIssue(parseInt(e.target.value))} value={selectedIssue || ''}>
-                        <option className='issue-dropdown' value="" disabled>Select an issue</option>
+                    <select className='issue-dropdown' onChange={(e) => setSelectedIssue(parseInt(e.target.value))} value={selectedIssue || ''}>
+                    <optgroup>
+                        <option value="" disabled>Select an issue</option>
                         <option value="1">No Access</option>
                         <option value="2">Refusal by Recipient</option>
                         <option value="3">Poor Weather</option>
@@ -54,6 +56,7 @@ const OrderDetails = ({
                         <option value="6">Parcel Damage</option>
                         <option value="7">Lost Parcel</option>
                         <option value="8">Other</option>
+                        </optgroup>
                     </select>
                     <button className='issue-button' onClick={handleIssueSubmit}>Submit Issue</button>
                 </div>
