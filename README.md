@@ -97,6 +97,9 @@ npm start
 
 **Wireframe Diagram:**
 
+![image](https://github.com/ThomasLoughran/DeliverEase_app/assets/131786678/0bcba6ca-730c-4121-82f7-4695a19b1c79)
+
+
 **UML Diagram:**
 
 ![uml diagram](https://github.com/ThomasLoughran/DeliverEase_app/blob/README/DeliverEaseUML.drawio.png)
