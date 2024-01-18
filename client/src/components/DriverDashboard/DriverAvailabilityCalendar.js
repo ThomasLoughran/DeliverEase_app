@@ -36,7 +36,6 @@ const DriverAvailabilityCalendar = () => {
                 ...previousAvailability,
                 [formattedDate]: !currentAvailability,
             }));
-            console.log(user)
             alert('Availability updated successfully!');
 
         } catch (error) {
