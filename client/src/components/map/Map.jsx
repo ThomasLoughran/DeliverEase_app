@@ -16,11 +16,11 @@ import { useUser } from "../../contexts/UserContext";
 
 import RoutingControl from './RoutingControl'
 
-const Map = ({currentOrder}) => {
-  const { user } = useUser();
+const Map = ({currentOrder, previousOrder}) => {
   const [map, setMap] = useState(null);
-  const [start, setStart] = useState([user.distributionCentre.latitude, user.distributionCentre.longitude])
-  const [end, setEnd] = useState([currentOrder.latitude, currentOrder.longitude])
+  
+  const [start, setStart] = useState([previousOrder.latitude, previousOrder.longitude]);
+  const [end, setEnd] = useState([currentOrder.latitude, currentOrder.longitude]);
   
 
   const maps = {

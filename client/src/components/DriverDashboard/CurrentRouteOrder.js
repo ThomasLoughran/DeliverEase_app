@@ -108,6 +108,7 @@ const CurrentRouteOrder = () => {
     const handleSuccessfulDelivery = () => {
         if (currentOrder) {
             markOrderAsCompleted(currentOrder.id);
+            
         }
     };
 
