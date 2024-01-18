@@ -103,7 +103,7 @@ npm start
 
 ## 4.1 Component Diagram:
 
-![component diagram](https://github.com/ThomasLoughran/DeliverEase_app/blob/README/DeliverEaseComponent.drawio.png)
+![component diagram](https://github.com/ThomasLoughran/DeliverEase_app/blob/README/DeliverEaseComponentDiagram.drawio.png)
 
 ## 4.2 Wireframe Diagram:
 
