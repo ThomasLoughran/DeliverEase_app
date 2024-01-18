@@ -1,5 +1,7 @@
 import { Navigate, useNavigate } from "react-router-dom";
-import '../styles/HomePage.css'
+import '../styles/HomePage.css';
+import lightLogo from '../assets/light-mode-logo.png'; //altered the dark-logo and light logo sizes.
+
 
 const HomePage = () => {
 
@@ -14,7 +16,7 @@ const HomePage = () => {
 
     return ( 
         <div className="homepage-container">
-            <h1 className="homepage-title">DelieverEase</h1>
+            <img className="homepage-logo" src={lightLogo}/> 
             <p className="homepage-slogan">Where every mile feels like a smile!</p>
             <button onClick={handleClick} className="homepage-login-button">Login</button>
         </div>

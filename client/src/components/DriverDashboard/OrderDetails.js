@@ -1,4 +1,8 @@
 import React from "react";
+import Map from "../map/Map";
+import { useUser } from "../../contexts/UserContext";
+import { useState } from "react";
+import '../../styles/OrderDetails.css'
 
 const OrderDetails = ({
     currentOrder,
@@ -9,20 +13,36 @@ const OrderDetails = ({
     setSelectedIssue,
     handleIssueSubmit,
 }) => {
+
+
+
+    const { user } = useUser();
+    const [previousOrder, setPreviousOrder] = useState(user.distributionCentre);
+
+    const incrementPreviousOrder = () => {
+        setPreviousOrder(currentOrder);
+    }
+
     return (
         <div>
-            <h2>Current Order</h2>
+            <h2>Current Order:</h2>
             <p>Order ID: {currentOrder.id}</p>
             <p>Address: {currentOrder.address}</p>
 
-            <button onClick={handleSuccessfulDelivery}>Successfully Delivered</button>
-            <button onClick={handleUnsuccessfulDelivery}>Unsuccessfully Delivered</button>
+            <button className='success-button' onClick={() => {
+                incrementPreviousOrder();
+                handleSuccessfulDelivery(); 
+                }}>Success!</button>
+            <button onClick={() => {
+                incrementPreviousOrder();
+                handleUnsuccessfulDelivery(); 
+                }}>Problem...</button>
 
             {unsuccessfulClicked && (
                 <div>
                     <label>Select Issue:</label>
                     <select onChange={(e) => setSelectedIssue(parseInt(e.target.value))} value={selectedIssue || ''}>
-                        <option value="" disabled>Select an issue</option>
+                        <option className='issue-dropdown' value="" disabled>Select an issue</option>
                         <option value="1">No Access</option>
                         <option value="2">Refusal by Recipient</option>
                         <option value="3">Poor Weather</option>
@@ -32,9 +52,10 @@ const OrderDetails = ({
                         <option value="7">Lost Parcel</option>
                         <option value="8">Other</option>
                     </select>
-                    <button onClick={handleIssueSubmit}>Submit Issue</button>
+                    <button className='issue-button' onClick={handleIssueSubmit}>Submit Issue</button>
                 </div>
             )}
+            <Map className='map' currentOrder={currentOrder} previousOrder={previousOrder}/>
         </div>
     );
 }

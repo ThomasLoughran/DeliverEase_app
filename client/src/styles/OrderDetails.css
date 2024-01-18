@@ -1,0 +1,21 @@
+h2 {
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.success-button {
+    margin-top: 10px;
+    margin-right: 20px;
+}
+
+.issue-button {
+    margin-left: 10px;
+    margin-bottom: 10px;
+}
+
+@media (max-width: 390px) {
+    .issue-dropdown {
+        font-size: 20px;
+    }
+    
+}

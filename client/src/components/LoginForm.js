@@ -3,8 +3,6 @@ import { useNavigate } from "react-router-dom";
 import { useUser } from "../contexts/UserContext";
 import '../styles/LoginPage.css';
 
-
-import darkLogo from '../assets/adjusted-size-logos/dark-mode-logo.png';
 import lightLogo from '../assets/adjusted-size-logos/light-mode-logo.png';
 
 
@@ -20,7 +18,6 @@ const LoginForm = () => {
 
 
     const { loginUser } = useUser();
-    const [darkMode, setDarkMode] = useState(true);
 
     const handleUserLoginInformationChange = (event) => {
         const propertyName = event.target.name;
@@ -34,10 +31,10 @@ const LoginForm = () => {
             alert('Please enter both ID and Password.');
             return;
         }
-    
+
         event.preventDefault()
         await fetchUser(userLoginInformation);
-        console.log(userLoginInformation)
+
     }
 
     const fetchUser = async (userDetails) => {
@@ -59,66 +56,56 @@ const LoginForm = () => {
             }
 
             loginUser(data);
-            console.log("This is data", data);
-            console.log(data.role === "MANAGER", "this should be true")
-
 
             if (data.role === "MANAGER") {
-                navigate("/manager/routes", {replace: true})
+                navigate("/manager/routes", { replace: true })
             }
 
             if (data.role === "DRIVER") {
                 navigate("/driver/routes")
             }
-
-
-
-
-            // navigate("/", { replace: true });
         } catch (error) {
             console.error('Error during login:', error);
         }
     }
 
-    const handleToggleDarkMode = () => {
-        setDarkMode(!darkMode);
-        document.body.classList.toggle('dark-mode', darkMode);
-    };
 
     return (
 
         <>
-            <button onClick={handleToggleDarkMode} className="dark-mode-toggle">
-                Toggle Dark Mode
-            </button>
-            <form id="login-form" onSubmit={handleLogin} className={darkMode ? 'dark-mode' : ''}>
-                <label htmlFor="login-form">Please enter your details:</label>
-                <input
-                    id="userId"
-                    name="id"
-                    type="id"
-                    placeholder="Please enter your id"
-                    value={userLoginInformation.id}
-                    onChange={handleUserLoginInformationChange}
+
+            <div className="login-page">
+
+                <img
+                    src={lightLogo}
+                    alt="Logo"
+                    className="logo"
+                    style={{ width: '400px', height: 'auto' }}
                 />
 
-                <input
-                    id="userPassword"
-                    name="password"
-                    type="password"
-                    placeholder="Please enter your Password"
-                    value={userLoginInformation.password}
-                    onChange={handleUserLoginInformationChange}
-                />
-                <button type="submit">Login</button>
+                <form id="login-form" onSubmit={handleLogin}>
+                    <label htmlFor="login-form">Please enter your details:</label>
+                    <input
+                        id="userId"
+                        name="id"
+                        type="id"
+                        placeholder="Please enter your id"
+                        value={userLoginInformation.id}
+                        onChange={handleUserLoginInformationChange}
+                    />
 
-            </form>
-            <img
-                src={darkMode ? lightLogo : darkLogo}
-                alt="Logo"
-                className="logo"
-                style={{ width: '400px', height: 'auto' }}
-            />
+                    <input
+                        id="userPassword"
+                        name="password"
+                        type="password"
+                        placeholder="Please enter your Password"
+                        value={userLoginInformation.password}
+                        onChange={handleUserLoginInformationChange}
+                    />
+                    <button type="submit">Login</button>
+
+                </form>
+            </div>
 
 
         </>
@@ -129,3 +116,12 @@ const LoginForm = () => {
 }
 
 export default LoginForm;
+
+
+
+
+
+
+
+
+
