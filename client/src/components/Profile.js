@@ -4,15 +4,6 @@ import '../styles/Profile.css';
 import { Link } from 'react-router-dom';
 import profileIcon from '../assets/icon-location.png'
 
-// TO-DO:
-//save button to update user password 
-//add current password verification before user can update password
-//password fields to clear on save/submit/update
-//css: bring modal to center of screen 
-//css: position profile and message icon in column
-//css: resolve impact on messageIcon on profile-expand ✅
-
-
 const Profile = ({closeModal}) => {
 
     const { user } = useUser();
@@ -24,7 +15,7 @@ const Profile = ({closeModal}) => {
         confirmNewPassword: "",
     });
 
-    //handle form change
+   
     const handleEmployeeFormChange = (e) => {
         const {name, value} = e.target;
         setEmployeeForm((previousData) => ({
@@ -32,7 +23,7 @@ const Profile = ({closeModal}) => {
         }))
     }
     
-    //handle form submit
+
     const handleUpdateEmployeeForm = async (e) => {
         e.preventDefault();
     
@@ -42,8 +33,7 @@ const Profile = ({closeModal}) => {
                 return;
             }  
             
-            // if (employeeForm.oldPassword !==  )
-    
+
             
             try {
                 console.log(employeeForm);
@@ -76,11 +66,10 @@ const Profile = ({closeModal}) => {
                 console.error(error);
 
                 
-                // alert({data});
+            
             }
 
-            // alert('Passwords successfully changed');
-
+    
             
     }
 
