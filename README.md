@@ -37,6 +37,7 @@ Our app solves these challenges currently faced by RainForestRetail:
 ## 1.2 Business Case & Risk Register
 
 **Risk Register**
+The risks identified in association with the development of the app are listed in the following document:
 
 - [Risk register](https://github.com/ThomasLoughran/DeliverEase_app/blob/README/risk_register.pdf)
 
@@ -124,7 +125,7 @@ npm start
 - Drivers can see their route of orders to deliver on a map
 - Make app compatible with a mobile device
 
-## 5.3. Routes used in the frontend:
+## 5.3. Routes used in the frontend are as follows:
 
 1. **Display the route of a driver**
 - Method: `GET`
