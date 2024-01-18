@@ -31,30 +31,30 @@ public class RouteService {
     @Autowired
     DistributionCentreRepository distributionCentreRepository;
 
-    public List<Route> findAllRoutesByDistCentreIdAndDate(Long distCentreId, LocalDate date){
+    public List<Route> findAllRoutesByDistCentreIdAndDate(Long distCentreId, LocalDate date) {
         return routeRepository.findAllByDistributionCentreIdAndDate(distCentreId, ZonedDateTime.of(date, date.atStartOfDay().toLocalTime(), UTC));
     }
 
-    public List<Route> findAllRoutesByDistCentreIdAndIsComplete(Long distCentreId, boolean isComplete){
+    public List<Route> findAllRoutesByDistCentreIdAndIsComplete(Long distCentreId, boolean isComplete) {
         return routeRepository.findAllRoutesByDistributionCentreIdAndIsComplete(distCentreId, isComplete);
     }
 
     public List<Order> getDistributionCentreOrdersByCompletionStatus(Long distCentreId, boolean isOrderComplete) {
-        return orderRepository.findAllByDistributionCentreIdAndIsCompletedOrderByDateOrdered(distCentreId,isOrderComplete);
+        return orderRepository.findAllByDistributionCentreIdAndIsCompletedOrderByDateOrdered(distCentreId, isOrderComplete);
     }
 
 
     public String generateRoutes(Long distCentreId, LocalDate localDate) {
 
         List<Order> incompleteOrders = getDistributionCentreOrdersByCompletionStatus(distCentreId, false);
-        List<Driver> availableDrivers =  driverRepository.availableDrivers(distCentreId, localDate);
+        List<Driver> availableDrivers = driverRepository.availableDrivers(distCentreId, localDate);
         List<Route> alreadyAssignedRoutes = findAllRoutesByDistCentreIdAndDate(distCentreId, localDate);
 
-        if (!alreadyAssignedRoutes.isEmpty()){
-            for (Route route : alreadyAssignedRoutes){
+        if (!alreadyAssignedRoutes.isEmpty()) {
+            for (Route route : alreadyAssignedRoutes) {
                 Optional<Driver> optionalDriver = driverRepository.findById(route.getDriverId());
                 //remove drivers already on route that date
-                if (optionalDriver.isPresent()){
+                if (optionalDriver.isPresent()) {
                     Driver driver = optionalDriver.get();
                     // Check if the driver is present in availableDrivers before removing
                     if (availableDrivers.contains(driver)) {
@@ -63,10 +63,10 @@ public class RouteService {
                 }
 
                 //remove orders already on route that date
-                for (Long orderId: route.getOrderId()){
+                for (Long orderId : route.getOrderId()) {
                     Optional<Order> optionalOrder = orderRepository.findById(orderId);
                     //remove orders already on route that date
-                    if (optionalOrder.isPresent()){
+                    if (optionalOrder.isPresent()) {
                         Order order = optionalOrder.get();
                         // Check if the order is present in incompleteOrders before removing
                         if (incompleteOrders.contains(order)) {
@@ -80,14 +80,14 @@ public class RouteService {
         //drivers removed if already on route that day
         //orders removed if already on route that day OR in an incomplete route
 
-        alreadyAssignedRoutes = findAllRoutesByDistCentreIdAndIsComplete(distCentreId,false);
-        if (!alreadyAssignedRoutes.isEmpty()){
-            for (Route route : alreadyAssignedRoutes){
+        alreadyAssignedRoutes = findAllRoutesByDistCentreIdAndIsComplete(distCentreId, false);
+        if (!alreadyAssignedRoutes.isEmpty()) {
+            for (Route route : alreadyAssignedRoutes) {
                 //remove orders already on incomplete routes
-                for ( Long orderId: route.getOrderId()){
+                for (Long orderId : route.getOrderId()) {
                     Optional<Order> optionalOrder = orderRepository.findById(orderId);
                     //remove orders already on route that date
-                    if (optionalOrder.isPresent()){
+                    if (optionalOrder.isPresent()) {
                         Order order = optionalOrder.get();
                         // Check if the order is present in incompleteOrders before removing
                         if (incompleteOrders.contains(order)) {
@@ -101,7 +101,7 @@ public class RouteService {
 //        cannot create routes if no drivers available
         if (availableDrivers.isEmpty()) {
             return ("Routes not created - No available drivers");
-        }else if  (incompleteOrders.isEmpty()){
+        } else if (incompleteOrders.isEmpty()) {
             return ("Routes not created - No unassigned orders to be routed");
         }
 
@@ -112,24 +112,24 @@ public class RouteService {
 
 //        create nodes of all the locations with radial coordinates centred on distCentre
         DistributionCentre distributionCentre = distributionCentreRepository.findById(distCentreId).get();
-        List<Node> orderLocations = createNodes( distributionCentre, ordersToBeDelivered);
+        List<Node> orderLocations = createNodes(distributionCentre, ordersToBeDelivered);
 
         //sort order Locations By Angle Theta
         orderLocations = sortNodesByTheta(orderLocations);
 
 //        Assign drivers a list of their orders
-        Map<Long,ArrayList<Node>> ordersInRoutes =  assignDriversOrders(availableDrivers, orderLocations, maxParcelsPerVan);
+        Map<Long, ArrayList<Node>> ordersInRoutes = assignDriversOrders(availableDrivers, orderLocations, maxParcelsPerVan);
 
 //        id is -1 to avoid overlap with any order id
         Node distributionCentreNode = new Node(distributionCentre.getLocation().getX(), distributionCentre.getLocation().getY(), -1);
 
         List<Node> orderedNodeList = new ArrayList<>();
-        for (Long driverId : ordersInRoutes.keySet()){
+        for (Long driverId : ordersInRoutes.keySet()) {
             orderedNodeList = routeFind(ordersInRoutes.get(driverId), distributionCentreNode);
             ArrayList<Long> orderedIds = new ArrayList<>();
-            for (Node node : orderedNodeList){
+            for (Node node : orderedNodeList) {
 //                dist centre has id -1 and must not be included in final list
-                if (node.getOrderId() > 0){
+                if (node.getOrderId() > 0) {
                     orderedIds.add(node.getOrderId());
                 }
             }
@@ -189,13 +189,13 @@ public class RouteService {
         return nodesInRoute;
     }
 
-    public List<Order> setTotalOrders(List<Driver> availableDrivers, List<Order> incompleteOrders, int maxParcelsPerVan){
+    public List<Order> setTotalOrders(List<Driver> availableDrivers, List<Order> incompleteOrders, int maxParcelsPerVan) {
         int totalCapacity = 0;
         int totalWeight = 0;
         int totalOrders = maxParcelsPerVan * availableDrivers.size();
 
         //gets the totals of each across all drivers
-        for (Driver driver : availableDrivers){
+        for (Driver driver : availableDrivers) {
             totalCapacity += driver.getVanCapacity();
             totalWeight += driver.getVanMaxWeight();
         }
@@ -206,25 +206,25 @@ public class RouteService {
         int runningTotalWeight = 0;
         int runningTotalOrders = 0;
 
-        for (Order order : incompleteOrders){
-            runningTotalOrders+=1;
-            runningTotalWeight+=order.getWeight();
-            runningTotalCapacity+=order.getSize();
+        for (Order order : incompleteOrders) {
+            runningTotalOrders += 1;
+            runningTotalWeight += order.getWeight();
+            runningTotalCapacity += order.getSize();
 
             if ((runningTotalOrders <= totalOrders)
-                    &&(runningTotalWeight < totalWeight)
-                    &&(runningTotalCapacity < totalCapacity)){
+                    && (runningTotalWeight < totalWeight)
+                    && (runningTotalCapacity < totalCapacity)) {
 
                 ordersToBeDelivered.add(order);
 
-            }else{
+            } else {
                 break;
             }
         }
         return ordersToBeDelivered;
     }
 
-    public List<Node> createNodes(DistributionCentre distributionCentre, List<Order> ordersToBeDelivered){
+    public List<Node> createNodes(DistributionCentre distributionCentre, List<Order> ordersToBeDelivered) {
 
         double distCentreX = distributionCentre.getLocation().getX();
         double distCentreY = distributionCentre.getLocation().getY();
@@ -232,10 +232,10 @@ public class RouteService {
         ArrayList<Node> orderLocations = new ArrayList<>();
 
         // Gets the order's angle from North of distribution centre and it's radial distance from the distribution centre
-        for (Order order : ordersToBeDelivered){
-            Node node = new Node(order.getLongitude(),order.getLatitude(),order.getId());
+        for (Order order : ordersToBeDelivered) {
+            Node node = new Node(order.getLongitude(), order.getLatitude(), order.getId());
 
-            node.setRadius( Math.sqrt( Math.pow(node.getX() - distCentreX,2) ) +  Math.sqrt( Math.pow(node.getY() - distCentreY,2) ) );
+            node.setRadius(Math.sqrt(Math.pow(node.getX() - distCentreX, 2)) + Math.sqrt(Math.pow(node.getY() - distCentreY, 2)));
             node.setTheta(Math.atan2(node.getY() - distCentreY, node.getX() - distCentreX));
 
             orderLocations.add(node);
@@ -244,7 +244,7 @@ public class RouteService {
         return orderLocations;
     }
 
-    public List<Node> sortNodesByTheta(List<Node> nodeList){
+    public List<Node> sortNodesByTheta(List<Node> nodeList) {
         Collections.sort(nodeList, new Comparator<Node>() {
             @Override
             public int compare(Node o1, Node o2) {
@@ -254,14 +254,14 @@ public class RouteService {
         return nodeList;
     }
 
-    public Map<Long,ArrayList<Node>> assignDriversOrders(List<Driver> availableDrivers, List<Node> orderLocations, int maxParcelsPerVan){
+    public Map<Long, ArrayList<Node>> assignDriversOrders(List<Driver> availableDrivers, List<Node> orderLocations, int maxParcelsPerVan) {
         //get and shuffle drivers
         Collections.shuffle(availableDrivers);
 
-        Map<Long,ArrayList<Node>> ordersInRoutes = new HashMap<>();
+        Map<Long, ArrayList<Node>> ordersInRoutes = new HashMap<>();
 
         //sets the all drivers to have an empty list of routes associated with them;
-        for (Driver driver : availableDrivers){
+        for (Driver driver : availableDrivers) {
             ordersInRoutes.put(driver.getId(), new ArrayList<>());
         }
 
@@ -272,18 +272,18 @@ public class RouteService {
         int runningTotalCapacity = 0;
         int runningTotalWeight = 0;
         int runningTotalOrders = 0;
-        for (Node node : orderLocations){
+        for (Node node : orderLocations) {
             Order order = orderRepository.findById(node.getOrderId()).get();
             runningTotalWeight += order.getWeight();
             runningTotalCapacity += order.getSize();
-            runningTotalOrders ++;
+            runningTotalOrders++;
 
-            if(runningTotalCapacity < currentDriver.getVanCapacity() &&
+            if (runningTotalCapacity < currentDriver.getVanCapacity() &&
                     runningTotalWeight < currentDriver.getVanMaxWeight() &&
-                    runningTotalOrders <= maxParcelsPerVan){
+                    runningTotalOrders <= maxParcelsPerVan) {
                 ordersInRoutes.get(currentDriver.getId()).add(node);
             } else {
-                driverCount ++;
+                driverCount++;
                 if (driverCount < availableDrivers.size()) {
                     currentDriver = availableDrivers.get(driverCount);
                     ordersInRoutes.get(currentDriver.getId()).add(node);
@@ -301,7 +301,7 @@ public class RouteService {
 
     public Route findRouteById(Long routeId) {
         Optional<Route> optionalRoute = routeRepository.findById(routeId);
-        if (optionalRoute.isPresent()){
+        if (optionalRoute.isPresent()) {
             return optionalRoute.get();
         } else {
             return null;
@@ -310,7 +310,7 @@ public class RouteService {
 
     public Route updateRouteCompletion(Long routeId, boolean isComplete) {
         Optional<Route> optionalRoute = routeRepository.findById(routeId);
-        if (optionalRoute.isPresent()){
+        if (optionalRoute.isPresent()) {
             Route route = optionalRoute.get();
             route.setComplete(isComplete);
             routeRepository.save(route);
@@ -322,7 +322,7 @@ public class RouteService {
 
     public void deleteRouteById(Long routeId) {
         Optional<Route> optionalRoute = routeRepository.findById(routeId);
-        if (optionalRoute.isPresent()){
+        if (optionalRoute.isPresent()) {
             Route route = optionalRoute.get();
             routeRepository.delete(route);
         }
@@ -332,25 +332,26 @@ public class RouteService {
         return routeRepository.findRouteByDriverIdAndDate(driverId, ZonedDateTime.of(localDate, localDate.atStartOfDay().toLocalTime(), UTC));
     }
 
-<<<<<<< HEAD
+
     public List<Order> getAllOrdersInRoute(long routeId) {
         ArrayList<Order> orderList = new ArrayList<>();
 
         Route route = routeRepository.findById(routeId).get();
 
-        for (Long orderId : route.getOrderId()){
+        for (Long orderId : route.getOrderId()) {
             orderList.add(orderRepository.findById(orderId).get());
         }
 
         return orderList;
-=======
-    public Order findValidOrderInRoute(Long driverId, LocalDate localDate) {
+    }
+
+    public Order findValidOrderInRoute(Long driverId, LocalDate localDate){
         int currentIncrement = 0;
         Route route = findRouteByDriverIdAndDate(driverId, localDate);
 
-        for (Long orderID : route.getOrderId()){
+        for (Long orderID : route.getOrderId()) {
             Order order = orderRepository.findById(orderID).get();
-            if (!order.isCompleted() && (order.getIssue() == null || !(order.getTimeIssuePosted().toLocalDate().toString().equals(localDate.toString())))){
+            if (!order.isCompleted() && (order.getIssue() == null || !(order.getTimeIssuePosted().toLocalDate().toString().equals(localDate.toString())))) {
                 order.setCurrentPositionInRoute(currentIncrement);
                 return order;
             }
@@ -358,6 +359,7 @@ public class RouteService {
         }
 
         return null;
->>>>>>> 6fe31ec498c7a14ac895021cc0f1366bf8a36570
+
     }
+    
 }

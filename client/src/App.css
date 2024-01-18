@@ -67,3 +67,12 @@ body {
     background: #faf5e4; 
     color: #004445; 
 }
+
+.contentContainer {
+  display: flex;
+  width: 70vw;
+  text-align: center;
+  flex-wrap: wrap;
+  flex-direction: column;
+  align-content: center;
+}
