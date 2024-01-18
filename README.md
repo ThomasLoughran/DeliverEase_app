@@ -17,7 +17,11 @@
 3. [Setup Instructions](#3-setup-instructions)
    - 3.1 [Server Side Setup](#31-server-side-setup)
    - 3.2 [Client Side Setup](#32-client-side-setup)
-4. [Component & Wireframe Diagrams](#4-component-uml--wireframe-diagrams)
+4. [Diagrams](#4-diagrams)
+   - 4.1 [Component Diagram](#41-component-diagram)
+   - 4.2 [Wireframe Diagram](#42-wireframe-diagram)
+   - 4.3 [UML Diagram](#43-uml-diagram)
+   - 4.4 [ER Diagram](#44-er-diagram)
 5. [App Functionality](#5-app-functionality)
    - 5.1 [MVP](#51-mvp)
    - 5.2 [Extensions](#52-extensions)
@@ -33,6 +37,10 @@ Our app solves these challenges currently faced by RainForestRetail:
 - A single warehouse creates a bottleneck in the delivery system
 - The fleet of delivery vehicles is being poorly utilised
 - As more employees are added it becomes harder to get an overview of availability and where everyone is working on a given day
+
+Assumptions we have made with this scenario:
+- The warehouses are in stock with the order's products
+- There is a van for every driver
 
 ## 1.2 Business Case & Risk Register
 
@@ -91,15 +99,23 @@ npm install react-router-dom
 npm start
 ```
 
-## 4. Component, UML & Wireframe Diagrams 
+## 4. Diagrams 
 
-**Component Diagram:**
+## 4.1 Component Diagram:
 
-**Wireframe Diagram:**
+![component diagram](https://github.com/ThomasLoughran/DeliverEase_app/blob/README/DeliverEaseComponentDiagram.drawio.png)
 
-**UML Diagram:**
+## 4.2 Wireframe Diagram:
+
+![wireframe diagram](https://github.com/ThomasLoughran/DeliverEase_app/blob/README/DeliverEaseWireframe.png)
+
+## 4.3 UML Diagram:
 
 ![uml diagram](https://github.com/ThomasLoughran/DeliverEase_app/blob/README/DeliverEaseUML.drawio.png)
+
+## 4.4 ER Diagram:
+
+![er diagram](https://github.com/ThomasLoughran/DeliverEase_app/blob/README/DeliverEaseER.drawio.png)
 
 ## 5. App Functionality 
 

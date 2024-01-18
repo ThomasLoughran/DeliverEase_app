@@ -1,17 +1,10 @@
 import { useState } from 'react';
 import { useUser } from '../contexts/UserContext';
-import '../styles/Profile.css';
+import '../styles/Profile.css'; 
+import { Link } from 'react-router-dom';
+import profileIcon from '../assets/icon-location.png'
 
-// TO-DO:
-//save button to update user password 
-//add current password verification before user can update password
-//password fields to clear on save/submit/update
-//css: bring modal to center of screen 
-//css: position profile and message icon in column
-//css: resolve impact on messageIcon on profile-expand ✅
-
-
-const Profile = () => {
+const Profile = ({closeModal}) => {
 
     const { user } = useUser();
     const [showMore, setShowMore] = useState(false);
@@ -22,7 +15,6 @@ const Profile = () => {
         confirmNewPassword: "",
     });
 
-    //handle form change
     const handleEmployeeFormChange = (e) => {
         const { name, value } = e.target;
         setEmployeeForm((previousData) => ({
@@ -30,7 +22,6 @@ const Profile = () => {
         }))
     }
 
-    //handle form submit
     const handleUpdateEmployeeForm = async (e) => {
         e.preventDefault();
 
@@ -64,8 +55,6 @@ const Profile = () => {
                 })
             }
 
-
-
         } catch (error) {
             console.error(error);
         }
@@ -74,7 +63,10 @@ const Profile = () => {
 
     return (
         <div className="profile-content">
+        <button onClick={() => closeModal(false)} className="close-modal-button">X</button>
+
             <h2>My Profile:</h2>
+            <img className="profile-icon" src={profileIcon} />
             {user.role === 'MANAGER' && (
                 <>
                     <p>Name: {user.name}</p>
