@@ -41,7 +41,7 @@ public class OrderService {
     public Order updateOrderIssue(OrderDTO orderDTO) {
         Order order = orderRepository.findById(orderDTO.getId()).get();
         order.setIssue(Issue.fromInteger(orderDTO.getIssue()));
-        order.setTimeIssuePosted(orderDTO.getTimeIssuePosted());
+        order.setTimeIssuePosted(ZonedDateTime.now());
         order.setManagerReviewed(false);
         order.setCompleted(false);
 
