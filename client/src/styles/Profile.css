@@ -26,8 +26,8 @@
     padding-top: 100px; /* Location of the box */
     left: 0;
     top: 0;
-    width: 100vw; /* Full width */
-    height: 100vh; /* Full height */
+    width: 120vw; /* Full width */
+    height: 120vh; /* Full height */
     overflow: auto; 
     background-color: #004445; /* Set the background color for the entire page */
     background-color: rgb(0,0,0); /* Fallback color */
@@ -47,33 +47,55 @@
     display: flex;
     justify-content: space-around;
     height: 80%;
+    
 }
 
 
 .profile {
-    width: 40%;
+    width: 60%;
     height: 100%;
     background: #faf5e4; 
     text-align: center;
     border-radius: 8px;
     animation-name: zoom;
     animation-duration: 0.6s;
-    margin-right: 26%;
     align-items: center;
     flex-direction: column;
     display: flexbox;
 }
 
-.close--modal-button {
-    width: 50px;
-    height: 40px;
-    margin-left: 20% ;
+#old-password {
+    width: 90%;
+}
+#new-password {
+    width: 90%;
+}
+#confirm-new-password {
+    width: 90%;
+}
+
+.close-modal-button {
+    width: 30px;
+    height: 30px;
+    margin-left: 20%;
+    margin: 5%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 
 #save-button {
+    width: 60%;
     background-color: #004445;
     color: white;
+    margin: 5px;
+}
+
+.update-details-button{
+    width: 60%;
+    background-color: #004445;
+    color: white; 
 }
 
 

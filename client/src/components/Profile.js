@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useUser } from '../contexts/UserContext';
 import '../styles/Profile.css'; 
 import { Link } from 'react-router-dom';
+import profileIcon from '../assets/icon-location.png'
 
 // TO-DO:
 //save button to update user password 
@@ -12,7 +13,7 @@ import { Link } from 'react-router-dom';
 //css: resolve impact on messageIcon on profile-expand ✅
 
 
-const Profile = () => {
+const Profile = ({closeModal}) => {
 
     const { user } = useUser();
     const [showMore, setShowMore] = useState(false);
@@ -85,7 +86,10 @@ const Profile = () => {
 
     return (
         <div className="profile-content">
+        <button onClick={() => closeModal(false)} className="close-modal-button">X</button>
+
             <h2>My Profile:</h2>
+            <img className="profile-icon" src={profileIcon} />
             {user.role === 'MANAGER' && (
                 <>
                     <p>Name: {user.name}</p>
