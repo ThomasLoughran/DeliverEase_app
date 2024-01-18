@@ -9,12 +9,17 @@ import {
   LayersControl
 } from "react-leaflet";
 
+import { useUser } from "../../contexts/UserContext";
+
+
+
+
 import RoutingControl from './RoutingControl'
 
-const Map = () => {
+const Map = ({currentOrder}) => {
   const [map, setMap] = useState(null);
-  const [start, setStart] = useState([38.9072, -77.0369])
-  const [end, setEnd] = useState([37.7749, -122.4194])
+  const [start, setStart] = useState([51.2, -1.8])
+  const [end, setEnd] = useState([currentOrder.latitude, currentOrder.longitude])
 
   const maps = {
     base: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"

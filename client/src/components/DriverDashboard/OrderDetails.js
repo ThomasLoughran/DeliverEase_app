@@ -36,7 +36,7 @@ const OrderDetails = ({
                     <button onClick={handleIssueSubmit}>Submit Issue</button>
                 </div>
             )}
-            <Map/>
+            <Map currentOrder={currentOrder}/>
         </div>
     );
 }
