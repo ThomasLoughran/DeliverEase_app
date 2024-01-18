@@ -55,29 +55,15 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 80%;
+  width: 100%;
   height: 100vh;
-  /* padding: auto; */
 }
 
 body {
-  padding-right: 10vw;
+  /* padding-right: 10vw; */
     margin: 0;
     font-family: 'Arial', sans-serif;
     justify-content: center;
     background: #faf5e4; 
     color: #004445; 
 }
-
-body.dark-mode {
-    background: #004445; 
-    color: #faf5e4; 
-}
-
-/* .contentContainer {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-} */
-
-

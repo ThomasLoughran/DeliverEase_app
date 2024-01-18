@@ -3,10 +3,7 @@ import '../../styles/DriversList.css'
 
 const DriversList = ({ drivers, distributionCentres, selectedCentreId, setSelectedCentreId, setOpenModal, openModal }) => {
 
-    // console.log(drivers);
-
     const driversListComponents = drivers.map((driver) => {
-        console.log(driver);
         return (
 
             <li className="driver-card">
@@ -15,7 +12,6 @@ const DriversList = ({ drivers, distributionCentres, selectedCentreId, setSelect
                 <p>Van Capacity: {driver.vanCapacity}</p>
                 <p>Van Max Weight: {driver.vanMaxWeight}</p>
                 <p>Van name: {driver.vanName}</p>
-                {/* <p>Available Dates: {driver.availableDates}</p> */}
             </li>
         )
     })
@@ -46,9 +42,8 @@ const DriversList = ({ drivers, distributionCentres, selectedCentreId, setSelect
 
             </select>
 
-            {!openModal && <button onClick={() => setOpenModal(true)} className="open-modal-button">Add Driver</button>}
-
-
+            {!openModal && 
+            <button onClick={() => setOpenModal(true)} className="open-modal-button">Add Driver</button>}
 
             <ul className='drivers-list'>
             {drivers ? driversListComponents : <p>Loading</p>}

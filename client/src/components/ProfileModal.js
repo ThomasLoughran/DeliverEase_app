@@ -27,9 +27,9 @@ const ProfileModal = ({closeModal}) => {
         <div className="profile-modal" >
             <div className="profile-modal-background">
                 <div className="profile-modal-container">
-                    <button onClick={() => closeModal(false)} className="close-modal-button">X</button>
                     <div className="profile">
-                        <Profile/>
+                        <Profile 
+                        closeModal={closeModal}/>
                     </div>
                 </div>
             </div>

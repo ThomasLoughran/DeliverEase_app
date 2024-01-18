@@ -18,10 +18,34 @@
 .homepage-slogan {
     margin-bottom: 5vh;
 }
-.homepage-title {
-    margin-top: 10vh;
-    font-size: 4rem;
+.homepage-logo {
+    height: 40%;
+    max-width: auto;
+    scale:inherit;
 }
+
+/* laptop: */
+@media (max-width: 967px ) {
+        .homepage-login-button {
+            font-size: 1.2rem;
+        }
+    
+        .homepage-slogan {
+            font-size: 1.2rem;
+        }
+    }
+
+/* for iphone: */
+    @media ( max-width: 390px ) {
+    .homepage-login-button {
+        font-size: 1.5rem;
+    }
+    
+    .homepage-slogan {
+        font-size: 1.3rem;
+    }
+}     
+
 
 .homepage-login-button {
     background-color: #f8b400;
@@ -31,4 +55,5 @@
     border-radius: 5px;
     cursor: pointer;
     font-size: 2rem;
+    
 }

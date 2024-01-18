@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { useUser } from '../../contexts/UserContext';
+import '../../styles/DriverAvailability.css'
+
 
 
 const DriverAvailabilityCalendar = () => {
@@ -34,7 +36,6 @@ const DriverAvailabilityCalendar = () => {
                 ...previousAvailability,
                 [formattedDate]: !currentAvailability,
             }));
-            console.log(user)
             alert('Availability updated successfully!');
 
         } catch (error) {
@@ -49,8 +50,9 @@ const DriverAvailabilityCalendar = () => {
     );
 
     return (
-        <>
-            <h2>Driver Availability Calendar</h2>
+        <div className="driver-availability"
+        style={{'margin-right': '20px'}}>
+            <h2>Availability Calendar:</h2>
 
             <input
                 type="date"
@@ -68,7 +70,7 @@ const DriverAvailabilityCalendar = () => {
                     </li>
                 ))}
             </ul>
-        </>
+        </div>
     );
 };
 

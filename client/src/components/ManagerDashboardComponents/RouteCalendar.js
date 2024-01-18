@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 import { useUser } from '../../contexts/UserContext';
+import '../../styles/RouteCalendar.css'
 
 
-const RouteCalendar = ({loadRoute,showTodayRoutes}) => {
+const RouteCalendar = ({ loadRoute, showTodayRoutes }) => {
     const { user } = useUser();
     const [selectedDate, setSelectedDate] = useState(new Date());
     const [routesData, setRoutesData] = useState([]);
@@ -10,7 +11,7 @@ const RouteCalendar = ({loadRoute,showTodayRoutes}) => {
 
     useEffect(() => {
         setLoadRoutes(loadRoute);
-      }, [loadRoute]);
+    }, [loadRoute]);
 
     const formatDate = (date) => {
         return date.toISOString().split('T')[0];
@@ -53,13 +54,12 @@ const RouteCalendar = ({loadRoute,showTodayRoutes}) => {
     };
 
     const handleCurrentDay = () => {
-        setTimeout(() => {
-          fetchRoutesData();
-          console.log(routesData);
-          showTodayRoutes(false);
-          setLoadRoutes(false);
-        }, 1000);
-      };
+
+        fetchRoutesData();
+        showTodayRoutes(false);
+        setLoadRoutes(false);
+
+    };
 
     return (
         <div className="route-calendar">
@@ -74,9 +74,10 @@ const RouteCalendar = ({loadRoute,showTodayRoutes}) => {
                     />
                 </div>
             </div>
-
+            <div className="day-buttons">
             <button onClick={handlePreviousDay}>Previous day</button>
             <button onClick={handleNextDay}>Next day</button>
+            </div>
 
             {loadRoutes && (
                 <div>
@@ -91,9 +92,16 @@ const RouteCalendar = ({loadRoute,showTodayRoutes}) => {
                 ) : (
                     <ul>
                         {routesData.map((route, index) => (
+
                             <li key={index}>
-                                Route Id: {route.id}
+                                <div>
+                                    Route: {route.id} |
+                                    Driver Id Assigned : {route.driverId} |
+                                    Number of Orders: {route.orderId.length}
+                                </div>
+
                             </li>
+
                         ))}
                     </ul>
                 )}

@@ -10,14 +10,6 @@ const DriversListContainer = () => {
     const [openModal, setOpenModal] = useState(false);
     const [distributionCentres, setDistributionCentres] = useState([]);
 
-    // const handleOpenModal = () => {
-    //     setOpenModal(true);
-    // }
-
-    // const handleCloseModal = () => {
-    //     setOpenModal(false);
-    // }    
-
     useEffect(() => {
 
         fetchDistributionCentres();
@@ -46,7 +38,6 @@ const DriversListContainer = () => {
             }
 
             setDistributionCentres(data);
-            console.log(data);
 
         } catch (error) {
             console.error('Error getting distribution centres:', error);
@@ -71,7 +62,6 @@ const DriversListContainer = () => {
             }
 
             setDrivers(data);
-            console.log(data);
 
         } catch (error) {
             console.error('Error getting drivers:', error);
@@ -85,13 +75,18 @@ const DriversListContainer = () => {
     return ( 
 
         <>
+        <h1>Find drivers by distribution centre:</h1>
         <div className="drivers-list-container">
-            {/* <p>Hello from driversListContainer</p> */}
-            <DriversList drivers={drivers} distributionCentres={distributionCentres} selectedCentreId={selectedCentreId} setSelectedCentreId={setSelectedCentreId} setOpenModal={setOpenModal} openModal={openModal}/>
-            {/* {!openModal && <button onClick={() => setOpenModal(true)} className="open-modal-button">Add Driver</button>} moved to driversList */}
-            {openModal && <Modal closeModal={setOpenModal}/>}
-
-            
+            <DriversList 
+            drivers={drivers} 
+            distributionCentres={distributionCentres} 
+            selectedCentreId={selectedCentreId} 
+            setSelectedCentreId={setSelectedCentreId} 
+            setOpenModal={setOpenModal} 
+            openModal={openModal}/>
+            {openModal && 
+            <Modal closeModal={setOpenModal}/>
+            }
         </div>
         </>
 

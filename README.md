@@ -1,5 +1,6 @@
-# DeliverEase 🚛📦
-### Capstone Project
+# Capstone Project
+
+![DeliverEase logo](https://github.com/ThomasLoughran/DeliverEase_app/blob/main/client/src/assets/dark-mode-logo.png)
 
 ## 🎸 Developer Team 🎸 
 - [Albert](https://github.com/Al-B-code) 
@@ -8,7 +9,7 @@
 - [Suzi](https://github.com/sctowers) 
 - [Tom](https://github.com/ThomasLoughran) 
 
-## Table of Contents 📜
+## Table of Contents 
 1. [Introduction](#introduction)
    - 1.1 [Scenario](#11-scenario)
    - 1.2 [Business Case & Risk Register](#12-business-case--risk-register)   
@@ -16,7 +17,11 @@
 3. [Setup Instructions](#3-setup-instructions)
    - 3.1 [Server Side Setup](#31-server-side-setup)
    - 3.2 [Client Side Setup](#32-client-side-setup)
-4. [Component & Wireframe Diagrams](#4-component-uml--wireframe-diagrams)
+4. [Diagrams](#4-diagrams)
+   - 4.1 [Component Diagram](#41-component-diagram)
+   - 4.2 [Wireframe Diagram](#42-wireframe-diagram)
+   - 4.3 [UML Diagram](#43-uml-diagram)
+   - 4.4 [ER Diagram](#44-er-diagram)
 5. [App Functionality](#5-app-functionality)
    - 5.1 [MVP](#51-mvp)
    - 5.2 [Extensions](#52-extensions)
@@ -33,14 +38,18 @@ Our app solves these challenges currently faced by RainForestRetail:
 - The fleet of delivery vehicles is being poorly utilised
 - As more employees are added it becomes harder to get an overview of availability and where everyone is working on a given day
 
+Assumptions we have made with this scenario:
+- The warehouses are in stock with the order's products
+- There is a van for every driver
+- Driver will only use an iPhone 12 Pro to login to account
+   - Please note: When selecting an issue for an order in chrome browser the font size is very small. Font is legible if using Firefox.
+- Manager will only use a laptop to login to account
+
 ## 1.2 Business Case & Risk Register
 
 **Risk Register**
 
-```
-*insert doc here*
-
-```
+- [Risk register](https://github.com/ThomasLoughran/DeliverEase_app/blob/README/risk_register.pdf)
 
 **Business Case**
 
@@ -48,10 +57,7 @@ The application provides a user-friendly solution that assists managers with dis
 
 The following Business Plan details the advantages of DeliverEase for RainForest Retail:
 
-```
-*insert doc here*
-
-```
+- [Business case](https://github.com/ThomasLoughran/DeliverEase_app/blob/README/business_case.pdf)
 
 ## 2. Technologies & Libraries
 - Java
@@ -96,13 +102,23 @@ npm install react-router-dom
 npm start
 ```
 
-## 4. Component, UML & Wireframe Diagrams 
+## 4. Diagrams 
 
-**Component Diagram:**
+## 4.1 Component Diagram:
 
-**Wireframe Diagram:**
+![component diagram](https://github.com/ThomasLoughran/DeliverEase_app/blob/README/DeliverEaseComponentDiagram.drawio.png)
 
-**UML Diagram:**
+## 4.2 Wireframe Diagram:
+
+![wireframe diagram](https://github.com/ThomasLoughran/DeliverEase_app/blob/README/DeliverEaseWireframe.png)
+
+## 4.3 UML Diagram:
+
+![uml diagram](https://github.com/ThomasLoughran/DeliverEase_app/blob/README/DeliverEaseUML.drawio.png)
+
+## 4.4 ER Diagram:
+
+![er diagram](https://github.com/ThomasLoughran/DeliverEase_app/blob/README/DeliverEaseER.drawio.png)
 
 ## 5. App Functionality 
 
@@ -111,9 +127,10 @@ npm start
 - Drivers can update availability in a calendar
 - Drivers can see the address and postcode of the next order to deliver
 - Driver marks delivery as successful or unsuccessful with issue
+- All employees can change their password
 - Managers can create a new driver
 - Managers generate routes
-- Managers have a calendar log of all the create routes
+- Managers have a calendar log of all the created routes
 - Managers can see all distribution centres with contact details
 - Managers receives message of issue with delivery
 
@@ -121,88 +138,66 @@ npm start
 
 - Undelivered items given priority for tomorrow delivery
 - Drivers can see their route of orders to deliver on a map
+- Make app compatible with a mobile device
 
 ## 5.3. Routes used in the frontend:
 
-1. **Display all drivers**
-* Method: `GET`
-* URL: `http://localhost:8080/drivers/all`
-* This will get the full list of driver employees.
+1. **Display the route of a driver**
+- Method: `GET`
+- URL: `http://localhost:8080/routes/driver/{driverId}`
+- This will get the route for the current day by driver id and date.
 
-<br>
+2. **Update the order as complete**
+- Method: `PATCH`
+- URL: `http://localhost:8080/orders/complete/{id}/`
+- This will update the order by order id as the order being complete (true or false).
 
-2. **Display driver by ID number**
-* Method: `GET`
-* URL: `http://localhost:8080/drivers/id`
-* This will get a driver by their employee ID number.
+3. **Display order by id**
+- Method: `GET`
+- URL: `http://localhost:8080/orders/{id}`
+- This will get an order by its id number.
 
-<br>
+4. **Update the issue attached to a incomplete order**
+- Method: `PATCH`
+- URL: `http://localhost:8080/orders/issue`
+- This will update the order by adding the selected issue with the date the issue was submitted by the order id.
 
-3. **Display all available drivers**
-* Method: `GET`
-* URL: `http://localhost:8080/drivers/available`
-* This will get the full list of driver employees that have a status of ‘available’.
+5. **Update driver's availability**
+- Method: `PATCH`
+- URL: `http://localhost:8080/drivers/change-available/{id}`
+- This will update an driver's availability on a selected date.
 
-<br>
+6. **Create new driver**
+- Method: `POST`
+- URL: `http://localhost:8080/drivers/new-driver`
+- This will create a new driver record and add it to the list of drivers. 
 
-4. **Display all managers**
-* Method: `GET`
-* URL: `http://localhost:8080/managers/all`
-* This will get the full list of driver employees.
+7. **Create routes**
+- Method: `POST`
+- URL: `http://localhost:8080/routes/new-routes/{disCentreId}`
+- This will generate routes by distribution centre given a selected date.
 
-<br>
+8. **Display all issue**
+- Method: `GET`
+- URL: `http://localhost:8080/orders/issue/all`
+- This will get all the issues of a given distribution centre if the manager has not reviewed them.
 
-5. **Display manager by their ID number**
-* Method: `GET`
-* URL: `http://localhost:8080/managers/id`
-* This will get the full list of driver employees.
+9. **Update if the manager has reviewed an issue**
+- Method: `PATCH`
+- URL: `http://localhost:8080/orders/manager-review/{id}`
+- This will update the order issue by order id and change manager to reviewed true.
 
-<br>
+10. **Display all routes by date**
+- Method: `GET`
+- URL: `http://localhost:8080/routes/all/{distCentreId}`
+- This will get all the routes of a given distribution centre by date.
 
-6. **Display all orders**
-* Method: `GET`
-* URL: `http://localhost:8080/orders/all`
-* This will display the current list of all orders.
+11. **Login**
+- Method: `POST`
+- URL: `http://localhost:8080/employees/login`
+- This will log an employee into the app.
 
-<br>
-
-7. **Display all completed orders**
-* Method: `GET`
-* URL: `http://localhost:8080/orders/completion`
-* This will get the full list of completed orders (i.e. they have been delivered to the customer). 
-
-<br>
-
-8. **Display order by ID**
-* Method: `GET`
-* URL: `http://localhost:8080/orders/id`
-* This will get an order by its ID number.
-
-<br>
-
-9. **Display all distribution centres**
-* Method: `GET`
-* URL: `http://localhost:8080/distribution-centres`
-* This will get the full list of distribution centres.
-
-<br>
-
-10. **Update orders’ status**
-* Method: `PATCH`
-* URL: `http://localhost:8080/orders/{id}`
-* This will update an order’s delivered, manager-reviewed and/or issue and issue timing status by order ID.
-
-<br> 
-
-11. **Create new driver**
-* Method: `POST`
-* URL: `http://localhost:8080/drivers/new-driver`
-* This will create a new driver record and add it to the list of drivers. 
-
-<br> 
-
-12. **Update driver's availability**
-* Method: `PATCH`
-* URL: `http://localhost:8080/drivers/change-available/{id}`
-* This will update an driver's availability.
-
+12. **Update employee password**
+- Method: `PATCH`
+- URL: `http://localhost:8080/employees/update-password`
+- This will let the employee change their password if they can enter their current password and the new password matches the confirm new password.

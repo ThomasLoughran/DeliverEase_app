@@ -2,6 +2,7 @@ import React from "react";
 import Map from "../map/Map";
 import { useUser } from "../../contexts/UserContext";
 import { useState } from "react";
+import '../../styles/OrderDetails.css'
 
 const OrderDetails = ({
     currentOrder,
@@ -12,6 +13,9 @@ const OrderDetails = ({
     setSelectedIssue,
     handleIssueSubmit,
     data,
+    issueSubmitted,
+    setIssueSubmitted,
+
 }) => {
 
 
@@ -21,27 +25,30 @@ const OrderDetails = ({
 
     const incrementPreviousOrder = () => {
         setPreviousOrder(currentOrder);
+        handleIssueSubmit(false);
+        setIssueSubmitted(false);
     }
 
     return (
         <div>
-            <h2>Current Order</h2>
+            <h2>Current Order:</h2>
             <p>Order ID: {currentOrder.id}</p>
             <p>Address: {currentOrder.address}</p>
 
-            <button onClick={() => {
+            <button className='success-button' onClick={() => {
                 incrementPreviousOrder();
                 handleSuccessfulDelivery(); 
-                }}>Successfully Delivered</button>
+                }}>Success!</button>
             <button onClick={() => {
                 incrementPreviousOrder();
                 handleUnsuccessfulDelivery(); 
-                }}>Unsuccessfully Delivered</button>
+                }}>Problem...</button>
 
-            {unsuccessfulClicked && (
+            {unsuccessfulClicked && !issueSubmitted && (
                 <div>
                     <label>Select Issue:</label>
-                    <select onChange={(e) => setSelectedIssue(parseInt(e.target.value))} value={selectedIssue || ''}>
+                    <select className='issue-dropdown' onChange={(e) => setSelectedIssue(parseInt(e.target.value))} value={selectedIssue || ''}>
+                    <optgroup>
                         <option value="" disabled>Select an issue</option>
                         <option value="1">No Access</option>
                         <option value="2">Refusal by Recipient</option>
@@ -51,11 +58,14 @@ const OrderDetails = ({
                         <option value="6">Parcel Damage</option>
                         <option value="7">Lost Parcel</option>
                         <option value="8">Other</option>
+                        </optgroup>
                     </select>
-                    <button onClick={handleIssueSubmit}>Submit Issue</button>
+                    <button className='issue-button' onClick={handleIssueSubmit}>Submit Issue</button>
                 </div>
             )}
+
             <Map currentOrder={currentOrder} previousOrder={previousOrder} data = {data} distCentre = {user.distributionCentre}/>
+
         </div>
     );
 }
