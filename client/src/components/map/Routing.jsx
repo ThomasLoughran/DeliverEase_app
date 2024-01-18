@@ -14,19 +14,20 @@ export default function Routing({currentOrder, previousOrder,orderWayPoints}) {
     console.log("previous", previousOrder.latitude, previousOrder.longitude)
     console.log("current", currentOrder.latitude, currentOrder.longitude)
     
-    console.log(orderWayPoints,"All waypoints in map");
+    //console.log(orderWayPoints,"All waypoints in map");
     if (previousOrder) {
 
       if (!map) return;
 
     
     const coords = orderWayPoints.map((waypoint)=>{
-        return [L.latLng(waypoint)]
+        return L.latLng(waypoint[0],waypoint[1])
       }) 
 
     console.log(coords);
+
     const routingControl = L.Routing.control({
-      waypoints: [coords]
+      waypoints: coords
       // routeWhileDragging: true,
     }).addTo(map);
 
