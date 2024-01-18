@@ -151,6 +151,7 @@ const CurrentRouteOrder = () => {
                         selectedIssue={selectedIssue}
                         setSelectedIssue={setSelectedIssue}
                         handleIssueSubmit={handleIssueSubmit}
+                        data = {data}
                     />
                 </div>
             ) : (

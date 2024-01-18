@@ -17,17 +17,30 @@ import Routing from "./Routing";
 
 import RoutingControl from './RoutingControl'
 
-const Map = ({currentOrder, previousOrder}) => {
+const Map = ({currentOrder, previousOrder,data,distCentre}) => {
   const [map, setMap] = useState(null);
   
   const [start, setStart] = useState([previousOrder.latitude, previousOrder.longitude]);
   const [end, setEnd] = useState([currentOrder.latitude, currentOrder.longitude]);
   const [key, setKey] = useState(0);
+  const [allOrders,setAllOrders]=useState([]);
+
+  const fetchAllOrders = async () => {
+    try {
+      const response = await fetch(`http://localhost:8080/routes/${data.id}/all-orders`);
+      const orderData = await response.json();
+      setAllOrders(orderData);
+
+    } catch (error) {
+      console.error("Error fetching all orders:", error);
+    }
+  };
+
+  
 
   useEffect(() => {
-    setKey(key+1)
-
-  }, [currentOrder])
+    fetchAllOrders();
+  }, []); 
 
   const maps = {
     base: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
