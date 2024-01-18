@@ -14,6 +14,8 @@ const OrderDetails = ({
     handleIssueSubmit,
     issueSubmitted,
     setIssueSubmitted,
+    data,
+
 }) => {
 
 
@@ -61,7 +63,9 @@ const OrderDetails = ({
                     <button className='issue-button' onClick={handleIssueSubmit}>Submit Issue</button>
                 </div>
             )}
-            <Map className='map' currentOrder={currentOrder} previousOrder={previousOrder}/>
+            
+            <Map currentOrder={currentOrder} previousOrder={previousOrder} data = {data} distCentre = {user.distributionCentre}/>
+
         </div>
     );
 }

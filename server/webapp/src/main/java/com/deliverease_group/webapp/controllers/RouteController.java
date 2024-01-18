@@ -84,4 +84,11 @@ public class RouteController {
         return new ResponseEntity<>(null, HttpStatus.OK);
     }
 
+    @GetMapping(value = "/{routeId}/all-orders")
+    public ResponseEntity<List<Order>> getAllOrdersInRoute (@PathVariable long routeId){
+        List<Order> allOrders = routeService.getAllOrdersInRoute(routeId);
+        return new ResponseEntity<>(allOrders,HttpStatus.OK);
+    }
+
+
 }

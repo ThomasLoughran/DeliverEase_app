@@ -183,6 +183,7 @@ const CurrentRouteOrder = () => {
                         handleIssueSubmit={handleIssueSubmit}
                         issueSubmitted={issueSubmitted}
                         setIssueSubmitted={setIssueSubmitted}
+                        data = {data}
                     />
                 </div>
             ) : (
