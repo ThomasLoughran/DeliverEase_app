@@ -11,17 +11,27 @@ export default function Routing({currentOrder, previousOrder}) {
   const map = useMap();
 
   useEffect(() => {
+    console.log("previous", previousOrder.latitude, previousOrder.longitude)
+    console.log("current", currentOrder.latitude, currentOrder.longitude)
 
-    if (!map) return;
+    if (previousOrder && currentOrder) {
+
+      if (!map) return;
 
     const routingControl = L.Routing.control({
       waypoints: [L.latLng(previousOrder.latitude, previousOrder.longitude), L.latLng(currentOrder.latitude, currentOrder.longitude)],
-      routeWhileDragging: true
+      routeWhileDragging: true,
     }).addTo(map);
+
+    return () => map.removeControl(routingControl);
+    // return map;
+    }
 
     
 
-  }, [map]);
+  }, [map, previousOrder, currentOrder]);
+
+  
 
   return null;
 }
