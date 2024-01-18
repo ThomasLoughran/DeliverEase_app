@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useUser } from '../contexts/UserContext';
 import '../styles/Profile.css'; 
 import { Link } from 'react-router-dom';
+import profileIcon from '../assets/icon-location.png'
 
 // TO-DO:
 //save button to update user password 
@@ -86,6 +87,7 @@ const Profile = () => {
     return (
         <div className="profile-content">
             <h2>My Profile:</h2>
+            <img className="profile-icon" src={profileIcon} />
             {user.role === 'MANAGER' && (
                 <>
                     <p>Name: {user.name}</p>
