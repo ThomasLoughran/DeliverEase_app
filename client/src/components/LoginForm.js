@@ -59,8 +59,22 @@ const LoginForm = () => {
             }
 
             loginUser(data);
-            // console.log("This is data", data);
-            navigate("/", { replace: true });
+            console.log("This is data", data);
+            console.log(data.role === "MANAGER", "this should be true")
+
+
+            if (data.role === "MANAGER") {
+                navigate("/manager/routes", {replace: true})
+            }
+
+            if (data.role === "DRIVER") {
+                navigate("/driver/routes")
+            }
+
+
+
+
+            // navigate("/", { replace: true });
         } catch (error) {
             console.error('Error during login:', error);
         }

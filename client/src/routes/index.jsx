@@ -68,13 +68,13 @@ const Routes = () => {
                     element: <LoggedInLayout/>,
                     children: [
                         {
-                            path: "/dashboard",
-                            element: <p>Hello from home</p>
-                        },
-                        {
                             path: "/manager",
                             element: <ManagerProtectedRoute/>,
                             children: [
+                                {
+                                    path:"/manager/routes",
+                                    element: <ManagerRoutesContainer/>
+                                },
                                 {
                                     path:"/manager/drivers",
                                     element: <DriversListContainer/>
@@ -83,10 +83,7 @@ const Routes = () => {
                                     path:"/manager/distribution-centres",
                                     element: <DistributionCentreListContainer/>
                                 },
-                                {
-                                    path:"/manager/routes",
-                                    element: <ManagerRoutesContainer/>
-                                }
+                               
                             ]
                         },
                         {
@@ -94,13 +91,14 @@ const Routes = () => {
                             element: <DriverProtectedRoute/>,
                             children: [
                                 {
+                                    path:"/driver/routes",
+                                    element: <CurrentRouteOrder/>
+                                },
+                                {
                                     path:"/driver/driver-availability",
                                     element: <DriverAvailabilityCalendar/>
                                 },
-                                {
-                                    path:"/driver/routes",
-                                    element: <CurrentRouteOrder/>
-                                }
+                                
                             ]
                         }
                     ]
