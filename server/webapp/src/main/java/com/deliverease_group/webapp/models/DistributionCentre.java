@@ -19,6 +19,12 @@ public class DistributionCentre {
     @Column
     private DistributionCentreLocation location;
 
+    @Column
+    private double latitude;
+
+    @Column
+    private double longitude;
+
     @OneToMany(mappedBy = "distributionCentre")
     @Column
     @JsonIgnoreProperties({ "distributionCentre" })
@@ -44,6 +50,8 @@ public class DistributionCentre {
         this.routes = new ArrayList<>();
         this.employees = new ArrayList<>();
         this.phoneNumber = location.getPhoneNumber();
+        this.latitude = location.getY();
+        this.longitude = location.getX();
     }
 
     public long getId() {
@@ -96,5 +104,21 @@ public class DistributionCentre {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    public double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
+    }
+
+    public double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
     }
 }

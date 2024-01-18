@@ -11,8 +11,6 @@ const CurrentRouteOrder = () => {
     const [showNextOrder, setShowNextOrder] = useState(false);
     const [showIndex, setShowIndex] = useState(0);
 
-
-
     const fetchCurrentOrder = async () => {
         try {
             const currentDate = new Date();
@@ -110,6 +108,7 @@ const CurrentRouteOrder = () => {
     const handleSuccessfulDelivery = () => {
         if (currentOrder) {
             markOrderAsCompleted(currentOrder.id);
+            
         }
     };
 
