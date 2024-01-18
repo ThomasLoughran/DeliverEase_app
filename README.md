@@ -17,7 +17,11 @@
 3. [Setup Instructions](#3-setup-instructions)
    - 3.1 [Server Side Setup](#31-server-side-setup)
    - 3.2 [Client Side Setup](#32-client-side-setup)
-4. [Component & Wireframe Diagrams](#4-component-uml--wireframe-diagrams)
+4. [Diagrams](#4-diagrams)
+   - 4.1 [Component Diagram](#41-component-diagram)
+   - 4.2 [Wireframe Diagram](#42-wireframe-diagram)
+   - 4.3 [UML Diagram](#43-uml-diagram)
+   - 4.4 [ER Diagram](#44-er-diagram)
 5. [App Functionality](#5-app-functionality)
    - 5.1 [MVP](#51-mvp)
    - 5.2 [Extensions](#52-extensions)
@@ -91,15 +95,19 @@ npm install react-router-dom
 npm start
 ```
 
-## 4. Component, UML & Wireframe Diagrams 
+## 4. Diagrams 
 
-**Component Diagram:**
+## 4.1 Component Diagram:
 
-**Wireframe Diagram:**
+## 4.2 Wireframe Diagram:
 
-**UML Diagram:**
+## 4.3 UML Diagram:
 
 ![uml diagram](https://github.com/ThomasLoughran/DeliverEase_app/blob/README/DeliverEaseUML.drawio.png)
+
+## 4.4 ER Diagram:
+
+![er diagram](https://github.com/ThomasLoughran/DeliverEase_app/blob/README/DeliverEaseER.drawio.png)
 
 ## 5. App Functionality 
 
