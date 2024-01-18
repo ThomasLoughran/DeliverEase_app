@@ -2,6 +2,7 @@ import React from "react";
 import Map from "../map/Map";
 import { useUser } from "../../contexts/UserContext";
 import { useState } from "react";
+import '../../styles/OrderDetails.css'
 
 const OrderDetails = ({
     currentOrder,
@@ -24,24 +25,24 @@ const OrderDetails = ({
 
     return (
         <div>
-            <h2>Current Order</h2>
+            <h2>Current Order:</h2>
             <p>Order ID: {currentOrder.id}</p>
             <p>Address: {currentOrder.address}</p>
 
-            <button onClick={() => {
+            <button className='success-button' onClick={() => {
                 incrementPreviousOrder();
                 handleSuccessfulDelivery(); 
-                }}>Successfully Delivered</button>
+                }}>Success!</button>
             <button onClick={() => {
                 incrementPreviousOrder();
                 handleUnsuccessfulDelivery(); 
-                }}>Unsuccessfully Delivered</button>
+                }}>Problem...</button>
 
             {unsuccessfulClicked && (
                 <div>
                     <label>Select Issue:</label>
                     <select onChange={(e) => setSelectedIssue(parseInt(e.target.value))} value={selectedIssue || ''}>
-                        <option value="" disabled>Select an issue</option>
+                        <option className='issue-dropdown' value="" disabled>Select an issue</option>
                         <option value="1">No Access</option>
                         <option value="2">Refusal by Recipient</option>
                         <option value="3">Poor Weather</option>
@@ -51,10 +52,10 @@ const OrderDetails = ({
                         <option value="7">Lost Parcel</option>
                         <option value="8">Other</option>
                     </select>
-                    <button onClick={handleIssueSubmit}>Submit Issue</button>
+                    <button className='issue-button' onClick={handleIssueSubmit}>Submit Issue</button>
                 </div>
             )}
-            <Map currentOrder={currentOrder} previousOrder={previousOrder}/>
+            <Map className='map' currentOrder={currentOrder} previousOrder={previousOrder}/>
         </div>
     );
 }
