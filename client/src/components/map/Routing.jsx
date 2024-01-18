@@ -6,20 +6,27 @@ import { useMap } from "react-leaflet";
 L.Marker.prototype.options.icon = L.icon({
   iconUrl: "https://unpkg.com/leaflet@1.7.1/dist/images/marker-icon.png"
 });
-export default function Routing({currentOrder, previousOrder}) {
+export default function Routing({currentOrder, previousOrder,orderWayPoints}) {
 
   const map = useMap();
 
   useEffect(() => {
     console.log("previous", previousOrder.latitude, previousOrder.longitude)
     console.log("current", currentOrder.latitude, currentOrder.longitude)
-
+    
+    console.log(orderWayPoints,"All waypoints in map");
     if (previousOrder) {
 
       if (!map) return;
 
+    
+    const coords = orderWayPoints.map((waypoint)=>{
+        return [L.latLng(waypoint)]
+      }) 
+
+    console.log(coords);
     const routingControl = L.Routing.control({
-      waypoints: [L.latLng(previousOrder.latitude, previousOrder.longitude), L.latLng(currentOrder.latitude, currentOrder.longitude)],
+      waypoints: [coords]
       // routeWhileDragging: true,
     }).addTo(map);
 
@@ -32,7 +39,7 @@ export default function Routing({currentOrder, previousOrder}) {
 
     
 
-  }, [currentOrder, previousOrder]);
+  }, [currentOrder, previousOrder,orderWayPoints]);
 
   
 
