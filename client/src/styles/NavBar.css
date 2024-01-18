@@ -77,9 +77,37 @@ body {
     /* height: 40px; */
 }
 
+.navLogo {
+    height: 35px;
+    width: 35px;
+    margin-left: 15px;
+}
+
+/* .open-close-nav {
+    display: flex;
+    justify-content: flex-start;
+    margin-top: 0;
+    margin-bottom: 790px;
+} */
+
+@media (max-width: 390px) {
 .open-close-nav {
     display: flex;
     justify-content: flex-start;
     margin-top: 0;
     margin-bottom: 790px;
+    width: 70px;
+    height: 50px;
+}}
+
+.open-close-nav {
+    display: flex;
+    justify-content: flex-start;
+    margin-top: 0;
+    margin-bottom: 790px;
+    width: 70px;
+    height: 50px;
 }
+
+
+
