@@ -10,6 +10,7 @@ const CurrentRouteOrder = () => {
     const [data, setData] = useState(null);
     const [showNextOrder, setShowNextOrder] = useState(false);
     const [showIndex, setShowIndex] = useState(0);
+    const [issueSubmitted, setIssueSubmitted] = useState(false);
 
 
 
@@ -161,6 +162,7 @@ const CurrentRouteOrder = () => {
 
 
                 fetchNextOrder();
+                setIssueSubmitted(true);
             } catch (error) {
                 console.error('Error submitting issue:', error);
             }
@@ -179,6 +181,8 @@ const CurrentRouteOrder = () => {
                         selectedIssue={selectedIssue}
                         setSelectedIssue={setSelectedIssue}
                         handleIssueSubmit={handleIssueSubmit}
+                        issueSubmitted={issueSubmitted}
+                        setIssueSubmitted={setIssueSubmitted}
                     />
                 </div>
             ) : (

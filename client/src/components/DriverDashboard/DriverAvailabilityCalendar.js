@@ -50,8 +50,9 @@ const DriverAvailabilityCalendar = () => {
     );
 
     return (
-        <div className="driver-availability">
-            <h2>Driver Availability Calendar</h2>
+        <div className="driver-availability"
+        style={{'margin-right': '20px'}}>
+            <h2>Availability Calendar:</h2>
 
             <input
                 type="date"
