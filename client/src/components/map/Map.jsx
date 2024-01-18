@@ -21,7 +21,14 @@ const Map = ({currentOrder, previousOrder}) => {
   
   const [start, setStart] = useState([previousOrder.latitude, previousOrder.longitude]);
   const [end, setEnd] = useState([currentOrder.latitude, currentOrder.longitude]);
+  const [routingControl, setRoutingControl] = useState(null);
   
+  useEffect(() => {
+    if (start && end){
+      setStart([previousOrder.latitude, previousOrder.longitude]);
+      setEnd([currentOrder.latitude, currentOrder.longitude]);
+    }
+  }, [previousOrder])
 
   const maps = {
     base: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -36,7 +43,6 @@ const Map = ({currentOrder, previousOrder}) => {
         style={{ height: "80vh", width: "100%", padding: 0 }}
         whenCreated={map => setMap(map)}
       >
-        
         
         <RoutingControl 
           position={'topright'} 
