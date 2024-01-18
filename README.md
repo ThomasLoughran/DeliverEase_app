@@ -38,6 +38,10 @@ Our app solves these challenges currently faced by RainForestRetail:
 - The fleet of delivery vehicles is being poorly utilised
 - As more employees are added it becomes harder to get an overview of availability and where everyone is working on a given day
 
+Assumptions we have made with this scenario:
+- The warehouses are in stock with the order's products
+- There is a van for every driver
+
 ## 1.2 Business Case & Risk Register
 
 **Risk Register**
