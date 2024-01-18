@@ -103,7 +103,6 @@ const NavBar = () => {
 
             
 
-       
             {user?.role === 'MANAGER' && (
                 <>
                     <Link id="routes-calendar" to='manager/routes'>
