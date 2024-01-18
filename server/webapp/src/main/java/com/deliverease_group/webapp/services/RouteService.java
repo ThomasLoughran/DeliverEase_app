@@ -331,4 +331,20 @@ public class RouteService {
     public Route findRouteByDriverIdAndDate(Long driverId, LocalDate localDate) {
         return routeRepository.findRouteByDriverIdAndDate(driverId, ZonedDateTime.of(localDate, localDate.atStartOfDay().toLocalTime(), UTC));
     }
+
+    public Order findValidOrderInRoute(Long driverId, LocalDate localDate) {
+        int currentIncrement = 0;
+        Route route = findRouteByDriverIdAndDate(driverId, localDate);
+
+        for (Long orderID : route.getOrderId()){
+            Order order = orderRepository.findById(orderID).get();
+            if (!order.isCompleted() && (order.getIssue() == null || !(order.getTimeIssuePosted().toLocalDate().toString().equals(localDate.toString())))){
+                order.setCurrentPositionInRoute(currentIncrement);
+                return order;
+            }
+            currentIncrement++;
+        }
+
+        return null;
+    }
 }

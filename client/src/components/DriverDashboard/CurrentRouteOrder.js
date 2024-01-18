@@ -11,6 +11,20 @@ const CurrentRouteOrder = () => {
     const [showNextOrder, setShowNextOrder] = useState(false);
     const [showIndex, setShowIndex] = useState(0);
 
+
+
+    useEffect( () => {
+
+        fetchCurrentOrder()
+
+    })
+
+
+
+
+
+
+
     const fetchCurrentOrder = async () => {
         try {
             const currentDate = new Date();
@@ -24,11 +38,16 @@ const CurrentRouteOrder = () => {
             const responseData = await response.json();
 
         if (responseData.orderId && responseData.orderId.length > 0) {
-                    const orderId = responseData.orderId[showIndex];
-                    const orderResponse = await fetch(`http://localhost:8080/orders/${orderId}`);
+
+
+            
+
+                    const orderResponse = await fetch(`http://localhost:8080/routes/driver/${user.id}/currentOrder?localDate=${formattedDate}`);
 
                     if (orderResponse.ok) {
                         const orderData = await orderResponse.json();
+
+                        setShowIndex(orderResponse.currentPositionInRoute)
                         setCurrentOrder(orderData);
                         setShowNextOrder(false)
                         setData(responseData);
@@ -47,6 +66,8 @@ const CurrentRouteOrder = () => {
         } catch (error) {
             console.error('Error fetching routes data:', error);
         }
+
+
     };
 
     useEffect(() => {
@@ -79,17 +100,28 @@ const CurrentRouteOrder = () => {
     
     const fetchNextOrder = async (currentOrderId) => {
         try {
-            const nextOrderIndex = data.orderId.indexOf(currentOrderId) + 1;
-            setShowIndex(showIndex + 1);
+
+         
+            // console.log(nextOrderIndex, "this is next order id");
+
     
-            if (nextOrderIndex < data.orderId.length) {
-                const nextOrderId = data.orderId[nextOrderIndex];
-                const nextOrderResponse = await fetch(`http://localhost:8080/orders/${nextOrderId}`);
+            if (currentOrder.currentPositionInRoute < data.orderId.length) {
+                // const nextOrderId = data.orderId[nextOrderIndex];
+
+                const currentDate = new Date();
+                const formattedDate = currentDate.toISOString().split('T')[0];
+                const nextOrderResponse = await fetch(`http://localhost:8080/routes/driver/${user.id}/currentOrder?localDate=${formattedDate}`);
     
                 if (nextOrderResponse.ok) {
                     const nextOrderData = await nextOrderResponse.json();
                     setCurrentOrder(nextOrderData);
                     setShowNextOrder(true);
+
+                    const nextOrderIndex = nextOrderData;
+                    console.log(currentOrder,"This is before setShowIndex")
+                    setShowIndex(showIndex + 1);
+
+
                 } else {
                     setCurrentOrder(null);
                     setShowNextOrder(false);

@@ -61,6 +61,7 @@ const NavBar = () => {
     }
 
     return (
+
         <>
             {navOpen && (
                 <div className="navBar">
@@ -116,6 +117,7 @@ const NavBar = () => {
                     )}
                     <Link id="logout" to="/" onClick={handleLogout}>
                         Logout
+
                     </Link>
                     <img src={darkLogo} alt="Logo" className="logo" />
 
