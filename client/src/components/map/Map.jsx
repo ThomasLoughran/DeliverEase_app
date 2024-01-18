@@ -23,18 +23,49 @@ const Map = ({currentOrder, previousOrder,data,distCentre}) => {
   const [start, setStart] = useState([previousOrder.latitude, previousOrder.longitude]);
   const [end, setEnd] = useState([currentOrder.latitude, currentOrder.longitude]);
   const [key, setKey] = useState(0);
-  const [allOrders,setAllOrders]=useState([]);
+  const [allOrders,setAllOrders] = useState([]);
+  const [orderWayPoints,setOrderWayPoints] = useState([])
+
+  const orderPoints = [];
+
+  // orderPoints.push([[distCentre.latitude,distCentre.longitude]])
+
+  // for(let i=0;i<data.length;i++){
+  //   orderPoints.push([data[i].longitude,data[i].longitude])
+  // }
+
+  // orderPoints.push([[distCentre.latitude,distCentre.longitude]])
+
+  console.log(orderPoints);
 
   const fetchAllOrders = async () => {
     try {
       const response = await fetch(`http://localhost:8080/routes/${data.id}/all-orders`);
       const orderData = await response.json();
-      setAllOrders(orderData);
+      
+      orderPoints.push([distCentre.latitude,distCentre.longitude])
+  
+      for(let i=0;i<orderData.length;i++){
+        orderPoints.push([orderData[i].longitude,orderData[i].longitude])
+      }
+
+      orderPoints.push([distCentre.latitude,distCentre.longitude])
+
+      console.log(orderPoints);
+
+
+
 
     } catch (error) {
       console.error("Error fetching all orders:", error);
     }
   };
+
+  
+
+ 
+
+  // setOrderWayPoints([orderPoints,[distCentre.latitude,distCentre.longitude]])
 
   
 
