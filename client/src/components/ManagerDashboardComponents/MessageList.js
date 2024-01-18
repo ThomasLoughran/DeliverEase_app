@@ -108,6 +108,7 @@ const messageListComponents = orders.length > 0 ? (
             <p className="message-order-id">Order Id: {order.id}</p>
             <p>Issue: {order.issue}</p>
             <p>Time Posted: {order.timeIssuePosted}</p>
+            <p>Address: {order.address}</p>
             <button
                 className="confirm-manager-review-button"
                 onClick={() => handlePatchManagerReviewed(order.id)}

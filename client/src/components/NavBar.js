@@ -103,19 +103,17 @@ const NavBar = () => {
 
             
 
-            <Link id="home" to="/">
-                Home
-            </Link>
+       
             {user?.role === 'MANAGER' && (
                 <>
+                    <Link id="routes-calendar" to='manager/routes'>
+                        Routes Calendar
+                    </Link>
                     <Link id="drivers" to="manager/drivers">
                         Drivers
                     </Link>
                     <Link id="dist-cent" to="manager/distribution-centres">
                         Distribution Centres
-                    </Link>
-                    <Link id="routes-calendar" to='manager/routes'>
-                        Routes Calendar
                     </Link>
                 </>
             )}
