@@ -54,7 +54,7 @@ const CurrentRouteOrder = () => {
     }, [user.id, unsuccessfulClicked, showNextOrder]);
 
     const handleUnsuccessfulDelivery = () => {
-        setUnsuccessfulClicked(true);
+        setUnsuccessfulClicked(!unsuccessfulClicked);
         setSelectedIssue(null);
     };
 
@@ -131,7 +131,7 @@ const CurrentRouteOrder = () => {
                 }
                 console.log('Issue submitted!');
 
-
+                setUnsuccessfulClicked(false);
                 fetchNextOrder();
             } catch (error) {
                 console.error('Error submitting issue:', error);
