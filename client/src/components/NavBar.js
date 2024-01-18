@@ -9,7 +9,8 @@ import profileIcon from '../assets/profile-icon-white.png';
 import messageIcon from '../assets/message-icon-white.png';
 import activeMessageIcon  from '../assets/message-icon-white-active.png'
 import MessageModal from './MessageModal';
-
+import NavLogo from '../assets/menu-icon.png';
+import CloseNav from '../assets/menu-close-icon.png';
 
 
 const NavBar = () => {
@@ -19,6 +20,7 @@ const NavBar = () => {
     const [openMessageListModal, setOpenMessageListModal] = useState(false);
     const [orders , setOrders] = useState([])
     const [notificationRefresh, setNotificationRefresh] = useState(true);
+    const [navOpen, setNavOpen] = useState(false)
     // const [ordersLoaded, setOrdersLoaded] = useState(false)
 
     const handleLogout = () => {
@@ -76,7 +78,8 @@ const NavBar = () => {
 
 
     return (
-
+        <>
+        {navOpen && (
         <div className= "navBar">
             <div className="profile-message-container" >
                     <img id="profile-icon" src={profileIcon} onClick={() => setOpenProfileModal(true)}
@@ -131,7 +134,17 @@ const NavBar = () => {
                 Logout
             </Link>
             <img src={darkLogo} alt="Logo" className="logo" />
+            
         </div>
+        )}
+            <button className="open-close-nav" 
+                onClick={() => setNavOpen(!navOpen)}>
+                {navOpen ? 
+                <img src={CloseNav} 
+                style={{ width: '35px', height: 'auto' }}
+                /> : <img src={NavLogo}/>}
+            </button>
+            </>
     );
 };
 

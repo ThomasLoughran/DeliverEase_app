@@ -16,7 +16,7 @@ body {
     justify-content: flex-start;
 }
 
-.logo{
+.logo {
     margin-top: auto;
     margin-bottom: 5vh;
 }
@@ -35,9 +35,8 @@ body {
 }
 
 
-.profile-message-container{
+.profile-message-container {
     flex-direction: row;
-    /* background-color: #004445; */
     margin-top: 0;
     padding: 10px;
     justify-content: flex-start;
@@ -46,31 +45,29 @@ body {
 }
 
 #profile-button {
-     width: auto;
-     height: 40px;
-     margin: 10px;
-     background-color: rgba(0, 0, 0, 0,);
-     display: flex;
-     align-items: left;
-     /* padding: 0 10px; */
-     text-decoration: none;
-     border: none;
-     cursor: pointer;
+    width: auto;
+    height: 40px;
+    margin: 10px;
+    background-color: rgba(0, 0, 0, 0, );
+    display: flex;
+    align-items: left;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
 }
 
-    .profile-button:hover {
-        /* background-color: #004445; */
-        transform: scale(1.07);
-    }
+.profile-button:hover {
+    transform: scale(1.07);
+}
 
 .message-button {
-   padding-left: 10px;
+    padding-left: 10px;
 }
 
-    .message-button:hover {
-        /* background-color: #004445; */
-        transform: scale(1.07);
-    }
+.message-button:hover {
+    /* background-color: #004445; */
+    transform: scale(1.07);
+}
 
 #profile-img {
     /* height: 40px; */
@@ -80,3 +77,9 @@ body {
     /* height: 40px; */
 }
 
+.open-close-nav {
+    display: flex;
+    justify-content: flex-start;
+    margin-top: 0;
+    margin-bottom: 790px;
+}
