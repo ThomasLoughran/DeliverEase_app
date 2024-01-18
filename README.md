@@ -41,6 +41,8 @@ Our app solves these challenges currently faced by RainForestRetail:
 Assumptions we have made with this scenario:
 - The warehouses are in stock with the order's products
 - There is a van for every driver
+- Driver will only use an iPhone 12 Pro to login to account
+- Manager will only use a laptop to login to account
 
 ## 1.2 Business Case & Risk Register
 
