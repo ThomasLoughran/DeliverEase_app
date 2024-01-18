@@ -10,7 +10,6 @@ import messageIcon from '../assets/message-icon-white.png';
 import activeMessageIcon from '../assets/message-icon-white-active.png'
 import MessageModal from './MessageModal';
 import NavLogo from '../assets/menu-icon.png';
-import CloseNav from '../assets/menu-close-icon.png';
 
 
 const NavBar = () => {
@@ -21,7 +20,6 @@ const NavBar = () => {
     const [orders, setOrders] = useState([])
     const [notificationRefresh, setNotificationRefresh] = useState(true);
     const [navOpen, setNavOpen] = useState(false)
-    // const [ordersLoaded, setOrdersLoaded] = useState(false)
 
     const handleLogout = () => {
         logoutUser();
@@ -31,15 +29,9 @@ const NavBar = () => {
 
     useEffect(() => {
 
-        console.log(notificationRefresh)
-
-
-
         if (user.role == 'MANAGER') {
             fetchIssues()
         }
-
-
 
     }, [user.role, openMessageListModal, notificationRefresh])
 
@@ -62,20 +54,11 @@ const NavBar = () => {
             }
 
             setOrders(data);
-            console.log("This is data", data);
 
         } catch (error) {
             console.error('Error during receiving messages:', error);
         }
-
-        // setOrdersLoaded(true);
     }
-
-
-
-
-
-
 
     return (
         <>
@@ -97,7 +80,6 @@ const NavBar = () => {
                                 alt={orders.length > 0 && notificationRefresh ? "New messages icon" : "message Icon"}
                                 onClick={() => {
                                     setOpenMessageListModal(true)
-                                    console.log("triggered")
                                     setNotificationRefresh(false)
                                     setOrders([])
                                 }
@@ -107,8 +89,6 @@ const NavBar = () => {
                         )}
                         {openMessageListModal && <MessageModal closeModal={setOpenMessageListModal} />}
                     </div>
-
-
 
 
                     {user?.role === 'MANAGER' && (

@@ -60,7 +60,6 @@ const CurrentRouteOrder = () => {
 
     const markOrderAsCompleted = async (orderId) => {
         try {
-            console.log(orderId, 'this is order id');
             const response = await fetch(`http://localhost:8080/orders/complete/${orderId}?isComplete=true`, {
                 method: 'PATCH',
                 headers: { "Content-Type": "application/json" },
@@ -82,7 +81,6 @@ const CurrentRouteOrder = () => {
         try {
             const nextOrderIndex = data.orderId.indexOf(currentOrderId) + 1;
             setShowIndex(showIndex + 1);
-            console.log(nextOrderIndex, "this is next order id");
     
             if (nextOrderIndex < data.orderId.length) {
                 const nextOrderId = data.orderId[nextOrderIndex];
@@ -115,7 +113,6 @@ const CurrentRouteOrder = () => {
     const handleIssueSubmit = async () => {
         if (selectedIssue !== null && currentOrder) {
             try {
-                console.log('Submitting issue:', selectedIssue);
                 const response = await fetch(`http://localhost:8080/orders/issue`, {
                     method: 'PATCH',
                     headers: { "Content-Type": "application/json" },
@@ -129,7 +126,6 @@ const CurrentRouteOrder = () => {
                 if (!response.ok) {
                     throw new Error(`Failed to submit issue: ${response.status} ${response.statusText}`);
                 }
-                console.log('Issue submitted!');
 
 
                 fetchNextOrder();

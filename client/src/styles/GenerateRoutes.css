@@ -1,0 +1,37 @@
+.generate-routes-component {
+    margin-top: 70px;
+    /* margin: 20px; */
+    width: 600px;
+}
+
+.generate-routes-component h2 {
+    font-size: 30px;
+    margin-bottom: 10px;
+}
+
+.generate-routes-component p {
+    color: #2c786c;
+    font-size: 24px;
+}
+
+.generate-routes-component label {
+    margin-top: 20px;
+    display: block;
+}
+
+.generate-routes-component input {
+    padding: 8px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    outline: none;
+}
+
+.generate-routes-component button {
+    padding: 10px 16px;
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+    margin-top: 10px;
+}
+
