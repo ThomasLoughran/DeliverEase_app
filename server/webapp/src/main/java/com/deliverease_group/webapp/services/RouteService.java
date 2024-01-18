@@ -331,4 +331,16 @@ public class RouteService {
     public Route findRouteByDriverIdAndDate(Long driverId, LocalDate localDate) {
         return routeRepository.findRouteByDriverIdAndDate(driverId, ZonedDateTime.of(localDate, localDate.atStartOfDay().toLocalTime(), UTC));
     }
+
+    public List<Order> getAllOrdersInRoute(long routeId) {
+        ArrayList<Order> orderList = new ArrayList<>();
+
+        Route route = routeRepository.findById(routeId).get();
+
+        for (Long orderId : route.getOrderId()){
+            orderList.add(orderRepository.findById(orderId).get());
+        }
+
+        return orderList;
+    }
 }
