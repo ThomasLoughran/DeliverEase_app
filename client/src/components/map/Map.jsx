@@ -22,7 +22,12 @@ const Map = ({currentOrder, previousOrder}) => {
   
   const [start, setStart] = useState([previousOrder.latitude, previousOrder.longitude]);
   const [end, setEnd] = useState([currentOrder.latitude, currentOrder.longitude]);
-  
+  const [key, setKey] = useState(0);
+
+  useEffect(() => {
+    setKey(key+1)
+
+  }, [currentOrder])
 
   const maps = {
     base: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -34,7 +39,7 @@ const Map = ({currentOrder, previousOrder}) => {
       attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
       url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
     />
-    <Routing currentOrder={currentOrder} previousOrder={previousOrder}/>
+    <Routing key={key} currentOrder={currentOrder} previousOrder={previousOrder}/>
   </MapContainer>)
   
 };

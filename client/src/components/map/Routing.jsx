@@ -14,22 +14,25 @@ export default function Routing({currentOrder, previousOrder}) {
     console.log("previous", previousOrder.latitude, previousOrder.longitude)
     console.log("current", currentOrder.latitude, currentOrder.longitude)
 
-    if (previousOrder && currentOrder) {
+    if (previousOrder) {
 
       if (!map) return;
 
     const routingControl = L.Routing.control({
       waypoints: [L.latLng(previousOrder.latitude, previousOrder.longitude), L.latLng(currentOrder.latitude, currentOrder.longitude)],
-      routeWhileDragging: true,
+      // routeWhileDragging: true,
     }).addTo(map);
 
-    return () => map.removeControl(routingControl);
-    // return map;
+
+    return () =>{
+      console.log("this is the map property", routingControl)
+      map.removeControl(routingControl);
+    }
     }
 
     
 
-  }, [map, previousOrder, currentOrder]);
+  }, [currentOrder, previousOrder]);
 
   
 
