@@ -10,6 +10,7 @@ import {
 } from "react-leaflet";
 
 import { useUser } from "../../contexts/UserContext";
+import Routing from "./Routing";
 
 
 
@@ -27,30 +28,15 @@ const Map = ({currentOrder, previousOrder}) => {
     base: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
   };
 
-  return (
-    <>
-      <MapContainer
-        center={[37.0902, -95.7129]}
-        zoom={3}
-        zoomControl={true}
-        style={{ height: "80vh", width: "100%", padding: 0 }}
-        whenCreated={map => setMap(map)}
-      >
-        
-        
-        <RoutingControl 
-          position={'topright'} 
-          start={start} 
-          end={end} 
-          color={'#757de8'} 
-        />
-            <TileLayer
-              attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-              url={maps.base}
-            />
-      </MapContainer>
-    </>
-  );
+  return(
+  <MapContainer center={[currentOrder.latitude, currentOrder.longitude]} zoom={13} style={{ height: "100vh" }}>
+    <TileLayer
+      attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+      url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+    />
+    <Routing currentOrder={currentOrder} previousOrder={previousOrder}/>
+  </MapContainer>)
+  
 };
 
 export default Map;
