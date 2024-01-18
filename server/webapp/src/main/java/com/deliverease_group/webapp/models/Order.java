@@ -32,6 +32,8 @@ public class Order {
     private Issue issue;
     private ZonedDateTime timeIssuePosted;
 
+    private int currentPositionInRoute;
+
     public Order() {
 
     }
@@ -50,6 +52,7 @@ public class Order {
         this.isFragile = isFragile;
         this.issue = null;
         this.timeIssuePosted = timeIssuePosted;
+        this.currentPositionInRoute = -1;
     }
 
     public Long getId() {
@@ -66,6 +69,14 @@ public class Order {
 
     public void setDistributionCentre(DistributionCentre distributionCentre) {
         this.distributionCentre = distributionCentre;
+    }
+
+    public int getCurrentPositionInRoute() {
+        return currentPositionInRoute;
+    }
+
+    public void setCurrentPositionInRoute(int currentPositionInRoute) {
+        this.currentPositionInRoute = currentPositionInRoute;
     }
 
     public int getSize() {
