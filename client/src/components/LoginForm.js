@@ -31,10 +31,10 @@ const LoginForm = () => {
             alert('Please enter both ID and Password.');
             return;
         }
-    
+
         event.preventDefault()
         await fetchUser(userLoginInformation);
-        
+
     }
 
     const fetchUser = async (userDetails) => {
@@ -56,23 +56,14 @@ const LoginForm = () => {
             }
 
             loginUser(data);
-            console.log("This is data", data);
-            console.log(data.role === "MANAGER", "this should be true")
-
 
             if (data.role === "MANAGER") {
-                navigate("/manager/routes", {replace: true})
+                navigate("/manager/routes", { replace: true })
             }
 
             if (data.role === "DRIVER") {
                 navigate("/driver/routes")
             }
-
-
-
-
-            // navigate("/", { replace: true });
-
         } catch (error) {
             console.error('Error during login:', error);
         }
@@ -83,38 +74,38 @@ const LoginForm = () => {
 
         <>
 
-        <div className="login-page">
-            
-            <img
-                src={lightLogo}
-                alt="Logo"
-                className="logo"
-                style={{ width: '400px', height: 'auto' }}
-            />
+            <div className="login-page">
 
-            <form id="login-form" onSubmit={handleLogin}>
-                <label htmlFor="login-form">Please enter your details:</label>
-                <input
-                    id="userId"
-                    name="id"
-                    type="id"
-                    placeholder="Please enter your id"
-                    value={userLoginInformation.id}
-                    onChange={handleUserLoginInformationChange}
+                <img
+                    src={lightLogo}
+                    alt="Logo"
+                    className="logo"
+                    style={{ width: '400px', height: 'auto' }}
                 />
 
-                <input
-                    id="userPassword"
-                    name="password"
-                    type="password"
-                    placeholder="Please enter your Password"
-                    value={userLoginInformation.password}
-                    onChange={handleUserLoginInformationChange}
-                />
-                <button type="submit">Login</button>
+                <form id="login-form" onSubmit={handleLogin}>
+                    <label htmlFor="login-form">Please enter your details:</label>
+                    <input
+                        id="userId"
+                        name="id"
+                        type="id"
+                        placeholder="Please enter your id"
+                        value={userLoginInformation.id}
+                        onChange={handleUserLoginInformationChange}
+                    />
 
-            </form>
-        </div>
+                    <input
+                        id="userPassword"
+                        name="password"
+                        type="password"
+                        placeholder="Please enter your Password"
+                        value={userLoginInformation.password}
+                        onChange={handleUserLoginInformationChange}
+                    />
+                    <button type="submit">Login</button>
+
+                </form>
+            </div>
 
 
         </>

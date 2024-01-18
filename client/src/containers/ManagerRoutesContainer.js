@@ -17,7 +17,6 @@ const ManagerRoutesContainer = () => {
 
     const showTodayRoutes = (showtoggle) => {
         setLoadRoutes(showtoggle);
-        console.log(loadRoutes);
     }
 
     return (

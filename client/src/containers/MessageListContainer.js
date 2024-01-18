@@ -5,18 +5,14 @@ const MessageListContainer = () => {
 
     const [openModal, setOpenModal] = useState(false);
 
-
-
-
-    return (  
+    return (
 
         <>
-        {openModal && <MessageModal closeModal={setOpenModal}/>}
-        {!openModal && <button onClick={() => setOpenModal(true)}>Messages</button>}
-
+            {openModal && <MessageModal closeModal={setOpenModal} />}
+            {!openModal && <button onClick={() => setOpenModal(true)}>Messages</button>}
         </>
 
-       );
+    );
 }
- 
+
 export default MessageListContainer;

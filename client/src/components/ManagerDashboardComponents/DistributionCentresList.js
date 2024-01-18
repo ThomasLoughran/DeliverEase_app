@@ -2,10 +2,7 @@ import '../../styles/DistributionCentresList.css'
 
 const DistributionCentresList = ({ distributionCentres }) => {
 
-    // console.log(distributionCentres);
-
     const DistributionCentresListComponents = distributionCentres.map((distributionCentre) => {
-        // console.log(distributionCentre);
         return (
 
             <li className="distribution-centre-card">
