@@ -7,11 +7,6 @@ export const ManagerProtectedRoute = () => {
 
     const { user } = useUser();
 
-    useEffect(() => {
-        
-
-    }, [user])
-
 
 if (user.role !== 'MANAGER') {
     {console.log("Cannot access page due to invalid user type", user.role)}

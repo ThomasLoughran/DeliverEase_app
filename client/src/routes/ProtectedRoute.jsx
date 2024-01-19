@@ -7,11 +7,6 @@ export const ProtectedRoute = () => {
 
     const { user } = useUser();
 
-    useEffect(() => {
-        
-
-    }, [user])
-
 
 if (!user) {
     {console.log("User not logged in", user)}
