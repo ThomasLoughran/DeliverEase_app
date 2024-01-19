@@ -17,49 +17,25 @@ export default function Routing({currentOrder, previousOrder,orderWayPoints}) {
     console.log("current", currentOrder.latitude, currentOrder.longitude)
     setCount(count+1)
     if (count<2){
-
-
     
     const coords = orderWayPoints.map((waypoint)=>{
         return L.latLng(waypoint[0],waypoint[1])
       }) 
-
-    //console.log(coords);
-    
-    
-    // const routingControl = L.Routing.control({
-    //   waypoints: coords,
-    //   lineOptions : {
-    //     draggableWaypoints:false
-    //   }
-    //   //routeWhileDragging: true
-    // }).addTo(map);
 
     const routingControl = L.Routing.control({
       waypoints: coords,
       fitSelectedRoutes: true,
       draggableWaypoints: false,
       routeWhileDragging: false,
-      //createMarker: function() { return null; },
       lineOptions: {
           addWaypoints: false,
           styles: [{ color: '#242c81', weight: 2 }]
       }
      }).addTo(map);
   
-
-    // return () =>{
-    //   //console.log("this is the map property", routingControl)
-    //   //if (!map.routingControl){
-    //   //map.removeControl(routingControl);
-    //   //}
-    // }
-   }
-    
+   }    
 
   }, [orderWayPoints]);
-
-  
 
   return null;
 }
