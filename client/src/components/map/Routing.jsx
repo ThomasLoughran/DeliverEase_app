@@ -24,6 +24,7 @@ export default function Routing({currentOrder, previousOrder,orderWayPoints}) {
 
     const routingControl = L.Routing.control({
       waypoints: coords,
+      collapsible: true,
       fitSelectedRoutes: true,
       draggableWaypoints: false,
       routeWhileDragging: false,
