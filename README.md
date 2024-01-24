@@ -22,10 +22,12 @@
    - 4.2 [Wireframe Diagram](#42-wireframe-diagram)
    - 4.3 [UML Diagram](#43-uml-diagram)
    - 4.4 [ER Diagram](#44-er-diagram)
+   - 4.5 [Retrospective](#45-retrospective)
 5. [App Functionality](#5-app-functionality)
    - 5.1 [MVP](#51-mvp)
    - 5.2 [Extensions](#52-extensions)
    - 5.3 [Routes](#53-routes-used-in-the-frontend)
+
 
 ## Introduction
 Welcome to our full stack application allowing delivery drivers and managers to better communicate.
@@ -60,7 +62,7 @@ The following Business Plan details the advantages of DeliverEase for RainForest
 - [Business case](https://github.com/ThomasLoughran/DeliverEase_app/blob/README/business_case.pdf)
 
 ## 2. Technologies & Libraries
-- Java
+- Java 17
 - JavaScript
 - HTML
 - CSS
@@ -93,11 +95,7 @@ createdb deliverEase
 ```bash 
 npi i
 ```
-3. In the terminal to install the React Router enter:
-```bash
-npm install react-router-dom
-```
-4. Start running the app in the terminal with:
+3. Start running the app in the terminal with:
 ```bash
 npm start
 ```
@@ -119,6 +117,10 @@ npm start
 ## 4.4 ER Diagram:
 
 ![er diagram](https://github.com/ThomasLoughran/DeliverEase_app/blob/README/DeliverEaseER.drawio.png)
+
+## 4.5 Retrospective:
+
+![retrospective diagram](https://github.com/ThomasLoughran/DeliverEase_app/blob/README/Retropective.png)
 
 ## 5. App Functionality 
 
@@ -171,6 +173,17 @@ npm start
 - Method: `POST`
 - URL: `http://localhost:8080/drivers/new-driver`
 - This will create a new driver record and add it to the list of drivers. 
+- Example JSON: 
+```bash
+{
+    "name" : "Albert",
+    "password" : "drowssap",
+    "distributionCentreId" : 1,
+    "vanCapacity" : 50,
+    "vanMaxWeight" : 1000,
+    "vanName" : "The Albimobile"
+}
+```
 
 7. **Create routes**
 - Method: `POST`
@@ -201,3 +214,11 @@ npm start
 - Method: `PATCH`
 - URL: `http://localhost:8080/employees/update-password`
 - This will let the employee change their password if they can enter their current password and the new password matches the confirm new password.
+- Example JSON:
+```bash
+{
+    "id" : 10,
+    "oldPassword" : "password",
+    "newPassword" : "drowssap1"
+}
+```
