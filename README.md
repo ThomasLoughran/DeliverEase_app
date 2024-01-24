@@ -120,7 +120,7 @@ npm start
 
 ## 4.5 Retrospective:
 
-![retrospective diagram](https://github.com/ThomasLoughran/DeliverEase_app/blob/README/Retropective.png)
+![retrospective diagram](https://github.com/ThomasLoughran/DeliverEase_app/blob/README/Retrospective.png)
 
 ## 5. App Functionality 
 
