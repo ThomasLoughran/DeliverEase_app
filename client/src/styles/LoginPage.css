@@ -5,7 +5,7 @@
     align-items: center;
     flex-direction: column;
     justify-content: center;
-    color: #004445; 
+    color: #004445;
 }
 
 #login-form {
@@ -42,12 +42,3 @@ button {
 button:hover {
     background-color: #2c786c;
 }
-
-
-
-
-
-
-
-
-

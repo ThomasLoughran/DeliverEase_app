@@ -13,18 +13,16 @@ import { useUser } from "../../contexts/UserContext";
 import Routing from "./Routing";
 
 
-
-
 import RoutingControl from './RoutingControl'
 
-const Map = ({currentOrder, previousOrder,data,distCentre}) => {
+const Map = ({ currentOrder, previousOrder, data, distCentre }) => {
   const [map, setMap] = useState(null);
-  
+
   const [start, setStart] = useState([previousOrder.latitude, previousOrder.longitude]);
   const [end, setEnd] = useState([currentOrder.latitude, currentOrder.longitude]);
   const [key, setKey] = useState(0);
-  const [allOrders,setAllOrders] = useState([]);
-  const [orderWayPoints,setOrderWayPoints] = useState([])
+  const [allOrders, setAllOrders] = useState([]);
+  const [orderWayPoints, setOrderWayPoints] = useState([])
 
   //const orderPoints = [];
 
@@ -39,22 +37,22 @@ const Map = ({currentOrder, previousOrder,data,distCentre}) => {
 
 
   const fetchAllOrders = async () => {
-    
+
     try {
       const orderPoints = [];
       const response = await fetch(`http://localhost:8080/routes/${data.id}/all-orders`);
       const orderData = await response.json();
-      
-      orderPoints.push([distCentre.latitude,distCentre.longitude])
-  
-      for(let i=0;i<orderData.length;i++){
-        orderPoints.push([orderData[i].latitude,orderData[i].longitude])
+
+      orderPoints.push([distCentre.latitude, distCentre.longitude])
+
+      for (let i = 0; i < orderData.length; i++) {
+        orderPoints.push([orderData[i].latitude, orderData[i].longitude])
       }
 
-      orderPoints.push([distCentre.latitude,distCentre.longitude])
-      
+      orderPoints.push([distCentre.latitude, distCentre.longitude])
+
       setOrderWayPoints(orderPoints)
-       
+
       //console.log(orderPoints);
 
 
@@ -65,31 +63,31 @@ const Map = ({currentOrder, previousOrder,data,distCentre}) => {
     }
   };
 
-  
 
- 
+
+
 
   // setOrderWayPoints([orderPoints,[distCentre.latitude,distCentre.longitude]])
 
-  
+
 
   useEffect(() => {
     fetchAllOrders();
-  }, []); 
+  }, []);
 
   const maps = {
     base: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
   };
 
-  return(
-  <MapContainer center={[currentOrder.latitude, currentOrder.longitude]} zoom={13} style={{ height: "100vh" }}>
-    <TileLayer
-      attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-      url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-    />
-    <Routing currentOrder={currentOrder} previousOrder={previousOrder} orderWayPoints={orderWayPoints}/>
-  </MapContainer>)
-  
+  return (
+    <MapContainer center={[currentOrder.latitude, currentOrder.longitude]} zoom={13} style={{ height: "100vh" }}>
+      <TileLayer
+        attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+      />
+      <Routing currentOrder={currentOrder} previousOrder={previousOrder} orderWayPoints={orderWayPoints} />
+    </MapContainer>)
+
 };
 
 export default Map;

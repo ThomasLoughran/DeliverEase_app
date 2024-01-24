@@ -8,17 +8,11 @@ const MessageList = ({ setNotificationRefresh }) => {
     const { user } = useUser();
     const [orders, setOrders] = useState([]);
     const [distCentreId, setDistCentreId] = useState(user.distributionCentre.id);
-    const [orderId, setOrderId] = useState(null); // set to null by default? then switches based on the button clicked.
-
-
-    // In this file a "message" is an order. 
-    // fetch all orders that have an issue.
+    const [orderId, setOrderId] = useState(null);
 
     useEffect(() => {
         fetchIssues();
     }, [orderId])
-
-
 
     const handlePatchManagerReviewed = async (orderId) => {
         try {
@@ -29,26 +23,20 @@ const MessageList = ({ setNotificationRefresh }) => {
         }
     };
 
-
     const fetchIssues = async () => {
         try {
             const response = await fetch(`http://localhost:8080/orders/issue/all?distCentreId=${distCentreId}&isManagerReviewed=${false}`, {
                 method: "GET",
-
             });
-
             if (!response.ok) {
                 throw new Error(`Failed to receive messages: ${response.status} ${response.statusText}`);
             }
 
             const data = await response.json();
-
             if (!data) {
                 throw new Error("Empty response received");
             }
-
             setOrders(data);
-
         } catch (error) {
             console.error('Error during receiving messages:', error);
         }
@@ -58,8 +46,6 @@ const MessageList = ({ setNotificationRefresh }) => {
         try {
             const response = await fetch(`http://localhost:8080/orders/manager-review/${orderId}?isManagerReviewed=true`, {
                 method: "PATCH",
-
-
             });
 
             if (!response.ok) {
@@ -78,7 +64,6 @@ const MessageList = ({ setNotificationRefresh }) => {
             console.error('Error sending patched message:', error);
         }
     }
-
 
     const messageListComponents = orders.length > 0 ? (
         orders.map((order) => (

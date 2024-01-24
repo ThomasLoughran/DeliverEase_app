@@ -1,16 +1,13 @@
 import { Outlet, RouterProvider, createBrowserRouter } from "react-router-dom";
-import Dashboard from "../pages/Dashboard";
 import LoginPage from "../pages/LoginPage";
 import { ProtectedRoute } from "./ProtectedRoute";
 import { DriverProtectedRoute } from "./DriverProtectedRoute";
 import { ManagerProtectedRoute } from "./ManagerProtectedRoute";
 
-
 import LogoutPage from "../pages/LogoutPage";
 import { useUser } from "../contexts/UserContext"
 import HomePage from "../pages/HomePage";
 import NavBar from "../components/NavBar";
-import Profile from "../components/Profile";
 import DriversListContainer from "../containers/DriversListContainer";
 import DistributionCentreListContainer from "../containers/DistributionCentreListContainer";
 import ManagerRoutesContainer from "../containers/ManagerRoutesContainer";
@@ -24,19 +21,15 @@ const Routes = () => {
     const LoggedInLayout = () => {
         return (
             <div className="wrapper">
-                    <NavBar/>
+                <NavBar />
                 <div className="main">
                     <div className="contentContainer">
-                        <Outlet/>
+                        <Outlet />
                     </div>
                 </div>
             </div>
         )
     }
-
-
-
-
 
     const { user } = useUser();
 
@@ -47,39 +40,39 @@ const Routes = () => {
             children: [
                 {
                     path: "/",
-                    element: <LoggedInLayout/>,
+                    element: <LoggedInLayout />,
                     children: [
                         {
                             path: "/manager",
-                            element: <ManagerProtectedRoute/>,
+                            element: <ManagerProtectedRoute />,
                             children: [
                                 {
-                                    path:"/manager/routes",
-                                    element: <ManagerRoutesContainer/>
+                                    path: "/manager/routes",
+                                    element: <ManagerRoutesContainer />
                                 },
                                 {
-                                    path:"/manager/drivers",
-                                    element: <DriversListContainer/>
+                                    path: "/manager/drivers",
+                                    element: <DriversListContainer />
                                 },
                                 {
-                                    path:"/manager/distribution-centres",
-                                    element: <DistributionCentreListContainer/>
+                                    path: "/manager/distribution-centres",
+                                    element: <DistributionCentreListContainer />
                                 },
                             ]
                         },
                         {
                             path: "/driver",
-                            element: <DriverProtectedRoute/>,
+                            element: <DriverProtectedRoute />,
                             children: [
                                 {
-                                    path:"/driver/routes",
-                                    element: <CurrentRouteOrder/>
+                                    path: "/driver/routes",
+                                    element: <CurrentRouteOrder />
                                 },
                                 {
-                                    path:"/driver/driver-availability",
-                                    element: <DriverAvailabilityCalendar/>
+                                    path: "/driver/driver-availability",
+                                    element: <DriverAvailabilityCalendar />
                                 },
-                                
+
                             ]
                         }
                     ]
@@ -99,7 +92,7 @@ const Routes = () => {
     const routesForNotLoggedInOnly = [
         {
             path: "/",
-            element: <HomePage/>,
+            element: <HomePage />,
         },
         {
             path: "/login",
@@ -107,15 +100,10 @@ const Routes = () => {
         }
     ]
 
-
-
-
     const router = createBrowserRouter([
         ...(!user ? routesForNotLoggedInOnly : []),
         ...routesForLoggedInOnly,
     ])
-
-
 
     return (
         <RouterProvider router={router} />

@@ -1,11 +1,11 @@
 import CurrentRouteOrder from "../components/DriverDashboard/CurrentRouteOrder";
 
 const DriverRoutesContainer = () => {
-    return ( 
+    return (
         <>
-        <CurrentRouteOrder/>
+            <CurrentRouteOrder />
         </>
-     );
+    );
 }
- 
+
 export default DriverRoutesContainer;

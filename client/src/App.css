@@ -39,6 +39,7 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
@@ -61,9 +62,9 @@
 
 body {
   /* padding-right: 10vw; */
-    margin: 0;
-    font-family: 'Arial', sans-serif;
-    justify-content: center;
-    background: #faf5e4; 
-    color: #004445; 
+  margin: 0;
+  font-family: 'Arial', sans-serif;
+  justify-content: center;
+  background: #faf5e4;
+  color: #004445;
 }

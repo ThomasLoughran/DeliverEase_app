@@ -4,10 +4,7 @@ import { useUser } from "../contexts/UserContext";
 
 
 const Dashboard = () => {
-
-
     const { user } = useUser();
-
 
     if (user.role === "MANAGER") {
         return (
@@ -17,7 +14,6 @@ const Dashboard = () => {
         )
     }
 
-
     if (user.role === "DRIVER") {
         return (
             <>
@@ -25,7 +21,6 @@ const Dashboard = () => {
             </>
         )
     }
-
 
     return (
         <>

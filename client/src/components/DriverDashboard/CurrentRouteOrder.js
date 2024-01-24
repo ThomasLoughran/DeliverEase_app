@@ -12,19 +12,11 @@ const CurrentRouteOrder = () => {
     const [showIndex, setShowIndex] = useState(0);
     const [issueSubmitted, setIssueSubmitted] = useState(false);
 
-
-
-    useEffect( () => {
+    useEffect(() => {
 
         fetchCurrentOrder()
 
     })
-
-
-
-
-
-
 
     const fetchCurrentOrder = async () => {
         try {
@@ -38,37 +30,30 @@ const CurrentRouteOrder = () => {
 
             const responseData = await response.json();
 
-        if (responseData.orderId && responseData.orderId.length > 0) {
+            if (responseData.orderId && responseData.orderId.length > 0) {
 
+                const orderResponse = await fetch(`http://localhost:8080/routes/driver/${user.id}/currentOrder?localDate=${formattedDate}`);
 
-            
+                if (orderResponse.ok) {
+                    const orderData = await orderResponse.json();
 
-                    const orderResponse = await fetch(`http://localhost:8080/routes/driver/${user.id}/currentOrder?localDate=${formattedDate}`);
-
-                    if (orderResponse.ok) {
-                        const orderData = await orderResponse.json();
-
-                        setShowIndex(orderResponse.currentPositionInRoute)
-                        setCurrentOrder(orderData);
-                        setShowNextOrder(false)
-                        setData(responseData);
-                    } else {
-                        setCurrentOrder(null);
-                        setData(null);
-                        setShowNextOrder(false)
-                    }
-                
+                    setShowIndex(orderResponse.currentPositionInRoute)
+                    setCurrentOrder(orderData);
+                    setShowNextOrder(false)
+                    setData(responseData);
+                } else {
+                    setCurrentOrder(null);
+                    setData(null);
+                    setShowNextOrder(false)
+                }
             } else {
                 setCurrentOrder(null);
                 setData(null);
                 setShowNextOrder(false)
-
             }
         } catch (error) {
             console.error('Error fetching routes data:', error);
         }
-
-
     };
 
     useEffect(() => {
@@ -88,41 +73,31 @@ const CurrentRouteOrder = () => {
                 body: JSON.stringify({
                 }),
             });
-    
+
             if (!response.ok) {
                 throw new Error(`Failed to mark order as completed: ${response.status} ${response.statusText}`);
             }
-    
             await fetchNextOrder(orderId);
         } catch (error) {
             console.error('Error marking order as completed:', error);
         }
     };
-    
+
     const fetchNextOrder = async (currentOrderId) => {
         try {
-
-         
-            // console.log(nextOrderIndex, "this is next order id");
-
-    
             if (currentOrder.currentPositionInRoute < data.orderId.length) {
-                // const nextOrderId = data.orderId[nextOrderIndex];
 
                 const currentDate = new Date();
                 const formattedDate = currentDate.toISOString().split('T')[0];
                 const nextOrderResponse = await fetch(`http://localhost:8080/routes/driver/${user.id}/currentOrder?localDate=${formattedDate}`);
-    
+
                 if (nextOrderResponse.ok) {
                     const nextOrderData = await nextOrderResponse.json();
                     setCurrentOrder(nextOrderData);
                     setShowNextOrder(true);
 
                     const nextOrderIndex = nextOrderData;
-                    console.log(currentOrder,"This is before setShowIndex")
                     setShowIndex(showIndex + 1);
-
-
                 } else {
                     setCurrentOrder(null);
                     setShowNextOrder(false);
@@ -139,7 +114,6 @@ const CurrentRouteOrder = () => {
     const handleSuccessfulDelivery = () => {
         if (currentOrder) {
             markOrderAsCompleted(currentOrder.id);
-            
         }
     };
 
@@ -159,7 +133,6 @@ const CurrentRouteOrder = () => {
                 if (!response.ok) {
                     throw new Error(`Failed to submit issue: ${response.status} ${response.statusText}`);
                 }
-
 
                 fetchNextOrder();
                 setIssueSubmitted(true);
@@ -183,7 +156,7 @@ const CurrentRouteOrder = () => {
                         handleIssueSubmit={handleIssueSubmit}
                         issueSubmitted={issueSubmitted}
                         setIssueSubmitted={setIssueSubmitted}
-                        data = {data}
+                        data={data}
                     />
                 </div>
             ) : (

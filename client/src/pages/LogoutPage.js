@@ -9,14 +9,10 @@ const LogoutPage = () => {
 
     const handleLogout = () => {
         logoutUser();
-        navigate("/", {replace: true});
+        navigate("/", { replace: true });
     }
 
-        
-
-
-
-    return ( 
+    return (
         <button onClick={handleLogout}>Logout</button>
     );
 }

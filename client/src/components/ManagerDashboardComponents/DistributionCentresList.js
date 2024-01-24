@@ -12,12 +12,10 @@ const DistributionCentresList = ({ distributionCentres }) => {
         )
     })
 
-
-
-    return ( 
-            <ul className='distribution-centres-list'>
+    return (
+        <ul className='distribution-centres-list'>
             {distributionCentres ? DistributionCentresListComponents : <p>Loading</p>}
-            </ul>
+        </ul>
     );
 }
 

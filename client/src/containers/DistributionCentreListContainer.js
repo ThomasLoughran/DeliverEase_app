@@ -1,12 +1,9 @@
-
 import DistributionCentresList from "../components/ManagerDashboardComponents/DistributionCentresList.js";
 import { useEffect, useState } from "react";
-
 
 const DistributionCentreListContainer = () => {
 
     const [distributionCentres, setDistributionCentres] = useState([]);
-
 
     useEffect(() => {
         fetchDistributionCentres();
@@ -34,15 +31,13 @@ const DistributionCentreListContainer = () => {
         } catch (error) {
             console.error('Error getting distribution centres:', error);
         }
-
     }
 
-
-    return ( 
+    return (
         <>
-        <h1 style={{'margin-top':'40px'}}>Distribution Centres:</h1>
-        <DistributionCentresList distributionCentres={distributionCentres}/>
-    </>
+            <h1 style={{ 'margin-top': '40px' }}>Distribution Centres:</h1>
+            <DistributionCentresList distributionCentres={distributionCentres} />
+        </>
     );
 
 }

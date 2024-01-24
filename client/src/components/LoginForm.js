@@ -1,21 +1,17 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useUser } from "../contexts/UserContext";
 import '../styles/LoginPage.css';
 
 import lightLogo from '../assets/adjusted-size-logos/light-mode-logo.png';
 
-
 const LoginForm = () => {
-
-
     const navigate = useNavigate();
 
     const [userLoginInformation, setUserLoginInformation] = useState({
         id: '',
         password: '',
     })
-
 
     const { loginUser } = useUser();
 
@@ -34,7 +30,6 @@ const LoginForm = () => {
 
         event.preventDefault()
         await fetchUser(userLoginInformation);
-
     }
 
     const fetchUser = async (userDetails) => {
@@ -69,13 +64,9 @@ const LoginForm = () => {
         }
     }
 
-
     return (
-
         <>
-
             <div className="login-page">
-
                 <img
                     src={lightLogo}
                     alt="Logo"
@@ -103,15 +94,9 @@ const LoginForm = () => {
                         onChange={handleUserLoginInformationChange}
                     />
                     <button type="submit">Login</button>
-
                 </form>
             </div>
-
-
         </>
-
-
-
     );
 }
 

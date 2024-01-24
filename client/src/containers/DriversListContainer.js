@@ -4,7 +4,6 @@ import Modal from "../components/Modal";
 
 const DriversListContainer = () => {
 
-
     const [drivers, setDrivers] = useState([]);
     const [selectedCentreId, setSelectedCentreId] = useState(null);
     const [openModal, setOpenModal] = useState(false);
@@ -13,10 +12,9 @@ const DriversListContainer = () => {
     useEffect(() => {
 
         fetchDistributionCentres();
-        if (selectedCentreId !== null) {    
+        if (selectedCentreId !== null) {
             fetchDrivers(selectedCentreId);
         }
-        
 
     }, [selectedCentreId])
 
@@ -66,31 +64,24 @@ const DriversListContainer = () => {
         } catch (error) {
             console.error('Error getting drivers:', error);
         }
-
     }
 
-
-
-
-    return ( 
-
+    return (
         <>
-        <h1>Find drivers by distribution centre:</h1>
-        <div className="drivers-list-container">
-            <DriversList 
-            drivers={drivers} 
-            distributionCentres={distributionCentres} 
-            selectedCentreId={selectedCentreId} 
-            setSelectedCentreId={setSelectedCentreId} 
-            setOpenModal={setOpenModal} 
-            openModal={openModal}/>
-            {openModal && 
-            <Modal closeModal={setOpenModal}/>
-            }
-        </div>
+            <h1>Find drivers by distribution centre:</h1>
+            <div className="drivers-list-container">
+                <DriversList
+                    drivers={drivers}
+                    distributionCentres={distributionCentres}
+                    selectedCentreId={selectedCentreId}
+                    setSelectedCentreId={setSelectedCentreId}
+                    setOpenModal={setOpenModal}
+                    openModal={openModal} />
+                {openModal &&
+                    <Modal closeModal={setOpenModal} />
+                }
+            </div>
         </>
-
-
     );
 }
 

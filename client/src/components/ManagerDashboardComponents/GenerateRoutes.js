@@ -2,11 +2,9 @@ import { useState } from "react";
 import { useUser } from '../../contexts/UserContext';
 import '../../styles/GenerateRoutes.css'
 
-const GenerateRoutes = ({showTodayRoutes}) => {
+const GenerateRoutes = ({ showTodayRoutes }) => {
     const { user } = useUser();
     const [localDate, setLocalDate] = useState(new Date());
-
-
 
     const formatDate = (date) => {
         return date.toLocaleDateString();
@@ -17,7 +15,7 @@ const GenerateRoutes = ({showTodayRoutes}) => {
     };
 
     const handleGenerateRoutes = async () => {
-        
+
         try {
             const formattedDate = formatDate(localDate);
 
@@ -28,12 +26,10 @@ const GenerateRoutes = ({showTodayRoutes}) => {
             });
 
             const data = await response.text();
-                alert(data);
-                if (data === "Routes successfully created"){
-                    showTodayRoutes(true);
-                }
-
-
+            alert(data);
+            if (data === "Routes successfully created") {
+                showTodayRoutes(true);
+            }
         } catch (error) {
             console.error('Error generating routes:', error);
         }
@@ -41,18 +37,18 @@ const GenerateRoutes = ({showTodayRoutes}) => {
 
     return (
         <>
-        <div className="generate-routes-component">
-            <h2>Generate Routes</h2>
-            <p>Select Date:</p>
-            <label>
-                Date:
-                <input
-                    type="date"
-                    value={localDate.toISOString().split('T')[0]}
-                    onChange={(e) => handleDateChange(new Date(e.target.value))} />
-            </label>
+            <div className="generate-routes-component">
+                <h2>Generate Routes</h2>
+                <p>Select Date:</p>
+                <label>
+                    Date:
+                    <input
+                        type="date"
+                        value={localDate.toISOString().split('T')[0]}
+                        onChange={(e) => handleDateChange(new Date(e.target.value))} />
+                </label>
 
-            <button onClick={handleGenerateRoutes}>Generate Routes</button>
+                <button onClick={handleGenerateRoutes}>Generate Routes</button>
             </div>
         </>
     );

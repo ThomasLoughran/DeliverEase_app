@@ -91,14 +91,15 @@ body {
 } */
 
 @media (max-width: 390px) {
-.open-close-nav {
-    display: flex;
-    justify-content: flex-start;
-    margin-top: 0;
-    margin-bottom: 790px;
-    width: 70px;
-    height: 50px;
-}}
+    .open-close-nav {
+        display: flex;
+        justify-content: flex-start;
+        margin-top: 0;
+        margin-bottom: 790px;
+        width: 70px;
+        height: 50px;
+    }
+}
 
 .open-close-nav {
     display: flex;
@@ -108,6 +109,3 @@ body {
     width: 70px;
     height: 50px;
 }
-
-
-

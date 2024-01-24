@@ -1,16 +1,24 @@
 .message-modal {
 
     /* display: none; Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
-    padding-top: 100px; /* Location of the box */
+    position: fixed;
+    /* Stay in place */
+    z-index: 1;
+    /* Sit on top */
+    padding-top: 100px;
+    /* Location of the box */
     left: 0;
     top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.5); /* Black w/ opacity */
+    width: 100%;
+    /* Full width */
+    height: 100%;
+    /* Full height */
+    overflow: auto;
+    /* Enable scroll if needed */
+    background-color: rgb(0, 0, 0);
+    /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.5);
+    /* Black w/ opacity */
     /* display: flex; */
 }
 
@@ -25,18 +33,17 @@
     display: flex;
     justify-content: space-around;
     height: 80%;
-
 }
 
 .MessageList-container {
-width: 70%;
-height: 100%;
-background: #faf5e4; 
-text-align: center;
-border-radius: 8px;
-animation-name: zoom;
-animation-duration: 0.6s;
-/* margin-right: 26%; */
+    width: 70%;
+    height: 100%;
+    background: #faf5e4;
+    text-align: center;
+    border-radius: 8px;
+    animation-name: zoom;
+    animation-duration: 0.6s;
+    /* margin-right: 26%; */
 }
 
 
@@ -48,8 +55,6 @@ animation-duration: 0.6s;
     display: flex;
 }
 
-
-
 .order-message-list {
     display: flex;
     flex-direction: column;
@@ -58,8 +63,6 @@ animation-duration: 0.6s;
     max-height: 80%;
     overflow-y: scroll;
     padding-left: 2%;
-
-
 }
 
 .order-message {
@@ -71,23 +74,26 @@ animation-duration: 0.6s;
     align-items: center;
     flex-direction: column;
     justify-content: center;
-    background: #004445; 
-    color: #faf5e4; 
+    background: #004445;
+    color: #faf5e4;
     border-radius: 8px;
     margin-bottom: 5%;
 }
 
 
 @keyframes zoom {
-    from {transform: scale(0.1)} 
-    to {transform: scale(1)}
+    from {
+        transform: scale(0.1)
+    }
+
+    to {
+        transform: scale(1)
+    }
 }
 
 .message-list-title {
     padding-bottom: 2%;
     padding-top: 2%;
-
-
 }
 
 .confirm-manager-review-button {
@@ -99,7 +105,7 @@ animation-duration: 0.6s;
 }
 
 .message-list-refresh-button {
-/* margin-bottom: 5%; */
+    /* margin-bottom: 5%; */
 }
 
 .title-and-refresh-button-container {
@@ -108,9 +114,7 @@ animation-duration: 0.6s;
     align-items: center;
 }
 
-.message-list-title {
-
-}
+.message-list-title {}
 
 .refresh-symbol {
     width: 20px;
@@ -118,7 +122,7 @@ animation-duration: 0.6s;
 }
 
 .message-list-refresh-button {
-    background-color: rgba(0,0,0,0);
+    background-color: rgba(0, 0, 0, 0);
     width: 30px;
     height: fit-content;
     display: flex;

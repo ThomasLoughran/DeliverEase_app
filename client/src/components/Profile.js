@@ -1,10 +1,9 @@
 import { useState } from 'react';
 import { useUser } from '../contexts/UserContext';
-import '../styles/Profile.css'; 
-import { Link } from 'react-router-dom';
+import '../styles/Profile.css';
 import profileIcon from '../assets/icon-location.png'
 
-const Profile = ({closeModal}) => {
+const Profile = ({ closeModal }) => {
 
     const { user } = useUser();
     const [showMore, setShowMore] = useState(false);
@@ -25,25 +24,20 @@ const Profile = ({closeModal}) => {
     const handleUpdateEmployeeForm = async (e) => {
         e.preventDefault();
 
-
         if (employeeForm.newPassword !== employeeForm.confirmNewPassword) {
             alert('Passwords do not match.');
             return;
         }
 
         try {
-            console.log(employeeForm);
             const response = await fetch('http://localhost:8080/employees/update-password', {
                 method: "PATCH",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(employeeForm)
             })
-
             //noted: data is a string (not JSON) so response must be .'text' - see below:
             const data = await response.text();
-
             alert(data);
-
             if (!response.ok) {
 
                 throw new Error(`Failed to save new password: ${response.status}. Please try again.`)
@@ -54,16 +48,14 @@ const Profile = ({closeModal}) => {
                     confirmNewPassword: "",
                 })
             }
-
         } catch (error) {
             console.error(error);
         }
-
     }
 
     return (
         <div className="profile-content">
-        <button onClick={() => closeModal(false)} className="close-modal-button">X</button>
+            <button onClick={() => closeModal(false)} className="close-modal-button">X</button>
 
             <h2>My Profile:</h2>
             <img className="profile-icon" src={profileIcon} />
@@ -132,10 +124,7 @@ const Profile = ({closeModal}) => {
                 onClick={() => setShowMore(!showMore)}>
                 {showMore ? 'Cancel' : 'Update details'}
             </button>
-
         </div>
-
-
     );
 }
 

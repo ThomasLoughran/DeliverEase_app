@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { useUser } from '../../contexts/UserContext';
 import '../../styles/RouteCalendar.css'
 
-
 const RouteCalendar = ({ loadRoute, showTodayRoutes }) => {
     const { user } = useUser();
     const [selectedDate, setSelectedDate] = useState(new Date());
@@ -75,8 +74,8 @@ const RouteCalendar = ({ loadRoute, showTodayRoutes }) => {
                 </div>
             </div>
             <div className="day-buttons">
-            <button onClick={handlePreviousDay}>Previous day</button>
-            <button onClick={handleNextDay}>Next day</button>
+                <button onClick={handlePreviousDay}>Previous day</button>
+                <button onClick={handleNextDay}>Next day</button>
             </div>
 
             {loadRoutes && (

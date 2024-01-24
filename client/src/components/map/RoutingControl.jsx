@@ -5,7 +5,7 @@ import "leaflet-routing-machine/dist/leaflet-routing-machine.css";
 
 const createRoutineMachineLayer = ({ position, start, end, color }) => {
   const instance = L.Routing.control({
-    position, 
+    position,
     collapsible: true,
     waypoints: [
       start,

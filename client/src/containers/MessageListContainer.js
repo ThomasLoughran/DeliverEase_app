@@ -11,7 +11,6 @@ const MessageListContainer = () => {
             {openModal && <MessageModal closeModal={setOpenModal} />}
             {!openModal && <button onClick={() => setOpenModal(true)}>Messages</button>}
         </>
-
     );
 }
 

@@ -11,7 +11,6 @@ import activeMessageIcon from '../assets/message-icon-white-active.png'
 import MessageModal from './MessageModal';
 import NavLogo from '../assets/menu-icon.png';
 
-
 const NavBar = () => {
     const { user, logoutUser } = useUser();
 
@@ -25,22 +24,16 @@ const NavBar = () => {
         logoutUser();
     }
 
-
-
     useEffect(() => {
-
         if (user.role == 'MANAGER') {
             fetchIssues()
         }
-
     }, [user.role, openMessageListModal, notificationRefresh])
-
 
     const fetchIssues = async () => {
         try {
             const response = await fetch(`http://localhost:8080/orders/issue/all?distCentreId=${1}&isManagerReviewed=${false}`, {
                 method: "GET",
-
             });
 
             if (!response.ok) {
@@ -48,32 +41,27 @@ const NavBar = () => {
             }
 
             const data = await response.json();
-
             if (!data) {
                 throw new Error("Empty response received");
             }
-
             setOrders(data);
-
         } catch (error) {
             console.error('Error during receiving messages:', error);
         }
     }
 
     return (
-
         <>
             {navOpen && (
                 <div className="navBar">
-                    <img 
-                    className='navLogo'
-                    src={NavLogo}
-                    onClick={() => setNavOpen(!navOpen)}/>
+                    <img
+                        className='navLogo'
+                        src={NavLogo}
+                        onClick={() => setNavOpen(!navOpen)} />
                     <div className="profile-message-container" >
                         <img id="profile-icon" src={profileIcon} onClick={() => setOpenProfileModal(true)}
                             className="profile-button" />
                         {openProfileModal && <ProfileModal closeModal={setOpenProfileModal} />}
-
                         {user?.role === 'MANAGER' && (
                             <img
                                 id="message-icon"
@@ -90,7 +78,6 @@ const NavBar = () => {
                         )}
                         {openMessageListModal && <MessageModal closeModal={setOpenMessageListModal} />}
                     </div>
-
 
                     {user?.role === 'MANAGER' && (
                         <>
@@ -126,7 +113,7 @@ const NavBar = () => {
             {navOpen === false ?
                 <button className="open-close-nav"
                     onClick={() => setNavOpen(!navOpen)}>
-                    <img src={NavLogo}/>
+                    <img src={NavLogo} />
                 </button>
                 : ""}
         </>

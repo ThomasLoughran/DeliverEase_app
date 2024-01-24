@@ -1,6 +1,5 @@
 import '../../styles/DriversList.css'
 
-
 const DriversList = ({ drivers, distributionCentres, selectedCentreId, setSelectedCentreId, setOpenModal, openModal }) => {
 
     const driversListComponents = drivers.map((driver) => {
@@ -28,29 +27,24 @@ const DriversList = ({ drivers, distributionCentres, selectedCentreId, setSelect
                 </option>
             </>
         )
-
     })
 
-
-    return ( 
-
+    return (
         <>
-
-            <select id="distribution-centre-drop-down" onChange={handleDropDownChange} value={selectedCentreId || ''} > 
-            <option value="" disabled> Please select centre</option>
+            <select id="distribution-centre-drop-down" onChange={handleDropDownChange} value={selectedCentreId || ''} >
+                <option value="" disabled> Please select centre</option>
                 {dropDownComponents}
 
             </select>
 
-            {!openModal && 
-            <button onClick={() => setOpenModal(true)} className="open-modal-button">Add Driver</button>}
+            {!openModal &&
+                <button onClick={() => setOpenModal(true)} className="open-modal-button">Add Driver</button>}
 
             <ul className='drivers-list'>
-            {drivers ? driversListComponents : <p>Loading</p>}
+                {drivers ? driversListComponents : <p>Loading</p>}
             </ul>
-
         </>
     );
 }
- 
+
 export default DriversList;
