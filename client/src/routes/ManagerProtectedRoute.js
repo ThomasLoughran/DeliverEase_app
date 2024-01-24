@@ -15,7 +15,7 @@ export const ManagerProtectedRoute = () => {
 
 if (user.role !== 'MANAGER') {
     {console.log("Cannot access page due to invalid user type", user.role)}
-    return  <Navigate to="/" />;
+    return  <Navigate to="/driver/routes"/>;
 }
 
 return <Outlet/>
