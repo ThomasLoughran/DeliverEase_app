@@ -40,24 +40,6 @@ const Routes = () => {
 
     const { user } = useUser();
 
-    const routesForPublic = [
-
-        {
-            path: "/about-us",
-            element: <p>About-us</p>
-        },
-        {
-            path: "/test",
-            element: <p>Not logged in user home page</p>
-        },
-        {
-            path: "/home",
-            element: <p>Home</p>
-        }
-
-
-    ];
-
     const routesForLoggedInOnly = [
         {
             path: "/",
@@ -83,7 +65,6 @@ const Routes = () => {
                                     path:"/manager/distribution-centres",
                                     element: <DistributionCentreListContainer/>
                                 },
-                               
                             ]
                         },
                         {
@@ -130,7 +111,6 @@ const Routes = () => {
 
 
     const router = createBrowserRouter([
-        ...routesForPublic,
         ...(!user ? routesForNotLoggedInOnly : []),
         ...routesForLoggedInOnly,
     ])
