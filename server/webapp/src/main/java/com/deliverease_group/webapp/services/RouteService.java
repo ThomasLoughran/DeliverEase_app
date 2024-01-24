@@ -337,9 +337,9 @@ public class RouteService {
         int currentIncrement = 0;
         Route route = findRouteByDriverIdAndDate(driverId, localDate);
 
-        for (Long orderID : route.getOrderId()){
+        for (Long orderID : route.getOrderId()) {
             Order order = orderRepository.findById(orderID).get();
-            if (!order.isCompleted() && (order.getIssue() == null || !(order.getTimeIssuePosted().toLocalDate().toString().equals(localDate.toString())))){
+            if (!order.isCompleted() && (order.getIssue() == null || !(order.getTimeIssuePosted().toLocalDate().toString().equals(localDate.toString())))) {
                 order.setCurrentPositionInRoute(currentIncrement);
                 return order;
             }
@@ -347,17 +347,20 @@ public class RouteService {
         }
 
         return null;
+    }
 
-    public List<Order> getAllOrdersInRoute(long routeId) {
-        ArrayList<Order> orderList = new ArrayList<>();
+        public List<Order> getAllOrdersInRoute ( long routeId){
+            ArrayList<Order> orderList = new ArrayList<>();
 
-        Route route = routeRepository.findById(routeId).get();
+            Route route = routeRepository.findById(routeId).get();
 
-        for (Long orderId : route.getOrderId()){
-            orderList.add(orderRepository.findById(orderId).get());
+            for (Long orderId : route.getOrderId()) {
+                orderList.add(orderRepository.findById(orderId).get());
+            }
+
+            return orderList;
+
         }
 
-        return orderList;
 
-    }
 }
