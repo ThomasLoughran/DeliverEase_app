@@ -9,7 +9,7 @@
 - [Suzi](https://github.com/sctowers) 
 - [Tom](https://github.com/ThomasLoughran) 
 
-## Table of Contents 📜
+## Table of Contents 
 1. [Introduction](#introduction)
    - 1.1 [Scenario](#11-scenario)
    - 1.2 [Business Case & Risk Register](#12-business-case--risk-register)   
@@ -44,6 +44,7 @@ Assumptions we have made with this scenario:
 - The warehouses are in stock with the order's products
 - There is a van for every driver
 - Driver will only use an iPhone 12 Pro to login to account
+   - Please note: When selecting an issue for an order in chrome browser using inspect the font size is very small. Font is legible if using Firefox.
 - Manager will only use a laptop to login to account
 
 ## 1.2 Business Case & Risk Register
@@ -103,7 +104,7 @@ npm start
 
 ## 4.1 Component Diagram:
 
-![component diagram](https://github.com/ThomasLoughran/DeliverEase_app/blob/README/DeliverEaseComponent.drawio.png)
+![component diagram](https://github.com/ThomasLoughran/DeliverEase_app/blob/README/DeliverEaseComponentDiagram.drawio.png)
 
 ## 4.2 Wireframe Diagram:
 
@@ -131,7 +132,7 @@ npm start
 - All employees can change their password
 - Managers can create a new driver
 - Managers generate routes
-- Managers have a calendar log of all the create routes
+- Managers have a calendar log of all the created routes
 - Managers can see all distribution centres with contact details
 - Managers receives message of issue with delivery
 

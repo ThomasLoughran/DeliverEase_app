@@ -1,0 +1,68 @@
+.route-calendar {
+    margin-top: 40px;
+    width: 600px;
+    
+}
+
+.calendar {
+    margin-bottom: 20px;
+}
+
+.routes {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.routes h3 {
+    color: #004445;
+    font-size: 24px;
+}
+
+.routes ul {
+    list-style: none;
+    padding: 0;
+}
+
+.routes li {
+    background-color: #2c786c;
+    color: #faf5e4;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    border: 2px solid #2c786c;
+    border-radius: 4px;
+
+}
+
+.routes div {
+    margin-bottom: 10px;
+    color: #2c786c;
+    padding: 8px; 
+    margin: 5px;
+    color: #faf5e4;
+    font-size: 20px;
+
+}
+
+.calendar label {
+    font-size: 20px;
+    color: #2c786c;
+}
+
+.calendar input {
+    padding: 8px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.route-calendar h2 {
+    color: #004445;
+    margin-bottom: 10px;
+}
+
+.day-buttons button {
+    margin-right: 10px;
+    border: none;
+    border-radius: 4px;
+    margin-bottom: 20px;
+}

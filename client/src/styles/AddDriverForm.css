@@ -1,0 +1,12 @@
+#add-driver-form {
+    width: 80vw;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #004445;
+    color: #faf5e4;
+    display: flex;
+    flex-direction: column;
+}
+
+

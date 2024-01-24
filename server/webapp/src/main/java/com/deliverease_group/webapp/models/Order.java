@@ -1,5 +1,6 @@
 package com.deliverease_group.webapp.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.time.ZonedDateTime;
@@ -14,6 +15,7 @@ public class Order {
 
     @ManyToOne
     @JoinColumn(name = "distribution_centre_id")
+    @JsonIgnore
     private DistributionCentre distributionCentre;
 
 
@@ -29,6 +31,8 @@ public class Order {
     private boolean isFragile;
     private Issue issue;
     private ZonedDateTime timeIssuePosted;
+
+    private int currentPositionInRoute;
 
     public Order() {
 
@@ -48,6 +52,7 @@ public class Order {
         this.isFragile = isFragile;
         this.issue = null;
         this.timeIssuePosted = timeIssuePosted;
+        this.currentPositionInRoute = -1;
     }
 
     public Long getId() {
@@ -64,6 +69,14 @@ public class Order {
 
     public void setDistributionCentre(DistributionCentre distributionCentre) {
         this.distributionCentre = distributionCentre;
+    }
+
+    public int getCurrentPositionInRoute() {
+        return currentPositionInRoute;
+    }
+
+    public void setCurrentPositionInRoute(int currentPositionInRoute) {
+        this.currentPositionInRoute = currentPositionInRoute;
     }
 
     public int getSize() {

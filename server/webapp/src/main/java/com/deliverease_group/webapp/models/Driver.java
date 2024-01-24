@@ -2,9 +2,11 @@ package com.deliverease_group.webapp.models;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDate;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Entity
 @Table(name = "drivers")
@@ -21,7 +23,7 @@ public class Driver extends Employee{
 
     @ElementCollection
     @CollectionTable
-    private List<ZonedDateTime> availableDates;
+    private Map<LocalDate, Boolean> availableDates;
 
 
     public Driver(String name,
@@ -32,7 +34,7 @@ public class Driver extends Employee{
                   int vanMaxWeight,
                   String vanName,
                   Boolean capacityFull,
-                  ArrayList<ZonedDateTime> availableDates) {
+                  Map<LocalDate, Boolean> availableDates) {
         super(name, password, role, distributionCentre);
         this.vanCapacity = vanCapacity;
         this.vanMaxWeight = vanMaxWeight;
@@ -76,11 +78,22 @@ public class Driver extends Employee{
         this.capacityFull = capacityFull;
     }
 
-    public List<ZonedDateTime> getAvailableDates() {
+    public Map<LocalDate, Boolean> getAvailableDates() {
         return availableDates;
     }
 
-    public void setAvailableDates(List<ZonedDateTime> availableDates) {
+    public Map<LocalDate, Boolean> updateAvailableDates(LocalDate date) {
+        if (this.availableDates.containsKey(date)){
+            this.availableDates.remove(date);
+        } else {
+            this.availableDates.put(date, true);
+        }
+        return availableDates;
+    }
+
+    public void setAvailableDates(Map<LocalDate, Boolean> availableDates) {
         this.availableDates = availableDates;
     }
+
+
 }
