@@ -9,15 +9,17 @@ const AddDriverForm = () => {
         vanMaxWeight: 0,
         vanName: "",
         password: "",
-        distributionCentreId: null,
+        distributionCentreId: "",
     });
 
     const handleFormDataChange = (e) => {
         const { name, value } = e.target;
         setFormData((previousData) => ({
-            ...previousData, [name]: value,
-        }))
-    }
+            ...previousData, 
+            // [name]: name === 'distributionCentreId' ? parseInt(value, 10) : value,
+            [name] : value,
+        }));
+    };
 
     const handleFormSubmit = async (e) => {
         e.preventDefault();
@@ -27,11 +29,34 @@ const AddDriverForm = () => {
         }
 
         try {
+            const distributionCentreMappings = {
+                BIRMINGHAM: 1,
+                BRISTOL: 2,
+                LONDON: 3,
+                MANCHESTER: 4,
+                OXFORD: 5,
+                CARDIFF: 6,
+            };
+
+            const distributionCentreId = distributionCentreMappings[formData.distributionCentreId];
+            console.log("DistributionCentreId:", distributionCentreId)
+
+            // if (distributionCentreId === undefined) {
+            //     alert("Invalid Distribution Centre selected.");
+            //     return;
+            // }
+
+            const dataToSend = {
+                ...formData,
+                distributionCentreId,
+            };
+
             const response = await fetch('http://localhost:8080/drivers/new-driver', {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(formData)
+                body: JSON.stringify(dataToSend)
             })
+            console.log("Data:", dataToSend)
 
             if (!response.ok) {
                 throw new Error(`Failed to add driver: ${response.status}`)
@@ -43,7 +68,7 @@ const AddDriverForm = () => {
                     vanName: "",
                     password: "",
                     confirmPassword: "",
-                    distributionCentreId: null,
+                    distributionCentreId: "",
                 })
             }
 
@@ -144,20 +169,25 @@ const AddDriverForm = () => {
                     </input>
 
                     <label htmlFor="distributionCentreId">
-                        Distribution Centre ID:
+                        Distribution Centre:
                     </label>
-
-                    <input
-                        placeholder="Please enter distribution centre here"
+                    <select
                         id="distributionCentreId"
-                        type="number"
                         name="distributionCentreId"
-                        value={formData.distributionCentreId}
+                        value={formData.distributionCentreId || ''}
                         onChange={handleFormDataChange}
-                        min="1"
                         required
                     >
-                    </input>
+                        <option value="" disabled>
+                            Select Distribution Centre
+                        </option>
+                        <option value="1">BIRMINGHAM</option>
+                        <option value="2">BRISTOL</option>
+                        <option value="3">LONDON</option>
+                        <option value="4">MANCHESTER</option>
+                        <option value="5">OXFORD</option>
+                        <option value="6">CARDIFF</option>
+                    </select>
 
                     <button id="submit-button" type="submit"> Submit </button>
 
