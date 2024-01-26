@@ -2,6 +2,7 @@ package com.deliverease_group.webapp.controllers;
 
 import com.deliverease_group.webapp.dtos.LoginDTO;
 import com.deliverease_group.webapp.dtos.PasswordDTO;
+import com.deliverease_group.webapp.dtos.UpdatePasswordResponseDTO;
 import com.deliverease_group.webapp.models.Driver;
 import com.deliverease_group.webapp.models.Employee;
 import com.deliverease_group.webapp.services.EmployeeService;
@@ -29,15 +30,15 @@ public class EmployeeController {
     }
 
     @PatchMapping("/update-password")
-    public ResponseEntity<String> updatePassword(@RequestBody PasswordDTO passwordDTO){
-        String passwordStatus = employeeService.updatePassword(passwordDTO);
-        if (passwordStatus == null){
+    public ResponseEntity<UpdatePasswordResponseDTO> updatePassword(@RequestBody PasswordDTO passwordDTO){
+        UpdatePasswordResponseDTO updatePasswordResponseDTO = employeeService.updatePassword(passwordDTO);
+        if (updatePasswordResponseDTO == null){
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        if (passwordStatus.equals("Password updated successfully")) {
-            return new ResponseEntity<>(passwordStatus, HttpStatus.OK);
+        if (updatePasswordResponseDTO.getResponse().equals("Password updated successfully")) {
+            return new ResponseEntity<>(updatePasswordResponseDTO, HttpStatus.OK);
         }
-        return new ResponseEntity<>(passwordStatus,HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(updatePasswordResponseDTO,HttpStatus.BAD_REQUEST);
     }
 
 }
