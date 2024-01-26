@@ -1,13 +1,13 @@
 package com.deliverease_group.webapp.dtos;
 
-public class UpdatePasswordResponseDTO {
+public class MessageResponseDTO {
 
     String response;
 
-    public UpdatePasswordResponseDTO() {
+    public MessageResponseDTO() {
     }
 
-    public UpdatePasswordResponseDTO(String response) {
+    public MessageResponseDTO(String response) {
         this.response = response;
     }
 

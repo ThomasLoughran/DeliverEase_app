@@ -1,5 +1,6 @@
 package com.deliverease_group.webapp.services;
 
+import com.deliverease_group.webapp.dtos.MessageResponseDTO;
 import com.deliverease_group.webapp.models.*;
 import com.deliverease_group.webapp.repositories.DistributionCentreRepository;
 import com.deliverease_group.webapp.repositories.DriverRepository;
@@ -42,7 +43,9 @@ public class RouteService {
     }
 
 
-    public String generateRoutes(Long distCentreId, LocalDate localDate) {
+    public MessageResponseDTO generateRoutes(Long distCentreId, LocalDate localDate) {
+
+        MessageResponseDTO messageResponseDTO = new MessageResponseDTO();
 
         List<Order> incompleteOrders = getDistributionCentreOrdersByCompletionStatus(distCentreId, false);
         List<Driver> availableDrivers =  driverRepository.availableDrivers(distCentreId, localDate);
@@ -98,9 +101,11 @@ public class RouteService {
 
 //        cannot create routes if no drivers available
         if (availableDrivers.isEmpty()) {
-            return ("Routes not created - No available drivers");
+            messageResponseDTO.setResponse("Routes not created - No available drivers");
+            return messageResponseDTO;
         }else if  (incompleteOrders.isEmpty()){
-            return ("Routes not created - No unassigned orders to be routed");
+            messageResponseDTO.setResponse("Routes not created - No unassigned orders to be routed");
+            return messageResponseDTO;
         }
 
 
@@ -140,8 +145,8 @@ public class RouteService {
                 routeRepository.save(route);
             }
         }
-
-        return ("Routes successfully created");
+        messageResponseDTO.setResponse("Routes successfully created");
+        return messageResponseDTO;
     }
 
     public List<Node> routeFind(ArrayList<Node> nodes, Node distCentre) {

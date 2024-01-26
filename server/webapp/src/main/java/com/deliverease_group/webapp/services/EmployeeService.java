@@ -2,7 +2,7 @@ package com.deliverease_group.webapp.services;
 
 import com.deliverease_group.webapp.dtos.LoginDTO;
 import com.deliverease_group.webapp.dtos.PasswordDTO;
-import com.deliverease_group.webapp.dtos.UpdatePasswordResponseDTO;
+import com.deliverease_group.webapp.dtos.MessageResponseDTO;
 import com.deliverease_group.webapp.models.Employee;
 import com.deliverease_group.webapp.repositories.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,25 +28,25 @@ public class EmployeeService {
         return null;
     }
 
-    public UpdatePasswordResponseDTO updatePassword(PasswordDTO passwordDTO) {
-        UpdatePasswordResponseDTO updatePasswordResponseDTO = new UpdatePasswordResponseDTO();
+    public MessageResponseDTO updatePassword(PasswordDTO passwordDTO) {
+        MessageResponseDTO messageResponseDTO = new MessageResponseDTO();
         Optional<Employee> optionalEmployee = employeeRepository.findById(passwordDTO.getId());
         if (optionalEmployee.isEmpty()){
             return null;
         }
         Employee employee = optionalEmployee.get();
         if (!employee.getPassword().equals(passwordDTO.getOldPassword())){
-            updatePasswordResponseDTO.setResponse("Old password doesn't match");
-            return updatePasswordResponseDTO;
+            messageResponseDTO.setResponse("Old password doesn't match");
+            return messageResponseDTO;
         }
         if (employee.getPassword().equals(passwordDTO.getNewPassword())){
-            updatePasswordResponseDTO.setResponse("Password already in use");
-            return updatePasswordResponseDTO;
+            messageResponseDTO.setResponse("Password already in use");
+            return messageResponseDTO;
         } else {
             employee.setPassword(passwordDTO.getNewPassword());
             employeeRepository.save(employee);
-            updatePasswordResponseDTO.setResponse("Password updated successfully");
-            return updatePasswordResponseDTO;
+            messageResponseDTO.setResponse("Password updated successfully");
+            return messageResponseDTO;
         }
 
     }
