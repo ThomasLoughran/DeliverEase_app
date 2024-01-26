@@ -23,9 +23,9 @@ public class RouteController {
     public ResponseEntity<MessageResponseDTO> generateRoutes (@PathVariable Long distCentreId, @RequestParam LocalDate localDate){
         MessageResponseDTO routeStatus = routeService.generateRoutes(distCentreId,localDate);
         if (routeStatus.equals("Routes successfully created")) {
-            return new ResponseEntity<>(HttpStatus.CREATED);
+            return new ResponseEntity<>(routeStatus, HttpStatus.CREATED);
         } else {
-            return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+            return new ResponseEntity<>(routeStatus, HttpStatus.NOT_IMPLEMENTED);
         }
     }
 

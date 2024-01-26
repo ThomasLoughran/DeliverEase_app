@@ -26,7 +26,7 @@ const GenerateRoutes = ({ showTodayRoutes }) => {
             });
 
             const data = await response.text();
-            alert(data);
+            alert(data.response);
             if (data === "Routes successfully created") {
                 showTodayRoutes(true);
             }
