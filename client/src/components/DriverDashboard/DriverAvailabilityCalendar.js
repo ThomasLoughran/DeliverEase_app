@@ -44,10 +44,12 @@ const DriverAvailabilityCalendar = () => {
     );
 
     return (
-        <div className="driver-availability"
-        style={{'margin-right': '20px'}}>
-            <h2>Availability Calendar:</h2>
-
+        <section className="driver-availability"
+            style={{ 'margin-right': '20px' }}>
+            <header>
+                <h2>Availability Calendar:</h2>
+            </header>
+            
             <input
                 type="date"
                 value={selectedDate.toISOString().split('T')[0]}
@@ -64,7 +66,7 @@ const DriverAvailabilityCalendar = () => {
                     </li>
                 ))}
             </ul>
-        </div>
+        </section>
     );
 };
 
