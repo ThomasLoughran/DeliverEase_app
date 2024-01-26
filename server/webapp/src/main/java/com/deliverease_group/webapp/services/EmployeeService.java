@@ -29,7 +29,11 @@ public class EmployeeService {
 
     public String updatePassword(PasswordDTO passwordDTO) {
 
-        Employee employee = employeeRepository.findById(passwordDTO.getId()).get();
+        Optional<Employee> optionalEmployee = employeeRepository.findById(passwordDTO.getId());
+        if (optionalEmployee.isEmpty()){
+            return null;
+        }
+        Employee employee = optionalEmployee.get();
         if (!employee.getPassword().equals(passwordDTO.getOldPassword())){
             return "Old password doesn't match";
         }
@@ -40,7 +44,6 @@ public class EmployeeService {
             employeeRepository.save(employee);
             return "Password updated successfully";
         }
-
 
     }
 }
