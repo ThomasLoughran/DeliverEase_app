@@ -1,5 +1,6 @@
 package com.deliverease_group.webapp.controllers;
 
+import com.deliverease_group.webapp.dtos.MessageResponseDTO;
 import com.deliverease_group.webapp.models.Order;
 import com.deliverease_group.webapp.models.Route;
 import com.deliverease_group.webapp.services.RouteService;
@@ -19,12 +20,12 @@ public class RouteController {
     RouteService routeService;
 
     @PostMapping(value = "/new-routes/{distCentreId}")
-    public ResponseEntity<String> generateRoutes (@PathVariable Long distCentreId, @RequestParam LocalDate localDate){
-        String routeStatus = routeService.generateRoutes(distCentreId,localDate);
+    public ResponseEntity<MessageResponseDTO> generateRoutes (@PathVariable Long distCentreId, @RequestParam LocalDate localDate){
+        MessageResponseDTO routeStatus = routeService.generateRoutes(distCentreId,localDate);
         if (routeStatus.equals("Routes successfully created")) {
             return new ResponseEntity<>(routeStatus, HttpStatus.CREATED);
-        }else{
-            return new ResponseEntity<>(routeStatus,HttpStatus.NOT_IMPLEMENTED);
+        } else {
+            return new ResponseEntity<>(routeStatus, HttpStatus.NOT_IMPLEMENTED);
         }
     }
 
