@@ -80,6 +80,7 @@ const AddDriverForm = () => {
                     name="vanCapacity"
                     value={formData.vanCapacity}
                     onChange={handleFormDataChange}
+                    min="1"
                     required
                 >
                 </input>
@@ -94,6 +95,7 @@ const AddDriverForm = () => {
                     name="vanMaxWeight"
                     value={formData.vanMaxWeight}
                     onChange={handleFormDataChange}
+                    min="1"
                     required
                 >
                 </input>
@@ -151,6 +153,7 @@ const AddDriverForm = () => {
                     name="distributionCentreId"
                     value={formData.distributionCentreId}
                     onChange={handleFormDataChange}
+                    min="1"
                     required
                 >
                 </input>
