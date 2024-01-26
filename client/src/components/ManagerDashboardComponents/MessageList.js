@@ -25,9 +25,7 @@ const MessageList = ({ setNotificationRefresh }) => {
 
     const fetchIssues = async () => {
         try {
-            const response = await fetch(`http://localhost:8080/orders/issue/all?distCentreId=${distCentreId}&isManagerReviewed=${false}`, {
-                method: "GET",
-            });
+            const response = await fetch(`http://localhost:8080/orders/issue/all?distCentreId=${distCentreId}&isManagerReviewed=${false}`);
             if (!response.ok) {
                 throw new Error(`Failed to receive messages: ${response.status} ${response.statusText}`);
             }
@@ -87,18 +85,22 @@ const MessageList = ({ setNotificationRefresh }) => {
 
     return (
         <>
-            <div className="title-and-refresh-button-container">
-                <h2 className="message-list-title">Message List</h2>
-                <button className="message-list-refresh-button" onClick={() => {
-                    fetchIssues()
-                }}>
-                    <img className="refresh-symbol" src={refreshButton} alt="Refresh"></img>
+            <section>
+                <header className="title-and-refresh-button-container">
+                    <h2 className="message-list-title">Message List</h2>
+                    <button className="message-list-refresh-button" onClick={() => {
+                        fetchIssues()
+                    }}>
+                        <img className="refresh-symbol" src={refreshButton} alt="Refresh"></img>
 
-                </button>
-            </div>
-            <ul className="order-message-list">
-                {messageListComponents}
-            </ul>
+                    </button>
+                </header>
+                <article>
+                    <ul className="order-message-list">
+                        {messageListComponents}
+                    </ul>
+                </article>
+            </section>
         </>
     );
 }

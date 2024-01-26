@@ -57,73 +57,75 @@ const Profile = ({ closeModal }) => {
         <div className="profile-content">
             <button onClick={() => closeModal(false)} className="close-modal-button">X</button>
 
-            <h2>My Profile:</h2>
-            <img className="profile-icon" src={profileIcon} />
-            {user.role === 'MANAGER' && (
-                <>
-                    <p>Name: {user.name}</p>
-                    <p>ID: {user.id}</p>
-                </>
-            )}
-            {user.role === 'DRIVER' && (
-                <>
-                    <p>Name: {user.name}</p>
-                    <p>ID: {user.id}</p>
-                    <p>Van name: {user.vanName}</p>
-                </>
-            )}
+            <section>
+                <h2>My Profile:</h2>
+                <img className="profile-icon" src={profileIcon} />
+                {user.role === 'MANAGER' && (
+                    <>
+                        <p>Name: {user.name}</p>
+                        <p>ID: {user.id}</p>
+                    </>
+                )}
+                {user.role === 'DRIVER' && (
+                    <>
+                        <p>Name: {user.name}</p>
+                        <p>ID: {user.id}</p>
+                        <p>Van name: {user.vanName}</p>
+                    </>
+                )}
 
-            {showMore && (
-                <form id="update-employee-form" onSubmit={handleUpdateEmployeeForm}>
-                    <label htmlFor="old-password" id='old-password'>
-                        Old password:
-                    </label>
-                    <input
-                        placeholder="Please enter your current password"
-                        id="old-password"
-                        type="password"
-                        name="oldPassword"
-                        value={employeeForm.oldPassword}
-                        onChange={handleEmployeeFormChange}
-                        required >
-                    </input>
+                {showMore && (
+                    <form id="update-employee-form" onSubmit={handleUpdateEmployeeForm}>
+                        <label htmlFor="old-password" id='old-password'>
+                            Old password:
+                        </label>
+                        <input
+                            placeholder="Please enter your current password"
+                            id="old-password"
+                            type="password"
+                            name="oldPassword"
+                            value={employeeForm.oldPassword}
+                            onChange={handleEmployeeFormChange}
+                            required >
+                        </input>
 
-                    <label htmlFor="new-password" id='new-password'>
-                        New password:
-                    </label>
-                    <input
-                        placeholder="Please add a new password"
-                        id="new-password"
-                        type="password"
-                        name="newPassword"
-                        value={employeeForm.newPassword}
-                        onChange={handleEmployeeFormChange}
-                        required >
-                    </input>
+                        <label htmlFor="new-password" id='new-password'>
+                            New password:
+                        </label>
+                        <input
+                            placeholder="Please add a new password"
+                            id="new-password"
+                            type="password"
+                            name="newPassword"
+                            value={employeeForm.newPassword}
+                            onChange={handleEmployeeFormChange}
+                            required >
+                        </input>
 
-                    <label htmlFor="confirm-change-password" id='confirm-change-password'>
-                        Confirm new password:
-                    </label>
-                    <input
-                        placeholder="Please confirm new password"
-                        id="confirm-new-password"
-                        type="password"
-                        name="confirmNewPassword"
-                        value={employeeForm.confirmNewPassword}
-                        onChange={handleEmployeeFormChange}
-                        required >
-                    </input>
+                        <label htmlFor="confirm-change-password" id='confirm-change-password'>
+                            Confirm new password:
+                        </label>
+                        <input
+                            placeholder="Please confirm new password"
+                            id="confirm-new-password"
+                            type="password"
+                            name="confirmNewPassword"
+                            value={employeeForm.confirmNewPassword}
+                            onChange={handleEmployeeFormChange}
+                            required >
+                        </input>
 
-                    <button type="submit" id="save-button" >
-                        Save
-                    </button>
-                </form>
-            )}
+                        <button type="submit" id="save-button" >
+                            Save
+                        </button>
+                    </form>
+                )}
 
-            <button className="update-details-button"
-                onClick={() => setShowMore(!showMore)}>
-                {showMore ? 'Cancel' : 'Update details'}
-            </button>
+                <button className="update-details-button"
+                    onClick={() => setShowMore(!showMore)}>
+                    {showMore ? 'Cancel' : 'Update details'}
+                </button>
+            </section>
         </div>
     );
 }

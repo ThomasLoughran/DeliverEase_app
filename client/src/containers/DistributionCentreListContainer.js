@@ -12,9 +12,7 @@ const DistributionCentreListContainer = () => {
     const fetchDistributionCentres = async () => {
 
         try {
-            const response = await fetch(`http://localhost:8080/distribution-centres/all`, {
-                method: "GET"
-            });
+            const response = await fetch(`http://localhost:8080/distribution-centres/all`);
 
             if (!response.ok) {
                 throw new Error(`Failed to get distribution centres: ${response.status} ${response.statusText} `);
@@ -34,10 +32,10 @@ const DistributionCentreListContainer = () => {
     }
 
     return (
-        <>
+        <section>
             <h1 style={{ 'margin-top': '40px' }}>Distribution Centres:</h1>
             <DistributionCentresList distributionCentres={distributionCentres} />
-        </>
+        </section>
     );
 
 }

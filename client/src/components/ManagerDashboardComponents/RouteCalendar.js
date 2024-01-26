@@ -61,10 +61,13 @@ const RouteCalendar = ({ loadRoute, showTodayRoutes }) => {
     };
 
     return (
-        <div className="route-calendar">
-            <h2>Route Log</h2>
-            <div className="calendar">
-                <div>
+        <section className="route-calendar">
+            <header>
+                <h2>Route Log</h2>
+            </header>
+
+            <article>
+                <div className="calendar">
                     <label>Select Date:</label>
                     <input
                         value={selectedDate.toISOString().split('T')[0]}
@@ -72,11 +75,12 @@ const RouteCalendar = ({ loadRoute, showTodayRoutes }) => {
                         onChange={(e) => onChange(new Date(e.target.value))}
                     />
                 </div>
-            </div>
-            <div className="day-buttons">
+            </article>
+
+            <nav className="day-buttons">
                 <button onClick={handlePreviousDay}>Previous day</button>
                 <button onClick={handleNextDay}>Next day</button>
-            </div>
+            </nav>
 
             {loadRoutes && (
                 <div>
@@ -84,28 +88,25 @@ const RouteCalendar = ({ loadRoute, showTodayRoutes }) => {
                 </div>
             )}
 
-            <div className="routes">
+            <article className="routes">
                 <h3>Routes on {selectedDate.toDateString()}:</h3>
                 {routesData.length === 0 ? (
                     <p>No routes on this date.</p>
                 ) : (
                     <ul>
                         {routesData.map((route, index) => (
-
                             <li key={index}>
                                 <div>
                                     Route: {route.id} |
                                     Driver Id Assigned : {route.driverId} |
                                     Number of Orders: {route.orderId.length}
                                 </div>
-
                             </li>
-
                         ))}
                     </ul>
                 )}
-            </div>
-        </div>
+            </article>
+        </section>
     );
 };
 

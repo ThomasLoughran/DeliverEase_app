@@ -1,7 +1,7 @@
 
 const DistributionCentreDropdown = ({ distributionCentres, selectedCentreId, onChange }) => {
     return (
-        <div>
+        <section>
             <label>Select Distribution Centre: </label>
             <select value={selectedCentreId || ''} onChange={(e) => onChange(parseInt(e.target.value, 10))}>
                 <option value="" disabled>Select Distribution Centre</option>
@@ -11,7 +11,7 @@ const DistributionCentreDropdown = ({ distributionCentres, selectedCentreId, onC
                     </option>
                 ))}
             </select>
-        </div>
+        </section>
     );
 };
 

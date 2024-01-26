@@ -4,7 +4,7 @@ import '../styles/Modal.css'
 const MessageModal = ({ closeModal }) => {
 
     return (
-        <div className="message-modal">
+        <aside className="message-modal">
             <div className="message-modal-background">
                 <div className="message-modal-container">
                     <div className="MessageList-container">
@@ -13,7 +13,7 @@ const MessageModal = ({ closeModal }) => {
                     </div>
                 </div>
             </div>
-        </div>
+        </aside>
     );
 }
 

@@ -32,9 +32,7 @@ const NavBar = () => {
 
     const fetchIssues = async () => {
         try {
-            const response = await fetch(`http://localhost:8080/orders/issue/all?distCentreId=${1}&isManagerReviewed=${false}`, {
-                method: "GET",
-            });
+            const response = await fetch(`http://localhost:8080/orders/issue/all?distCentreId=${1}&isManagerReviewed=${false}`);
 
             if (!response.ok) {
                 throw new Error(`Failed to receive messages: ${response.status} ${response.statusText}`);
@@ -53,7 +51,7 @@ const NavBar = () => {
     return (
         <>
             {navOpen && (
-                <div className="navBar">
+                <nav className="navBar">
                     <img
                         className='navLogo'
                         src={NavLogo}
@@ -108,7 +106,7 @@ const NavBar = () => {
                     </Link>
                     <img src={darkLogo} alt="Logo" className="logo" />
 
-                </div>
+                </nav>
             )}
             {navOpen === false ?
                 <button className="open-close-nav"
