@@ -21,9 +21,7 @@ const DriversListContainer = () => {
     const fetchDistributionCentres = async () => {
 
         try {
-            const response = await fetch(`http://localhost:8080/distribution-centres/all`, {
-                method: "GET"
-            });
+            const response = await fetch(`http://localhost:8080/distribution-centres/all`);
 
             if (!response.ok) {
                 throw new Error(`Failed to get distribution centres: ${response.status} ${response.statusText} `);
@@ -45,9 +43,7 @@ const DriversListContainer = () => {
     const fetchDrivers = async (distributionCentreId) => {
 
         try {
-            const response = await fetch(`http://localhost:8080/drivers?distCentId=${distributionCentreId}`, {
-                method: "GET"
-            });
+            const response = await fetch(`http://localhost:8080/drivers?distCentId=${distributionCentreId}`);
 
             if (!response.ok) {
                 throw new Error(`Failed to get users by distribution centre id: ${response.status} ${response.statusText} `);
