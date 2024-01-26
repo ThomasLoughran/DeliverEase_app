@@ -2,9 +2,9 @@ package com.deliverease_group.webapp.models;
 
 public class Node {
 
-    private double x;
+    private double longitude;
 
-    private double y;
+    private double latitude;
 
     private double radius;
 
@@ -12,26 +12,26 @@ public class Node {
 
     private long orderId;
 
-    public Node(double x, double y, long id) {
-        this.x = x;
-        this.y = y;
+    public Node(double longitude, double latitude, long id) {
+        this.longitude = longitude;
+        this.latitude = latitude;
         this.orderId = id;
     }
 
-    public double getX() {
-        return x;
+    public double getLongitude() {
+        return longitude;
     }
 
-    public void setX(double x) {
-        this.x = x;
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
     }
 
-    public double getY() {
-        return y;
+    public double getLatitude() {
+        return latitude;
     }
 
-    public void setY(double y) {
-        this.y = y;
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
     }
 
     public double getRadius() {

@@ -50,8 +50,8 @@ public class DistributionCentre {
         this.routes = new ArrayList<>();
         this.employees = new ArrayList<>();
         this.phoneNumber = location.getPhoneNumber();
-        this.latitude = location.getY();
-        this.longitude = location.getX();
+        this.latitude = location.getLatitude();
+        this.longitude = location.getLongitude();
     }
 
     public long getId() {
