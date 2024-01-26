@@ -109,7 +109,11 @@ public class RouteService {
         List<Order> ordersToBeDelivered = setTotalOrders(availableDrivers, incompleteOrders, maxParcelsPerVan);
 
 //        create nodes of all the locations with radial coordinates centred on distCentre
-        DistributionCentre distributionCentre = distributionCentreRepository.findById(distCentreId).get();
+        Optional<DistributionCentre> optionalDistributionCentre = distributionCentreRepository.findById(distCentreId);
+        if (optionalDistributionCentre.isEmpty()){
+            return null;
+        }
+        DistributionCentre distributionCentre = optionalDistributionCentre.get();
         List<Node> orderLocations = createNodes( distributionCentre, ordersToBeDelivered);
 
         //sort order Locations By Angle Theta
@@ -336,7 +340,11 @@ public class RouteService {
         Route route = findRouteByDriverIdAndDate(driverId, localDate);
 
         for (Long orderID : route.getOrderId()) {
-            Order order = orderRepository.findById(orderID).get();
+            Optional<Order> optionalOrder = orderRepository.findById(orderID);
+            if (optionalOrder.isEmpty()){
+                return null;
+            }
+            Order order = optionalOrder.get();
             if (!order.isCompleted() && (order.getIssue() == null || !(order.getTimeIssuePosted().toLocalDate().toString().equals(localDate.toString())))) {
                 order.setCurrentPositionInRoute(currentIncrement);
                 return order;
@@ -349,16 +357,16 @@ public class RouteService {
 
         public List<Order> getAllOrdersInRoute ( long routeId){
             ArrayList<Order> orderList = new ArrayList<>();
+            Optional<Route> optionalRoute = routeRepository.findById(routeId);
+            if (optionalRoute.isPresent()){
+                Route route = optionalRoute.get();
 
-            Route route = routeRepository.findById(routeId).get();
-
-            for (Long orderId : route.getOrderId()) {
-                orderList.add(orderRepository.findById(orderId).get());
+                for (Long orderId : route.getOrderId()) {
+                    orderList.add(orderRepository.findById(orderId).get());
+                }
             }
 
             return orderList;
-
         }
-
 
 }
