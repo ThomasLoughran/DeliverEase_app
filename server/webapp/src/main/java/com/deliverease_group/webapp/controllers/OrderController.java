@@ -73,7 +73,12 @@ public class OrderController {
 
     @PatchMapping(value = "/manager-review/{id}")
     public ResponseEntity<Order> patchOrderManagerReviewById(@PathVariable Long id, @RequestParam boolean isManagerReviewed){
-        return new ResponseEntity<>(orderService.updateOrderManagerReviewed(id, isManagerReviewed),HttpStatus.OK);
+        Order order = orderService.updateOrderManagerReviewed(id, isManagerReviewed);
+        if (order != null){
+            return new ResponseEntity<>(order, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.OK);
+        }
     }
 
     @GetMapping(value = "/issue/all")
