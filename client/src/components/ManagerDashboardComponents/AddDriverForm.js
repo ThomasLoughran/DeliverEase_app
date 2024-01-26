@@ -54,113 +54,115 @@ const AddDriverForm = () => {
 
     return (
         <>
-            <form id="add-driver-form" onSubmit={handleFormSubmit} >
-                <label htmlFor="name">
-                    Name:
-                </label>
+            <section>
+                <form id="add-driver-form" onSubmit={handleFormSubmit} >
+                    <label htmlFor="name">
+                        Name:
+                    </label>
 
-                <input
-                    placeholder="Please enter name here"
-                    id="name"
-                    type="text"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleFormDataChange}
-                    required >
+                    <input
+                        placeholder="Please enter name here"
+                        id="name"
+                        type="text"
+                        name="name"
+                        value={formData.name}
+                        onChange={handleFormDataChange}
+                        required >
 
-                </input>
+                    </input>
 
-                <label htmlFor="vanCapacity">
-                    Van Capacity:
-                </label>
-                <input
-                    placeholder="Please van capacity here"
-                    id="vanCapacity"
-                    type="number"
-                    name="vanCapacity"
-                    value={formData.vanCapacity}
-                    onChange={handleFormDataChange}
-                    min="1"
-                    required
-                >
-                </input>
+                    <label htmlFor="vanCapacity">
+                        Van Capacity:
+                    </label>
+                    <input
+                        placeholder="Please van capacity here"
+                        id="vanCapacity"
+                        type="number"
+                        name="vanCapacity"
+                        value={formData.vanCapacity}
+                        onChange={handleFormDataChange}
+                        min="1"
+                        required
+                    >
+                    </input>
 
-                <label htmlFor="vanMaxWeight">
-                    Van Max Weight:
-                </label>
-                <input
-                    placeholder="Please max weight here"
-                    id="vanMaxWeight"
-                    type="number"
-                    name="vanMaxWeight"
-                    value={formData.vanMaxWeight}
-                    onChange={handleFormDataChange}
-                    min="1"
-                    required
-                >
-                </input>
+                    <label htmlFor="vanMaxWeight">
+                        Van Max Weight:
+                    </label>
+                    <input
+                        placeholder="Please max weight here"
+                        id="vanMaxWeight"
+                        type="number"
+                        name="vanMaxWeight"
+                        value={formData.vanMaxWeight}
+                        onChange={handleFormDataChange}
+                        min="1"
+                        required
+                    >
+                    </input>
 
-                <label htmlFor="vanName">
-                    Van Name:
-                </label>
-                <input
-                    placeholder="Please van name here"
-                    id="vanName"
-                    type="text"
-                    name="vanName"
-                    value={formData.vanName}
-                    onChange={handleFormDataChange}
-                    required
-                >
-                </input>
+                    <label htmlFor="vanName">
+                        Van Name:
+                    </label>
+                    <input
+                        placeholder="Please van name here"
+                        id="vanName"
+                        type="text"
+                        name="vanName"
+                        value={formData.vanName}
+                        onChange={handleFormDataChange}
+                        required
+                    >
+                    </input>
 
-                <label htmlFor="password">
-                    Password:
-                </label>
-                <input
-                    placeholder="Please enter password here"
-                    id="password"
-                    type="password"
-                    name="password"
-                    value={formData.password}
-                    onChange={handleFormDataChange}
-                    required
-                >
-                </input>
+                    <label htmlFor="password">
+                        Password:
+                    </label>
+                    <input
+                        placeholder="Please enter password here"
+                        id="password"
+                        type="password"
+                        name="password"
+                        value={formData.password}
+                        onChange={handleFormDataChange}
+                        required
+                    >
+                    </input>
 
-                <label htmlFor="confirmPassword">
-                    Confirm Password:
-                </label>
-                <input
-                    placeholder="Please confirm password here"
-                    id="confirmPassword"
-                    type="password"
-                    name="confirmPassword"
-                    value={formData.confirmPassword}
-                    onChange={handleFormDataChange}
-                    required
-                >
-                </input>
+                    <label htmlFor="confirmPassword">
+                        Confirm Password:
+                    </label>
+                    <input
+                        placeholder="Please confirm password here"
+                        id="confirmPassword"
+                        type="password"
+                        name="confirmPassword"
+                        value={formData.confirmPassword}
+                        onChange={handleFormDataChange}
+                        required
+                    >
+                    </input>
 
-                <label htmlFor="distributionCentreId">
-                    Distribution Centre ID:
-                </label>
+                    <label htmlFor="distributionCentreId">
+                        Distribution Centre ID:
+                    </label>
 
-                <input
-                    placeholder="Please enter distribution centre here"
-                    id="distributionCentreId"
-                    type="number"
-                    name="distributionCentreId"
-                    value={formData.distributionCentreId}
-                    onChange={handleFormDataChange}
-                    min="1"
-                    required
-                >
-                </input>
+                    <input
+                        placeholder="Please enter distribution centre here"
+                        id="distributionCentreId"
+                        type="number"
+                        name="distributionCentreId"
+                        value={formData.distributionCentreId}
+                        onChange={handleFormDataChange}
+                        min="1"
+                        required
+                    >
+                    </input>
 
-                <button id="submit-button" type="submit"> Submit </button>
+                    <button id="submit-button" type="submit"> Submit </button>
 
-            </form>
+                </form>
+            </section>
         </>
     );
 };
