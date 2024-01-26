@@ -47,10 +47,16 @@ public class DriverService {
     }
 
     public Driver updateDriverAvailability(Long driverId, LocalDate date) {
-        Driver driver = driverRepository.findById(driverId).get();
-        driver.updateAvailableDates(date);
-        driverRepository.save(driver);
-        return driver;
+
+        Optional<Driver> optionalDriver = driverRepository.findById(driverId);
+        if (optionalDriver.isPresent()){
+            Driver driver = optionalDriver.get();
+            driver.updateAvailableDates(date);
+            driverRepository.save(driver);
+            return driver;
+        } else {
+            return null;
+        }
     }
 
     public Driver addNewDriver(DriverDTO driverDTO) {

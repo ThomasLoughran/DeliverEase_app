@@ -53,17 +53,32 @@ public class OrderController {
 
     @PatchMapping(value = "/issue")
     public ResponseEntity<Order> patchOrderIssueById(@RequestBody OrderDTO orderDTO){
-        return new ResponseEntity<>(orderService.updateOrderIssue(orderDTO),HttpStatus.OK);
+        Order order = orderService.updateOrderIssue(orderDTO);
+        if (order != null){
+            return new ResponseEntity<>(order,HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
     @PatchMapping(value = "/complete/{id}")
     public ResponseEntity<Order> patchOrderCompletionById(@PathVariable Long id, @RequestParam boolean isComplete){
-        return new ResponseEntity<>(orderService.updateOrderCompletion(id, isComplete),HttpStatus.OK);
+        Order order = orderService.updateOrderCompletion(id, isComplete);
+        if (order != null){
+            return new ResponseEntity<>(order, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.OK);
+        }
     }
 
     @PatchMapping(value = "/manager-review/{id}")
     public ResponseEntity<Order> patchOrderManagerReviewById(@PathVariable Long id, @RequestParam boolean isManagerReviewed){
-        return new ResponseEntity<>(orderService.updateOrderManagerReviewed(id, isManagerReviewed),HttpStatus.OK);
+        Order order = orderService.updateOrderManagerReviewed(id, isManagerReviewed);
+        if (order != null){
+            return new ResponseEntity<>(order, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.OK);
+        }
     }
 
     @GetMapping(value = "/issue/all")

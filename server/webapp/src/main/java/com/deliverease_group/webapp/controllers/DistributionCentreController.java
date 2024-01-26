@@ -22,7 +22,7 @@ public class DistributionCentreController {
 
     @GetMapping(value = "/all")
     public ResponseEntity<List<DistributionCentre>> getAllDistributionCentres() {
-        return distributionService.findAllDistributionCentres();
+        return new ResponseEntity<>(distributionService.findAllDistributionCentres(), HttpStatus.OK);
     }
 
     

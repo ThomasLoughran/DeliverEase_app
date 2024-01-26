@@ -6,6 +6,7 @@ import com.deliverease_group.webapp.repositories.DistributionCentreRepository;
 import com.deliverease_group.webapp.repositories.DriverRepository;
 import com.deliverease_group.webapp.repositories.OrderRepository;
 import com.deliverease_group.webapp.repositories.RouteRepository;
+import org.aspectj.weaver.ast.Or;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -39,29 +40,45 @@ public class OrderService {
     }
 
     public Order updateOrderIssue(OrderDTO orderDTO) {
-        Order order = orderRepository.findById(orderDTO.getId()).get();
-        order.setIssue(Issue.fromInteger(orderDTO.getIssue()));
-        order.setTimeIssuePosted(ZonedDateTime.now());
-        order.setManagerReviewed(false);
-        order.setCompleted(false);
+        Optional<Order> optionalOrder = orderRepository.findById(orderDTO.getId());
+        if (optionalOrder.isPresent()){
+            Order order = optionalOrder.get();
+            order.setIssue(Issue.fromInteger(orderDTO.getIssue()));
+            order.setTimeIssuePosted(ZonedDateTime.now());
+            order.setManagerReviewed(false);
+            order.setCompleted(false);
+            orderRepository.save(order);
+            return order;
+        } else {
+            return null;
+        }
 
-        orderRepository.save(order);
-        return order;
     }
 
 
     public Order updateOrderCompletion(Long id, boolean isComplete) {
-        Order order = orderRepository.findById(id).get();
-        order.setCompleted(isComplete);
-        orderRepository.save(order);
-        return order;
+        Optional<Order> optionalOrder = orderRepository.findById(id);
+        if (optionalOrder.isPresent()){
+            Order order = orderRepository.findById(id).get();
+            order.setCompleted(isComplete);
+            orderRepository.save(order);
+            return order;
+        } else {
+            return null;
+        }
     }
 
     public Order updateOrderManagerReviewed(Long id, boolean isManagerReviewed) {
-        Order order = orderRepository.findById(id).get();
-        order.setManagerReviewed(isManagerReviewed);
-        orderRepository.save(order);
-        return order;
+        Optional<Order> optionalOrder = orderRepository.findById(id);
+        if (optionalOrder.isPresent()){
+            Order order = optionalOrder.get();
+            order.setManagerReviewed(isManagerReviewed);
+            orderRepository.save(order);
+            return order;
+        } else {
+            return null;
+        }
+
     }
 
     public List<Order> getAllByDistributionAndIsManagerReviewed(Long distCentreId, boolean isManagerReviewed) {

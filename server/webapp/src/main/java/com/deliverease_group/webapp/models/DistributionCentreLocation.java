@@ -8,24 +8,24 @@ public enum DistributionCentreLocation {
     OXFORD(-1.257677, 51.752022, "(01235) 116678"),
     CARDIFF(-3.179090, 51.481583, "(029) 0835 7018");
 
-    private final double X;
+    private final double longitude;
 
-    private final double Y;
+    private final double latitude;
 
     private final String phoneNumber;
 
-    DistributionCentreLocation(double X, double Y, String phoneNumber) {
-        this.X = X;
-        this.Y = Y;
+    DistributionCentreLocation(double longitude, double latitude, String phoneNumber) {
+        this.longitude = longitude;
+        this.latitude = latitude;
         this.phoneNumber = phoneNumber;
     }
 
-    public double getX() {
-        return X;
+    public double getLongitude() {
+        return longitude;
     }
 
-    public double getY() {
-        return Y;
+    public double getLatitude() {
+        return latitude;
     }
 
     public String getPhoneNumber() {

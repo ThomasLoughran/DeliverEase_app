@@ -6,8 +6,6 @@ import com.deliverease_group.webapp.repositories.DriverRepository;
 import com.deliverease_group.webapp.repositories.OrderRepository;
 import com.deliverease_group.webapp.repositories.RouteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.AutoConfigureOrder;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -111,7 +109,11 @@ public class RouteService {
         List<Order> ordersToBeDelivered = setTotalOrders(availableDrivers, incompleteOrders, maxParcelsPerVan);
 
 //        create nodes of all the locations with radial coordinates centred on distCentre
-        DistributionCentre distributionCentre = distributionCentreRepository.findById(distCentreId).get();
+        Optional<DistributionCentre> optionalDistributionCentre = distributionCentreRepository.findById(distCentreId);
+        if (optionalDistributionCentre.isEmpty()){
+            return null;
+        }
+        DistributionCentre distributionCentre = optionalDistributionCentre.get();
         List<Node> orderLocations = createNodes( distributionCentre, ordersToBeDelivered);
 
         //sort order Locations By Angle Theta
@@ -121,7 +123,7 @@ public class RouteService {
         Map<Long,ArrayList<Node>> ordersInRoutes =  assignDriversOrders(availableDrivers, orderLocations, maxParcelsPerVan);
 
 //        id is -1 to avoid overlap with any order id
-        Node distributionCentreNode = new Node(distributionCentre.getLocation().getX(), distributionCentre.getLocation().getY(), -1);
+        Node distributionCentreNode = new Node(distributionCentre.getLocation().getLongitude(), distributionCentre.getLocation().getLatitude(), -1);
 
         List<Node> orderedNodeList = new ArrayList<>();
         for (Long driverId : ordersInRoutes.keySet()){
@@ -150,7 +152,7 @@ public class RouteService {
         double[][] distanceMatrix = new double[numberOfNodes][numberOfNodes];
         for (int i = 0; i < numberOfNodes; i++) {
             for (int j = 0; j < numberOfNodes; j++) {
-                double distance = Math.sqrt(Math.pow(nodes.get(i).getX() - nodes.get(j).getX(), 2) + Math.pow(nodes.get(i).getY() - nodes.get(j).getY(), 2));
+                double distance = Math.sqrt(Math.pow(nodes.get(i).getLongitude() - nodes.get(j).getLongitude(), 2) + Math.pow(nodes.get(i).getLatitude() - nodes.get(j).getLatitude(), 2));
                 distanceMatrix[i][j] = distance;
                 distanceMatrix[j][i] = distance;
             }
@@ -226,8 +228,8 @@ public class RouteService {
 
     public List<Node> createNodes(DistributionCentre distributionCentre, List<Order> ordersToBeDelivered){
 
-        double distCentreX = distributionCentre.getLocation().getX();
-        double distCentreY = distributionCentre.getLocation().getY();
+        double distCentreX = distributionCentre.getLocation().getLongitude();
+        double distCentreY = distributionCentre.getLocation().getLatitude();
 
         ArrayList<Node> orderLocations = new ArrayList<>();
 
@@ -235,8 +237,8 @@ public class RouteService {
         for (Order order : ordersToBeDelivered){
             Node node = new Node(order.getLongitude(),order.getLatitude(),order.getId());
 
-            node.setRadius( Math.sqrt( Math.pow(node.getX() - distCentreX,2) ) +  Math.sqrt( Math.pow(node.getY() - distCentreY,2) ) );
-            node.setTheta(Math.atan2(node.getY() - distCentreY, node.getX() - distCentreX));
+            node.setRadius( Math.sqrt( Math.pow(node.getLongitude() - distCentreX,2) ) +  Math.sqrt( Math.pow(node.getLatitude() - distCentreY,2) ) );
+            node.setTheta(Math.atan2(node.getLatitude() - distCentreY, node.getLongitude() - distCentreX));
 
             orderLocations.add(node);
         }
@@ -338,7 +340,11 @@ public class RouteService {
         Route route = findRouteByDriverIdAndDate(driverId, localDate);
 
         for (Long orderID : route.getOrderId()) {
-            Order order = orderRepository.findById(orderID).get();
+            Optional<Order> optionalOrder = orderRepository.findById(orderID);
+            if (optionalOrder.isEmpty()){
+                return null;
+            }
+            Order order = optionalOrder.get();
             if (!order.isCompleted() && (order.getIssue() == null || !(order.getTimeIssuePosted().toLocalDate().toString().equals(localDate.toString())))) {
                 order.setCurrentPositionInRoute(currentIncrement);
                 return order;
@@ -351,16 +357,16 @@ public class RouteService {
 
         public List<Order> getAllOrdersInRoute ( long routeId){
             ArrayList<Order> orderList = new ArrayList<>();
+            Optional<Route> optionalRoute = routeRepository.findById(routeId);
+            if (optionalRoute.isPresent()){
+                Route route = optionalRoute.get();
 
-            Route route = routeRepository.findById(routeId).get();
-
-            for (Long orderId : route.getOrderId()) {
-                orderList.add(orderRepository.findById(orderId).get());
+                for (Long orderId : route.getOrderId()) {
+                    orderList.add(orderRepository.findById(orderId).get());
+                }
             }
 
             return orderList;
-
         }
-
 
 }
