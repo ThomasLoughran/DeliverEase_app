@@ -65,38 +65,36 @@ const LoginForm = () => {
     }
 
     return (
-        <>
-            <div className="login-page">
-                <img
-                    src={lightLogo}
-                    alt="Logo"
-                    className="logo"
-                    style={{ width: '400px', height: 'auto' }}
+        <section className="login-page">
+            <img
+                src={lightLogo}
+                alt="Logo"
+                className="logo"
+                style={{ width: '400px', height: 'auto' }}
+            />
+
+            <form id="login-form" onSubmit={handleLogin}>
+                <label htmlFor="login-form">Please enter your details:</label>
+                <input
+                    id="userId"
+                    name="id"
+                    type="id"
+                    placeholder="Please enter your id"
+                    value={userLoginInformation.id}
+                    onChange={handleUserLoginInformationChange}
                 />
 
-                <form id="login-form" onSubmit={handleLogin}>
-                    <label htmlFor="login-form">Please enter your details:</label>
-                    <input
-                        id="userId"
-                        name="id"
-                        type="id"
-                        placeholder="Please enter your id"
-                        value={userLoginInformation.id}
-                        onChange={handleUserLoginInformationChange}
-                    />
-
-                    <input
-                        id="userPassword"
-                        name="password"
-                        type="password"
-                        placeholder="Please enter your Password"
-                        value={userLoginInformation.password}
-                        onChange={handleUserLoginInformationChange}
-                    />
-                    <button type="submit">Login</button>
-                </form>
-            </div>
-        </>
+                <input
+                    id="userPassword"
+                    name="password"
+                    type="password"
+                    placeholder="Please enter your Password"
+                    value={userLoginInformation.password}
+                    onChange={handleUserLoginInformationChange}
+                />
+                <button type="submit">Login</button>
+            </form>
+        </section>
     );
 }
 

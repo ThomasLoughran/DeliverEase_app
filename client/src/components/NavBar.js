@@ -51,7 +51,7 @@ const NavBar = () => {
     return (
         <>
             {navOpen && (
-                <div className="navBar">
+                <nav className="navBar">
                     <img
                         className='navLogo'
                         src={NavLogo}
@@ -106,7 +106,7 @@ const NavBar = () => {
                     </Link>
                     <img src={darkLogo} alt="Logo" className="logo" />
 
-                </div>
+                </nav>
             )}
             {navOpen === false ?
                 <button className="open-close-nav"

@@ -32,10 +32,10 @@ const DistributionCentreListContainer = () => {
     }
 
     return (
-        <>
+        <section>
             <h1 style={{ 'margin-top': '40px' }}>Distribution Centres:</h1>
             <DistributionCentresList distributionCentres={distributionCentres} />
-        </>
+        </section>
     );
 
 }

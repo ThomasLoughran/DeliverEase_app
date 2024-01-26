@@ -63,7 +63,7 @@ const DriversListContainer = () => {
     }
 
     return (
-        <>
+        <section>
             <h1>Find drivers by distribution centre:</h1>
             <div className="drivers-list-container">
                 <DriversList
@@ -77,7 +77,7 @@ const DriversListContainer = () => {
                     <Modal closeModal={setOpenModal} />
                 }
             </div>
-        </>
+        </section>
     );
 }
 

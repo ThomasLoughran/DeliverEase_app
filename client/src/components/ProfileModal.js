@@ -19,7 +19,7 @@ const ProfileModal = ({ closeModal }) => {
     }, [modalOpen]);
 
     return (
-        <div className="profile-modal" >
+        <aside className="profile-modal" >
             <div className="profile-modal-background">
                 <div className="profile-modal-container">
                     <div className="profile">
@@ -28,7 +28,7 @@ const ProfileModal = ({ closeModal }) => {
                     </div>
                 </div>
             </div>
-        </div>
+        </aside>
     );
 }
 
