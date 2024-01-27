@@ -143,7 +143,7 @@ const CurrentRouteOrder = () => {
         }
     };
 
-    console.log("current route order test")
+
 
     return (
         <>

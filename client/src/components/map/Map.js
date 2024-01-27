@@ -31,18 +31,16 @@ const Map = ({currentOrder, previousOrder}) => {
 // console.log("test")
 
   return(
-  // <MapContainer center={[currentOrder.latitude, currentOrder.longitude]} zoom={13} style={{ height: "100vh" }}>
-  //   <TileLayer
-  //     attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-  //     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-  //   />
+  <MapContainer center={[currentOrder.latitude, currentOrder.longitude]} zoom={13} style={{ height: "100vh" }}>
+    <TileLayer
+      attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+      url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+    />
 
-  //   <RoutingMachine key={`${previousOrder}-${currentOrder}`} start={[currentOrder.latitude, currentOrder.longitude]} end={[previousOrder.latitude, previousOrder.longitude]}/>
-  // </MapContainer>)
-
-  <p>test</p>
+    <RoutingMachine key={`${previousOrder}-${currentOrder}`} start={[currentOrder.latitude, currentOrder.longitude]} end={[previousOrder.latitude, previousOrder.longitude]}/>
+  </MapContainer>
   )
-  
+
 };
 
 export default Map;

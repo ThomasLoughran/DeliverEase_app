@@ -19,17 +19,20 @@ const OrderDetails = ({
 
     const { user } = useUser();
     const [previousOrder, setPreviousOrder] = useState(user.distributionCentre);
+    const [mapKey, setMapKey] = useState(0);
 
 
     const incrementPreviousOrder = () => {
         setPreviousOrder(currentOrder);
         setIssueSubmitted(false);
+        setMapKey((prevKey) => prevKey + 1);
     }
 
 
     useEffect(() => {
-
-    }, [currentOrder])
+        // Update the map key whenever currentOrder changes
+        // setMapKey((prevKey) => prevKey + 1);
+    }, [currentOrder, previousOrder]);
 
     // console.log("order details test")
 
@@ -78,7 +81,7 @@ const OrderDetails = ({
                 )}
             </article>
 
-            <Map currentOrder={currentOrder} previousOrder={previousOrder} data={data} distCentre={user.distributionCentre} />
+            <Map key={mapKey} currentOrder={currentOrder} previousOrder={previousOrder} data={data} distCentre={user.distributionCentre} />
 
         </section>
     );
