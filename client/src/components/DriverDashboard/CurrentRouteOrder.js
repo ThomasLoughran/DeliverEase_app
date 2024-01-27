@@ -5,6 +5,7 @@ import OrderDetails from "./OrderDetails";
 const CurrentRouteOrder = () => {
     const { user } = useUser();
     const [currentOrder, setCurrentOrder] = useState(null);
+    const [previousOrder, setPreviousOrder] = useState(null);
     const [unsuccessfulClicked, setUnsuccessfulClicked] = useState(false);
     const [selectedIssue, setSelectedIssue] = useState(null);
     const [data, setData] = useState(null);
@@ -28,12 +29,15 @@ const CurrentRouteOrder = () => {
                 throw new Error(`Failed to fetch routes data: ${response.status} ${response.statusText}`);
             }
 
+            //gets current route
             const responseData = await response.json();
 
+            // checks if current route is finished before getting current order.
             if (responseData.orderId && responseData.orderId.length > 0) {
 
                 const orderResponse = await fetch(`http://localhost:8080/routes/driver/${user.id}/currentOrder?localDate=${formattedDate}`);
 
+                
                 if (orderResponse.ok) {
                     const orderData = await orderResponse.json();
 
@@ -41,6 +45,10 @@ const CurrentRouteOrder = () => {
                     setCurrentOrder(orderData);
                     setShowNextOrder(false)
                     setData(responseData);
+
+                    if (orderData.currentPositionInRoute == 0) {
+                        setPreviousOrder(user.distributionCentre)
+                    }
                 } else {
                     setCurrentOrder(null);
                     setData(null);
@@ -58,6 +66,7 @@ const CurrentRouteOrder = () => {
 
     useEffect(() => {
         fetchCurrentOrder();
+
     }, [user.id, unsuccessfulClicked, showNextOrder]);
 
     const handleUnsuccessfulDelivery = () => {
@@ -84,6 +93,7 @@ const CurrentRouteOrder = () => {
     };
 
     const fetchNextOrder = async (currentOrderId) => {
+        setPreviousOrder(currentOrder);
         try {
             if (currentOrder.currentPositionInRoute < data.orderId.length) {
 
@@ -151,6 +161,8 @@ const CurrentRouteOrder = () => {
                 <div>
                     <OrderDetails
                         currentOrder={currentOrder}
+                        previousOrder={previousOrder}
+                        setPreviousOrder={setPreviousOrder}
                         handleSuccessfulDelivery={handleSuccessfulDelivery}
                         handleUnsuccessfulDelivery={handleUnsuccessfulDelivery}
                         unsuccessfulClicked={unsuccessfulClicked}

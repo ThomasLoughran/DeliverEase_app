@@ -69,6 +69,16 @@ public class RouteController {
         }
     }
 
+    @GetMapping(value = "/driver/{driverId}/previousOrder")
+    public ResponseEntity<Order> getValidPreviousOrderInRoute(@PathVariable Long driverId, @RequestParam LocalDate localDate, @RequestParam Long positionInRoute) {
+        Order order = routeService.findValidPreviousOrderInRoute(driverId, localDate, positionInRoute);
+        if (order != null){
+            return new ResponseEntity<>(order, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(order, HttpStatus.NOT_FOUND);
+        }
+    }
+
     @PatchMapping(value = "/{routeId}")
     public ResponseEntity<Route> updateRouteCompletion(@PathVariable Long routeId, @RequestParam boolean isComplete){
         Route route = routeService.updateRouteCompletion(routeId, isComplete);

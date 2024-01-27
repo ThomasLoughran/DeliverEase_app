@@ -360,6 +360,40 @@ public class RouteService {
         return null;
     }
 
+
+    public Order findValidPreviousOrderInRoute(Long driverId, LocalDate localDate, Long positionInRoute) {
+        int currentIncrement = 0;
+
+        Route route = findRouteByDriverIdAndDate(driverId, localDate);
+        for (Long orderID : route.getOrderId()) {
+
+
+            if (currentIncrement == positionInRoute - 1) {
+                Optional<Order> optionalOrder = orderRepository.findById(orderID);
+
+                if (optionalOrder.isEmpty()) {
+                    return null;
+                }
+
+                Order order = optionalOrder.get();
+                if (!order.isCompleted() && (order.getIssue() == null || !(order.getTimeIssuePosted().toLocalDate().toString().equals(localDate.toString())))) {
+                    order.setCurrentPositionInRoute(currentIncrement);
+                    return order;
+                }
+            }
+            currentIncrement++;
+
+        }
+
+        return null;
+    }
+
+
+
+
+
+
+
         public List<Order> getAllOrdersInRoute ( long routeId){
             ArrayList<Order> orderList = new ArrayList<>();
             Optional<Route> optionalRoute = routeRepository.findById(routeId);
@@ -373,5 +407,6 @@ public class RouteService {
 
             return orderList;
         }
+
 
 }

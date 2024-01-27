@@ -5,6 +5,8 @@ import '../../styles/OrderDetails.css'
 
 const OrderDetails = ({
     currentOrder,
+    previousOrder, 
+    setPreviousOrder,
     handleSuccessfulDelivery,
     handleUnsuccessfulDelivery,
     unsuccessfulClicked,
@@ -18,12 +20,14 @@ const OrderDetails = ({
 }) => {
 
     const { user } = useUser();
-    const [previousOrder, setPreviousOrder] = useState(user.distributionCentre);
+    // const [previousOrder, setPreviousOrder] = useState(user.distributionCentre);
     const [mapKey, setMapKey] = useState(0);
 
 
     const incrementPreviousOrder = () => {
-        setPreviousOrder(currentOrder);
+        console.log(currentOrder, 'this is current order when setting previous order')
+        // previousOrder = currentOrder;
+        setPreviousOrder(currentOrder)
         setIssueSubmitted(false);
         setMapKey((prevKey) => prevKey + 1);
     }
@@ -32,6 +36,10 @@ const OrderDetails = ({
     useEffect(() => {
         // Update the map key whenever currentOrder changes
         // setMapKey((prevKey) => prevKey + 1);
+
+        console.log(currentOrder)
+        console.log(previousOrder)
+
     }, [currentOrder, previousOrder]);
 
     // console.log("order details test")
