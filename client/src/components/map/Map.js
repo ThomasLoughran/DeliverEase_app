@@ -18,9 +18,10 @@ const Map = ({currentOrder, previousOrder}) => {
   // const [end, setEnd] = useState([currentOrder.latitude, currentOrder.longitude]);
 
 
-  // useEffect(() => {
-  // console.log(currentOrder, "current order changed")
-  // }, [currentOrder])
+  useEffect(() => {
+  console.log(currentOrder, "current order changed")
+  console.log(previousOrder, "previous order changed")
+  }, [currentOrder, previousOrder])
 
   const maps = {
     base: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"

@@ -12,13 +12,13 @@ const CurrentRouteOrder = () => {
     const [showNextOrder, setShowNextOrder] = useState(false);
     const [showIndex, setShowIndex] = useState(0);
     const [issueSubmitted, setIssueSubmitted] = useState(false);
-    const [currentPositionInRoute, setCurrentPositionInRoute] = useState(null);
+    const [currentPositionInRoute, setCurrentPositionInRoute] = useState(4); // this is the problem.......
 
     useEffect(() => {
 
         fetchCurrentOrder();
+        
         fetchPreviousOrder();
-
     }, [])
 
     const fetchCurrentOrder = async () => {
@@ -59,7 +59,7 @@ const CurrentRouteOrder = () => {
                         const data = await response.json();
                         // console.log(data, "this should be the previous order");
                         setPreviousOrder(data);
-                        console.log(data, "this is previous order");
+                        console.log(data, "this is previous order triggered inside fetch current order");
                     }
 
                 } else {
@@ -79,7 +79,7 @@ const CurrentRouteOrder = () => {
 
     useEffect(() => {
         fetchCurrentOrder();
-        fetchPreviousOrder();
+        // fetchPreviousOrder();
 
     }, [user.id, unsuccessfulClicked, showNextOrder]);
 
