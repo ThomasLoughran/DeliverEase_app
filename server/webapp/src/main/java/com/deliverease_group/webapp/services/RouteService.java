@@ -367,6 +367,17 @@ public class RouteService {
         Route route = findRouteByDriverIdAndDate(driverId, localDate);
         for (Long orderID : route.getOrderId()) {
 
+            if (positionInRoute == 0) {
+                Optional<Order> optionalOrder = orderRepository.findById(orderID);
+
+                if (optionalOrder.isEmpty()) {
+                    return null;
+                }
+
+                Order order = optionalOrder.get();
+                return order;
+            }
+
 
             if (currentIncrement == positionInRoute - 1) {
                 Optional<Order> optionalOrder = orderRepository.findById(orderID);

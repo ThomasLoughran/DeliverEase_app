@@ -12,13 +12,18 @@ const CurrentRouteOrder = () => {
     const [showNextOrder, setShowNextOrder] = useState(false);
     const [showIndex, setShowIndex] = useState(0);
     const [issueSubmitted, setIssueSubmitted] = useState(false);
-    const [currentPositionInRoute, setCurrentPositionInRoute] = useState(4); // this is the problem.......
+    const [currentPositionInRoute, setCurrentPositionInRoute] = useState(null); // this is the problem.......
 
     useEffect(() => {
 
         fetchCurrentOrder();
-        
+
         fetchPreviousOrder();
+        
+        
+
+
+        
     }, [])
 
     const fetchCurrentOrder = async () => {
@@ -78,7 +83,7 @@ const CurrentRouteOrder = () => {
     };
 
     useEffect(() => {
-        fetchCurrentOrder();
+        // fetchCurrentOrder();
         // fetchPreviousOrder();
 
     }, [user.id, unsuccessfulClicked, showNextOrder]);
@@ -169,9 +174,24 @@ const CurrentRouteOrder = () => {
 
 
     const fetchPreviousOrder = async () => {
+
+
+
+
         const currentDate = new Date();
         const formattedDate = currentDate.toISOString().split('T')[0];
-        const response = await fetch(`http://localhost:8080/routes/driver/${user.id}/previousOrder?localDate=${formattedDate}&positionInRoute=${currentPositionInRoute}`);
+
+        const orderResponse = await fetch(`http://localhost:8080/routes/driver/${user.id}/currentOrder?localDate=${formattedDate}`);
+        if (!orderResponse.ok){
+            return;
+        }
+        const orderData = await orderResponse.json();
+        console.log(orderData, "this is the orderData in the fetchprevious")
+        if (orderResponse.currentPositionInRoute == 0) {
+            setPreviousOrder(user.distributionCentre);
+            return
+        }
+        const response = await fetch(`http://localhost:8080/routes/driver/${user.id}/previousOrder?localDate=${formattedDate}&positionInRoute=${orderData.currentPositionInRoute}`);
         //need to add error handling
         const data = await response.json();
         // console.log(data, "this should be the previous order");
