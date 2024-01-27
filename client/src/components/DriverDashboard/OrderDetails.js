@@ -19,6 +19,7 @@ const OrderDetails = ({
 
     const { user } = useUser();
     const [previousOrder, setPreviousOrder] = useState(user.distributionCentre);
+    const [renderKey, setRenderKey] = useState(0);
 
     const incrementPreviousOrder = () => {
         setPreviousOrder(currentOrder);
@@ -38,10 +39,12 @@ const OrderDetails = ({
                 <button className='success-button' onClick={() => {
                     incrementPreviousOrder();
                     handleSuccessfulDelivery();
+                    setRenderKey(renderKey + 1);
                 }}>Success!</button>
                 <button onClick={() => {
                     incrementPreviousOrder();
                     handleUnsuccessfulDelivery();
+                    setRenderKey(renderKey + 1);
                 }}>Problem...</button>
 
                 {unsuccessfulClicked && !issueSubmitted && (
@@ -68,7 +71,7 @@ const OrderDetails = ({
                 )}
             </article>
 
-            <Map currentOrder={currentOrder} previousOrder={previousOrder} data={data} distCentre={user.distributionCentre} />
+            <Map currentOrder={currentOrder} previousOrder={previousOrder} data={data} distCentre={user.distributionCentre} renderKey={renderKey}/>
 
         </section>
     );
