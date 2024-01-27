@@ -22,7 +22,6 @@ const OrderDetails = ({
 
     const incrementPreviousOrder = () => {
         setPreviousOrder(currentOrder);
-        handleIssueSubmit(false);
         setIssueSubmitted(false);
     }
 

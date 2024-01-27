@@ -61,7 +61,6 @@
     align-items: center;
     justify-content: space-between;
     max-height: 80%;
-    overflow-y: scroll;
     padding-left: 2%;
 }
 
@@ -127,4 +126,9 @@
     height: fit-content;
     display: flex;
     justify-content: space-around;
+}
+
+.message-list-section {
+    overflow-y: scroll;
+    height: 80%;
 }
