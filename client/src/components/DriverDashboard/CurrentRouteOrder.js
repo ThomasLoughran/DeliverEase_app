@@ -16,7 +16,7 @@ const CurrentRouteOrder = () => {
 
         fetchCurrentOrder()
 
-    })
+    }, [])
 
     const fetchCurrentOrder = async () => {
         try {
@@ -142,6 +142,8 @@ const CurrentRouteOrder = () => {
             }
         }
     };
+
+    console.log("current route order test")
 
     return (
         <>
