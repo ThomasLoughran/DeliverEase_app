@@ -12,10 +12,12 @@ const CurrentRouteOrder = () => {
     const [showNextOrder, setShowNextOrder] = useState(false);
     const [showIndex, setShowIndex] = useState(0);
     const [issueSubmitted, setIssueSubmitted] = useState(false);
+    const [currentPositionInRoute, setCurrentPositionInRoute] = useState(null);
 
     useEffect(() => {
 
-        fetchCurrentOrder()
+        fetchCurrentOrder();
+        fetchPreviousOrder();
 
     }, [])
 
@@ -45,10 +47,21 @@ const CurrentRouteOrder = () => {
                     setCurrentOrder(orderData);
                     setShowNextOrder(false)
                     setData(responseData);
+                    setCurrentPositionInRoute(responseData.currentPositionInRoute);
+
 
                     if (orderData.currentPositionInRoute == 0) {
                         setPreviousOrder(user.distributionCentre)
+                    } else {
+                        // gets previous order
+                        const response = await fetch(`http://localhost:8080/routes/driver/${user.id}/previousOrder?localDate=${formattedDate}&positionInRoute=${orderData.currentPositionInRoute}`);
+                        //need to add error handling
+                        const data = await response.json();
+                        // console.log(data, "this should be the previous order");
+                        setPreviousOrder(data);
+                        console.log(data, "this is previous order");
                     }
+
                 } else {
                     setCurrentOrder(null);
                     setData(null);
@@ -66,6 +79,7 @@ const CurrentRouteOrder = () => {
 
     useEffect(() => {
         fetchCurrentOrder();
+        fetchPreviousOrder();
 
     }, [user.id, unsuccessfulClicked, showNextOrder]);
 
@@ -152,6 +166,17 @@ const CurrentRouteOrder = () => {
             }
         }
     };
+
+
+    const fetchPreviousOrder = async () => {
+        const currentDate = new Date();
+        const formattedDate = currentDate.toISOString().split('T')[0];
+        const response = await fetch(`http://localhost:8080/routes/driver/${user.id}/previousOrder?localDate=${formattedDate}&positionInRoute=${currentPositionInRoute}`);
+        //need to add error handling
+        const data = await response.json();
+        // console.log(data, "this should be the previous order");
+        setPreviousOrder(data);
+    }
 
 
 

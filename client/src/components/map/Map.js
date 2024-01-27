@@ -14,8 +14,8 @@ import RoutingMachine from "./RoutingMachine";
 const Map = ({currentOrder, previousOrder}) => {
   const [map, setMap] = useState(null);
   
-  const [start, setStart] = useState([previousOrder.latitude, previousOrder.longitude]);
-  const [end, setEnd] = useState([currentOrder.latitude, currentOrder.longitude]);
+  // const [start, setStart] = useState([previousOrder.latitude, previousOrder.longitude]);
+  // const [end, setEnd] = useState([currentOrder.latitude, currentOrder.longitude]);
 
 
   // useEffect(() => {

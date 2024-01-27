@@ -376,10 +376,7 @@ public class RouteService {
                 }
 
                 Order order = optionalOrder.get();
-                if (!order.isCompleted() && (order.getIssue() == null || !(order.getTimeIssuePosted().toLocalDate().toString().equals(localDate.toString())))) {
-                    order.setCurrentPositionInRoute(currentIncrement);
                     return order;
-                }
             }
             currentIncrement++;
 

@@ -6,7 +6,7 @@ import '../../styles/OrderDetails.css'
 const OrderDetails = ({
     currentOrder,
     previousOrder, 
-    setPreviousOrder,
+    // setPreviousOrder,
     handleSuccessfulDelivery,
     handleUnsuccessfulDelivery,
     unsuccessfulClicked,
@@ -27,7 +27,8 @@ const OrderDetails = ({
     const incrementPreviousOrder = () => {
         console.log(currentOrder, 'this is current order when setting previous order')
         // previousOrder = currentOrder;
-        setPreviousOrder(currentOrder)
+        console.log("this is the current order that will be set as previous");
+        // setPreviousOrder(currentOrder)
         setIssueSubmitted(false);
         setMapKey((prevKey) => prevKey + 1);
     }
@@ -37,8 +38,8 @@ const OrderDetails = ({
         // Update the map key whenever currentOrder changes
         // setMapKey((prevKey) => prevKey + 1);
 
-        console.log(currentOrder)
-        console.log(previousOrder)
+        console.log(currentOrder, "this is the current order")
+        console.log(previousOrder, "this is the previous order")
 
     }, [currentOrder, previousOrder]);
 
