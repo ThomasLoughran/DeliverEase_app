@@ -43,9 +43,11 @@ const DriverAvailabilityCalendar = () => {
             .filter(([date, isAvailable]) => isAvailable)
     );
 
+
+
     return (
         <section className="driver-availability"
-            style={{ 'margin-right': '20px' }}>
+            style={{ 'marginRight': '20px' }}>
             <header>
                 <h2>Availability Calendar:</h2>
             </header>

@@ -16,14 +16,18 @@ const Map = ({currentOrder, previousOrder}) => {
   
   const [start, setStart] = useState([previousOrder.latitude, previousOrder.longitude]);
   const [end, setEnd] = useState([currentOrder.latitude, currentOrder.longitude]);
-  const [key, setKey] = useState(0);
+
 
   useEffect(() => {
-  console.log(currentOrder)
-  console.log(previousOrder)
+  // console.log(currentOrder)
 
-  console.log(start);
-  console.log(end);
+
+  // console.log(start);
+  // console.log(end);
+
+  // setStart([previousOrder.latitude, previousOrder.longitude]);
+  // setEnd([currentOrder.latitude, currentOrder.longitude]);
+
 
   }, [])
 
@@ -37,10 +41,8 @@ const Map = ({currentOrder, previousOrder}) => {
 
   }
 
+
   return(
-  
-
-
   <MapContainer center={[currentOrder.latitude, currentOrder.longitude]} zoom={13} style={{ height: "100vh" }}>
     <TileLayer
       attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'

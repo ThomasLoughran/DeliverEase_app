@@ -1,6 +1,6 @@
 import Map from "../map/Map";
 import { useUser } from "../../contexts/UserContext";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import '../../styles/OrderDetails.css'
 
 const OrderDetails = ({
@@ -25,6 +25,11 @@ const OrderDetails = ({
         setPreviousOrder(currentOrder);
         setIssueSubmitted(false);
     }
+
+
+    useEffect(() => {
+
+    }, [currentOrder])
 
     return (
         <section>
