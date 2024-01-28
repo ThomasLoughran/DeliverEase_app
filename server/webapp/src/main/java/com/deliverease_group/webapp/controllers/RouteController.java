@@ -22,7 +22,7 @@ public class RouteController {
     @PostMapping(value = "/new-routes/{distCentreId}")
     public ResponseEntity<MessageResponseDTO> generateRoutes (@PathVariable Long distCentreId, @RequestParam LocalDate localDate){
         MessageResponseDTO routeStatus = routeService.generateRoutes(distCentreId,localDate);
-        if (routeStatus.equals("Routes successfully created")) {
+        if (routeStatus.getResponse().equals("Routes successfully created")) {
             return new ResponseEntity<>(routeStatus, HttpStatus.CREATED);
         } else {
             return new ResponseEntity<>(routeStatus, HttpStatus.NOT_IMPLEMENTED);
